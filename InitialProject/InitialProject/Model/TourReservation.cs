@@ -1,10 +1,11 @@
-﻿using System;
+﻿using InitialProject.Serializer;
+using System;
 
 namespace InitialProject.Model
 {
 
 
-    public class TourReservation
+    public class TourReservation: ISerializable
     {
         public int Id { get; set; }
         public int NumberOfGuests { get; set; }
