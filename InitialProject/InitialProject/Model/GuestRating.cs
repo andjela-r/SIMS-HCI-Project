@@ -10,6 +10,7 @@ namespace InitialProject.Model
         public int Cleanliness { get; set; }    
         public int Obedience { get; set; }
         public string Comment { get; set; }
+        public int GuestId { get; set; }
 
         public GuestRating(int id, int cleanliness, int obedience, string comment)
         {

@@ -13,7 +13,9 @@ namespace InitialProject.Model
         public int MaxOccupancy { get; set; }
         public int MinDays { get; set; }
         public int CancelPeriod { get; set; } = 1;
-        public List<int> Pictures{ get; set; }
+        public List<int> PicturesId { get; set; }
+        public int OwnerId { get; set; }
+        public List<int> GuestsIds { get; set; }
 
         public Accommodation(int id, string name, Location location, Type type, int occupancy,
             int minDays, int cancelPeriod, List<int> pictures)
@@ -25,7 +27,7 @@ namespace InitialProject.Model
             this.MaxOccupancy = occupancy;
             this.MinDays = minDays;
             this.CancelPeriod = cancelPeriod;
-            this.Pictures = pictures;
+            this.PicturesId = pictures;
         }
 
         public Accommodation() { }
@@ -33,7 +35,7 @@ namespace InitialProject.Model
         public string[] ToCSV()
         {
             string[] csvValues = { Id.ToString(), Name, Location.ToString(), Type.ToString(),
-            MaxOccupancy.ToString(), MinDays.ToString(), CancelPeriod.ToString(), Pictures.ToString() };
+            MaxOccupancy.ToString(), MinDays.ToString(), CancelPeriod.ToString(), PicturesId.ToString() };
             return csvValues;
         }
 
@@ -46,7 +48,7 @@ namespace InitialProject.Model
             MaxOccupancy = Convert.ToInt32(values[4]);
             MinDays = Convert.ToInt32(values[5]);
             CancelPeriod = Convert.ToInt32(values[6]);
-            Pictures = new List<int>() { Convert.ToInt32(values[7]) };
+            PicturesId = new List<int>() { Convert.ToInt32(values[7]) };
         }
     }
 }
