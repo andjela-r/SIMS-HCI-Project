@@ -25,10 +25,10 @@ namespace InitialProject.Repository
             _tours = _serializer.FromCSV(FilePath);
         }
 
-        public Tour FindByLocation(string? city, string? country)
+        public Tour FindByLocation(int locationId)
         {
             _tours = _serializer.FromCSV(FilePath);
-            return _tours.FirstOrDefault(u => u.Location.City == city || u.Location.Country == country);
+            return _tours.FirstOrDefault(u => u.LocationId == locationId);
         }
 
         public Tour FindByDuration(float duration)
@@ -43,10 +43,10 @@ namespace InitialProject.Repository
             return _tours.FirstOrDefault(u => u.Language == language);
         }
 
-        public Tour FindByGuestNumber(int NumberOfGuests)
+        public Tour FindByGuestNumber(int numberOfGuests)
         {
             _tours = _serializer.FromCSV(FilePath);
-            return _tours.FirstOrDefault(u => u.MaxGuests >= NumberOfGuests);
+            return _tours.FirstOrDefault(u => u.MaxGuests >= numberOfGuests);
         }
 
         public Tour Save(Tour tour)
@@ -66,6 +66,16 @@ namespace InitialProject.Repository
                 return 1;
             }
             return _tours.Max(c => c.Id) + 1;
+        }
+
+        public List<Tour> FindTodaysTours()
+        {
+            DateTime today = DateTime.Today;
+            Console.WriteLine("Danas: " +today);
+
+            _tours = _serializer.FromCSV(FilePath);
+
+            return _tours.FindAll(t => t.StartTime == today);
         }
     }
 }

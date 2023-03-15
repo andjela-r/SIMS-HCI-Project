@@ -18,7 +18,7 @@ namespace InitialProject.Service
             Tour tour = new Tour();
 
             tour.Name = tourDTO.Name;
-            tour.Location = tourDTO.Location;
+            tour.LocationId = tourDTO.LocationId;
             tour.Description = tourDTO.Description;
             tour.Language = tourDTO.Language;
             tour.MaxGuests = tourDTO.MaxGuests;
