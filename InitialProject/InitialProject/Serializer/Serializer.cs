@@ -2,14 +2,17 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Windows.Data;
+using System.Windows.Documents;
 
 namespace InitialProject.Serializer
 {
     class Serializer<T> where T: ISerializable, new()
     {
         private const char Delimiter = '|';
+        private const char ListDelimiter = ',';
 
         public void ToCSV(string fileName, List<T> objects)
         {
@@ -17,6 +20,12 @@ namespace InitialProject.Serializer
 
             foreach(T obj in objects)
             {
+                if(obj.GetType() == typeof(List))
+                {
+                    string list = string.Join(ListDelimiter, obj.ToCSV());
+                    csv.AppendLine(list);
+                }
+
                 string line = string.Join(Delimiter.ToString(), obj.ToCSV());
                 csv.AppendLine(line);
             }

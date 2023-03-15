@@ -10,7 +10,7 @@ namespace InitialProject.Model
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public Location Location { get; set; }
+        public int LocationId { get; set; }
         public string Description { get; set; }
         public string Language { get; set; }
         public int MaxGuests { get; set; }
@@ -23,11 +23,11 @@ namespace InitialProject.Model
 
         public Tour() { }
 
-        public Tour(int id, string name, Location location, string description, string language, int maxGuests, List<int> keyPointsId, DateTime startTime, float duration, List<int> picturesId, int guideId, List<int> guestId)
+        public Tour(int id, string name, int locationId, string description, string language, int maxGuests, List<int> keyPointsId, DateTime startTime, float duration, List<int> picturesId, int guideId, List<int> guestId)
         {
             this.Id = id;
             this.Name = name;
-            this.Location = location;
+            this.LocationId = locationId;
             this.Description = description;
             this.Language = language;
             this.MaxGuests = maxGuests; 
@@ -41,7 +41,7 @@ namespace InitialProject.Model
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Name, Location.ToString(), Description, Language, MaxGuests.ToString(), KeyPointsId.ToString(), StartTime.ToString(), Duration.ToString(), PicturesId.ToString(), GuideId.ToString(), GuestsId.ToString()  };
+            string[] csvValues = { Id.ToString(), Name, LocationId.ToString(), Description, Language, MaxGuests.ToString(), KeyPointsId.ToString(), StartTime.ToString(), Duration.ToString(), PicturesId.ToString(), GuideId.ToString(), GuestsId.ToString()  };
             return csvValues;
         }
 
@@ -49,7 +49,7 @@ namespace InitialProject.Model
         {
             Id = Convert.ToInt32(values[0]);
             Name = values[1];
-            Location = new Location() { Id = Convert.ToInt32(values[2]) };
+            LocationId = Convert.ToInt32(values[2]);
             Description = values[3];
             Language = values[4];
             MaxGuests = Convert.ToInt32(values[5]);

@@ -10,7 +10,7 @@ namespace InitialProject.DTO
     public class TourDTO
     {
         public string Name { get; set; }
-        public Location Location { get; set; }
+        public int LocationId { get; set; }
         public string Description { get; set; }
         public string Language { get; set; }
         public int MaxGuests { get; set; }
@@ -21,10 +21,10 @@ namespace InitialProject.DTO
 
         public TourDTO() { }
 
-        public TourDTO(string name, Location location, string description, string language, int maxGuests, List<int> keyPointsId, DateTime startTime, float duration, List<int> picturesId)
+        public TourDTO(string name, int locationId, string description, string language, int maxGuests, List<int> keyPointsId, DateTime startTime, float duration, List<int> picturesId)
         {
             this.Name = name;
-            this.Location = location;
+            this.LocationId = locationId;
             this.Description = description;
             this.Language = language;
             this.MaxGuests = maxGuests;
