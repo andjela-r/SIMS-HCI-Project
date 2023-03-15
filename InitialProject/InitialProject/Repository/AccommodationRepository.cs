@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Type = InitialProject.Model.Type;
 
 namespace InitialProject.Repository
 {
@@ -14,11 +15,8 @@ namespace InitialProject.Repository
         private const string FilePath = "../../../Resources/Data/accommodations.csv";
 
         private readonly Serializer<Accommodation> _serializer;
-       //OVO IDE U GUESTRATING REPOSITORY
-       //private readonly Serializer<GuestRating> _serializer;
 
         private List<Accommodation> _accommodations;
-        private List<GuestRating> _guestRatings;
 
         public AccommodationRepository()
         {
@@ -45,21 +43,35 @@ namespace InitialProject.Repository
             return _accommodations.Max(c => c.Id) + 1;
         }
 
-        //OVO IDE U GUESTRATINGREPOSITORY 
-        /*public GuestRating Update(GuestRating guestRating)
+        public Accommodation FindByName(string name)
         {
-            _guestRatings = _serializer.FromCSV(FilePath);
-            GuestRating current = _guestRatings.Find(c => c.Id == guestRating.Id);
-            int index = _comments.IndexOf(current);
-            _comments.Remove(current);
-            _comments.Insert(index, comment);       // keep ascending order of ids in file 
-            _serializer.ToCSV(FilePath, _comments);
-            return comment;
+            _accommodations = _serializer.FromCSV(FilePath);
+            return _accommodations.FirstOrDefault(u => u.Name == name);
         }
-        */
 
+        public Accommodation FindByType(Type type)
+        {
+            _accommodations = _serializer.FromCSV(FilePath);
+            return _accommodations.FirstOrDefault(u => u.Type == type);
+        }
 
+        public Accommodation FindByOccupancy(int maxOccupancy)
+        {
+            _accommodations = _serializer.FromCSV(FilePath);
+            return _accommodations.FirstOrDefault(u => u.MaxOccupancy <= maxOccupancy);
+        }
 
+        public Accommodation FindByMinDays(int minDays)
+        {
+            _accommodations = _serializer.FromCSV(FilePath);
+            return _accommodations.FirstOrDefault(u => u.MinDays >= minDays);
+        }
+
+        public Accommodation FindByLocation(string? city, string? country)
+        {
+            _accommodations = _serializer.FromCSV(FilePath);
+            return _accommodations.FirstOrDefault(u => u.Location.City == city || u.Location.Country == country);
+        }
 
     }
 }
