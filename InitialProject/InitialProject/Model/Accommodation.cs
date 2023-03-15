@@ -6,13 +6,13 @@ namespace InitialProject.Model
 {
     public class Accommodation : ISerializable
     {
-        public int Id;
+        public int Id { get; set; }
         public string Name { get; set; }
         public Location Location { get; set; }
         public Type Type { get; set; }
         public int MaxOccupancy { get; set; }
         public int MinDays { get; set; }
-        public int CancelPeriod { get; set; }
+        public int CancelPeriod { get; set; } = 1;
         public List<int> Pictures{ get; set; }
 
         public Accommodation(int id, string name, Location location, Type type, int occupancy,
@@ -46,7 +46,7 @@ namespace InitialProject.Model
             MaxOccupancy = Convert.ToInt32(values[4]);
             MinDays = Convert.ToInt32(values[5]);
             CancelPeriod = Convert.ToInt32(values[6]);
-            Pictures= new List<int>() { Convert.ToInt32(values[7]) };
+            Pictures = new List<int>() { Convert.ToInt32(values[7]) };
         }
     }
 }

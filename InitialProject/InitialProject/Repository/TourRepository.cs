@@ -1,10 +1,13 @@
-﻿using InitialProject.Model;
+using InitialProject.DTO;
+using InitialProject.Model;
 using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+
 
 namespace InitialProject.Repository
 {
@@ -44,6 +47,25 @@ namespace InitialProject.Repository
         {
             _tours = _serializer.FromCSV(FilePath);
             return _tours.FirstOrDefault(u => u.MaxGuests >= NumberOfGuests);
+        }
+
+        public Tour Save(Tour tour)
+        {
+            tour.Id = NextId();
+            _tours = _serializer.FromCSV(FilePath);
+            _tours.Add(tour);
+            _serializer.ToCSV(FilePath, _tours);
+            return tour;
+        }
+
+        public int NextId()
+        {
+            _tours= _serializer.FromCSV(FilePath);
+            if (_tours.Count < 1)
+            {
+                return 1;
+            }
+            return _tours.Max(c => c.Id) + 1;
         }
     }
 }
