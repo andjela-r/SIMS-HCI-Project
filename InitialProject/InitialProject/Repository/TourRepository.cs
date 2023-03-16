@@ -8,12 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-
 namespace InitialProject.Repository
 {
     public class TourRepository
     {
-        private const string FilePath = "../../../Resources/Data/tour.csv";
+        private const string FilePath = "../../../Resources/Data/tours.csv";
 
         private readonly Serializer<Tour> _serializer;
 
@@ -25,28 +24,28 @@ namespace InitialProject.Repository
             _tours = _serializer.FromCSV(FilePath);
         }
 
-        public Tour FindByLocation(int locationId)
+        public List<Tour> FindByLocation(int locationId)
         {
             _tours = _serializer.FromCSV(FilePath);
-            return _tours.FirstOrDefault(u => u.LocationId == locationId);
+            return _tours.FindAll(u => u.LocationId == locationId);
         }
 
-        public Tour FindByDuration(float duration)
+        public List<Tour> FindByDuration(float duration)
         {
             _tours = _serializer.FromCSV(FilePath);
-            return _tours.FirstOrDefault(u => u.Duration == duration);
+            return _tours.FindAll(u => u.Duration <= duration);
         }
 
-        public Tour FindByLanguage(string language)
+        public List<Tour> FindByLanguage(string language)
         {
             _tours = _serializer.FromCSV(FilePath);
-            return _tours.FirstOrDefault(u => u.Language == language);
+            return _tours.FindAll(u => u.Language == language);
         }
 
-        public Tour FindByGuestNumber(int numberOfGuests)
+        public List<Tour> FindByGuestNumber(int numberOfGuests)
         {
             _tours = _serializer.FromCSV(FilePath);
-            return _tours.FirstOrDefault(u => u.MaxGuests >= numberOfGuests);
+            return _tours.FindAll(u => u.MaxGuests >= numberOfGuests);
         }
 
         public Tour Save(Tour tour)

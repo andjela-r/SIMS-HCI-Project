@@ -1,12 +1,12 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
-using InitialProject.Serializer;
+using System.Linq;
+using System.Text;
 
 namespace InitialProject.Model
 {
-    public class Tour :ISerializable
+    public class Tour : ISerializable
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -20,6 +20,8 @@ namespace InitialProject.Model
         public List<int> PicturesId { get; set; }
         public int GuideId { get; set; }
         public List<int> GuestsId { get; set; }
+
+        private readonly string ListDelimiter = ",";
 
         public Tour() { }
 
@@ -41,7 +43,31 @@ namespace InitialProject.Model
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Name, LocationId.ToString(), Description, Language, MaxGuests.ToString(), KeyPointsId.ToString(), StartTime.ToString(), Duration.ToString(), PicturesId.ToString(), GuideId.ToString(), GuestsId.ToString()  };
+            string[] csvValues = new string[12];
+            csvValues.Append(Id.ToString());
+            csvValues.Append(Name);
+            csvValues.Append(LocationId.ToString());
+            csvValues.Append(Description);
+            csvValues.Append(Language.ToString());
+            csvValues.Append(MaxGuests.ToString());
+
+            StringBuilder keyPoints = new StringBuilder();
+            keyPoints.AppendJoin(ListDelimiter, KeyPointsId);
+
+            csvValues.Append(keyPoints.ToString());
+            csvValues.Append(StartTime.ToString("MM/dd/yyyy HH:mm:ss tt"));
+            csvValues.Append(Duration.ToString());
+
+            StringBuilder pictureIds = new StringBuilder();
+            pictureIds.AppendJoin(ListDelimiter, PicturesId);
+            csvValues.Append(pictureIds.ToString());
+
+            csvValues.Append(GuideId.ToString());
+
+            StringBuilder guestIds = new StringBuilder();
+            pictureIds.AppendJoin(ListDelimiter, GuestsId);
+            csvValues.Append(guestIds.ToString());
+
             return csvValues;
         }
 
@@ -53,13 +79,20 @@ namespace InitialProject.Model
             Description = values[3];
             Language = values[4];
             MaxGuests = Convert.ToInt32(values[5]);
-            KeyPointsId = new List<int>() { Convert.ToInt32(values[6]) };
-            StartTime = Convert.ToDateTime(values[7]);
-            Duration = Convert.ToInt32(values[8]);
-            PicturesId = new List<int>() { Convert.ToInt32(values[9]) };
-            GuideId = Convert.ToInt32(values[10]);
-            GuestsId = new List<int>() { Convert.ToInt32(values[11]) }; 
 
+            var keyPoints = values[6].Split(ListDelimiter);
+            KeyPointsId = keyPoints.Select(Int32.Parse).ToList();
+
+            StartTime = Convert.ToDateTime(values[7]);
+            Duration = float.Parse(values[8]);
+
+            var pictureIds = values[9].Split(ListDelimiter);
+            PicturesId = pictureIds.Select(Int32.Parse).ToList();
+
+            GuideId = Convert.ToInt32(values[10]);
+
+            var guestIds = values[11].Split(ListDelimiter);
+            GuestsId = guestIds.Select(Int32.Parse).ToList();
         }
     }
 }
