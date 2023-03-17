@@ -24,6 +24,13 @@ namespace InitialProject.Repository
             _tours = _serializer.FromCSV(FilePath);
         }
 
+        //TODO FindAllTours()
+        public List<Tour> FindAllTours()
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            return _tours;
+        }
+
         public List<Tour> FindByLocation(int locationId)
         {
             _tours = _serializer.FromCSV(FilePath);
