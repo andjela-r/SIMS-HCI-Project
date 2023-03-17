@@ -13,6 +13,15 @@ namespace InitialProjectTests.RepositoryTests
 
             Assert.NotNull(testRepository);
         }
+        [Fact]
+        public void FindAllTours_ReturnsTours()
+        {
+            var testRepository = new TourRepository();
+            var result = testRepository.FindAllTours();
+
+            Assert.NotNull(result);
+        }
+   
         //Location tests
         [Fact]
         public void FindByLocation_LocationId1_ReturnsToursWithLocation1()
