@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Type = InitialProject.Model.Type;
+using InitialProject.DTO;
+
 
 namespace InitialProject.Repository
 {
@@ -42,35 +44,35 @@ namespace InitialProject.Repository
             }
             return _accommodations.Max(c => c.Id) + 1;
         }
-
-        public Accommodation FindByName(string name)
+        //TODO ovde treba umesto FindAll, FirstorDefault
+        public List<Accommodation> FindByName(string name)
         {
             _accommodations = _serializer.FromCSV(FilePath);
-            return _accommodations.FirstOrDefault(u => u.Name == name);
+            return _accommodations.FindAll(u => u.Name == name);
         }
 
-        public Accommodation FindByType(Type type)
+        public List<Accommodation> FindByType(Type type)
         {
             _accommodations = _serializer.FromCSV(FilePath);
-            return _accommodations.FirstOrDefault(u => u.Type == type);
+            return _accommodations.FindAll(u => u.Type == type);
         }
 
-        public Accommodation FindByOccupancy(int maxOccupancy)
+        public List<Accommodation> FindByOccupancy(int maxOccupancy)
         {
             _accommodations = _serializer.FromCSV(FilePath);
-            return _accommodations.FirstOrDefault(u => u.MaxOccupancy <= maxOccupancy);
+            return _accommodations.FindAll(u => u.MaxOccupancy <= maxOccupancy);
         }
 
-        public Accommodation FindByMinDays(int minDays)
+        public List<Accommodation> FindByMinDays(int minDays)
         {
             _accommodations = _serializer.FromCSV(FilePath);
-            return _accommodations.FirstOrDefault(u => u.MinDays >= minDays);
+            return _accommodations.FindAll(u => u.MinDays >= minDays);
         }
 
-        public Accommodation FindByLocation(string? city, string? country)
+        public List<Accommodation> FindByLocation(int locationId)
         {
             _accommodations = _serializer.FromCSV(FilePath);
-            return _accommodations.FirstOrDefault(u => u.Location.City == city || u.Location.Country == country);
+            return _accommodations.FindAll(u => u.LocationId == locationId);
         }
 
     }

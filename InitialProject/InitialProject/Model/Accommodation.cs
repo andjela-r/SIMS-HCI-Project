@@ -1,6 +1,8 @@
-﻿using System;
+﻿using InitialProject.Serializer;
+using System;
 using System.Collections.Generic;
-using InitialProject.Serializer;
+using System.Linq;
+using System.Text;
 
 namespace InitialProject.Model
 {
@@ -8,34 +10,49 @@ namespace InitialProject.Model
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public Location Location { get; set; }
+        public int LocationId { get; set; }
         public Type Type { get; set; }
         public int MaxOccupancy { get; set; }
         public int MinDays { get; set; }
         public int CancelPeriod { get; set; } = 1;
         public List<int> PicturesId { get; set; }
         public int OwnerId { get; set; }
-        public List<int> GuestsIds { get; set; }
 
-        public Accommodation(int id, string name, Location location, Type type, int occupancy,
-            int minDays, int cancelPeriod, List<int> pictures)
+        private readonly string ListDelimiter = ",";
+
+        public Accommodation(int id, string name, int location, Type type, int occupancy,
+            int minDays, int cancelPeriod, List<int> pictures, int ownerId)
         {
             this.Id = id;
             this.Name = name;
-            this.Location = location;
+            this.LocationId = location;
             this.Type = type;
             this.MaxOccupancy = occupancy;
             this.MinDays = minDays;
             this.CancelPeriod = cancelPeriod;
             this.PicturesId = pictures;
+            this.OwnerId = ownerId; 
         }
 
         public Accommodation() { }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Name, Location.ToString(), Type.ToString(),
-            MaxOccupancy.ToString(), MinDays.ToString(), CancelPeriod.ToString(), PicturesId.ToString() };
+            string[] csvValues = new string[9];
+            csvValues.Append(Id.ToString());
+            csvValues.Append(Name);
+            csvValues.Append(LocationId.ToString());
+            csvValues.Append(Type.ToString());
+            csvValues.Append(MaxOccupancy.ToString());
+            csvValues.Append(MinDays.ToString());
+            csvValues.Append(CancelPeriod.ToString());
+
+            StringBuilder picturesIds = new StringBuilder();
+            picturesIds.AppendJoin(ListDelimiter, PicturesId);
+            csvValues.Append(picturesIds.ToString());
+
+            csvValues.Append(OwnerId.ToString());
+
             return csvValues;
         }
 
@@ -43,12 +60,17 @@ namespace InitialProject.Model
         {
             Id = Convert.ToInt32(values[0]);
             Name = values[1];
-            Location = new Location() { Id = Convert.ToInt32(values[2]) };
+            LocationId = Convert.ToInt32(values[2]);
             Type = (Type) Convert.ToInt32(values[3]);
             MaxOccupancy = Convert.ToInt32(values[4]);
             MinDays = Convert.ToInt32(values[5]);
             CancelPeriod = Convert.ToInt32(values[6]);
-            PicturesId = new List<int>() { Convert.ToInt32(values[7]) };
+
+            var pictureIds = values[8].Split(ListDelimiter);
+            PicturesId = pictureIds.Select(Int32.Parse).ToList();
+
+            OwnerId = Convert.ToInt32(values[7]);
+
         }
     }
 }
