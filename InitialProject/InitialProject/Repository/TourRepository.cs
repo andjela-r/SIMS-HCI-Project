@@ -24,11 +24,15 @@ namespace InitialProject.Repository
             _tours = _serializer.FromCSV(FilePath);
         }
 
-        //TODO FindAllTours()
         public List<Tour> FindAllTours()
         {
             _tours = _serializer.FromCSV(FilePath);
             return _tours;
+        }
+
+        public Tour FindById(int id)
+        {
+            return _tours.Find(x => x.Id == id);
         }
 
         public List<Tour> FindByLocation(int locationId)
@@ -72,6 +76,17 @@ namespace InitialProject.Repository
                 return 1;
             }
             return _tours.Max(c => c.Id) + 1;
+        }
+
+        public Tour Update(Tour tour)
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            Tour current = _tours.Find(c => c.Id == tour.Id);
+            int index = _tours.IndexOf(current);
+            _tours.Remove(current);
+            _tours.Insert(index, tour);       // keep ascending order of ids in file 
+            _serializer.ToCSV(FilePath, _tours);
+            return tour;
         }
 
         public List<Tour> FindTodaysTours()
