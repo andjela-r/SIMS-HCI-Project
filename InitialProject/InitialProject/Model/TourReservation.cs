@@ -3,8 +3,6 @@ using System;
 
 namespace InitialProject.Model
 {
-
-
     public class TourReservation: ISerializable
     {
         public int Id { get; set; }
@@ -14,9 +12,8 @@ namespace InitialProject.Model
 
         public TourReservation() { }
 
-        public TourReservation(int id, int numberOfGuests, int guestId, int tourId)
+        public TourReservation(int numberOfGuests, int guestId, int tourId)
         {
-            this.Id = id;
             this.NumberOfGuests = numberOfGuests;
             this.GuestId = guestId;
             this.TourId = tourId;

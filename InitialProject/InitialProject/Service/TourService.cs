@@ -1,11 +1,5 @@
 ﻿using InitialProject.DTO;
 using InitialProject.Model;
-using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using InitialProject.Repository;
 
 namespace InitialProject.Service
@@ -13,6 +7,7 @@ namespace InitialProject.Service
     public class TourService
     {
         TourRepository tourRepository = new TourRepository();
+        TourReservationRepository tourReservationRepository = new TourReservationRepository();
         public void CreateTour(TourDTO tourDTO)
         {
             Tour tour = new Tour();
@@ -29,5 +24,7 @@ namespace InitialProject.Service
 
             tourRepository.Save(tour);
         }
+
+        
     }
 }

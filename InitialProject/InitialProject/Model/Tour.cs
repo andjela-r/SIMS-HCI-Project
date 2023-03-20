@@ -43,30 +43,30 @@ namespace InitialProject.Model
 
         public string[] ToCSV()
         {
-            string[] csvValues = new string[12];
-            csvValues.Append(Id.ToString());
-            csvValues.Append(Name);
-            csvValues.Append(LocationId.ToString());
-            csvValues.Append(Description);
-            csvValues.Append(Language.ToString());
-            csvValues.Append(MaxGuests.ToString());
+            string[] csvValues = new string[] { };
+            csvValues = csvValues.Append(Id.ToString()).ToArray();
+            csvValues = csvValues.Append(Name).ToArray();
+            csvValues = csvValues.Append(LocationId.ToString()).ToArray();
+            csvValues = csvValues.Append(Description).ToArray();
+            csvValues = csvValues.Append(Language.ToString()).ToArray();
+            csvValues = csvValues.Append(MaxGuests.ToString()).ToArray();
 
             StringBuilder keyPoints = new StringBuilder();
             keyPoints.AppendJoin(ListDelimiter, KeyPointsId);
 
-            csvValues.Append(keyPoints.ToString());
-            csvValues.Append(StartTime.ToString("MM/dd/yyyy HH:mm:ss tt"));
-            csvValues.Append(Duration.ToString());
+            csvValues = csvValues.Append(keyPoints.ToString()).ToArray();
+            csvValues = csvValues.Append(StartTime.ToString("MM/dd/yyyy HH:mm:ss tt")).ToArray();
+            csvValues = csvValues.Append(Duration.ToString()).ToArray();
 
             StringBuilder pictureIds = new StringBuilder();
             pictureIds.AppendJoin(ListDelimiter, PicturesId);
-            csvValues.Append(pictureIds.ToString());
+            csvValues = csvValues.Append(pictureIds.ToString()).ToArray();
 
-            csvValues.Append(GuideId.ToString());
+            csvValues = csvValues.Append(GuideId.ToString()).ToArray();
 
             StringBuilder guestIds = new StringBuilder();
-            pictureIds.AppendJoin(ListDelimiter, GuestsId);
-            csvValues.Append(guestIds.ToString());
+            guestIds.AppendJoin(ListDelimiter, GuestsId);
+            csvValues = csvValues.Append(guestIds.ToString()).ToArray();
 
             return csvValues;
         }
@@ -92,7 +92,10 @@ namespace InitialProject.Model
             GuideId = Convert.ToInt32(values[10]);
 
             var guestIds = values[11].Split(ListDelimiter);
-            GuestsId = guestIds.Select(Int32.Parse).ToList();
+            if (guestIds.Select(x => Int32.TryParse(x, out var result)).All(x => x == true))
+                GuestsId = guestIds.Select(Int32.Parse).ToList();
+            else
+                GuestsId = GuestsId;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.DTO;
+using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
 using System;
@@ -6,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Threading;
 
 namespace InitialProject
 {
@@ -36,6 +38,16 @@ namespace InitialProject
             Console.WriteLine("6. Track a tour");
             Console.WriteLine("\n7. Search Tour");
             Console.WriteLine("8. Tour reservation");
+            Console.WriteLine("\nx. Exit");
+            Console.Write("Your option: ");
+        }
+
+        private static void WriteTourSearchOptions()
+        {
+            Console.WriteLine("1. Search by location");
+            Console.WriteLine("2. Search by duration");
+            Console.WriteLine("3. Search by language");
+            Console.WriteLine("4. Search by number of guests");
             Console.WriteLine("\nx. Exit");
             Console.Write("Your option: ");
         }
@@ -89,24 +101,174 @@ namespace InitialProject
                     Console.WriteLine("Option 6\n");
                     break;
                 case "7":
-                    TourRepository tourRepository = new TourRepository();
-                    Console.WriteLine("Unesite jezik: ");
-                    string language = Console.ReadLine();
-                    List<Tour> retVal = tourRepository.FindByLanguage(language);
-                    foreach (Tour tour in retVal)
+                    string searchOption;
+                    do
                     {
-                        Console.WriteLine(tour.Name);
-                        Console.WriteLine("---");
-                    }
+                        WriteTourSearchOptions();
+                        searchOption = Console.ReadLine();
+                        Console.Clear();
+                        ProcessSearchTourOption(searchOption);
+                    } while (!searchOption.Equals("x"));
+
                     break;
                 case "8":
                     Console.WriteLine("Option 8\n");
+
+                    Console.WriteLine("Enter tour id: ");
+                    int tourId = Convert.ToInt32(Console.ReadLine());
+
+                    Console.WriteLine("Enter guest id: ");
+                    int guestId = Convert.ToInt32(Console.ReadLine());
+
+                    Console.WriteLine("Enter number of guests: ");
+                    int guestNumber = Convert.ToInt32(Console.ReadLine());
+
+                    TourReservation newReservation = new TourReservation(guestNumber, guestId, tourId);
+                    ProcessCreateTourReservation(newReservation);
+
                     break;
                 case "x":
                     break;
                 default:
                     Console.WriteLine("Option does not exist");
                     break;
+            }
+        }
+
+
+        private static void ProcessSearchTourOption(string searchOption)
+        {
+            TourRepository tourRepository = new TourRepository();
+            List<Tour> retVal = new List<Tour>();
+            switch (searchOption)
+            {
+                case "1":
+                    Console.WriteLine("--Search by location id--\n");
+                    Console.WriteLine("Enter location id: ");
+                    string id = Console.ReadLine();
+                    retVal = tourRepository.FindByLocation(Convert.ToInt32(id));
+                    foreach (Tour tour in retVal)
+                    {
+                        Console.WriteLine(tour.Name);
+                        Console.WriteLine("---");
+                    }
+                    break;
+                case "2":
+                    Console.WriteLine("--Search by tour duration--\n");
+                    Console.WriteLine("Enter tour duration: ");
+                    string duration = Console.ReadLine();
+                    retVal = tourRepository.FindByDuration(Convert.ToInt32(duration));
+                    foreach (Tour tour in retVal)
+                    {
+                        Console.WriteLine(tour.Name);
+                        Console.WriteLine("---");
+                    }
+                    break;
+                case "3":
+                    Console.WriteLine("--Search by tour language--\n");
+                    Console.WriteLine("Enter tour language: ");
+                    string language = Console.ReadLine();
+                    retVal = tourRepository.FindByLanguage(language);
+                    foreach (Tour tour in retVal)
+                    {
+                        Console.WriteLine(tour.Name);
+                        Console.WriteLine("---");
+                    }
+                    break;
+                case "4":
+                    Console.WriteLine("--Search by number of guests--\n");
+                    Console.WriteLine("Enter number of guests: ");
+                    string guestNumber = Console.ReadLine();
+                    retVal = tourRepository.FindByGuestNumber(Convert.ToInt32(guestNumber));
+                    foreach (Tour tour in retVal)
+                    {
+                        Console.WriteLine(tour.Name);
+                        Console.WriteLine("---");
+                    }
+                    break;
+                case "x":
+                    break;
+                default:
+                    Console.WriteLine("Option does not exist");
+                    break;
+            }
+        }
+        public static void ProcessCreateTourReservation(TourReservation newReservation)
+        {
+            List<Tour> retVal = new List<Tour>();
+            TourRepository tourRepository = new TourRepository();
+            TourReservationRepository tourReservationRepository = new TourReservationRepository();
+
+            var tour = tourRepository.FindById(newReservation.TourId);
+            if (tour.MaxGuests > 0)
+            {
+                //Moguce je napraviti rezervaciju
+                if (newReservation.NumberOfGuests <= tour.MaxGuests)
+                {
+                    var createdReservation = tourReservationRepository.CreateReservation(newReservation);
+
+                    tour.MaxGuests -= newReservation.NumberOfGuests;
+
+                    tour = tourRepository.Update(tour);
+
+                    Console.WriteLine("Free seats left: {0}", tour.MaxGuests);
+
+                }
+                else //newReservation.NumberOfGuests > tour.MaxGuests
+                {
+                    Console.WriteLine("Free seats left: {0}", tour.MaxGuests);
+                    //Update number of guests
+                    Console.WriteLine("Would you like to change the number of guests? (y/n) ");
+                    string answer = Console.ReadLine();
+                    switch (answer)
+                    {
+                        case "y":
+                            Console.WriteLine("Enter new number of guests: ");
+                            int newGuestNumber = -1;
+                            while (newGuestNumber == -1 || newGuestNumber > tour.MaxGuests)
+                            {
+                                newGuestNumber = Convert.ToInt32(Console.ReadLine());
+                            }
+                            newReservation.NumberOfGuests = newGuestNumber;
+                            break;
+                        case "n":
+                            return;
+                        default:
+                            Console.WriteLine("Option does not exist");
+                            break;
+                    }
+                    var createdReservation = tourReservationRepository.CreateReservation(newReservation);
+
+                    tour.MaxGuests -= newReservation.NumberOfGuests;
+
+                    tour = tourRepository.Update(tour);
+
+                    Console.WriteLine("Free seats left: {0}", tour.MaxGuests);
+                }
+            }
+            else 
+            {
+                Console.WriteLine("Unfortunately, the tour you've chosen doens't have any seats left.\nWould you like to pick another tour? (y/n) ");
+                string answer = Console.ReadLine();
+                switch (answer)
+                {
+                    case "y":
+                        Console.WriteLine("Tours on the same location: ");
+                        int locationId = tour.LocationId;
+                        retVal = tourRepository.FindByLocation(locationId);
+                        foreach (Tour tours in retVal)
+                        {
+                            Console.WriteLine(tour.Name);
+                            Console.WriteLine("---");
+                        }
+                        
+                        break;
+                    case "n":
+                        return;
+                    default:
+                        Console.WriteLine("Option does not exist");
+                        break;
+                }
             }
         }
     }
