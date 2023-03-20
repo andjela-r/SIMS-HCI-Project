@@ -89,14 +89,6 @@ namespace InitialProject.Repository
             return tour;
         }
 
-        public List<Tour> FindTodaysTours()
-        {
-            DateTime today = DateTime.Today;
-            Console.WriteLine("Danas: " +today);
 
-            _tours = _serializer.FromCSV(FilePath);
-
-            return _tours.FindAll(t => t.StartTime == today);
-        }
     }
 }

@@ -18,7 +18,6 @@ namespace InitialProject.Service
             tour.Language = tourDTO.Language;
             tour.MaxGuests = tourDTO.MaxGuests;
             tour.KeyPointsId = tourDTO.KeyPointsId;
-            tour.StartTime = tourDTO.StartTime;
             tour.Duration = tourDTO.Duration;
             tour.PicturesId = tourDTO.PicturesId;
 
