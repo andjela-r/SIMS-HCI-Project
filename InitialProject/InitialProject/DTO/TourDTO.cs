@@ -15,13 +15,12 @@ namespace InitialProject.DTO
         public string Language { get; set; }
         public int MaxGuests { get; set; }
         public List<int> KeyPointsId { get; set; }
-        public DateTime StartTime { get; set; }
         public float Duration { get; set; }
         public List<int> PicturesId { get; set; }
 
         public TourDTO() { }
 
-        public TourDTO(string name, int locationId, string description, string language, int maxGuests, List<int> keyPointsId, DateTime startTime, float duration, List<int> picturesId)
+        public TourDTO(string name, int locationId, string description, string language, int maxGuests, List<int> keyPointsId, float duration, List<int> picturesId)
         {
             this.Name = name;
             this.LocationId = locationId;
@@ -29,7 +28,6 @@ namespace InitialProject.DTO
             this.Language = language;
             this.MaxGuests = maxGuests;
             this.KeyPointsId = keyPointsId;
-            this.StartTime = startTime;
             this.Duration = duration;
             this.PicturesId = picturesId;
         }

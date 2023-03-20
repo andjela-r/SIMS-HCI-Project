@@ -3,6 +3,7 @@ using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
 using System;
+using System.Buffers;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -52,6 +53,7 @@ namespace InitialProject
             Console.Write("Your option: ");
         }
 
+
         private static void ProcessChosenOption(string chosenOption)
         {
             switch (chosenOption)
@@ -69,37 +71,49 @@ namespace InitialProject
                     Console.WriteLine("Option 4\n");
                     break;
                 case "5":
-                    Console.WriteLine("Option 5\n");
-                    /*TourService tourService = new TourService();
-
-                    Console.WriteLine("Insert name: ");
-                    string name = Console.ReadLine();
-
-                    Console.WriteLine("Insert location id: ");
-                    int locationId = Convert.ToInt32(Console.ReadLine());
-
-                    Console.WriteLine("Insert description: ");
-                    string description = Console.ReadLine();
-
-                    Console.WriteLine("Insert language: ");
-                    string language = Console.ReadLine();
-
-                    Console.WriteLine("Insert max number of guests: ");
-                    int maxGuests = Convert.ToInt32(Console.ReadLine());
-
-                    
-                    Console.WriteLine("How many key points do you want to enter?  ");
-                    int nkp = Convert.ToInt32(Console.ReadLine());
-                    for(int i = 0; i<nkp; i++)
+                    string creationOption;
+                    do
                     {
-                        Console.WriteLine("Insert key point id: ");
-                        int keyPointId = Convert.ToInt32(Console.ReadLine());
-                    }
-                    */
+                        WriteTourCreationOptions();
+                        creationOption = Console.ReadLine();
+                        Console.Clear();
+
+                        ProcessCreationOption(creationOption);
+                    } while (!creationOption.Equals("x"));
                     break;
                 case "6":
-                    Console.WriteLine("Option 6\n");
-                    break;
+                    //ispis danasnjih tura
+                    TourRepository tourRepository = new TourRepository();
+                    AppointmentRepository appointmentRepository = new AppointmentRepository();
+                    List<Appointment> appointments = appointmentRepository.FindTodaysAppointments();
+                    foreach(Appointment appointment in appointments)
+                    {
+                        Tour tour = tourRepository.FindById(appointment.TourId);
+                        Console.WriteLine(appointment.TourId + " "+ tour.Name);
+                    }
+
+                    //zapocinjanje ture - promena statusa
+                    Console.WriteLine("Select a tour(id)");
+                    int SelectTourId = Convert.ToInt32(Console.ReadLine());
+                    appointmentRepository.StartTodaysAppointment(SelectTourId);
+                    Tour selectedTour = tourRepository.FindById(SelectTourId);
+
+                    //ispis kljucnih tacaka
+                    KeyPointRepository keyPointRepository = new KeyPointRepository();
+                    List<KeyPoint> keyPoints = keyPointRepository.FindKeyPoints(selectedTour);
+                    foreach (KeyPoint keyPoint in keyPoints)
+                    {
+                        Console.WriteLine(keyPoint.Name);
+                    }
+
+                    //menjanje statusa kljucnih tacaka
+                    
+
+                    //provera gostiju
+
+                    //kraj ture - zavrsena poslednja kljucna tacka || nepredvidive okolnosti
+
+                        break;
                 case "7":
                     string searchOption;
                     do
@@ -112,8 +126,6 @@ namespace InitialProject
 
                     break;
                 case "8":
-                    Console.WriteLine("Option 8\n");
-
                     Console.WriteLine("Enter tour id: ");
                     int tourId = Convert.ToInt32(Console.ReadLine());
 
@@ -133,6 +145,48 @@ namespace InitialProject
                     Console.WriteLine("Option does not exist");
                     break;
             }
+        }
+
+        private static void WriteTourCreationOptions()
+        {
+            Console.WriteLine("1. Tour creation");
+            Console.WriteLine("2. Appointment creation");
+            Console.WriteLine("x. Exit");
+
+            Console.WriteLine("Your option: ");
+        }
+
+        private static TourDTO GetTourCreationData()
+        {
+            Console.WriteLine("Insert name: ");
+            string name = Console.ReadLine();
+
+            Console.WriteLine("Insert location id: ");
+            int locationId = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Insert description: ");
+            string description = Console.ReadLine();
+
+            Console.WriteLine("Insert language: ");
+            string language = Console.ReadLine();
+
+            Console.WriteLine("Insert max number of guests: ");
+            int maxGuests = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Insert key points: ");
+            var keyPoints = Console.ReadLine().Split(',');
+            List<int> keyPointsId = keyPoints.Select(Int32.Parse).ToList();
+
+            Console.WriteLine("Insert duration: ");
+            float duration = float.Parse(Console.ReadLine());
+
+            Console.WriteLine("Insert picture ids: ");
+            var pictures = Console.ReadLine().Split(',');
+            List<int> pictureIds = pictures.Select(Int32.Parse).ToList();
+
+            TourDTO tourDTO = new TourDTO(name, locationId, description, language, maxGuests, keyPointsId, duration, pictureIds);
+
+            return tourDTO;            
         }
 
 
@@ -185,6 +239,52 @@ namespace InitialProject
                         Console.WriteLine(tour.Name);
                         Console.WriteLine("---");
                     }
+                    break;
+                case "x":
+                    break;
+                default:
+                    Console.WriteLine("Option does not exist");
+                    break;
+            }
+        }
+
+        private static AppointmentDTO GetAppointmentCreationData()
+        {
+            Console.WriteLine("Insert tour id: ");
+            int tourId = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Insert start time: ");
+            DateTime startTime = Convert.ToDateTime(Console.ReadLine());
+
+            Console.WriteLine("Insert guide id: ");
+            int guideId = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Insert guest ids: ");
+            var guests = Console.ReadLine().Split(',');
+            List<int> guestIds = guests.Select(Int32.Parse).ToList();
+
+            AppointmentDTO appointmentDTO = new AppointmentDTO(tourId, startTime, guideId, guestIds);
+
+            return appointmentDTO;
+        }
+
+        private static void ProcessCreationOption(string creationOption)
+        {
+            switch (creationOption)
+            {
+                case "1":
+                    TourDTO tourDTO = new TourDTO();
+                    tourDTO = GetTourCreationData();
+
+                    TourService tourService = new TourService();
+                    tourService.CreateTour(tourDTO);
+                    break;
+                case "2":
+                    AppointmentDTO appointmentDTO1 = new AppointmentDTO();
+                    appointmentDTO1 = GetAppointmentCreationData();
+
+                    AppointmentService appointmentService = new AppointmentService();
+                    appointmentService.CreateAppointment(appointmentDTO1);
                     break;
                 case "x":
                     break;
@@ -273,4 +373,3 @@ namespace InitialProject
         }
     }
 }
-
