@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using System.Windows.Threading;
 
 namespace InitialProject
@@ -99,12 +100,12 @@ namespace InitialProject
                     Tour selectedTour = tourRepository.FindById(SelectTourId);
 
                     //ispis kljucnih tacaka
-                    KeyPointRepository keyPointRepository = new KeyPointRepository();
-                    List<KeyPoint> keyPoints = keyPointRepository.FindKeyPoints(selectedTour);
-                    foreach (KeyPoint keyPoint in keyPoints)
-                    {
-                        Console.WriteLine(keyPoint.Name);
-                    }
+                    //KeyPointRepository keyPointRepository = new KeyPointRepository();
+                    //List<KeyPoint> keyPoints = keyPointRepository.FindKeyPoints(selectedTour);
+                    //foreach (KeyPoint keyPoint in keyPoints)
+                    //{
+                        //Console.WriteLine(keyPoint.Name);
+                    //}
 
                     //menjanje statusa kljucnih tacaka
                     
@@ -293,30 +294,46 @@ namespace InitialProject
                     break;
             }
         }
+
+        public static Appointment Book(TourReservation newReservation)
+        {
+            AppointmentRepository appointmentRepository = new AppointmentRepository();
+            TourReservationRepository tourReservationRepository = new TourReservationRepository();
+            var appointment = appointmentRepository.FindById(newReservation.TourId);
+            var createdReservation = tourReservationRepository.CreateReservation(newReservation);
+
+            for (int i = 0; i < createdReservation.NumberOfGuests; i++)
+            {
+                var highestId = appointment.GuestsId.Any() ? appointment.GuestsId.Max() : 1;
+                appointment.GuestsId.Add(highestId + 1);
+                appointment = appointmentRepository.Update(appointment);
+            }
+            return appointment;
+        }
+
         public static void ProcessCreateTourReservation(TourReservation newReservation)
         {
             List<Tour> retVal = new List<Tour>();
             TourRepository tourRepository = new TourRepository();
-            TourReservationRepository tourReservationRepository = new TourReservationRepository();
-
+            AppointmentRepository appointmentRepository = new AppointmentRepository();
+            //ne vraca apdejtovan appointment u drugom krugu
+            var appointment = appointmentRepository.FindById(newReservation.TourId);
             var tour = tourRepository.FindById(newReservation.TourId);
-            if (tour.MaxGuests > 0)
+            int seatsLeft = tour.MaxGuests - appointment.GuestsId.Count();
+
+            if (appointment.GuestsId.Count() < tour.MaxGuests)
             {
                 //Moguce je napraviti rezervaciju
-                if (newReservation.NumberOfGuests <= tour.MaxGuests)
+                if (newReservation.NumberOfGuests <= seatsLeft)
                 {
-                    var createdReservation = tourReservationRepository.CreateReservation(newReservation);
-
-                    tour.MaxGuests -= newReservation.NumberOfGuests;
-
-                    tour = tourRepository.Update(tour);
-
-                    Console.WriteLine("Free seats left: {0}", tour.MaxGuests);
+                    var updatedAppointment = Book(newReservation);
+                    seatsLeft = tour.MaxGuests - updatedAppointment.GuestsId.Count();
+                    Console.WriteLine("Successfully booked tour!\nFree seats left: {0}", seatsLeft);
 
                 }
-                else //newReservation.NumberOfGuests > tour.MaxGuests
+                else //newReservation.NumberOfGuests > appointment.GuestsId.Count()
                 {
-                    Console.WriteLine("Free seats left: {0}", tour.MaxGuests);
+                    Console.WriteLine("Free seats left: {0}", seatsLeft);
                     //Update number of guests
                     Console.WriteLine("Would you like to change the number of guests? (y/n) ");
                     string answer = Console.ReadLine();
@@ -324,10 +341,13 @@ namespace InitialProject
                     {
                         case "y":
                             Console.WriteLine("Enter new number of guests: ");
+                            Console.WriteLine("Enter '0' to return");
                             int newGuestNumber = -1;
                             while (newGuestNumber == -1 || newGuestNumber > tour.MaxGuests)
                             {
                                 newGuestNumber = Convert.ToInt32(Console.ReadLine());
+                                if (newGuestNumber == 0)
+                                    return;
                             }
                             newReservation.NumberOfGuests = newGuestNumber;
                             break;
@@ -337,18 +357,15 @@ namespace InitialProject
                             Console.WriteLine("Option does not exist");
                             break;
                     }
-                    var createdReservation = tourReservationRepository.CreateReservation(newReservation);
 
-                    tour.MaxGuests -= newReservation.NumberOfGuests;
-
-                    tour = tourRepository.Update(tour);
-
-                    Console.WriteLine("Free seats left: {0}", tour.MaxGuests);
+                    var updatedAppointment = Book(newReservation);
+                    seatsLeft = tour.MaxGuests - updatedAppointment.GuestsId.Count();
+                    Console.WriteLine("Successfully booked tour!\nFree seats left: {0}", seatsLeft);
                 }
             }
             else 
             {
-                Console.WriteLine("Unfortunately, the tour you've chosen doens't have any seats left.\nWould you like to pick another tour? (y/n) ");
+                Console.WriteLine("Unfortunately, the tour you've chosen doesn't have any seats left.\nWould you like to pick another tour? (y/n) ");
                 string answer = Console.ReadLine();
                 switch (answer)
                 {
