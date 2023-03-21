@@ -68,10 +68,5 @@ namespace InitialProject.Model
             PicturesId = pictureIds.Select(Int32.Parse).ToList();
         }
 
-
-
-
-
-
     }
 }

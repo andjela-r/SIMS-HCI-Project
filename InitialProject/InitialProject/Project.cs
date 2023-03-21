@@ -90,38 +90,10 @@ namespace InitialProject
                     } while (!creationOption.Equals("x"));
                     break;
                 case "6":
-                    //ispis danasnjih tura
-                    TourRepository tourRepository = new TourRepository();
-                    AppointmentRepository appointmentRepository = new AppointmentRepository();
-                    List<Appointment> appointments = appointmentRepository.FindTodaysAppointments();
-                    foreach(Appointment appointment in appointments)
-                    {
-                        Tour tour = tourRepository.FindById(appointment.TourId);
-                        Console.WriteLine(appointment.TourId + " "+ tour.Name);
-                    }
+                    TourService tourService = new TourService();
+                    tourService.TrackTourLive();
 
-                    //zapocinjanje ture - promena statusa
-                    Console.WriteLine("Select a tour(id)");
-                    int SelectTourId = Convert.ToInt32(Console.ReadLine());
-                    appointmentRepository.StartTodaysAppointment(SelectTourId);
-                    Tour selectedTour = tourRepository.FindById(SelectTourId);
-
-                    //ispis kljucnih tacaka
-                    //KeyPointRepository keyPointRepository = new KeyPointRepository();
-                    //List<KeyPoint> keyPoints = keyPointRepository.FindKeyPoints(selectedTour);
-                    //foreach (KeyPoint keyPoint in keyPoints)
-                    //{
-                        //Console.WriteLine(keyPoint.Name);
-                    //}
-
-                    //menjanje statusa kljucnih tacaka
-                    
-
-                    //provera gostiju
-
-                    //kraj ture - zavrsena poslednja kljucna tacka || nepredvidive okolnosti
-
-                        break;
+                    break;
                 case "7":
                     string searchOption;
                     do
@@ -159,6 +131,7 @@ namespace InitialProject
         {
             Console.WriteLine("1. Tour creation");
             Console.WriteLine("2. Appointment creation");
+            Console.WriteLine("3. Key point creation");
             Console.WriteLine("x. Exit");
 
             Console.WriteLine("Your option: ");
@@ -369,11 +342,7 @@ namespace InitialProject
             Console.WriteLine("Insert guide id: ");
             int guideId = Convert.ToInt32(Console.ReadLine());
 
-            Console.WriteLine("Insert guest ids: ");
-            var guests = Console.ReadLine().Split(',');
-            List<int> guestIds = guests.Select(Int32.Parse).ToList();
-
-            AppointmentDTO appointmentDTO = new AppointmentDTO(tourId, startTime, guideId, guestIds);
+            AppointmentDTO appointmentDTO = new AppointmentDTO(tourId, startTime, guideId);
 
             return appointmentDTO;
         }
@@ -395,6 +364,13 @@ namespace InitialProject
 
                     AppointmentService appointmentService = new AppointmentService();
                     appointmentService.CreateAppointment(appointmentDTO1);
+                    break;
+                case "3":
+                    KeyPointDTO keyPointDTO = new KeyPointDTO();
+                    keyPointDTO = GetKeyPointCreationData();
+
+                    KeyPointService keyPointService = new KeyPointService();
+                    keyPointService.CreateKeyPoint(keyPointDTO);
                     break;
                 case "x":
                     break;
@@ -496,6 +472,16 @@ namespace InitialProject
                         break;
                 }
             }
+        }
+
+        private static KeyPointDTO GetKeyPointCreationData()
+        {
+            Console.WriteLine("Insert name: ");
+            string name = Console.ReadLine();
+
+            KeyPointDTO keyPointDTO = new KeyPointDTO(name);
+
+            return keyPointDTO;
         }
     }
 }

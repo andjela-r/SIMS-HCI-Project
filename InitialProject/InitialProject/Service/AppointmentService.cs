@@ -18,13 +18,10 @@ namespace InitialProject.Service
             Appointment appointment = new Appointment();
 
             appointment.TourId = appointmentDTO.TourId;
-            appointment.StartTime = DateTime.Now;
+            appointment.StartTime = appointmentDTO.StartTime;
             appointment.GuideId = appointmentDTO.GuideId;
-            appointment.GuestsId = appointmentDTO.GuestsId;
 
             appointmentRepository.Save(appointment);
         }
-
-
     }
 }
