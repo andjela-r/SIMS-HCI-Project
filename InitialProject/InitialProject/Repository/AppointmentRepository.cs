@@ -78,5 +78,40 @@ namespace InitialProject.Repository
 
             //return tour;
         }
+        //Anjdeline
+        public List<Appointment> FindAllTours()
+        {
+            _appointments = _serializer.FromCSV(FilePath);
+            return _appointments;
+        }
+
+        public Appointment FindById(int id)
+        {
+            return _appointments.Find(x => x.Id == id);
+        }
+
+        /*public List<Appointment> FindByLocation(int locationId)
+        {
+            _appointments = _serializer.FromCSV(FilePath);
+            return _appointments.FindAll(u => u.LocationId == locationId);
+        }
+
+        public List<Appointment> FindByDuration(float duration)
+        {
+            _appointments = _serializer.FromCSV(FilePath);
+            return _appointments.FindAll(u => u.Duration <= duration);
+        }
+
+        public List<Appointment> FindByLanguage(string language)
+        {
+            _appointments = _serializer.FromCSV(FilePath);
+            return _appointments.FindAll(u => u.Language == language);
+        }
+
+        public List<Appointment> FindByGuestNumber(int numberOfGuests)
+        {
+            _appointments = _serializer.FromCSV(FilePath);
+            return _appointments.FindAll(u => u.MaxGuests >= numberOfGuests);
+        }*/
     }
 }
