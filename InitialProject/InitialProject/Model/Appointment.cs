@@ -33,25 +33,6 @@ namespace InitialProject.Model
             this.Status = status;
         }
 
-        /*public string[] ToCSV()
-        {
-
-            StringBuilder guestsIds = new StringBuilder();
-            //guestsIds.AppendJoin(ListDelimiter, GuestsId);
-
-            var guestIds = guestsIds.AppendJoin(ListDelimiter, GuestsId);
-            if (guestIds.Select(x => Int32.TryParse(x, out var result)).All(x => x == true))
-                GuestsId = guestIds.Select(Int32.Parse).ToList();
-            else
-                GuestsId = GuestsId;
-
-            int status = Convert.ToInt32(Status);
-
-            string[] csvValues = { Id.ToString(), TourId.ToString(), StartTime.ToString(),  GuideId.ToString(), guestsIds.ToString(), status.ToString()};
-
-            return csvValues;
-        }*/
-
         public string[] ToCSV()
         {
             string[] csvValues = new string[] { };
@@ -78,7 +59,7 @@ namespace InitialProject.Model
 
         public void FromCSV(string[] values)
         {
-            Id = Convert.ToInt32(values[0]);
+            Id = Convert.ToInt32(values[1]);
             TourId = Convert.ToInt32(values[1]);
             StartTime = Convert.ToDateTime(values[2]);
             GuideId = Convert.ToInt32(values[3]);

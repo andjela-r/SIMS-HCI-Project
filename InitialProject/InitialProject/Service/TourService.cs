@@ -1,6 +1,7 @@
 ﻿using InitialProject.DTO;
 using InitialProject.Model;
 using InitialProject.Repository;
+using System.Collections.Generic;
 
 namespace InitialProject.Service
 {
@@ -24,6 +25,36 @@ namespace InitialProject.Service
             tourRepository.Save(tour);
         }
 
-        
+        public void TrackTourLive()
+        {
+            KeyPointRepository keyPointRepository = new KeyPointRepository();
+            AppointmentRepository appointmentRepository = new AppointmentRepository();
+            TourRepository tourRepository = new TourRepository();
+
+            appointmentRepository.TodaysAppointments();
+
+            Appointment selectedAppointment = appointmentRepository.SelectAppointment();
+
+            int selectedTourId = selectedAppointment.TourId;
+            Tour selectedTour = tourRepository.FindById(selectedTourId);
+
+            List<KeyPoint> keyPoints = keyPointRepository.FindKeyPoints(selectedTour);
+            List<int> keyPointsIds = selectedTour.KeyPointsId;
+
+            List<int> touristsToArrive = selectedAppointment.GuestsId;
+
+            tourRepository.InitiateTour(keyPoints, touristsToArrive, keyPointRepository);
+
+            foreach (int id in keyPointsIds)
+            {
+                KeyPoint keyPoint = keyPointRepository.FindById(id);
+                if (keyPoint.Status != Status.Finished)
+                {
+                    keyPointRepository.SelectKeyPoint(keyPoints, keyPointsIds, touristsToArrive);
+                }
+            }
+
+            tourRepository.FinishTour(selectedAppointment, keyPoints);
+        }
     }
 }

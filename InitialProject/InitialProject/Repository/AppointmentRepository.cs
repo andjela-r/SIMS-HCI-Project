@@ -27,7 +27,7 @@ namespace InitialProject.Repository
         {
             appointment.Id = NextId();
             appointment.Status = Status.NotStarted;
-            //appointment.GuestsId = new List<int>();
+            appointment.GuestsId = new List<int>();
             _appointments = _serializer.FromCSV(FilePath);
             _appointments.Add(appointment);
             _serializer.ToCSV(FilePath, _appointments);
@@ -47,7 +47,7 @@ namespace InitialProject.Repository
         public List<Appointment> FindTodaysAppointments()
         {
             DateTime today = DateTime.Today;
-            Console.WriteLine("Danas: " +today+"\n");
+            Console.WriteLine("Today: " +today+"\n");
 
             _appointments = _serializer.FromCSV(FilePath);
 
@@ -67,8 +67,7 @@ namespace InitialProject.Repository
 
         public void StartTodaysAppointment(int id)
         {
-            Appointment result = _appointments.Find(x => x.TourId == id);
-            //Console.WriteLine("Izabrana tura: "+result.TourId);
+            Appointment result = _appointments.Find(x => x.Id == id);
             result.Status = Status.Ongoing;
             Update(result);
             _serializer.ToCSV(FilePath, _appointments);
@@ -76,13 +75,6 @@ namespace InitialProject.Repository
             TourRepository tourRepository = new TourRepository();
             Tour tour = tourRepository.FindById(id);
 
-            //return tour;
-        }
-        //Anjdeline
-        public List<Appointment> FindAllTours()
-        {
-            _appointments = _serializer.FromCSV(FilePath);
-            return _appointments;
         }
 
         public Appointment FindById(int id)
@@ -90,28 +82,29 @@ namespace InitialProject.Repository
             return _appointments.Find(x => x.Id == id);
         }
 
-        /*public List<Appointment> FindByLocation(int locationId)
+        public void TodaysAppointments()
         {
-            _appointments = _serializer.FromCSV(FilePath);
-            return _appointments.FindAll(u => u.LocationId == locationId);
+            TourRepository tourRepository = new TourRepository();
+            AppointmentRepository appointmentRepository = new AppointmentRepository();
+            List<Appointment> appointments = appointmentRepository.FindTodaysAppointments();
+            foreach (Appointment appointment in appointments)
+            {
+                Tour tour = tourRepository.FindById(appointment.TourId);
+                Console.WriteLine(appointment.Id + " " + tour.Name);
+            }
         }
 
-        public List<Appointment> FindByDuration(float duration)
+        public Appointment SelectAppointment()
         {
-            _appointments = _serializer.FromCSV(FilePath);
-            return _appointments.FindAll(u => u.Duration <= duration);
-        }
+            AppointmentRepository appointmentRepository = new AppointmentRepository();
+            TourRepository tourRepository = new TourRepository();
 
-        public List<Appointment> FindByLanguage(string language)
-        {
-            _appointments = _serializer.FromCSV(FilePath);
-            return _appointments.FindAll(u => u.Language == language);
-        }
+            Console.WriteLine("\nSelect a tour(id)");
+            int selectedAppointmentId = Convert.ToInt32(Console.ReadLine());
+            Appointment selectedAppointment = appointmentRepository.FindById(selectedAppointmentId);
+            appointmentRepository.StartTodaysAppointment(selectedAppointmentId);
 
-        public List<Appointment> FindByGuestNumber(int numberOfGuests)
-        {
-            _appointments = _serializer.FromCSV(FilePath);
-            return _appointments.FindAll(u => u.MaxGuests >= numberOfGuests);
-        }*/
+            return selectedAppointment;
+        }
     }
 }

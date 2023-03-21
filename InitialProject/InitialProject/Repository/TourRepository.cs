@@ -30,11 +30,6 @@ namespace InitialProject.Repository
             return _tours;
         }
 
-        public Tour FindById(int id)
-        {
-            return _tours.Find(x => x.Id == id);
-        }
-
         public List<Tour> FindByLocation(int locationId)
         {
             _tours = _serializer.FromCSV(FilePath);
@@ -84,11 +79,37 @@ namespace InitialProject.Repository
             Tour current = _tours.Find(c => c.Id == tour.Id);
             int index = _tours.IndexOf(current);
             _tours.Remove(current);
-            _tours.Insert(index, tour);       // keep ascending order of ids in file 
+            _tours.Insert(index, tour);   
             _serializer.ToCSV(FilePath, _tours);
             return tour;
         }
+        public Tour FindById(int id)
+        {
+            return _tours.Find(x => x.Id == id);
+        }
 
+        public void FinishTour(Appointment appointment, List<KeyPoint> keyPoints)
+        {
+            appointment.Status = Status.Finished;
+
+            KeyPointRepository keyPointRepository = new KeyPointRepository();
+
+            foreach (KeyPoint keyPoint in keyPoints)
+            {
+                keyPoint.Status = Status.NotStarted;
+                keyPointRepository.Update(keyPoint);
+
+            }
+
+            Console.WriteLine("\n-----------------\nTour is finished.\n-----------------\n");
+        }
+
+        public void InitiateTour(List<KeyPoint> keyPoints, List<int> touristsToArrive, KeyPointRepository keyPointRepository)
+        {
+            KeyPoint firstKeypoint = keyPoints.First();
+
+            keyPointRepository.InitiateKeyPoint(firstKeypoint, keyPoints, touristsToArrive);
+        }
 
     }
 }
