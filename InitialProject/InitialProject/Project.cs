@@ -365,7 +365,7 @@ namespace InitialProject
             }
             else 
             {
-                Console.WriteLine("Unfortunately, the tour you've chosen doens't have any seats left.\nWould you like to pick another tour? (y/n) ");
+                Console.WriteLine("Unfortunately, the tour you've chosen doesn't have any seats left.\nWould you like to pick another tour? (y/n) ");
                 string answer = Console.ReadLine();
                 switch (answer)
                 {
