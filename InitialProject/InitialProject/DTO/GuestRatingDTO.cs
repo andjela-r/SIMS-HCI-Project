@@ -10,15 +10,13 @@ namespace InitialProject.DTO
 {
     public class GuestRatingDTO
     {
-        public int Id { get; set; }
         public int Cleanliness { get; set; }
         public int Obedience { get; set; }
         public string Comment { get; set; }
         public int GuestId { get; set; }    
 
-        public GuestRatingDTO(int id, int cleanliness, int obedience, string comment, int guestId)
+        public GuestRatingDTO(int cleanliness, int obedience, string comment, int guestId)
         {
-            this.Id = id;
             this.Cleanliness = cleanliness;
             this.Obedience = obedience;
             this.Comment = comment;

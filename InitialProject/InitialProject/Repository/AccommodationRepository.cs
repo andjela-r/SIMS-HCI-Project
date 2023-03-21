@@ -14,8 +14,7 @@ namespace InitialProject.Repository
 {
     public class AccommodationRepository
     {
-        private const string FilePath = "../../../Resources/Data/accommodations.csv";
-
+        private const string FilePath ="../../../Resources/Data/accs.csv";
         private readonly Serializer<Accommodation> _serializer;
 
         private List<Accommodation> _accommodations;
