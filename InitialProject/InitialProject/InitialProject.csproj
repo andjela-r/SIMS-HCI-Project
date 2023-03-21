@@ -9,15 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Data\accommodations.csv" />
     <None Remove="Resources\Data\guestRatings.csv" />
+    <None Remove="Resources\Data\TextFile1.txt" />
     <None Remove="Resources\Images\add.png" />
     <None Remove="Resources\Images\delete.png" />
     <None Remove="Resources\Images\edit.png" />
     <None Remove="Resources\Images\view.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="Resources\Data\guestRatings.csv" />
   </ItemGroup>
 
   <ItemGroup>

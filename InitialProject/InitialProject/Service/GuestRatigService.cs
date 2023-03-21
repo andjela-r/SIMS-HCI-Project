@@ -13,7 +13,7 @@ namespace InitialProject.Service
     {
         GuestRatingRepository guestRatingRepository = new GuestRatingRepository();
 
-        public void RateGuest(GuestRatingDTO guestRatingDTO)
+        public void CreateGuestRating(GuestRatingDTO guestRatingDTO)
          {
             GuestRating guestRating = new GuestRating();
             guestRating.Cleanliness = guestRatingDTO.Cleanliness;

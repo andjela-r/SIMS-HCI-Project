@@ -10,7 +10,7 @@ namespace InitialProject.Repository
 {
     public class GuestRatingRepository
     {
-        private const string FilePath = "../../../Resources/Data/guestRatings.csv";
+        private const string FilePath = "../../../Resources/Data/guestsRatings.csv";
 
         private readonly Serializer<GuestRating> _serializer;
 
@@ -18,7 +18,7 @@ namespace InitialProject.Repository
 
         public GuestRatingRepository()
         {
-            _serializer = new Serializer<Accommodation>();
+            _serializer = new Serializer<GuestRating>();
             _guestRatings = _serializer.FromCSV(FilePath);
         }
 

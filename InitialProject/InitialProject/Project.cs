@@ -6,10 +6,11 @@ using System;
 using System.Buffers;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using System.Windows.Threading;
+using Type = InitialProject.Model.Type;
 
 namespace InitialProject
 {
@@ -60,10 +61,16 @@ namespace InitialProject
             switch (chosenOption)
             {
                 case "1":
-                    Console.WriteLine("Option 1\n");
+                    do
+                    {
+                        AccommodationRegistration();
+                    } while(!chosenOption.Equals("x"));
                     break;
                 case "2":
-                    Console.WriteLine("Option 2\n");
+                    do
+                    {
+                        RateAGuest();
+                    } while (!chosenOption.Equals("x"));
                     break;
                 case "3":
                     Console.WriteLine("Option 3\n");
@@ -189,7 +196,109 @@ namespace InitialProject
 
             return tourDTO;            
         }
+        private static void AccommodationRegistration() {
 
+            int idLocation, type;
+            LocationRepository locationRepository = new LocationRepository();
+            AccommodationService accommodationService = new AccommodationService();
+            
+            Console.WriteLine("Insert accommodation name: ");
+            string name = Console.ReadLine();
+
+            Console.WriteLine("Insert location id: ");
+            idLocation = Convert.ToInt32(Console.ReadLine());
+
+            while (locationRepository.FindById(idLocation) == null)
+            {
+                Console.WriteLine("That location does not exist. Try again: ");
+                Console.WriteLine("Insert location id: ");
+                idLocation = Convert.ToInt32(Console.ReadLine());
+            }
+
+            Console.WriteLine("Insert accommodation type:\n ");
+            Console.WriteLine("0-apartment\n1-house\n2-cottage");
+            type = Convert.ToInt32(Console.ReadLine());
+            
+            while((Type)type != Type.House && (Type)type != Type.Cottage && (Type)type != Type.Apartment)
+            {
+                Console.WriteLine("That type does not exist. Try again: ");
+                Console.WriteLine("Insert accommodation type:\n ");
+                type = Convert.ToInt32(Console.ReadLine());
+            }
+
+            Console.WriteLine("Insert maximum number of guests: ");
+            int maxOccupancy = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Insert minimum stay length (in days): ");
+            int minDays = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Insert cancel period: ");
+            int cancelPeriod = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Insert picture ids: ");
+            var pictures = Console.ReadLine().Split(',');
+            List<int> pictureIds = pictures.Select(Int32.Parse).ToList();
+
+            AccommodationDTO smestaj = new AccommodationDTO(name,
+            idLocation, (Type)type, maxOccupancy, minDays, cancelPeriod, pictureIds);
+            accommodationService.CreateAccommodation(smestaj);
+        }
+
+        private static void RateAGuest()
+        {
+            /* this will be activated with front
+             AccommodationReservation accommodationReservation = new AccommodationReservation();
+             if (!isDeadlineOver(accommodationReservation))
+             {
+                 Console.WriteLine("You have not rated a guest yet.");
+             } else Console.WriteLine("You have already rated a guest.");*/
+
+            int cleanliness, obedience;
+            GuestRatigService guestRatigService = new GuestRatigService();
+
+            Console.WriteLine("Rate cleanliness 1-5: ");
+            cleanliness = Convert.ToInt32(Console.ReadLine());
+
+            while(cleanliness > 5 || cleanliness < 1)
+            {
+                Console.WriteLine("Invalid rating. Try again, 1-5: ");
+                Console.WriteLine("Rate cleanliness 1-5: ");
+                cleanliness = Convert.ToInt32(Console.ReadLine());
+            }
+
+            Console.WriteLine("Rate obedience 1-5: ");
+            obedience = Convert.ToInt32(Console.ReadLine());
+
+            while (obedience > 5 || obedience < 1)
+            {
+                Console.WriteLine("Invalid rating. Try again, 1-5: ");
+                Console.WriteLine("Rate obedience 1-5: ");
+                obedience = Convert.ToInt32(Console.ReadLine());
+            }
+
+            Console.WriteLine("Insert comment: ");
+            string comment = Console.ReadLine();
+
+            Console.WriteLine("Insert guest id: ");
+            int guestId = Convert.ToInt32(Console.ReadLine());
+
+            GuestRatingDTO guestRatingDTO = new GuestRatingDTO(
+                cleanliness, obedience, comment, guestId);
+            guestRatigService.CreateGuestRating(guestRatingDTO);
+        }
+
+        private static bool isDeadlineOver(AccommodationReservation accommodationReservation)
+        {
+            var today = DateTime.Today;
+            var leavingDay = accommodationReservation.EndDate;
+            var difference = today - leavingDay;
+
+            if (difference.Days > 5)
+            {
+                return true;
+            }
+                else return false;
+        }
 
         private static void ProcessSearchTourOption(string searchOption)
         {

@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Data\accommodations.csv" />
     <None Remove="Resources\Data\guestRatings.csv" />
     <None Remove="Resources\Images\add.png" />
     <None Remove="Resources\Images\delete.png" />
