@@ -2,11 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Policy;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Xml.Linq;
 
 namespace InitialProject.Model
 {
@@ -14,6 +10,7 @@ namespace InitialProject.Model
     {
         public int Id { get; set; }
         public int TourId { get; set; }
+        public Tour Tour { get; set; }
         public DateTime StartTime { get; set; }
         public int GuideId { get; set; }
         public List<int> GuestsId { get; set; }

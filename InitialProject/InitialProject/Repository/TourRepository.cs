@@ -1,15 +1,12 @@
-using InitialProject.DTO;
-using InitialProject.Model;
-using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+using InitialProject.Model;
+using InitialProject.Serializer;
 
 namespace InitialProject.Repository
 {
+
     public class TourRepository
     {
         private const string FilePath = "../../../Resources/Data/tours.csv";
@@ -30,6 +27,11 @@ namespace InitialProject.Repository
             return _tours;
         }
 
+        public Tour FindById(int id)
+        {
+            return _tours.Find(x => x.Id == id);
+        }
+
         public List<Tour> FindByLocation(int locationId)
         {
             _tours = _serializer.FromCSV(FilePath);
@@ -39,7 +41,7 @@ namespace InitialProject.Repository
         public List<Tour> FindByDuration(float duration)
         {
             _tours = _serializer.FromCSV(FilePath);
-            return _tours.FindAll(u => u.Duration <= duration);
+            return _tours.FindAll(u => u.Duration == duration);
         }
 
         public List<Tour> FindByLanguage(string language)
@@ -51,7 +53,7 @@ namespace InitialProject.Repository
         public List<Tour> FindByGuestNumber(int numberOfGuests)
         {
             _tours = _serializer.FromCSV(FilePath);
-            return _tours.FindAll(u => u.MaxGuests >= numberOfGuests);
+            return _tours.FindAll(u => u.MaxGuests == numberOfGuests);
         }
 
         public Tour Save(Tour tour)
@@ -65,11 +67,8 @@ namespace InitialProject.Repository
 
         public int NextId()
         {
-            _tours= _serializer.FromCSV(FilePath);
-            if (_tours.Count < 1)
-            {
-                return 1;
-            }
+            _tours = _serializer.FromCSV(FilePath);
+            if (_tours.Count < 1) return 1;
             return _tours.Max(c => c.Id) + 1;
         }
 
@@ -79,35 +78,29 @@ namespace InitialProject.Repository
             Tour current = _tours.Find(c => c.Id == tour.Id);
             int index = _tours.IndexOf(current);
             _tours.Remove(current);
-            _tours.Insert(index, tour);   
+            _tours.Insert(index, tour);
             _serializer.ToCSV(FilePath, _tours);
             return tour;
         }
-        public Tour FindById(int id)
-        {
-            return _tours.Find(x => x.Id == id);
-        }
+
 
         public void FinishTour(Appointment appointment, List<KeyPoint> keyPoints)
         {
             appointment.Status = Status.Finished;
-
             KeyPointRepository keyPointRepository = new KeyPointRepository();
 
             foreach (KeyPoint keyPoint in keyPoints)
             {
                 keyPoint.Status = Status.NotStarted;
                 keyPointRepository.Update(keyPoint);
-
             }
-
             Console.WriteLine("\n-----------------\nTour is finished.\n-----------------\n");
         }
 
-        public void InitiateTour(List<KeyPoint> keyPoints, List<int> touristsToArrive, KeyPointRepository keyPointRepository)
+        public void InitiateTour(List<KeyPoint> keyPoints, List<int> touristsToArrive,
+            KeyPointRepository keyPointRepository)
         {
             KeyPoint firstKeypoint = keyPoints.First();
-
             keyPointRepository.InitiateKeyPoint(firstKeypoint, keyPoints, touristsToArrive);
         }
 
