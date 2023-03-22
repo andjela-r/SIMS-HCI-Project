@@ -12,12 +12,13 @@ namespace InitialProject.Model
         public string Comment { get; set; }
         public int GuestId { get; set; }
 
-        public GuestRating(int id, int cleanliness, int obedience, string comment)
+        public GuestRating(int id, int cleanliness, int obedience, string comment, int guestId)
         {
             this.Id = id;
             this.Cleanliness=cleanliness;
             this.Obedience=obedience;
             this.Comment=comment;
+            this.GuestId = guestId;
         }
 
         public GuestRating() { }
@@ -25,7 +26,7 @@ namespace InitialProject.Model
         public string[] ToCSV()
         {
             string[] csvValues = { Id.ToString(), Cleanliness.ToString(), 
-            Obedience.ToString(), Comment };
+            Obedience.ToString(), Comment, GuestId.ToString() };
             return csvValues;
         }
 
@@ -35,6 +36,7 @@ namespace InitialProject.Model
             Cleanliness = Convert.ToInt32(values[1]);
             Obedience = Convert.ToInt32(values[2]);
             Comment = values[3];
+            GuestId = Convert.ToInt32(values[4]);   
         }
     }
 }

@@ -60,18 +60,13 @@ namespace InitialProject.Model
             MaxGuests = Convert.ToInt32(values[5]);
 
             var keyPoints = values[6].Split(ListDelimiter);
-            KeyPointsId = keyPoints.Select(Int32.Parse).ToList();
+            KeyPointsId = keyPoints.Select(int.Parse).ToList();
 
             Duration = float.Parse(values[7]);
 
             var pictureIds = values[8].Split(ListDelimiter);
-            PicturesId = pictureIds.Select(Int32.Parse).ToList();
+            PicturesId = pictureIds.Select(int.Parse).ToList();
         }
-
-
-
-
-
 
     }
 }

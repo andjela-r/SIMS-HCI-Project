@@ -13,6 +13,5 @@ namespace InitialProject.Model
        Ongoing,
        Finished
     }
-
   
 }

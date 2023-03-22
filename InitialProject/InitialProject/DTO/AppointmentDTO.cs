@@ -12,16 +12,14 @@ namespace InitialProject.DTO
         public int TourId { get; set; }
         public DateTime StartTime { get; set; }
         public int GuideId { get; set; }
-        public List<int> GuestsId { get; set; }
 
         public AppointmentDTO() { }
 
-        public AppointmentDTO(int tourId, DateTime startTime, int guideId, List<int> guestsId)
+        public AppointmentDTO(int tourId, DateTime startTime, int guideId)
         {
             TourId = tourId;
             StartTime = startTime;
             GuideId = guideId;
-            GuestsId = guestsId;
         }
     }
 }
