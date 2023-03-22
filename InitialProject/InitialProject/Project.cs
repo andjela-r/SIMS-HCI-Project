@@ -1,23 +1,18 @@
-﻿using InitialProject.DTO;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using InitialProject.DTO;
 using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
-using System;
-using System.Buffers;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
 using Type = InitialProject.Model.Type;
 
 namespace InitialProject
 {
+
     internal class Program
     {
         [STAThreadAttribute]
-
         public static void Main()
         {
             string chosenOption;
@@ -28,7 +23,6 @@ namespace InitialProject
                 Console.Clear();
                 ProcessChosenOption(chosenOption);
             } while (!chosenOption.Equals("x"));
-
         }
 
         private static void WriteMenuOptions()
@@ -64,13 +58,15 @@ namespace InitialProject
                     do
                     {
                         AccommodationRegistration();
-                    } while(!chosenOption.Equals("x"));
+                    } while (!chosenOption.Equals("x"));
+
                     break;
                 case "2":
                     do
                     {
                         RateAGuest();
                     } while (!chosenOption.Equals("x"));
+
                     break;
                 case "3":
                     Console.WriteLine("Option 3\n");
@@ -88,6 +84,7 @@ namespace InitialProject
 
                         ProcessCreationOption(creationOption);
                     } while (!creationOption.Equals("x"));
+
                     break;
                 case "6":
                     TourService tourService = new TourService();
@@ -107,15 +104,15 @@ namespace InitialProject
                     break;
                 case "8":
                     Console.WriteLine("Enter tour id: ");
-                    int tourId = Convert.ToInt32(Console.ReadLine());
+                    var tourId = Convert.ToInt32(Console.ReadLine());
 
                     Console.WriteLine("Enter guest id: ");
-                    int guestId = Convert.ToInt32(Console.ReadLine());
+                    var guestId = Convert.ToInt32(Console.ReadLine());
 
                     Console.WriteLine("Enter number of guests: ");
-                    int guestNumber = Convert.ToInt32(Console.ReadLine());
+                    var guestNumber = Convert.ToInt32(Console.ReadLine());
 
-                    TourReservation newReservation = new TourReservation(guestNumber, guestId, tourId);
+                    var newReservation = new TourReservation(guestNumber, guestId, tourId);
                     ProcessCreateTourReservation(newReservation);
 
                     break;
@@ -140,41 +137,44 @@ namespace InitialProject
         private static TourDTO GetTourCreationData()
         {
             Console.WriteLine("Insert name: ");
-            string name = Console.ReadLine();
+            var name = Console.ReadLine();
 
             Console.WriteLine("Insert location id: ");
-            int locationId = Convert.ToInt32(Console.ReadLine());
+            var locationId = Convert.ToInt32(Console.ReadLine());
 
             Console.WriteLine("Insert description: ");
-            string description = Console.ReadLine();
+            var description = Console.ReadLine();
 
             Console.WriteLine("Insert language: ");
-            string language = Console.ReadLine();
+            var language = Console.ReadLine();
 
             Console.WriteLine("Insert max number of guests: ");
-            int maxGuests = Convert.ToInt32(Console.ReadLine());
+            var maxGuests = Convert.ToInt32(Console.ReadLine());
 
             Console.WriteLine("Insert key points: ");
             var keyPoints = Console.ReadLine().Split(',');
-            List<int> keyPointsId = keyPoints.Select(Int32.Parse).ToList();
+            var keyPointsId = keyPoints.Select(int.Parse).ToList();
 
             Console.WriteLine("Insert duration: ");
-            float duration = float.Parse(Console.ReadLine());
+            var duration = float.Parse(Console.ReadLine());
 
             Console.WriteLine("Insert picture ids: ");
             var pictures = Console.ReadLine().Split(',');
-            List<int> pictureIds = pictures.Select(Int32.Parse).ToList();
+            var pictureIds = pictures.Select(int.Parse).ToList();
 
-            TourDTO tourDTO = new TourDTO(name, locationId, description, language, maxGuests, keyPointsId, duration, pictureIds);
+            var tourDTO = new TourDTO(name, locationId, description, language, maxGuests, keyPointsId, duration,
+                pictureIds);
 
-            return tourDTO;            
+            return tourDTO;
         }
-        private static void AccommodationRegistration() {
+
+        private static void AccommodationRegistration()
+        {
 
             int idLocation, type;
             LocationRepository locationRepository = new LocationRepository();
             AccommodationService accommodationService = new AccommodationService();
-            
+
             Console.WriteLine("Insert accommodation name: ");
             string name = Console.ReadLine();
 
@@ -191,8 +191,8 @@ namespace InitialProject
             Console.WriteLine("Insert accommodation type:\n ");
             Console.WriteLine("0-apartment\n1-house\n2-cottage");
             type = Convert.ToInt32(Console.ReadLine());
-            
-            while((Type)type != Type.House && (Type)type != Type.Cottage && (Type)type != Type.Apartment)
+
+            while ((Type)type != Type.House && (Type)type != Type.Cottage && (Type)type != Type.Apartment)
             {
                 Console.WriteLine("That type does not exist. Try again: ");
                 Console.WriteLine("Insert accommodation type:\n ");
@@ -213,7 +213,7 @@ namespace InitialProject
             List<int> pictureIds = pictures.Select(Int32.Parse).ToList();
 
             AccommodationDTO smestaj = new AccommodationDTO(name,
-            idLocation, (Type)type, maxOccupancy, minDays, cancelPeriod, pictureIds);
+                idLocation, (Type)type, maxOccupancy, minDays, cancelPeriod, pictureIds);
             accommodationService.CreateAccommodation(smestaj);
         }
 
@@ -232,7 +232,7 @@ namespace InitialProject
             Console.WriteLine("Rate cleanliness 1-5: ");
             cleanliness = Convert.ToInt32(Console.ReadLine());
 
-            while(cleanliness > 5 || cleanliness < 1)
+            while (cleanliness > 5 || cleanliness < 1)
             {
                 Console.WriteLine("Invalid rating. Try again, 1-5: ");
                 Console.WriteLine("Rate cleanliness 1-5: ");
@@ -260,7 +260,7 @@ namespace InitialProject
             guestRatigService.CreateGuestRating(guestRatingDTO);
         }
 
-        private static bool isDeadlineOver(AccommodationReservation accommodationReservation)
+        private static bool IsDeadlineOver(AccommodationReservation accommodationReservation)
         {
             var today = DateTime.Today;
             var leavingDay = accommodationReservation.EndDate;
@@ -270,59 +270,53 @@ namespace InitialProject
             {
                 return true;
             }
-                else return false;
+
+            return false;
         }
 
         private static void ProcessSearchTourOption(string searchOption)
         {
-            TourRepository tourRepository = new TourRepository();
-            List<Tour> retVal = new List<Tour>();
+            var tourRepository = new TourRepository();
+            var appointmentRepository = new AppointmentRepository();
+            var retVal = new List<Tour>();
             switch (searchOption)
             {
                 case "1":
                     Console.WriteLine("--Search by location id--\n");
                     Console.WriteLine("Enter location id: ");
-                    string id = Console.ReadLine();
-                    retVal = tourRepository.FindByLocation(Convert.ToInt32(id));
-                    foreach (Tour tour in retVal)
-                    {
-                        Console.WriteLine(tour.Name);
-                        Console.WriteLine("---");
-                    }
+
+                    var id = Console.ReadLine();
+                    var app = appointmentRepository.FindByLocation(Convert.ToInt32(id));
+                    PrintAppointments(app);
                     break;
+
                 case "2":
                     Console.WriteLine("--Search by tour duration--\n");
                     Console.WriteLine("Enter tour duration: ");
-                    string duration = Console.ReadLine();
-                    retVal = tourRepository.FindByDuration(Convert.ToInt32(duration));
-                    foreach (Tour tour in retVal)
-                    {
-                        Console.WriteLine(tour.Name);
-                        Console.WriteLine("---");
-                    }
+
+                    var duration = Console.ReadLine();
+                    app = appointmentRepository.FindByDuration(float.Parse(duration));
+                    PrintAppointments(app);
                     break;
+
                 case "3":
                     Console.WriteLine("--Search by tour language--\n");
                     Console.WriteLine("Enter tour language: ");
-                    string language = Console.ReadLine();
-                    retVal = tourRepository.FindByLanguage(language);
-                    foreach (Tour tour in retVal)
-                    {
-                        Console.WriteLine(tour.Name);
-                        Console.WriteLine("---");
-                    }
+
+                    var language = Console.ReadLine();
+                    app = appointmentRepository.FindByLanguage(language);
+                    PrintAppointments(app);
                     break;
+
                 case "4":
                     Console.WriteLine("--Search by number of guests--\n");
                     Console.WriteLine("Enter number of guests: ");
-                    string guestNumber = Console.ReadLine();
-                    retVal = tourRepository.FindByGuestNumber(Convert.ToInt32(guestNumber));
-                    foreach (Tour tour in retVal)
-                    {
-                        Console.WriteLine(tour.Name);
-                        Console.WriteLine("---");
-                    }
+
+                    var guestNumber = Console.ReadLine();
+                    app = appointmentRepository.FindByGuestNumber(Convert.ToInt32(guestNumber));
+                    PrintAppointments(app);
                     break;
+
                 case "x":
                     break;
                 default:
@@ -331,16 +325,26 @@ namespace InitialProject
             }
         }
 
+
+        public static void PrintAppointments(List<Appointment> app)
+        {
+            foreach (var appointment in app)
+            {
+                Console.WriteLine("(ID: " + appointment.Id + ") " + appointment.Tour.Name);
+                Console.WriteLine("---");
+            }
+        }
+
         private static AppointmentDTO GetAppointmentCreationData()
         {
             Console.WriteLine("Insert tour id: ");
-            int tourId = Convert.ToInt32(Console.ReadLine());
+            var tourId = Convert.ToInt32(Console.ReadLine());
 
             Console.WriteLine("Insert start time: ");
-            DateTime startTime = Convert.ToDateTime(Console.ReadLine());
+            var startTime = Convert.ToDateTime(Console.ReadLine());
 
             Console.WriteLine("Insert guide id: ");
-            int guideId = Convert.ToInt32(Console.ReadLine());
+            var guideId = Convert.ToInt32(Console.ReadLine());
 
             AppointmentDTO appointmentDTO = new AppointmentDTO(tourId, startTime, guideId);
 
@@ -352,14 +356,14 @@ namespace InitialProject
             switch (creationOption)
             {
                 case "1":
-                    TourDTO tourDTO = new TourDTO();
+                    var tourDTO = new TourDTO();
                     tourDTO = GetTourCreationData();
 
-                    TourService tourService = new TourService();
+                    var tourService = new TourService();
                     tourService.CreateTour(tourDTO);
                     break;
                 case "2":
-                    AppointmentDTO appointmentDTO1 = new AppointmentDTO();
+                    var appointmentDTO1 = new AppointmentDTO();
                     appointmentDTO1 = GetAppointmentCreationData();
 
                     AppointmentService appointmentService = new AppointmentService();
@@ -382,58 +386,57 @@ namespace InitialProject
 
         public static Appointment Book(TourReservation newReservation)
         {
-            AppointmentRepository appointmentRepository = new AppointmentRepository();
-            TourReservationRepository tourReservationRepository = new TourReservationRepository();
+            var appointmentRepository = new AppointmentRepository();
+            var tourReservationRepository = new TourReservationRepository();
             var appointment = appointmentRepository.FindById(newReservation.TourId);
             var createdReservation = tourReservationRepository.CreateReservation(newReservation);
 
-            for (int i = 0; i < createdReservation.NumberOfGuests; i++)
+            for (var i = 0; i < createdReservation.NumberOfGuests; i++)
             {
                 var highestId = appointment.GuestsId.Any() ? appointment.GuestsId.Max() : 1;
                 appointment.GuestsId.Add(highestId + 1);
                 appointment = appointmentRepository.Update(appointment);
             }
+
             return appointment;
         }
 
         public static void ProcessCreateTourReservation(TourReservation newReservation)
         {
-            List<Tour> retVal = new List<Tour>();
-            TourRepository tourRepository = new TourRepository();
-            AppointmentRepository appointmentRepository = new AppointmentRepository();
-            //ne vraca apdejtovan appointment u drugom krugu
+            var tourRepository = new TourRepository();
+            var appointmentRepository = new AppointmentRepository();
             var appointment = appointmentRepository.FindById(newReservation.TourId);
             var tour = tourRepository.FindById(newReservation.TourId);
-            int seatsLeft = tour.MaxGuests - appointment.GuestsId.Count();
+            var seatsLeft = tour.MaxGuests - appointment.GuestsId.Count;
 
             if (appointment.GuestsId.Count() < tour.MaxGuests)
             {
-                //Moguce je napraviti rezervaciju
+                //It's possible to make a reservation
                 if (newReservation.NumberOfGuests <= seatsLeft)
                 {
                     var updatedAppointment = Book(newReservation);
-                    seatsLeft = tour.MaxGuests - updatedAppointment.GuestsId.Count();
+                    seatsLeft = tour.MaxGuests - updatedAppointment.GuestsId.Count;
                     Console.WriteLine("Successfully booked tour!\nFree seats left: {0}", seatsLeft);
-
                 }
-                else //newReservation.NumberOfGuests > appointment.GuestsId.Count()
+                else
                 {
                     Console.WriteLine("Free seats left: {0}", seatsLeft);
                     //Update number of guests
                     Console.WriteLine("Would you like to change the number of guests? (y/n) ");
-                    string answer = Console.ReadLine();
+                    var answer = Console.ReadLine();
                     switch (answer)
                     {
                         case "y":
                             Console.WriteLine("Enter new number of guests: ");
                             Console.WriteLine("Enter '0' to return");
-                            int newGuestNumber = -1;
+                            var newGuestNumber = -1;
                             while (newGuestNumber == -1 || newGuestNumber > tour.MaxGuests)
                             {
                                 newGuestNumber = Convert.ToInt32(Console.ReadLine());
                                 if (newGuestNumber == 0)
                                     return;
                             }
+
                             newReservation.NumberOfGuests = newGuestNumber;
                             break;
                         case "n":
@@ -448,22 +451,19 @@ namespace InitialProject
                     Console.WriteLine("Successfully booked tour!\nFree seats left: {0}", seatsLeft);
                 }
             }
-            else 
+            else
             {
-                Console.WriteLine("Unfortunately, the tour you've chosen doesn't have any seats left.\nWould you like to pick another tour? (y/n) ");
-                string answer = Console.ReadLine();
+                Console.WriteLine(
+                    "Unfortunately, the tour you've chosen doesn't have any seats left.\nWould you like to pick another tour? (y/n) ");
+                var answer = Console.ReadLine();
                 switch (answer)
                 {
                     case "y":
                         Console.WriteLine("Tours on the same location: ");
-                        int locationId = tour.LocationId;
-                        retVal = tourRepository.FindByLocation(locationId);
-                        foreach (Tour tours in retVal)
-                        {
-                            Console.WriteLine(tour.Name);
-                            Console.WriteLine("---");
-                        }
-                        
+                        var locationId = tour.LocationId;
+                        var app = appointmentRepository.FindByLocation(Convert.ToInt32(locationId));
+                        PrintAppointments(app);
+
                         break;
                     case "n":
                         return;

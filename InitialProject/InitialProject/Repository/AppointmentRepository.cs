@@ -3,17 +3,16 @@ using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace InitialProject.Repository
 {
-    internal class AppointmentRepository
+    public class AppointmentRepository
     {
         private const string FilePath = "../../../Resources/Data/appointments.csv";
 
         private readonly Serializer<Appointment> _serializer;
+
+        private readonly TourRepository _tourRepository;
 
         private List<Appointment> _appointments;
 
@@ -21,6 +20,7 @@ namespace InitialProject.Repository
         {
             _serializer = new Serializer<Appointment>();
             _appointments = _serializer.FromCSV(FilePath);
+            _tourRepository = new TourRepository();
         }
 
         public Appointment Save(Appointment appointment)
@@ -41,13 +41,14 @@ namespace InitialProject.Repository
             {
                 return 1;
             }
+
             return _appointments.Max(c => c.Id) + 1;
         }
 
         public List<Appointment> FindTodaysAppointments()
         {
             DateTime today = DateTime.Today;
-            Console.WriteLine("Today: " +today+"\n");
+            Console.WriteLine("Today: " + today + "\n");
 
             _appointments = _serializer.FromCSV(FilePath);
 
@@ -77,11 +78,6 @@ namespace InitialProject.Repository
 
         }
 
-        public Appointment FindById(int id)
-        {
-            return _appointments.Find(x => x.Id == id);
-        }
-
         public void TodaysAppointments()
         {
             TourRepository tourRepository = new TourRepository();
@@ -93,7 +89,6 @@ namespace InitialProject.Repository
                 Console.WriteLine(appointment.Id + " " + tour.Name);
             }
         }
-
         public Appointment SelectAppointment()
         {
             AppointmentRepository appointmentRepository = new AppointmentRepository();
@@ -105,6 +100,63 @@ namespace InitialProject.Repository
             appointmentRepository.StartTodaysAppointment(selectedAppointmentId);
 
             return selectedAppointment;
+        }
+
+        public List<Appointment> FindAllTours()
+        {
+            _appointments = _serializer.FromCSV(FilePath);
+            return _appointments;
+        }
+
+        public Appointment FindById(int id)
+        {
+            return _appointments.Find(x => x.Id == id);
+        }
+
+        public List<Appointment> FindByLocation(int locationId)
+        {
+            _appointments = _serializer.FromCSV(FilePath);
+            var tours = _tourRepository.FindByLocation(locationId);
+            var appointments = _appointments.FindAll(a => tours.Any(t => t.Id == a.TourId));
+
+            FillAppointmentTourDetails(appointments);
+            return appointments;
+        }
+
+        public List<Appointment> FindByDuration(float duration)
+
+        {
+            _appointments = _serializer.FromCSV(FilePath);
+            var tours = _tourRepository.FindByDuration(duration);
+            var appointments = _appointments.FindAll(a => tours.Any(t => t.Id == a.TourId));
+
+            FillAppointmentTourDetails(appointments);
+            return appointments;
+        }
+
+        public List<Appointment> FindByLanguage(string language)
+        {
+            _appointments = _serializer.FromCSV(FilePath);
+            var tours = _tourRepository.FindByLanguage(language);
+            var appointments = _appointments.FindAll(a => tours.Any(t => t.Id == a.TourId));
+
+            FillAppointmentTourDetails(appointments);
+            return appointments;
+        }
+
+        public List<Appointment> FindByGuestNumber(int numberOfGuests)
+        {
+            _appointments = _serializer.FromCSV(FilePath);
+            var tours = _tourRepository.FindByGuestNumber(Convert.ToInt32(numberOfGuests));
+            var appointments = _appointments.FindAll(a => tours.Any(t => t.Id == a.TourId));
+
+            FillAppointmentTourDetails(appointments);
+            return appointments;
+        }
+
+        public void FillAppointmentTourDetails(List<Appointment> appointments)
+        {
+            foreach (var appointment in appointments) appointment.Tour = _tourRepository.FindById(appointment.TourId);
         }
     }
 }
