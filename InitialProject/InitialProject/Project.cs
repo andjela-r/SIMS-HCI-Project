@@ -727,7 +727,6 @@ namespace InitialProject
                         }
                         else
                         {
-                            Console.WriteLine("picka2 ");
                             Console.WriteLine("ova ptelja ");
                             var diffStart = startDate - accommodation1.StartDate;
                             var diffEnd = endDate - accommodation1.EndDate;
