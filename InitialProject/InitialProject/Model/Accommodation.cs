@@ -16,12 +16,11 @@ namespace InitialProject.Model
         public int MinDays { get; set; }
         public int CancelPeriod { get; set; } = 1;
         public List<int> PicturesId { get; set; }
-        public int OwnerId { get; set; }
 
         private readonly string ListDelimiter = ",";
 
         public Accommodation(int id, string name, int location, Type type, int occupancy,
-            int minDays, int cancelPeriod, List<int> pictures, int ownerId)
+            int minDays, int cancelPeriod, List<int> pictures)
         {
             this.Id = id;
             this.Name = name;
@@ -31,7 +30,7 @@ namespace InitialProject.Model
             this.MinDays = minDays;
             this.CancelPeriod = cancelPeriod;
             this.PicturesId = pictures;
-            this.OwnerId = ownerId; 
+  
         }
 
         public Accommodation() { }
@@ -50,9 +49,6 @@ namespace InitialProject.Model
             StringBuilder picturesIds = new StringBuilder();
             picturesIds.AppendJoin(ListDelimiter, PicturesId);
             csvValues.Append(picturesIds.ToString());
-
-            csvValues.Append(OwnerId.ToString());
-
             return csvValues;
         }
 
@@ -66,10 +62,8 @@ namespace InitialProject.Model
             MinDays = Convert.ToInt32(values[5]);
             CancelPeriod = Convert.ToInt32(values[6]);
 
-            var pictureIds = values[8].Split(ListDelimiter);
+            var pictureIds = values[7].Split(ListDelimiter);
             PicturesId = pictureIds.Select(Int32.Parse).ToList();
-
-            OwnerId = Convert.ToInt32(values[7]);
 
         }
     }

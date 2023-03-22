@@ -44,6 +44,7 @@ namespace InitialProject.Repository
             }
             return _accommodations.Max(c => c.Id) + 1;
         }
+
         //TODO ovde treba umesto FindAll, FirstorDefault
         public List<Accommodation> FindByName(string name)
         {
@@ -60,19 +61,24 @@ namespace InitialProject.Repository
         public List<Accommodation> FindByOccupancy(int maxOccupancy)
         {
             _accommodations = _serializer.FromCSV(FilePath);
-            return _accommodations.FindAll(u => u.MaxOccupancy <= maxOccupancy);
+            return _accommodations.FindAll(u => u.MaxOccupancy >= maxOccupancy);
         }
 
         public List<Accommodation> FindByMinDays(int minDays)
         {
             _accommodations = _serializer.FromCSV(FilePath);
-            return _accommodations.FindAll(u => u.MinDays >= minDays);
+            return _accommodations.FindAll(u => u.MinDays <= minDays);
         }
 
         public List<Accommodation> FindByLocation(int locationId)
         {
             _accommodations = _serializer.FromCSV(FilePath);
             return _accommodations.FindAll(u => u.LocationId == locationId);
+        }
+
+        public Accommodation FindById(int id)
+        {
+            return _accommodations.Find(x => x.Id == id);
         }
 
     }
