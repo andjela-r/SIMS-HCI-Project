@@ -27,10 +27,10 @@ namespace InitialProject
 
         private static void WriteMenuOptions()
         {
-            Console.WriteLine("1. Accomodation registration");
+            Console.WriteLine("1. Accommodation registration");
             Console.WriteLine("2. Rate a guest");
-            Console.WriteLine("\n3. Search Accomodation");
-            Console.WriteLine("4. Accomodation reservation");
+            Console.WriteLine("\n3. Search Accommodation");
+            Console.WriteLine("4. Accommodation reservation");
             Console.WriteLine("\n5. Tour registration");
             Console.WriteLine("6. Track a tour");
             Console.WriteLine("\n7. Search Tour");
@@ -68,7 +68,7 @@ namespace InitialProject
             {
                 case "1":
                     Console.WriteLine("Option 1\n");
-                    Console.WriteLine("Enter name of the accomodation: ");
+                    Console.WriteLine("Enter name of the accommodation: ");
                     string naziv = Console.ReadLine();
                     List<Accommodation> listAcc4 = accommodationRepository.FindByName(naziv);
                     foreach (Accommodation accommodation in listAcc4)
@@ -79,7 +79,7 @@ namespace InitialProject
                     break;
                 case "2":
                     Console.WriteLine("Option 2\n");
-                    Console.WriteLine("Enter location of the accomodation: ");
+                    Console.WriteLine("Enter location of the accommodation: ");
                     int lokacija = Convert.ToInt32(Console.ReadLine());
                     List<Accommodation> listAcc3 = accommodationRepository.FindByLocation(lokacija);
                     foreach (Accommodation accommodation in listAcc3)
@@ -211,8 +211,6 @@ namespace InitialProject
                         Console.WriteLine("Minimum number of days to stay in is " + accommodation.MinDays);
                         d = Convert.ToInt32(Console.ReadLine());
                     }
-                    Console.WriteLine("izasao ");
-                    //nadji datume rezervacije
                     //AccommodationReservation newReservation1 = new AccommodationReservation(accId, guestId1, startDate, endDate, d);
                     ProcessCreateAccommodationReservation(accId, guestId1, startDate, endDate, d);
                     break;
@@ -720,7 +718,7 @@ namespace InitialProject
                                     guests = Convert.ToInt32(Console.ReadLine());
                                 }
                                 AccommodationReservation newReservation1 = new AccommodationReservation(accommodationId, guestId, newStartDate, newEndDate, duration);
-                                Console.WriteLine("Succesful! ");
+                                Console.WriteLine("Successful! ");
                             }
                             else
                                 Console.WriteLine("cant reserve this accommodation for this period. Sorry!");
@@ -728,7 +726,6 @@ namespace InitialProject
                         }
                         else
                         {
-                            Console.WriteLine("ova ptelja ");
                             var diffStart = startDate - accommodation1.StartDate;
                             var diffEnd = endDate - accommodation1.EndDate;
                             Console.WriteLine("You want this number of days to reserve : " + duration);
@@ -778,7 +775,6 @@ namespace InitialProject
                 }
                 else 
                 {
-                    Console.WriteLine("picka1 ");
                     Console.WriteLine("Available dates: ");
                     List<DateTime> listAcc5 = accommodationReservationRepository.GetOccupiedDays(startDate, endDate);
                     Console.WriteLine("Slobodni dani:  ");
