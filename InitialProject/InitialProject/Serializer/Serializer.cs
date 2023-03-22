@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using InitialProject.Model;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using System.Windows.Data;
 
 namespace InitialProject.Serializer
 {
@@ -20,7 +21,6 @@ namespace InitialProject.Serializer
             }
 
             File.WriteAllText(fileName, csv.ToString());
-
         }
 
         public List<T> FromCSV(string fileName)
@@ -36,6 +36,11 @@ namespace InitialProject.Serializer
             }
 
             return objects;
+        }
+
+        public static implicit operator Serializer<T>(Serializer<Accommodation> v)
+        {
+            throw new NotImplementedException();
         }
     }
 }
