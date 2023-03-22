@@ -211,6 +211,7 @@ namespace InitialProject
                         Console.WriteLine("Minimum number of days to stay in is " + accommodation.MinDays);
                         d = Convert.ToInt32(Console.ReadLine());
                     }
+                    Console.WriteLine("izasao ");
                     //nadji datume rezervacije
                     //AccommodationReservation newReservation1 = new AccommodationReservation(accId, guestId1, startDate, endDate, d);
                     ProcessCreateAccommodationReservation(accId, guestId1, startDate, endDate, d);
