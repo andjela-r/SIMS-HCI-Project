@@ -29,12 +29,13 @@ namespace InitialProject.Model
             this.MaxOccupancy = occupancy;
             this.MinDays = minDays;
             this.CancelPeriod = cancelPeriod;
-            this.PicturesId = picturesId;
+            this.PicturesId = pictures;
+            this.OwnerId = ownerId; 
         }
 
         public Accommodation() { }
 
-        /*public string[] ToCSV()
+        public string[] ToCSV()
         {
             string[] csvValues = new string[9];
             csvValues.Append(Id.ToString());
@@ -103,11 +104,11 @@ namespace InitialProject.Model
             MinDays = Convert.ToInt32(values[5]);
             CancelPeriod = Convert.ToInt32(values[6]);
 
-            var pictureIds = values[8].Split(ListDelimiter);
+            var pictureIds = values[7].Split(ListDelimiter);
             PicturesId = pictureIds.Select(Int32.Parse).ToList();
 
             OwnerId = Convert.ToInt32(values[7]);
 
-        }*/
+        }
     }
 }

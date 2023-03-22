@@ -13,11 +13,11 @@ namespace InitialProject.Model
         public DateTime EndDate { get; set; }
         public int DurationDays { get; set; }
 
+
         public AccommodationReservation() { }
 
-        public AccommodationReservation(int id, int accommodationId, int guestId, DateTime startDate, DateTime endDate, int durationDays)
+        public AccommodationReservation(int accommodationId, int guestId, DateTime startDate, DateTime endDate, int durationDays)
         {
-            this.Id = id;
             this.AccommodationId = accommodationId;
             this.GuestId = guestId;
             this.StartDate = startDate;
@@ -31,7 +31,7 @@ namespace InitialProject.Model
             AccommodationId = Convert.ToInt32(values[1]);
             GuestId = Convert.ToInt32(values[2]);
             StartDate = Convert.ToDateTime(values[3]);
-            EndDate = Convert.ToDateTime(values[3]);
+            EndDate = Convert.ToDateTime(values[4]);
             DurationDays = Convert.ToInt32(values[5]);
         }
 
