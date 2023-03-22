@@ -34,25 +34,6 @@ namespace InitialProject.Model
 
         public Accommodation() { }
 
-        /*public string[] ToCSV()
-        {
-            string[] csvValues = new string[9];
-            csvValues.Append(Id.ToString());
-            csvValues.Append(Name);
-            csvValues.Append(LocationId.ToString());
-            csvValues.Append(Type.ToString());
-            csvValues.Append(MaxOccupancy.ToString());
-            csvValues.Append(MinDays.ToString());
-            csvValues.Append(CancelPeriod.ToString());
-
-            StringBuilder picturesIds = new StringBuilder();
-            picturesIds.AppendJoin(ListDelimiter, PicturesId);
-            csvValues.Append(picturesIds.ToString());
-
-            csvValues.Append(OwnerId.ToString());
-
-            return csvValues;
-        }*/
 
         public string[] ToCSV()
         {
@@ -103,11 +84,10 @@ namespace InitialProject.Model
             MinDays = Convert.ToInt32(values[5]);
             CancelPeriod = Convert.ToInt32(values[6]);
 
-            var pictureIds = values[8].Split(ListDelimiter);
+            var pictureIds = values[7].Split(ListDelimiter);
             PicturesId = pictureIds.Select(Int32.Parse).ToList();
 
-            OwnerId = Convert.ToInt32(values[7]);
+            OwnerId = Convert.ToInt32(values[7]);*/
 
-        }*/
+        }
     }
-}
