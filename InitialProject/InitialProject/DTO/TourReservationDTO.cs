@@ -10,15 +10,15 @@ namespace InitialProject.DTO
     {
         public int TourId { get; set; }
         public int GuestId { get; set; }
-        public int NumberOfGuests { get; set; }
+        public int NumberOfTourists { get; set; }
 
         public TourReservationDTO() { }
 
-        public TourReservationDTO(int tourId, int guestId, int numberOfGuests)
+        public TourReservationDTO(int tourId, int guestId, int numberOfTourists)
         {
             this.TourId = tourId;
             this.GuestId = guestId;
-            this.NumberOfGuests = numberOfGuests;
+            this.NumberOfTourists = numberOfTourists;
         }
     }
 }

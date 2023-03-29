@@ -13,7 +13,7 @@ namespace InitialProject.Model
         public Tour Tour { get; set; }
         public DateTime StartTime { get; set; }
         public int GuideId { get; set; }
-        public List<int> GuestsId { get; set; }
+        public List<int> TouristsId { get; set; }
         public Status Status { get; set; }  
 
         private readonly string ListDelimiter = ",";
@@ -26,7 +26,7 @@ namespace InitialProject.Model
             this.TourId = TourID;
             this.StartTime = startTime;
             this.GuideId = guideId;
-            this.GuestsId = null;
+            this.TouristsId = null;
             this.Status = status;
         }
 
@@ -41,9 +41,9 @@ namespace InitialProject.Model
             
             StringBuilder guestIds = new StringBuilder();
             
-            if(GuestsId != null) 
+            if(TouristsId != null) 
             {
-                guestIds.AppendJoin(ListDelimiter, GuestsId);
+                guestIds.AppendJoin(ListDelimiter, TouristsId);
                 csvValues = csvValues.Append(guestIds.ToString()).ToArray();
             } else
                 csvValues = csvValues.Append("").ToArray();
@@ -63,9 +63,9 @@ namespace InitialProject.Model
 
             var guestIds = values[4].Split(ListDelimiter);
             if (guestIds.Select(x => Int32.TryParse(x, out var result)).All(x => x == true))
-                GuestsId = guestIds.Select(Int32.Parse).ToList();
+                TouristsId = guestIds.Select(Int32.Parse).ToList();
             else
-                GuestsId = GuestsId;
+                TouristsId = TouristsId;
             
             Status = (Status)Convert.ToInt32(values[5]);
         }

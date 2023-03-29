@@ -21,7 +21,7 @@ namespace InitialProject.Repository
             _tours = _serializer.FromCSV(FilePath);
         }
 
-        public List<Tour> FindAllTours()
+        public List<Tour> FindAll()
         {
             _tours = _serializer.FromCSV(FilePath);
             return _tours;
@@ -50,10 +50,10 @@ namespace InitialProject.Repository
             return _tours.FindAll(u => u.Language == language);
         }
 
-        public List<Tour> FindByGuestNumber(int numberOfGuests)
+        public List<Tour> FindByGuestNumber(int numberOfTourists)
         {
             _tours = _serializer.FromCSV(FilePath);
-            return _tours.FindAll(u => u.MaxGuests == numberOfGuests);
+            return _tours.FindAll(u => u.MaxTourists == numberOfTourists);
         }
 
         public Tour Save(Tour tour)
