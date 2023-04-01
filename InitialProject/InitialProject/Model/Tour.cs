@@ -17,13 +17,13 @@ namespace InitialProject.Model
         public int MaxGuests { get; set; }
         public List<int> KeyPointsId { get; set; }
         public float Duration { get; set; }
-        public List<int> PicturesId { get; set; }
+        public List<string> Pictures { get; set; }
 
         private readonly string ListDelimiter = ",";
 
         public Tour() { }
 
-        public Tour(int id, string name, int locationId, string description, string language, int maxGuests, List<int> keyPointsId, float duration, List<int> picturesId)
+        public Tour(int id, string name, int locationId, string description, string language, int maxGuests, List<int> keyPointsId, float duration, List<string> pictures)
         {
             this.Id = id;
             this.Name = name;
@@ -33,7 +33,7 @@ namespace InitialProject.Model
             this.MaxGuests = maxGuests; 
             this.KeyPointsId = keyPointsId;
             this.Duration = duration;
-            this.PicturesId = picturesId;
+            this.Pictures = pictures;
         }
 
         public string[] ToCSV()
@@ -41,11 +41,11 @@ namespace InitialProject.Model
             StringBuilder keyPoints = new StringBuilder();
             keyPoints.AppendJoin(ListDelimiter, KeyPointsId);
 
-            StringBuilder pictureIds = new StringBuilder();
-            pictureIds.AppendJoin(ListDelimiter, PicturesId);
+            StringBuilder pictures = new StringBuilder();
+            pictures.AppendJoin(ListDelimiter, Pictures);
 
             string[] csvValues = { Id.ToString(), Name, LocationId.ToString(), Description, Language, MaxGuests.ToString(), 
-                keyPoints.ToString(), Duration.ToString(), pictureIds.ToString() };
+                keyPoints.ToString(), Duration.ToString(), pictures.ToString() };
             return csvValues;
         }
 
@@ -64,8 +64,8 @@ namespace InitialProject.Model
 
             Duration = float.Parse(values[7]);
 
-            var pictureIds = values[8].Split(ListDelimiter);
-            PicturesId = pictureIds.Select(int.Parse).ToList();
+            var pictures = values[8].Split(ListDelimiter);
+            Pictures = pictures.ToList();
         }
 
     }

@@ -56,12 +56,6 @@ namespace InitialProject.Repository
             return _accommodationReservations.FindAll(u => u.EndDate <= endDate);
         }
 
-        public AccommodationReservation GetStartDateById(int accommodationId)
-        {
-            _accommodationReservations = _serializer.FromCSV(FilePath);
-            return _accommodationReservations.FirstOrDefault();
-        }
-
         public bool IsAvailable(AccommodationReservation newReservation, AccommodationReservation oldReservations)
         {
             if (newReservation.StartDate == oldReservations.StartDate)

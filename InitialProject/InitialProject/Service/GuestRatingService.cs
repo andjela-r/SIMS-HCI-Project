@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Service
 {
-    internal class GuestRatigService
+    internal class GuestRatingService
     {
         GuestRatingRepository guestRatingRepository = new GuestRatingRepository();
 
