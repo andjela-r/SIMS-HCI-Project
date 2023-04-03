@@ -1,13 +1,8 @@
 ﻿using InitialProject.Model;
 using InitialProject.Serializer;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 using Type = InitialProject.Model.Type;
-using InitialProject.DTO;
 
 
 namespace InitialProject.Repository
@@ -57,16 +52,16 @@ namespace InitialProject.Repository
             return _accommodations.FindAll(u => u.Type == type);
         }
 
-        public List<Accommodation> FindByOccupancy(int maxOccupancy)
+        public List<Accommodation> FindByMaxGuests(int maxGuests)
         {
             _accommodations = _serializer.FromCSV(FilePath);
-            return _accommodations.FindAll(u => u.MaxOccupancy >= maxOccupancy);
+            return _accommodations.FindAll(u => u.MaxGuests >= maxGuests);
         }
 
-        public List<Accommodation> FindByMinDays(int minDays)
+        public List<Accommodation> FindByMinStay(int minStay)
         {
             _accommodations = _serializer.FromCSV(FilePath);
-            return _accommodations.FindAll(u => u.MinDays <= minDays);
+            return _accommodations.FindAll(u => u.MinStay <= minStay);
         }
 
         public List<Accommodation> FindByLocation(int locationId)

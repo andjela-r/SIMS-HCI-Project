@@ -105,11 +105,11 @@ namespace InitialProject
                     Console.WriteLine("Option 4\n");
                     Console.WriteLine("How many days do you want to stay in: ");
                     int minimum = Convert.ToInt32(Console.ReadLine());
-                    List<Accommodation> listAcc1 = accommodationRepository.FindByMinDays(minimum);
+                    List<Accommodation> listAcc1 = accommodationRepository.FindByMinStay(minimum);
                     foreach (Accommodation accommodation in listAcc1)
                     {
                         Console.WriteLine(accommodation.Name);
-                        Console.WriteLine("Min days: " + accommodation.MinDays);
+                        Console.WriteLine("Min days: " + accommodation.MinStay);
                         Console.WriteLine("---");
                     }
                     break;
@@ -117,11 +117,11 @@ namespace InitialProject
                     Console.WriteLine("Option 5\n");
                     Console.WriteLine("How many guests do you want to stay in: ");
                     int maks = Convert.ToInt32(Console.ReadLine());
-                    List<Accommodation> listAcc = accommodationRepository.FindByOccupancy(maks);
+                    List<Accommodation> listAcc = accommodationRepository.FindByMaxGuests(maks);
                     foreach (Accommodation accommodation in listAcc)
                     {
                         Console.WriteLine(accommodation.Name);
-                        Console.WriteLine("Max guests: " + accommodation.MaxOccupancy);
+                        Console.WriteLine("Max guests: " + accommodation.MaxGuests);
                         Console.WriteLine("---");
                     }
                     break;
@@ -197,7 +197,7 @@ namespace InitialProject
                             line1 = Console.ReadLine();
                         }
                     }
-                    while (startDate >= endDate || startDate < DateTime.Today || (endDate - startDate).TotalDays < accommodation.MinDays);
+                    while (startDate >= endDate || startDate < DateTime.Today || (endDate - startDate).TotalDays < accommodation.MinStay);
 
                     Console.WriteLine("How many days do you want to stay in: ");
                     int d = Convert.ToInt32(Console.ReadLine());
@@ -206,9 +206,9 @@ namespace InitialProject
                         Console.WriteLine("number of days must be smaller than period. ");
                         d = Convert.ToInt32(Console.ReadLine());
                     }
-                    while(d <= accommodation.MinDays)
+                    while(d <= accommodation.MinStay)
                     {
-                        Console.WriteLine("Minimum number of days to stay in is " + accommodation.MinDays);
+                        Console.WriteLine("Minimum number of days to stay in is " + accommodation.MinStay);
                         d = Convert.ToInt32(Console.ReadLine());
                     }
                     //AccommodationReservation newReservation1 = new AccommodationReservation(accId, guestId1, startDate, endDate, d);
@@ -297,12 +297,12 @@ namespace InitialProject
             Console.WriteLine("Insert duration: ");
             var duration = float.Parse(Console.ReadLine());
 
-            Console.WriteLine("Insert picture ids: ");
+            Console.WriteLine("Insert picture links: ");
             var pictures = Console.ReadLine().Split(',');
-            var pictureIds = pictures.Select(int.Parse).ToList();
-
+            var pictureLinks = pictures.ToList();
+            
             var tourDTO = new TourDTO(name, locationId, description, language, maxGuests, keyPointsId, duration,
-                pictureIds);
+                pictureLinks);
 
             return tourDTO;
         }
@@ -349,10 +349,10 @@ namespace InitialProject
 
             Console.WriteLine("Insert picture ids: ");
             var pictures = Console.ReadLine().Split(',');
-            List<int> pictureIds = pictures.Select(Int32.Parse).ToList();
+            List<string> pictureLinks = pictures.ToList();
 
             AccommodationDTO smestaj = new AccommodationDTO(name,
-                idLocation, (Type)type, maxOccupancy, minDays, cancelPeriod, pictureIds);
+                idLocation, (Type)type, maxOccupancy, minDays, cancelPeriod, pictureLinks);
             accommodationService.CreateAccommodation(smestaj);
         }
 
@@ -366,7 +366,7 @@ namespace InitialProject
              } else Console.WriteLine("You have already rated a guest.");*/
 
             int cleanliness, obedience;
-            GuestRatigService guestRatigService = new GuestRatigService();
+            GuestRatingService guestRatigService = new GuestRatingService();
 
             Console.WriteLine("Rate cleanliness 1-5: ");
             cleanliness = Convert.ToInt32(Console.ReadLine());
@@ -666,7 +666,7 @@ namespace InitialProject
                                 int guests = Convert.ToInt32(Console.ReadLine());
                                 Accommodation acc = accommodationRepository.FindById(accommodationId);
 
-                                while (acc.MaxOccupancy > guests)
+                                while (acc.MaxGuests > guests)
                                 {
                                     Console.WriteLine("Too many guests: ");
                                     guests = Convert.ToInt32(Console.ReadLine());
@@ -712,7 +712,7 @@ namespace InitialProject
                                 int guests = Convert.ToInt32(Console.ReadLine());
                                 Accommodation acc = accommodationRepository.FindById(accommodationId);
 
-                                while (acc.MaxOccupancy > guests)
+                                while (acc.MaxGuests > guests)
                                 {
                                     Console.WriteLine("Too many guests: ");
                                     guests = Convert.ToInt32(Console.ReadLine());
@@ -759,7 +759,7 @@ namespace InitialProject
                                 int guests = Convert.ToInt32(Console.ReadLine());
                                 Accommodation acc = accommodationRepository.FindById(accommodationId);
 
-                                while (acc.MaxOccupancy > guests)
+                                while (acc.MaxGuests > guests)
                                 {
                                     Console.WriteLine("Too many guests: ");
                                     guests = Convert.ToInt32(Console.ReadLine());
@@ -794,7 +794,7 @@ namespace InitialProject
                     int guests = Convert.ToInt32(Console.ReadLine());
                     Accommodation acc = accommodationRepository.FindById(accommodationId);
 
-                    while (acc.MaxOccupancy > guests)
+                    while (acc.MaxGuests > guests)
                     {
                         Console.WriteLine("Too many guests: ");
                         guests = Convert.ToInt32(Console.ReadLine());
