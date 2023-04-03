@@ -45,7 +45,7 @@ namespace InitialProject
             Console.WriteLine("1. Search by location");
             Console.WriteLine("2. Search by duration");
             Console.WriteLine("3. Search by language");
-            Console.WriteLine("4. Search by number of guests");
+            Console.WriteLine("4. Search by number of tourists");
             Console.WriteLine("\nx. Exit");
             Console.Write("Your option: ");
         }
@@ -248,7 +248,7 @@ namespace InitialProject
                     Console.WriteLine("Enter guest id: ");
                     var guestId = Convert.ToInt32(Console.ReadLine());
 
-                    Console.WriteLine("Enter number of guests: ");
+                    Console.WriteLine("Enter number of tourists: ");
                     var guestNumber = Convert.ToInt32(Console.ReadLine());
 
                     var newReservation = new TourReservation(guestNumber, guestId, tourId);
@@ -287,8 +287,8 @@ namespace InitialProject
             Console.WriteLine("Insert language: ");
             var language = Console.ReadLine();
 
-            Console.WriteLine("Insert max number of guests: ");
-            var maxGuests = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Insert max number of tourists: ");
+            var maxTourists = Convert.ToInt32(Console.ReadLine());
 
             Console.WriteLine("Insert key points: ");
             var keyPoints = Console.ReadLine().Split(',');
@@ -301,7 +301,7 @@ namespace InitialProject
             var pictures = Console.ReadLine().Split(',');
             var pictureIds = pictures.Select(int.Parse).ToList();
 
-            var tourDTO = new TourDTO(name, locationId, description, language, maxGuests, keyPointsId, duration,
+            var tourDTO = new TourDTO(name, locationId, description, language, maxTourists, keyPointsId, duration,
                 pictureIds);
 
             return tourDTO;
@@ -448,8 +448,8 @@ namespace InitialProject
                     break;
 
                 case "4":
-                    Console.WriteLine("--Search by number of guests--\n");
-                    Console.WriteLine("Enter number of guests: ");
+                    Console.WriteLine("--Search by number of tourists--\n");
+                    Console.WriteLine("Enter number of tourists: ");
 
                     var guestNumber = Console.ReadLine();
                     app = appointmentRepository.FindByGuestNumber(Convert.ToInt32(guestNumber));
@@ -530,10 +530,10 @@ namespace InitialProject
             var appointment = appointmentRepository.FindById(newReservation.TourId);
             var createdReservation = tourReservationRepository.CreateReservation(newReservation);
 
-            for (var i = 0; i < createdReservation.NumberOfGuests; i++)
+            for (var i = 0; i < createdReservation.NumberOfTourists; i++)
             {
-                var highestId = appointment.GuestsId.Any() ? appointment.GuestsId.Max() : 1;
-                appointment.GuestsId.Add(highestId + 1);
+                var highestId = appointment.TouristsId.Any() ? appointment.TouristsId.Max() : 1;
+                appointment.TouristsId.Add(highestId + 1);
                 appointment = appointmentRepository.Update(appointment);
             }
 
@@ -546,37 +546,37 @@ namespace InitialProject
             var appointmentRepository = new AppointmentRepository();
             var appointment = appointmentRepository.FindById(newReservation.TourId);
             var tour = tourRepository.FindById(newReservation.TourId);
-            var seatsLeft = tour.MaxGuests - appointment.GuestsId.Count;
+            var seatsLeft = tour.MaxTourists - appointment.TouristsId.Count;
 
-            if (appointment.GuestsId.Count() < tour.MaxGuests)
+            if (appointment.TouristsId.Count() < tour.MaxTourists)
             {
                 //It's possible to make a reservation
-                if (newReservation.NumberOfGuests <= seatsLeft)
+                if (newReservation.NumberOfTourists <= seatsLeft)
                 {
                     var updatedAppointment = Book(newReservation);
-                    seatsLeft = tour.MaxGuests - updatedAppointment.GuestsId.Count;
+                    seatsLeft = tour.MaxTourists - updatedAppointment.TouristsId.Count;
                     Console.WriteLine("Successfully booked tour!\nFree seats left: {0}", seatsLeft);
                 }
                 else
                 {
                     Console.WriteLine("Free seats left: {0}", seatsLeft);
-                    //Update number of guests
-                    Console.WriteLine("Would you like to change the number of guests? (y/n) ");
+                    //Update number of tourists
+                    Console.WriteLine("Would you like to change the number of tourists? (y/n) ");
                     var answer = Console.ReadLine();
                     switch (answer)
                     {
                         case "y":
-                            Console.WriteLine("Enter new number of guests: ");
+                            Console.WriteLine("Enter new number of tourists: ");
                             Console.WriteLine("Enter '0' to return");
-                            var newGuestNumber = -1;
-                            while (newGuestNumber == -1 || newGuestNumber > tour.MaxGuests)
+                            var newTouristNumber = -1;
+                            while (newTouristNumber == -1 || newTouristNumber > tour.MaxTourists)
                             {
-                                newGuestNumber = Convert.ToInt32(Console.ReadLine());
-                                if (newGuestNumber == 0)
+                                newTouristNumber = Convert.ToInt32(Console.ReadLine());
+                                if (newTouristNumber == 0)
                                     return;
                             }
 
-                            newReservation.NumberOfGuests = newGuestNumber;
+                            newReservation.NumberOfTourists = newTouristNumber;
                             break;
                         case "n":
                             return;
@@ -586,7 +586,7 @@ namespace InitialProject
                     }
 
                     var updatedAppointment = Book(newReservation);
-                    seatsLeft = tour.MaxGuests - updatedAppointment.GuestsId.Count();
+                    seatsLeft = tour.MaxTourists - updatedAppointment.TouristsId.Count();
                     Console.WriteLine("Successfully booked tour!\nFree seats left: {0}", seatsLeft);
                 }
             }

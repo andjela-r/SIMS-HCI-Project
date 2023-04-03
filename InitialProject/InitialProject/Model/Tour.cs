@@ -14,7 +14,7 @@ namespace InitialProject.Model
         public int LocationId { get; set; }
         public string Description { get; set; }
         public string Language { get; set; }
-        public int MaxGuests { get; set; }
+        public int MaxTourists { get; set; }
         public List<int> KeyPointsId { get; set; }
         public float Duration { get; set; }
         public List<int> PicturesId { get; set; }
@@ -23,14 +23,14 @@ namespace InitialProject.Model
 
         public Tour() { }
 
-        public Tour(int id, string name, int locationId, string description, string language, int maxGuests, List<int> keyPointsId, float duration, List<int> picturesId)
+        public Tour(int id, string name, int locationId, string description, string language, int maxTourists, List<int> keyPointsId, float duration, List<int> picturesId)
         {
             this.Id = id;
             this.Name = name;
             this.LocationId = locationId;
             this.Description = description;
             this.Language = language;
-            this.MaxGuests = maxGuests; 
+            this.MaxTourists = maxTourists; 
             this.KeyPointsId = keyPointsId;
             this.Duration = duration;
             this.PicturesId = picturesId;
@@ -44,7 +44,7 @@ namespace InitialProject.Model
             StringBuilder pictureIds = new StringBuilder();
             pictureIds.AppendJoin(ListDelimiter, PicturesId);
 
-            string[] csvValues = { Id.ToString(), Name, LocationId.ToString(), Description, Language, MaxGuests.ToString(), 
+            string[] csvValues = { Id.ToString(), Name, LocationId.ToString(), Description, Language, MaxTourists.ToString(), 
                 keyPoints.ToString(), Duration.ToString(), pictureIds.ToString() };
             return csvValues;
         }
@@ -57,7 +57,7 @@ namespace InitialProject.Model
             LocationId = Convert.ToInt32(values[2]);
             Description = values[3];
             Language = values[4];
-            MaxGuests = Convert.ToInt32(values[5]);
+            MaxTourists = Convert.ToInt32(values[5]);
 
             var keyPoints = values[6].Split(ListDelimiter);
             KeyPointsId = keyPoints.Select(int.Parse).ToList();
