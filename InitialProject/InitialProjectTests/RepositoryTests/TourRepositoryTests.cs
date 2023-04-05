@@ -14,10 +14,10 @@ namespace InitialProjectTests.RepositoryTests
             Assert.NotNull(testRepository);
         }
         [Fact]
-        public void FindAllTours_ReturnsTours()
+        public void FindAll_ReturnsTours()
         {
             var testRepository = new TourRepository();
-            var result = testRepository.FindAllTours();
+            var result = testRepository.FindAll();
 
             Assert.NotNull(result);
         }
@@ -110,7 +110,7 @@ namespace InitialProjectTests.RepositoryTests
             var result = testRepository.FindByGuestNumber(5);
 
             Assert.NotNull(result);
-            Assert.All(result, item => Assert.True(item.MaxGuests >= 5));
+            Assert.All(result, item => Assert.True(item.MaxTourists >= 5));
         }
 
         [Fact]

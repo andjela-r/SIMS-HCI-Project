@@ -17,7 +17,7 @@ namespace InitialProject.Service
             tour.LocationId = tourDTO.LocationId;
             tour.Description = tourDTO.Description;
             tour.Language = tourDTO.Language;
-            tour.MaxGuests = tourDTO.MaxGuests;
+            tour.MaxTourists = tourDTO.MaxTourists;
             tour.KeyPointsId = tourDTO.KeyPointsId;
             tour.Duration = tourDTO.Duration;
             tour.Pictures = tourDTO.Pictures;
@@ -41,7 +41,7 @@ namespace InitialProject.Service
             List<KeyPoint> keyPoints = keyPointRepository.FindKeyPoints(selectedTour);
             List<int> keyPointsIds = selectedTour.KeyPointsId;
 
-            List<int> touristsToArrive = selectedAppointment.GuestsId;
+            List<int> touristsToArrive = selectedAppointment.TouristsId;
 
             tourRepository.InitiateTour(keyPoints, touristsToArrive, keyPointRepository);
 

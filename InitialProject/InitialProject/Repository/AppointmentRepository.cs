@@ -27,7 +27,7 @@ namespace InitialProject.Repository
         {
             appointment.Id = NextId();
             appointment.Status = Status.NotStarted;
-            appointment.GuestsId = new List<int>();
+            appointment.TouristsId = new List<int>();
             _appointments = _serializer.FromCSV(FilePath);
             _appointments.Add(appointment);
             _serializer.ToCSV(FilePath, _appointments);
@@ -102,7 +102,7 @@ namespace InitialProject.Repository
             return selectedAppointment;
         }
 
-        public List<Appointment> FindAllTours()
+        public List<Appointment> FindAll()
         {
             _appointments = _serializer.FromCSV(FilePath);
             return _appointments;
@@ -144,10 +144,10 @@ namespace InitialProject.Repository
             return appointments;
         }
 
-        public List<Appointment> FindByGuestNumber(int numberOfGuests)
+        public List<Appointment> FindByGuestNumber(int numberOfTourists)
         {
             _appointments = _serializer.FromCSV(FilePath);
-            var tours = _tourRepository.FindByGuestNumber(Convert.ToInt32(numberOfGuests));
+            var tours = _tourRepository.FindByGuestNumber(Convert.ToInt32(numberOfTourists));
             var appointments = _appointments.FindAll(a => tours.Any(t => t.Id == a.TourId));
 
             FillAppointmentTourDetails(appointments);
