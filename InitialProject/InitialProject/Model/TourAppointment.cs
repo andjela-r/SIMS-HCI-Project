@@ -6,28 +6,28 @@ using System.Text;
 
 namespace InitialProject.Model
 {
-    public class Appointment : ISerializable
+    public class TourAppointment : ISerializable
     {
         public int Id { get; set; }
         public int TourId { get; set; }
         public Tour Tour { get; set; }
         public DateTime StartTime { get; set; }
-        public int GuideId { get; set; }
-        public List<int> TouristsId { get; set; }
-        public Status Status { get; set; }  
+        public List<int> TouristIds { get; set; }
+        public Status Status { get; set; }
+        public List<int> KeyPointIds { get; set; }
 
         private readonly string ListDelimiter = ",";
 
-        public Appointment() { }
+        public TourAppointment() { }
 
-        public Appointment(int id, int TourID, DateTime startTime, int guideId/*, List<int> guestsId*/, Status status)
+        public TourAppointment(int id, int TourID, DateTime startTime, Status status, List<int> keyPointIds)
         {
             this.Id = id;
             this.TourId = TourID;
             this.StartTime = startTime;
-            this.GuideId = guideId;
-            this.TouristsId = null;
+            this.TouristIds = null;
             this.Status = status;
+            this.KeyPointIds = keyPointIds;
         }
 
         public string[] ToCSV()
@@ -36,14 +36,13 @@ namespace InitialProject.Model
             csvValues = csvValues.Append(Id.ToString()).ToArray();
             csvValues = csvValues.Append(TourId.ToString()).ToArray();
             csvValues = csvValues.Append(StartTime.ToString("MM/dd/yyyy HH:mm:ss tt")).ToArray();
-            csvValues = csvValues.Append(GuideId.ToString()).ToArray();
 
-            
+
             StringBuilder guestIds = new StringBuilder();
             
-            if(TouristsId != null) 
+            if(TouristIds != null) 
             {
-                guestIds.AppendJoin(ListDelimiter, TouristsId);
+                guestIds.AppendJoin(ListDelimiter, TouristIds);
                 csvValues = csvValues.Append(guestIds.ToString()).ToArray();
             } else
                 csvValues = csvValues.Append("").ToArray();
@@ -51,23 +50,29 @@ namespace InitialProject.Model
             int status = Convert.ToInt32(Status);
             csvValues = csvValues.Append(status.ToString()).ToArray();
 
+            StringBuilder keyPoints = new StringBuilder();
+            keyPoints.AppendJoin(ListDelimiter, KeyPointIds);
+            csvValues = csvValues.Append(keyPoints.ToString()).ToArray();
+
             return csvValues;
         }
 
         public void FromCSV(string[] values)
         {
-            Id = Convert.ToInt32(values[1]);
+            Id = Convert.ToInt32(values[0]);
             TourId = Convert.ToInt32(values[1]);
             StartTime = Convert.ToDateTime(values[2]);
-            GuideId = Convert.ToInt32(values[3]);
 
-            var guestIds = values[4].Split(ListDelimiter);
+            var guestIds = values[3].Split(ListDelimiter);
             if (guestIds.Select(x => Int32.TryParse(x, out var result)).All(x => x == true))
-                TouristsId = guestIds.Select(Int32.Parse).ToList();
+                TouristIds = guestIds.Select(Int32.Parse).ToList();
             else
-                TouristsId = TouristsId;
+                TouristIds = TouristIds;
             
-            Status = (Status)Convert.ToInt32(values[5]);
+            Status = (Status)Convert.ToInt32(values[4]);
+
+            var keyPoints = values[5].Split(ListDelimiter);
+            KeyPointIds = keyPoints.Select(int.Parse).ToList();
         }
     }
 }
