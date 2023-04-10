@@ -6,8 +6,11 @@ namespace InitialProject.Model
     internal class Voucher : ISerializable
     {
         public int Id { get; set; }
+        public int TouristId { get; set; }
         public string Name { get; set; }
         public DateTime ExpirationDate { get; set; }
+
+
 
         public void FromCSV(string[] values)
         {

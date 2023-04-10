@@ -1,4 +1,6 @@
-﻿using System;
+﻿using InitialProject.Repository;
+using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -45,6 +47,20 @@ namespace InitialProject.View.Tourist.Components
         {
             BookWindow bookWindow = new BookWindow();
             bookWindow.Show();
+        }
+    }
+    public class MainWindowViewModel
+    {
+        public ObservableCollection<TourComponent> CustomComponentDataList { get; set; }
+
+        public MainWindowViewModel()
+        {
+            TourRepository _tourRepository = new TourRepository();
+            CustomComponentDataList = new ObservableCollection<TourComponent>();
+            for (int i = 0; i < _tourRepository.FindAll().Count; i++)
+            {
+                CustomComponentDataList.Add(new TourComponent());
+            }
         }
     }
 }
