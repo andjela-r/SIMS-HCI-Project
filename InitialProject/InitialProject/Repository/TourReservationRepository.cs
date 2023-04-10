@@ -40,7 +40,7 @@ namespace InitialProject.Repository
         public void ProcessSearchTourOption(string searchOption)
         {
             var tourRepository = new TourRepository();
-            var appointmentRepository = new AppointmentRepository();
+            var appointmentRepository = new TourAppointmentRepository();
             var retVal = new List<Tour>();
             switch (searchOption)
             {
