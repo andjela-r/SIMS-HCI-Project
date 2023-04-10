@@ -44,7 +44,7 @@ namespace InitialProject.Model
             StringBuilder pictures = new StringBuilder();
             pictures.AppendJoin(ListDelimiter, Pictures);
 
-            string[] csvValues = { Id.ToString(), Name, LocationId.ToString(), Description, Language, MaxGuests.ToString(), 
+            string[] csvValues = { Id.ToString(), Name, LocationId.ToString(), Description, Language, MaxTourists.ToString(), 
                 keyPoints.ToString(), Duration.ToString(), pictures.ToString() };
             return csvValues;
         }
