@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="InitialProject.View.Tourist.Components.TourComponent"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:InitialProject.View.Tourist.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="360" d:DesignWidth="280"
+
+             x:Name="root">
+
+    <Grid Width="280" Height="360" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Rectangle
+            Grid.Row="0"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Height="360" 
+            Fill="LightSteelBlue"
+            Stroke="DarkGray"
+            Width="280"/>
+
+        <Image 
+            Grid.Row="0"
+            VerticalAlignment="Top" 
+            Source="{Binding ImagePath, ElementName=root}" 
+            Height="280" 
+            Width="280" 
+            Stretch="UniformToFill"
+            StretchDirection="Both"/>
+
+        <Label 
+            Content="{Binding Title, ElementName=root}" 
+                FontSize="17" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top"
+                Margin="5,285,0,0"/>
+
+        <TextBlock  MaxHeight="30" MaxWidth="150"
+            Margin="11,315,0,0"
+            Text="{Binding Description, ElementName=root}"
+            HorizontalAlignment="Left" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top"/>
+
+        <Button 
+            Margin="172,300,0,0"
+            FontSize="17" 
+            Content="Book" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" 
+            Height="40" 
+            Width="88" 
+            Click="BookButton_OnClick"/>
+    </Grid>
+</UserControl>

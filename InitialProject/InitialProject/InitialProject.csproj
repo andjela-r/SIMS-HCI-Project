@@ -13,8 +13,14 @@
     <None Remove="Resources\Data\guestRatings.csv" />
     <None Remove="Resources\Data\TextFile1.txt" />
     <None Remove="Resources\Images\add.png" />
+    <None Remove="Resources\Images\bell.png" />
+    <None Remove="Resources\Images\bell_notification.png" />
     <None Remove="Resources\Images\delete.png" />
     <None Remove="Resources\Images\edit.png" />
+    <None Remove="Resources\Images\info.png" />
+    <None Remove="Resources\Images\tour_picture.jpg" />
+    <None Remove="Resources\Images\tour_picture1.jpg" />
+    <None Remove="Resources\Images\tour_picture2.jpg" />
     <None Remove="Resources\Images\view.png" />
   </ItemGroup>
 
@@ -34,10 +40,27 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="View\Guest\" />
-    <Folder Include="View\Guide\" />
-    <Folder Include="View\Owner\" />
-    <Folder Include="View\Tourist\" />
+    <Resource Include="Resources\Images\bell.png" />
+    <Resource Include="Resources\Images\bell_notification.png" />
+    <Resource Include="Resources\Images\info.png" />
+    <Resource Include="Resources\Images\tour_picture.jpg" />
+    <Resource Include="Resources\Images\tour_picture1.jpg" />
+    <Resource Include="Resources\Images\tour_picture2.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

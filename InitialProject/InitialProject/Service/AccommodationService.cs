@@ -19,10 +19,10 @@ namespace InitialProject.Service
             accommodation.Name = accommodationDTO.Name;
             accommodation.LocationId = accommodationDTO.LocationId; 
             accommodation.Type = accommodationDTO.Type;
-            accommodation.MaxOccupancy = accommodationDTO.MaxOccupancy;
-            accommodation.MinDays = accommodationDTO.MinDays;
-            accommodation.CancelPeriod = accommodationDTO.CancelPeriod;
-            accommodation.PicturesId = accommodationDTO.PicturesId;
+            accommodation.MaxGuests = accommodationDTO.MaxGuests;
+            accommodation.MinStay = accommodationDTO.MinStay;
+            accommodation.DaysToCancelBeforeReservation = accommodationDTO.DaysToCancelBeforeReservation;
+            accommodation.Pictures = accommodationDTO.Pictures;
 
             accommodationRepository.Save(accommodation);
         }

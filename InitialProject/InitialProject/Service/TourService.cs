@@ -20,7 +20,7 @@ namespace InitialProject.Service
             tour.MaxTourists = tourDTO.MaxTourists;
             tour.KeyPointsId = tourDTO.KeyPointsId;
             tour.Duration = tourDTO.Duration;
-            tour.PicturesId = tourDTO.PicturesId;
+            tour.Pictures = tourDTO.Pictures;
 
             tourRepository.Save(tour);
         }

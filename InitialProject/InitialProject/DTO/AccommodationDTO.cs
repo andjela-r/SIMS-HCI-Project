@@ -13,21 +13,21 @@ namespace InitialProject.DTO
         public string Name { get; set; }
         public int LocationId { get; set; }
         public Type Type { get; set; }   
-        public int MaxOccupancy { get; set; }
-        public int MinDays { get; set; }
-        public int CancelPeriod { get; set; } = 1;
-        public List<int> PicturesId { get; set; }
+        public int MaxGuests { get; set; }
+        public int MinStay { get; set; }
+        public int DaysToCancelBeforeReservation { get; set; } = 1;
+        public List<string> Pictures { get; set; }
      
-        public AccommodationDTO(string name, int locationId, Type type, int occupancy,
-         int minDays, int cancelPeriod, List<int> picturesId)
+        public AccommodationDTO(string name, int locationId, Type type, int guests,
+         int minStay, int daysToCancelBeforeReservation, List<string> pictures)
         {
             this.Name = name;
             this.LocationId = locationId;
             this.Type = type;
-            this.MaxOccupancy = occupancy;
-            this.MinDays = minDays;
-            this.CancelPeriod = cancelPeriod;
-            this.PicturesId = picturesId;
+            this.MaxGuests = guests;
+            this.MinStay = minStay;
+            this.DaysToCancelBeforeReservation = daysToCancelBeforeReservation;
+            this.Pictures = pictures;
         }
 
         public AccommodationDTO() { }
