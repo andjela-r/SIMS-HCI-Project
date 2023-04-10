@@ -237,7 +237,7 @@ namespace InitialProject
                         WriteTourSearchOptions();
                         searchOption = Console.ReadLine();
                         Console.Clear();
-                        TourReservationService.TourReservationRepository.ProcessSearchTourOption(searchOption);
+                        //TourReservationService.TourReservationRepository.ProcessSearchTourOption(searchOption);
                     } while (!searchOption.Equals("x"));
 
                     break;
@@ -252,7 +252,7 @@ namespace InitialProject
                     var guestNumber = Convert.ToInt32(Console.ReadLine());
 
                     var newReservation = new TourReservation(guestNumber, guestId, tourId);
-                    TourReservationService.ProcessCreateTourReservation(newReservation);
+                    //TourReservationService.ProcessCreateTourReservation(newReservation);
 
                     break;
                 case "x":
