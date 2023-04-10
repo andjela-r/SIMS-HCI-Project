@@ -13,17 +13,17 @@ namespace InitialProject.Service
     {
         TourReservationRepository tourReservationRepository = new TourReservationRepository();
 
-        public static Appointment Book(TourReservation newReservation)
+        public static TourAppointment Book(TourReservation newReservation)
         {
-            var appointmentRepository = new AppointmentRepository();
+            var appointmentRepository = new TourAppointmentRepository();
             var tourReservationRepository = new TourReservationRepository();
             var appointment = appointmentRepository.FindById(newReservation.TourId);
             var createdReservation = tourReservationRepository.CreateReservation(newReservation);
 
             for (var i = 0; i < createdReservation.NumberOfTourists; i++)
             {
-                var highestId = appointment.TouristsId.Any() ? appointment.TouristsId.Max() : 1;
-                appointment.TouristsId.Add(highestId + 1);
+                var highestId = appointment.TouristIds.Any() ? appointment.TouristIds.Max() : 1;
+                appointment.TouristIds.Add(highestId + 1);
                 appointment = appointmentRepository.Update(appointment);
             }
 
@@ -33,18 +33,18 @@ namespace InitialProject.Service
         public void ProcessCreateTourReservation(TourReservation newReservation)
         {
             var tourRepository = new TourRepository();
-            var appointmentRepository = new AppointmentRepository();
+            var appointmentRepository = new TourAppointmentRepository();
             var appointment = appointmentRepository.FindById(newReservation.TourId);
             var tour = tourRepository.FindById(newReservation.TourId);
-            var seatsLeft = tour.MaxTourists - appointment.TouristsId.Count;
+            var seatsLeft = tour.MaxTourists - appointment.TouristIds.Count;
 
-            if (appointment.TouristsId.Count() < tour.MaxTourists)
+            if (appointment.TouristIds.Count() < tour.MaxTourists)
             {
                 //It's possible to make a reservation
                 if (newReservation.NumberOfTourists <= seatsLeft)
                 {
                     var updatedAppointment = Book(newReservation);
-                    seatsLeft = tour.MaxTourists - updatedAppointment.TouristsId.Count;
+                    seatsLeft = tour.MaxTourists - updatedAppointment.TouristIds.Count;
                     //Console.WriteLine("Successfully booked tour!\nFree seats left: {0}", seatsLeft);
                 }
                 else
@@ -76,7 +76,7 @@ namespace InitialProject.Service
                     }
 
                     var updatedAppointment = Book(newReservation);
-                    seatsLeft = tour.MaxTourists - updatedAppointment.TouristsId.Count();
+                    seatsLeft = tour.MaxTourists - updatedAppointment.TouristIds.Count();
                     //Console.WriteLine("Successfully booked tour!\nFree seats left: {0}", seatsLeft);
                 }
             }

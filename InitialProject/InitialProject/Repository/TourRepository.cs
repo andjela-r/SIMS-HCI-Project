@@ -82,27 +82,5 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _tours);
             return tour;
         }
-
-
-        public void FinishTour(Appointment appointment, List<KeyPoint> keyPoints)
-        {
-            appointment.Status = Status.Finished;
-            KeyPointRepository keyPointRepository = new KeyPointRepository();
-
-            foreach (KeyPoint keyPoint in keyPoints)
-            {
-                keyPoint.Status = Status.NotStarted;
-                keyPointRepository.Update(keyPoint);
-            }
-            Console.WriteLine("\n-----------------\nTour is finished.\n-----------------\n");
-        }
-
-        public void InitiateTour(List<KeyPoint> keyPoints, List<int> touristsToArrive,
-            KeyPointRepository keyPointRepository)
-        {
-            KeyPoint firstKeypoint = keyPoints.First();
-            keyPointRepository.InitiateKeyPoint(firstKeypoint, keyPoints, touristsToArrive);
-        }
-
     }
 }
