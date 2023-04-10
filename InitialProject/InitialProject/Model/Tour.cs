@@ -18,12 +18,13 @@ namespace InitialProject.Model
         public List<int> KeyPointsId { get; set; }
         public float Duration { get; set; }
         public List<string> Pictures { get; set; }
+        public int GuideId { get; set; }
 
         private readonly string ListDelimiter = ",";
 
         public Tour() { }
 
-        public Tour(int id, string name, int locationId, string description, string language, int maxTourists, List<int> keyPointsId, float duration, List<string> pictures)
+        public Tour(int id, string name, int locationId, string description, string language, int maxTourists, List<int> keyPointsId, float duration, List<string> pictures, int guideId)
         {
             this.Id = id;
             this.Name = name;
@@ -34,18 +35,16 @@ namespace InitialProject.Model
             this.KeyPointsId = keyPointsId;
             this.Duration = duration;
             this.Pictures = pictures;
+            this.GuideId = guideId;
         }
 
         public string[] ToCSV()
         {
-            StringBuilder keyPoints = new StringBuilder();
-            keyPoints.AppendJoin(ListDelimiter, KeyPointsId);
-
             StringBuilder pictures = new StringBuilder();
             pictures.AppendJoin(ListDelimiter, Pictures);
 
             string[] csvValues = { Id.ToString(), Name, LocationId.ToString(), Description, Language, MaxTourists.ToString(), 
-                keyPoints.ToString(), Duration.ToString(), pictures.ToString() };
+                Duration.ToString(), pictures.ToString(), GuideId.ToString() };
             return csvValues;
         }
 
@@ -59,13 +58,12 @@ namespace InitialProject.Model
             Language = values[4];
             MaxTourists = Convert.ToInt32(values[5]);
 
-            var keyPoints = values[6].Split(ListDelimiter);
-            KeyPointsId = keyPoints.Select(int.Parse).ToList();
+            Duration = float.Parse(values[6]);
 
-            Duration = float.Parse(values[7]);
-
-            var pictures = values[8].Split(ListDelimiter);
+            var pictures = values[7].Split(ListDelimiter);
             Pictures = pictures.ToList();
+
+            GuideId = Convert.ToInt32(values[8]);
         }
 
     }

@@ -17,19 +17,20 @@ namespace InitialProject.DTO
         public List<int> KeyPointsId { get; set; }
         public float Duration { get; set; }
         public List<string> Pictures { get; set; }
+        public int GuideId { get; set; }
 
         public TourDTO() { }
 
-        public TourDTO(string name, int locationId, string description, string language, int maxTourists, List<int> keyPointsId, float duration, List<string> pictures)
+        public TourDTO(string name, int locationId, string description, string language, int maxTourists, float duration, List<string> pictures/*, int guideId*/)
         {
             this.Name = name;
             this.LocationId = locationId;
             this.Description = description;
             this.Language = language;
             this.MaxTourists = maxTourists;
-            this.KeyPointsId = keyPointsId;
             this.Duration = duration;
             this.Pictures = pictures;
+            //this.GuideId = guideId;
         }
     }
 }

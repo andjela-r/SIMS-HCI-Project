@@ -289,10 +289,6 @@ namespace InitialProject
             Console.WriteLine("Insert max number of tourists: ");
             var maxTourists = Convert.ToInt32(Console.ReadLine());
 
-            Console.WriteLine("Insert key points: ");
-            var keyPoints = Console.ReadLine().Split(',');
-            var keyPointsId = keyPoints.Select(int.Parse).ToList();
-
             Console.WriteLine("Insert duration: ");
             var duration = float.Parse(Console.ReadLine());
 
@@ -422,7 +418,7 @@ namespace InitialProject
             }
         }
 
-        private static AppointmentDTO GetAppointmentCreationData()
+        private static TourAppointmentDTO GetAppointmentCreationData()
         {
             Console.WriteLine("Insert tour id: ");
             var tourId = Convert.ToInt32(Console.ReadLine());
@@ -430,10 +426,11 @@ namespace InitialProject
             Console.WriteLine("Insert start time: ");
             var startTime = Convert.ToDateTime(Console.ReadLine());
 
-            Console.WriteLine("Insert guide id: ");
-            var guideId = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Insert key points: ");
+            var keyPoints = Console.ReadLine().Split(',');
+            var keyPointIds = keyPoints.Select(int.Parse).ToList();
 
-            AppointmentDTO appointmentDTO = new AppointmentDTO(tourId, startTime, guideId);
+            TourAppointmentDTO appointmentDTO = new TourAppointmentDTO(tourId, startTime, keyPointIds);
 
             return appointmentDTO;
         }
@@ -450,10 +447,9 @@ namespace InitialProject
                     tourService.CreateTour(tourDTO);
                     break;
                 case "2":
-                    var appointmentDTO1 = new AppointmentDTO();
+                    var appointmentDTO1 = new TourAppointmentDTO();
                     appointmentDTO1 = GetAppointmentCreationData();
-
-                    AppointmentService appointmentService = new AppointmentService();
+                    TourAppointmentService appointmentService = new TourAppointmentService();
                     appointmentService.CreateAppointment(appointmentDTO1);
                     break;
                 case "3":
@@ -474,12 +470,12 @@ namespace InitialProject
         public static void ProcessCreateTourReservation(TourReservation newReservation)
         {
             var tourRepository = new TourRepository();
-            var appointmentRepository = new AppointmentRepository();
+            var appointmentRepository = new TourAppointmentRepository();
             var appointment = appointmentRepository.FindById(newReservation.TourId);
             var tour = tourRepository.FindById(newReservation.TourId);
-            var seatsLeft = tour.MaxTourists - appointment.TouristsId.Count;
+            var seatsLeft = tour.MaxTourists - appointment.TouristIds.Count;
 
-            if (appointment.TouristsId.Count() < tour.MaxTourists)
+            if (appointment.TouristIds.Count() < tour.MaxTourists)
             {
                 //It's possible to make a reservation
                 if (newReservation.NumberOfTourists <= seatsLeft)
