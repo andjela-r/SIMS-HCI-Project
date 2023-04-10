@@ -35,7 +35,7 @@ namespace InitialProject.Repository
             return _accommodationReservations.Max(c => c.Id) + 1;
         }
 
-        public AccommodationReservation CreateReservation(AccommodationReservation accommodationReservation)
+        public AccommodationReservation Save(AccommodationReservation accommodationReservation)
         {
             accommodationReservation.Id = NextId();
             _accommodationReservations = _serializer.FromCSV(FilePath);
@@ -56,25 +56,12 @@ namespace InitialProject.Repository
             return _accommodationReservations.FindAll(u => u.EndDate <= endDate);
         }
 
-        public bool IsAvailable(AccommodationReservation newReservation, AccommodationReservation oldReservations)
-        {
-            if (newReservation.StartDate == oldReservations.StartDate)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
         public List<DateTime> GetDatesBetween(DateTime startDate, DateTime endDate)
         {
             List<DateTime> allDates = new List<DateTime>();
             for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
                 allDates.Add(date);
             return allDates;
-
         }
 
         public List<DateTime> GetOccupiedDays(DateTime startDate, DateTime endDate)
@@ -93,6 +80,11 @@ namespace InitialProject.Repository
         {
             _accommodationReservations = _serializer.FromCSV(FilePath);
             return _accommodationReservations.Find(x => x.Id == id);
+        }
+
+        public List<AccommodationReservation> FindAll()
+        {
+            return _serializer.FromCSV(FilePath);
         }
 
     }

@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using InitialProject.DTO;
+﻿/*using InitialProject.DTO;
 using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Type = InitialProject.Model.Type;
 
 namespace InitialProject
@@ -206,12 +206,11 @@ namespace InitialProject
                         Console.WriteLine("number of days must be smaller than period. ");
                         d = Convert.ToInt32(Console.ReadLine());
                     }
-                    while(d <= accommodation.MinStay)
+                    while(accommodation.MinStay >= d)
                     {
                         Console.WriteLine("Minimum number of days to stay in is " + accommodation.MinStay);
                         d = Convert.ToInt32(Console.ReadLine());
                     }
-                    //AccommodationReservation newReservation1 = new AccommodationReservation(accId, guestId1, startDate, endDate, d);
                     ProcessCreateAccommodationReservation(accId, guestId1, startDate, endDate, d);
                     break;
                 case "5":
@@ -363,7 +362,7 @@ namespace InitialProject
              if (!isDeadlineOver(accommodationReservation))
              {
                  Console.WriteLine("You have not rated a guest yet.");
-             } else Console.WriteLine("You have already rated a guest.");*/
+             } else Console.WriteLine("You have already rated a guest.");
 
             int cleanliness, obedience;
             GuestRatingService guestRatigService = new GuestRatingService();
@@ -636,20 +635,24 @@ namespace InitialProject
             List<AccommodationReservation> listAcc = accommodationReservationRepository.FindByAccommodationId(accommodationId);
             foreach (AccommodationReservation accommodation1 in listAcc)
             {
-                if (accommodation1.AccommodationId == accommodationId)
+                Console.WriteLine(accommodation1.AccommodationId);
+                Console.WriteLine(accommodationId);
+
+                if (accommodation1.AccommodationId+1 == accommodationId)
                 {
                     Console.WriteLine("***");
                     if (accommodation1.StartDate < startDate)
                     {
                         if (accommodation1.EndDate < endDate)
-                        { 
+                        {
                             var diffEnd = endDate - accommodation1.EndDate;
                             Console.WriteLine("free days: " + diffEnd.Days + "\n");
                             Console.WriteLine("You want this number of days to reserve : " + duration);
-                            if (diffEnd.Days > duration)
+                            if (diffEnd.Days >= duration)
                             {
                                 Console.WriteLine("Available dates:");
-                                List<DateTime> listAcc5 = accommodationReservationRepository.GetOccupiedDays(accommodation1.EndDate, endDate);
+                                List<DateTime> listAcc5 =
+                                    accommodationReservationRepository.GetOccupiedDays(accommodation1.EndDate, endDate);
                                 Console.WriteLine("Slobodni dani:  ");
                                 int i = 1;
                                 foreach (DateTime date in listAcc5)
@@ -658,6 +661,7 @@ namespace InitialProject
                                         Console.WriteLine("Date " + i + ": " + date.Day + "." + date.Month);
                                     i++;
                                 }
+
                                 Console.WriteLine("Pick a date: ");
                                 int n = Convert.ToInt32(Console.ReadLine());
                                 DateTime newStartDate = listAcc5[n - 1];
@@ -671,11 +675,14 @@ namespace InitialProject
                                     Console.WriteLine("Too many guests: ");
                                     guests = Convert.ToInt32(Console.ReadLine());
                                 }
-                                AccommodationReservation newReservation1 = new AccommodationReservation(accommodationId, guestId, newStartDate, newEndDate, duration);
+
+                                AccommodationReservation newReservation1 = new AccommodationReservation(accommodationId,
+                                    guestId, newStartDate, newEndDate, duration);
                                 Console.WriteLine("Succesful! ");
                             }
                             else
                                 Console.WriteLine("cant reserve this accommodation for this period. Sorry!");
+
                             break;
                         }
                         else
@@ -694,18 +701,21 @@ namespace InitialProject
                             if (diffStart.Days > duration)
                             {
                                 Console.WriteLine("Available dates: ");
-                                List<DateTime> listAcc5 = accommodationReservationRepository.GetOccupiedDays(startDate, accommodation1.StartDate);
+                                List<DateTime> listAcc6 =
+                                    accommodationReservationRepository.GetOccupiedDays(startDate,
+                                        accommodation1.StartDate);
                                 Console.WriteLine("Slobodni dani:  ");
                                 int i = 1;
-                                foreach (DateTime date in listAcc5)
+                                foreach (DateTime date in listAcc6)
                                 {
                                     if (date.AddDays(duration) <= startDate)
                                         Console.WriteLine("Date " + i + ": " + date.Day + "." + date.Month);
                                     i++;
                                 }
+
                                 Console.WriteLine("Pick a date: ");
                                 int n = Convert.ToInt32(Console.ReadLine());
-                                DateTime newStartDate = listAcc5[n - 1];
+                                DateTime newStartDate = listAcc6[n - 1];
                                 DateTime newEndDate = newStartDate.AddDays(duration);
 
                                 Console.WriteLine("How many guests will come: ");
@@ -717,11 +727,15 @@ namespace InitialProject
                                     Console.WriteLine("Too many guests: ");
                                     guests = Convert.ToInt32(Console.ReadLine());
                                 }
-                                AccommodationReservation newReservation1 = new AccommodationReservation(accommodationId, guestId, newStartDate, newEndDate, duration);
+
+                                AccommodationReservation newReservation1 = new AccommodationReservation(accommodationId,
+                                    guestId, newStartDate, newEndDate, duration);
+
                                 Console.WriteLine("Successful! ");
                             }
                             else
                                 Console.WriteLine("cant reserve this accommodation for this period. Sorry!");
+
                             break;
                         }
                         else
@@ -733,7 +747,9 @@ namespace InitialProject
                             if (diffStart.Days > duration || diffEnd.Days > duration)
                             {
                                 Console.WriteLine("Available dates:");
-                                List<DateTime> listAcc5 = accommodationReservationRepository.GetOccupiedDays(startDate, accommodation1.StartDate);
+                                List<DateTime> listAcc5 =
+                                    accommodationReservationRepository.GetOccupiedDays(startDate,
+                                        accommodation1.StartDate);
                                 int i = 1;
                                 foreach (DateTime date in listAcc5)
                                 {
@@ -741,14 +757,17 @@ namespace InitialProject
                                         Console.WriteLine("Date " + i + ": " + date.Day + "." + date.Month);
                                     i++;
                                 }
+
                                 Console.WriteLine("OR: \n\n");
-                                List<DateTime> listAcc6 = accommodationReservationRepository.GetOccupiedDays(accommodation1.EndDate, endDate);
+                                List<DateTime> listAcc6 =
+                                    accommodationReservationRepository.GetOccupiedDays(accommodation1.EndDate, endDate);
                                 foreach (DateTime date in listAcc6)
                                 {
                                     if (date.AddDays(duration) <= endDate)
                                         Console.WriteLine("Date " + i + ": " + date.Day + "." + date.Month);
                                     i++;
                                 }
+
                                 Console.WriteLine("Pick a date: ");
                                 int n = Convert.ToInt32(Console.ReadLine());
 
@@ -764,46 +783,83 @@ namespace InitialProject
                                     Console.WriteLine("Too many guests: ");
                                     guests = Convert.ToInt32(Console.ReadLine());
                                 }
-; AccommodationReservation newReservation1 = new AccommodationReservation(accommodationId, guestId, newStartDate, newEndDate, duration);
+
+                                AccommodationReservation newReservation1 = new AccommodationReservation(accommodationId,
+                                    guestId, newStartDate, newEndDate, duration);
+                                var newReservation3 =
+                                    accommodationReservationRepository.CreateReservation(newReservation1);
                                 Console.WriteLine("Succesful! ");
                             }
                             else
                                 Console.WriteLine("cant reserve this accommodation for this period. Sorry!");
+
                             break;
                         }
                     }
                 }
-                else 
+                else
                 {
-                    Console.WriteLine("Available dates: ");
-                    List<DateTime> listAcc5 = accommodationReservationRepository.GetOccupiedDays(startDate, endDate);
-                    Console.WriteLine("Slobodni dani:  ");
-                    int i = 1;
-                    foreach (DateTime date in listAcc5)
-                    {
-                        if (date.AddDays(duration) <= startDate)
-                            Console.WriteLine("Date " + i + ": " + date.Day + "." + date.Month);
-                        i++;
-                    }
-                    Console.WriteLine("Pick a date: ");
-                    int n = Convert.ToInt32(Console.ReadLine());
-                    DateTime newStartDate = listAcc5[n - 1];
-                    DateTime newEndDate = newStartDate.AddDays(duration);
+                    Console.WriteLine(accommodation1.AccommodationId);
+                    Console.WriteLine(accommodationId);
+                    Console.WriteLine("///Unesi datume kada zelite: ");
+                    DateTime starttDate;
+                    DateTime enddDate;
+                    // var accommodation = accommodationRepository.FindById(accId);
 
-                    Console.WriteLine("How many guests will come: ");
-                    int guests = Convert.ToInt32(Console.ReadLine());
-                    Accommodation acc = accommodationRepository.FindById(accommodationId);
-
-                    while (acc.MaxGuests > guests)
+                    do
                     {
-                        Console.WriteLine("Too many guests: ");
-                        guests = Convert.ToInt32(Console.ReadLine());
-                    }
-                    AccommodationReservation newReservation1 = new AccommodationReservation(accommodationId, guestId, newStartDate, newEndDate, duration);
-                    Console.WriteLine("Succesful! ");
+                        Console.WriteLine("Enter start date: (dd/MM/yyyy)");
+                        string line = Console.ReadLine();
+                        while (!DateTime.TryParseExact(line, "dd/MM/yyyy", null,
+                                   System.Globalization.DateTimeStyles.None, out starttDate))
+                        {
+                            Console.WriteLine("Invalid");
+                            line = Console.ReadLine();
+                        }
+
+                        Console.WriteLine("Enter end date: (dd/MM/yyyy) ");
+                        string line1 = Console.ReadLine();
+                        while (!DateTime.TryParseExact(line1, "dd/MM/yyyy", null,
+                                   System.Globalization.DateTimeStyles.None, out enddDate))
+                        {
+                            Console.WriteLine("Invalid");
+                            line1 = Console.ReadLine();
+                        }
+                    } while (starttDate >= enddDate || starttDate < DateTime.Today);
+
+                    AccommodationReservation newReservation9 =
+                        new AccommodationReservation(accommodationId, guestId, starttDate, enddDate, duration);
+                    var newReservation4 = accommodationReservationRepository.CreateReservation(newReservation9);
+
+                    /* Console.WriteLine("Available dates: ");
+                     List<DateTime> listAcc5 = accommodationReservationRepository.GetOccupiedDays(startDate, endDate);
+                     Console.WriteLine("Slobodni dani:  ");
+                     int i = 1;
+                     foreach (DateTime date in listAcc5)
+                     {
+                         if (date.AddDays(duration) <= startDate)
+                             Console.WriteLine("Date " + i + ": " + date.Day + "." + date.Month);
+                         i++;
+                     }
+                     Console.WriteLine("Pick a date: ");
+                     int n = Convert.ToInt32(Console.ReadLine());
+                     DateTime newStartDate = listAcc5[n - 1];
+                     DateTime newEndDate = newStartDate.AddDays(duration);
+
+                     Console.WriteLine("How many guests will come: ");
+                     int guests = Convert.ToInt32(Console.ReadLine());
+                     Accommodation acc = accommodationRepository.FindById(accommodationId);
+
+                     while (acc.MaxGuests > guests)
+                     {
+                         Console.WriteLine("Too many guests: ");
+                         guests = Convert.ToInt32(Console.ReadLine());
+                     }
+                     AccommodationReservation newReservation1 = new AccommodationReservation(accommodationId, guestId, newStartDate, newEndDate, duration);
+                     Console.WriteLine("Succesful! ");
                 }
             }
             }
         }
-    }
+    }*/
 
