@@ -4,6 +4,7 @@ using InitialProject.Repository;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using InitialProject.View.Tourist;
 
 namespace InitialProject
 {
@@ -50,9 +51,21 @@ namespace InitialProject
             {
                 if(user.Password == txtPassword.Password)
                 {
-                    CommentsOverview commentsOverview = new CommentsOverview(user);
-                    commentsOverview.Show();
-                    Close();
+                    switch (user.Role)
+                    {
+                        case Role.Tourist:
+                            HomePage homePage = new HomePage();
+                            homePage.Show();
+                            Close();
+                            break;
+                        case Role.Guest:
+                            break;
+                        case Role.Guide:
+                            break;
+                        case Role.Owner:
+                            break;
+                    }
+                    
                 } 
                 else
                 {

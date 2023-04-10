@@ -301,7 +301,7 @@ namespace InitialProject
             var pictures = Console.ReadLine().Split(',');
             var pictureLinks = pictures.ToList();
             
-            var tourDTO = new TourDTO(name, locationId, description, language, maxGuests, keyPointsId, duration,
+            var tourDTO = new TourDTO(name, locationId, description, language, maxTourists, keyPointsId, duration,
                 pictureLinks);
 
             return tourDTO;
@@ -523,23 +523,6 @@ namespace InitialProject
             }
         }
 
-        public static Appointment Book(TourReservation newReservation)
-        {
-            var appointmentRepository = new AppointmentRepository();
-            var tourReservationRepository = new TourReservationRepository();
-            var appointment = appointmentRepository.FindById(newReservation.TourId);
-            var createdReservation = tourReservationRepository.CreateReservation(newReservation);
-
-            for (var i = 0; i < createdReservation.NumberOfTourists; i++)
-            {
-                var highestId = appointment.TouristsId.Any() ? appointment.TouristsId.Max() : 1;
-                appointment.TouristsId.Add(highestId + 1);
-                appointment = appointmentRepository.Update(appointment);
-            }
-
-            return appointment;
-        }
-
         public static void ProcessCreateTourReservation(TourReservation newReservation)
         {
             var tourRepository = new TourRepository();
@@ -553,7 +536,7 @@ namespace InitialProject
                 //It's possible to make a reservation
                 if (newReservation.NumberOfTourists <= seatsLeft)
                 {
-                    var updatedAppointment = Book(newReservation);
+                    var updatedAppointment = TourReservationService.Book(newReservation);
                     seatsLeft = tour.MaxTourists - updatedAppointment.TouristsId.Count;
                     Console.WriteLine("Successfully booked tour!\nFree seats left: {0}", seatsLeft);
                 }
@@ -585,7 +568,7 @@ namespace InitialProject
                             break;
                     }
 
-                    var updatedAppointment = Book(newReservation);
+                    var updatedAppointment = TourReservationService.Book(newReservation);
                     seatsLeft = tour.MaxTourists - updatedAppointment.TouristsId.Count();
                     Console.WriteLine("Successfully booked tour!\nFree seats left: {0}", seatsLeft);
                 }
