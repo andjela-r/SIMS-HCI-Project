@@ -46,7 +46,10 @@ namespace InitialProject.Repository
             return _locations.FirstOrDefault(u => u.Id == id);
         }
 
-
+        public List<Location> FindAll()
+        {
+            return _serializer.FromCSV(FilePath);
+        }
 
 
 

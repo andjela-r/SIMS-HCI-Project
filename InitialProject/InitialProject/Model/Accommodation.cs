@@ -12,6 +12,8 @@ namespace InitialProject.Model
         public string Name { get; set; }
         public int LocationId { get; set; }
         public Type Type { get; set; }
+        public string TypeText { get; set; }
+        public Location Location { get; set; }
         public int MaxGuests { get; set; }
         public int MinStay { get; set; }
         public int DaysToCancelBeforeReservation { get; set; } = 1;
