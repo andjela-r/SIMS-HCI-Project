@@ -1,0 +1,21 @@
+﻿<Window x:Class="InitialProject.View.Tourist.Vouchers"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.View.Tourist"
+        mc:Ignorable="d"
+        Title="Vouchers" Height="768" Width="1024" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <Label Content="Vouchers" FontSize="40" HorizontalAlignment="Left" Margin="134,177,0,0" VerticalAlignment="Top"/>
+        <DockPanel HorizontalAlignment="Center" Height="147" VerticalAlignment="Top" Width="700">
+            <Button Content="Home" Width="110" Height="50" FontSize="17" Click="Home_OnClick"/>
+            <Button Content="Search" Width="110" Height="50" FontSize="17" Click="Search_OnClick"/>
+            <Button Content="Registered Tours" Width="140" Height="50" FontSize="17" Click="RegisteredTours_OnClick"/>
+            <Button Content="Requests" Width="110" Height="50" FontSize="17" Click="Requests_OnClick"/>
+            <Button Content="Vouchers" Width="110" Height="50" FontSize="17" Click="Vouchers_OnClick"/>
+            <Button Content="Sent Requests" Width="120" Height="50" FontSize="17" Click="SentRequests_OnClick"/>
+        </DockPanel>
+
+    </Grid>
+</Window>

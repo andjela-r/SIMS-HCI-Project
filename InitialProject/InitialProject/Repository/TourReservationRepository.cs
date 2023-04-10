@@ -1,4 +1,5 @@
-﻿using InitialProject.Model;
+﻿using System;
+using InitialProject.Model;
 using InitialProject.Serializer;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,57 @@ namespace InitialProject.Repository
             _tourReservations.Add(tourReservation);
             _serializer.ToCSV(FilePath, _tourReservations);
             return tourReservation;
+        }
+
+        public void ProcessSearchTourOption(string searchOption)
+        {
+            var tourRepository = new TourRepository();
+            var appointmentRepository = new AppointmentRepository();
+            var retVal = new List<Tour>();
+            switch (searchOption)
+            {
+                case "1":
+                    // --Search by location id--
+                    //Enter location id:
+
+                    var id = Console.ReadLine();
+                    var app = appointmentRepository.FindByLocation(Convert.ToInt32(id));
+                    Program.PrintAppointments(app);
+                    break;
+
+                case "2":
+                    //Console.WriteLine("--Search by tour duration--\n");
+                    //Console.WriteLine("Enter tour duration: ");
+
+                    var duration = Console.ReadLine();
+                    app = appointmentRepository.FindByDuration(float.Parse(duration));
+                    Program.PrintAppointments(app);
+                    break;
+
+                case "3":
+                    //Console.WriteLine("--Search by tour language--\n");
+                    //Console.WriteLine("Enter tour language: ");
+
+                    var language = Console.ReadLine();
+                    app = appointmentRepository.FindByLanguage(language);
+                    Program.PrintAppointments(app);
+                    break;
+
+                case "4":
+                    //Console.WriteLine("--Search by number of tourists--\n");
+                    //Console.WriteLine("Enter number of tourists: ");
+
+                    var guestNumber = Console.ReadLine();
+                    app = appointmentRepository.FindByGuestNumber(Convert.ToInt32(guestNumber));
+                    Program.PrintAppointments(app);
+                    break;
+
+                case "x":
+                    break;
+                default:
+                    //Console.WriteLine("Option does not exist");
+                    break;
+            }
         }
     }
 }
