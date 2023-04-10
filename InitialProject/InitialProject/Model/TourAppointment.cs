@@ -11,6 +11,7 @@ namespace InitialProject.Model
         public int Id { get; set; }
         public int TourId { get; set; }
         public Tour Tour { get; set; }
+        public int AvailableSeats { get; set; }
         public DateTime StartTime { get; set; }
         public List<int> TouristIds { get; set; }
         public Status Status { get; set; }
@@ -20,10 +21,11 @@ namespace InitialProject.Model
 
         public TourAppointment() { }
 
-        public TourAppointment(int id, int TourID, DateTime startTime, Status status, List<int> keyPointIds)
+        public TourAppointment(int id, int TourID, int availableSeats, DateTime startTime, Status status, List<int> keyPointIds)
         {
             this.Id = id;
             this.TourId = TourID;
+            this.AvailableSeats = availableSeats;
             this.StartTime = startTime;
             this.TouristIds = null;
             this.Status = status;
