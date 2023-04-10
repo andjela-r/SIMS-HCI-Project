@@ -39,7 +39,6 @@ namespace InitialProject.Repository
             return _accommodations.Max(c => c.Id) + 1;
         }
 
-        //TODO ovde treba umesto FindAll, FirstorDefault
         public List<Accommodation> FindByName(string name)
         {
             _accommodations = _serializer.FromCSV(FilePath);
@@ -73,6 +72,11 @@ namespace InitialProject.Repository
         public Accommodation FindById(int id)
         {
             return _accommodations.Find(x => x.Id == id);
+        }
+
+        public List<Accommodation> FindAll()
+        {
+            return _serializer.FromCSV(FilePath);
         }
 
     }

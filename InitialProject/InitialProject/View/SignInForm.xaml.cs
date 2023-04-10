@@ -1,6 +1,7 @@
 ﻿using InitialProject.Forms;
 using InitialProject.Model;
 using InitialProject.Repository;
+using InitialProject.View;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -59,13 +60,16 @@ namespace InitialProject
                             Close();
                             break;
                         case Role.Guest:
+                            GuestView guest = new GuestView(user);
+                            guest.Show();
+                            Close();
                             break;
                         case Role.Guide:
                             break;
                         case Role.Owner:
                             break;
                     }
-                    
+;
                 } 
                 else
                 {
