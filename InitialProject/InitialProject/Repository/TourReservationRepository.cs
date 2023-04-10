@@ -50,7 +50,7 @@ namespace InitialProject.Repository
 
                     var id = Console.ReadLine();
                     var app = appointmentRepository.FindByLocation(Convert.ToInt32(id));
-                    Program.PrintAppointments(app);
+                    //Program.PrintAppointments(app);
                     break;
 
                 case "2":
@@ -59,7 +59,7 @@ namespace InitialProject.Repository
 
                     var duration = Console.ReadLine();
                     app = appointmentRepository.FindByDuration(float.Parse(duration));
-                    Program.PrintAppointments(app);
+                    //Program.PrintAppointments(app);
                     break;
 
                 case "3":
@@ -68,7 +68,7 @@ namespace InitialProject.Repository
 
                     var language = Console.ReadLine();
                     app = appointmentRepository.FindByLanguage(language);
-                    Program.PrintAppointments(app);
+                    //Program.PrintAppointments(app);
                     break;
 
                 case "4":
@@ -77,7 +77,7 @@ namespace InitialProject.Repository
 
                     var guestNumber = Console.ReadLine();
                     app = appointmentRepository.FindByGuestNumber(Convert.ToInt32(guestNumber));
-                    Program.PrintAppointments(app);
+                    //Program.PrintAppointments(app);
                     break;
 
                 case "x":

@@ -91,7 +91,7 @@ namespace InitialProject.Service
                         //Console.WriteLine("Tours on the same location: ");
                         var locationId = tour.LocationId;
                         var app = appointmentRepository.FindByLocation(Convert.ToInt32(locationId));
-                        Program.PrintAppointments(app);
+                        //Program.PrintAppointments(app);
 
                         break;
                     case "n":

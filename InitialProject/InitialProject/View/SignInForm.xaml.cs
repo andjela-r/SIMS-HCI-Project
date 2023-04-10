@@ -60,16 +60,16 @@ namespace InitialProject
                             Close();
                             break;
                         case Role.Guest:
+                            GuestView guest = new GuestView(user);
+                            guest.Show();
+                            Close();
                             break;
                         case Role.Guide:
                             break;
                         case Role.Owner:
                             break;
                     }
-                    
-                   /* GuestView commentsOverview = new GuestView(user);
-                    commentsOverview.Show();
-                    Close();*/
+;
                 } 
                 else
                 {
