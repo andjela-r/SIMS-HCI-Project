@@ -213,5 +213,10 @@ namespace InitialProject.View.Tourist
             signInForm.Show();
             Close();
         }
+
+        private void Link_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

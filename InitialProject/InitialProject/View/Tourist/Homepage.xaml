@@ -62,5 +62,11 @@
 
         <Image Grid.Column="2" Source="../../Resources/Images/info.png" HorizontalAlignment="Left" Height="24" Margin="250,46,0,0" VerticalAlignment="Top" Width="24"/>
         <Image Grid.Column="2" Source="../../Resources/Images/bell.png" HorizontalAlignment="Left" Height="50" Margin="201,0,0,0" VerticalAlignment="Center" Width="50"/>
+        <Rectangle Fill="LightPink" Grid.Column="2" HorizontalAlignment="Left" Height="108" Margin="0,455,0,0" Grid.RowSpan="2" Grid.Row="1" Stroke="#FF757575" VerticalAlignment="Top" Width="317"/>
+        <Label Grid.Column="2" FontSize="17" Content="Tour Name" HorizontalAlignment="Left" Margin="12,503,0,0" Grid.Row="1" VerticalAlignment="Top" Foreground="#FF0006FF" FontWeight="Bold" FontStyle="Italic" Grid.RowSpan="2"/>
+        <Label FontSize="20" Content="Leave a Review!" HorizontalAlignment="Left" Margin="10,463,0,0" Grid.Row="1" Grid.Column="2" Grid.RowSpan="2"/>
+        <Label Grid.Column="2" Content="Days left to review:" HorizontalAlignment="Left" Margin="147,36,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+        <TextBox Grid.Column="2" FontSize="13" HorizontalAlignment="Left" Margin="262,36,0,0" Grid.Row="2" TextWrapping="Wrap" Text="5" VerticalAlignment="Top" Width="25" Height="26" RenderTransformOrigin="1.185,0.923"/>
+        <Button Grid.Column="2" Visibility="Hidden" Click="Link_OnClick" Content="Button" HorizontalAlignment="Left" Height="19" Margin="22,40,0,0" Grid.Row="2" VerticalAlignment="Top" Width="80"/>
     </Grid>
 </Window>
