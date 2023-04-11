@@ -1,6 +1,7 @@
 ﻿using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ namespace InitialProject.Model
     {
         public int Id { get; set; }
 
-        public DateTime StartDate { get; set; }  
+        public DateTime StartDate { get; set; }
 
         public DateTime EndDate { get; set; }
 
@@ -32,14 +33,15 @@ namespace InitialProject.Model
             this.Comment = comment;
         }
 
-        public RequestStatus()
-        {
-        }
+        public RequestStatus() { }
 
         public string[] ToCSV()
         {
             string[] csvValues = new string[] { };
             csvValues = csvValues.Append(Id.ToString()).ToArray();
+            int status = Convert.ToInt32(Status);
+            csvValues = csvValues.Append(status.ToString()).ToArray();
+            csvValues = csvValues.Append(ReservationId.ToString()).ToArray();
             csvValues = csvValues.Append(StartDate.ToString()).ToArray();
             csvValues = csvValues.Append(EndDate.ToString()).ToArray();
             int request = Convert.ToInt32(Request);
@@ -56,7 +58,7 @@ namespace InitialProject.Model
             EndDate = Convert.ToDateTime(values[2]);
             Request = (RequestStatusEnum)Convert.ToInt32(values[3]);
             ReservationId = Convert.ToInt32(values[4]);
-            Comment = values[5];
+            Comment = values[5];    
         }
 
 

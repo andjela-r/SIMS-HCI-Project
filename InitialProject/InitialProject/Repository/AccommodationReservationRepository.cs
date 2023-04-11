@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Printing;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Xml.Linq;
@@ -45,6 +46,15 @@ namespace InitialProject.Repository
             return accommodationReservation;
         }
 
+        public AccommodationReservation DeleteById(int id)
+        {
+            _accommodationReservations = _serializer.FromCSV(FilePath);
+            AccommodationReservation reservationToDelete = _accommodationReservations.Find(u => u.Id == id);
+            _accommodationReservations.Remove(reservationToDelete);
+            _serializer.ToCSV(FilePath, _accommodationReservations);
+             return reservationToDelete;     
+        }
+        
         public List<AccommodationReservation> FindByStartDate(DateTime startDate)
         {
             _accommodationReservations = _serializer.FromCSV(FilePath);
@@ -63,10 +73,16 @@ namespace InitialProject.Repository
             return _accommodationReservations.FindAll(u => u.AccommodationId <= accommodationId);
         }
 
+        public List<AccommodationReservation> FindByGuestId(int guestId)
+        {
+            _accommodationReservations = _serializer.FromCSV(FilePath);
+            return _accommodationReservations.FindAll(u => u.GuestId <= guestId);
+        }
+
         public AccommodationReservation FindById(int id)
         {
             _accommodationReservations = _serializer.FromCSV(FilePath);
-            return _accommodationReservations.Find(x => x.Id == id);
+            return _accommodationReservations.Find(u => u.Id == id);
         }
 
         public List<AccommodationReservation> FindAll()

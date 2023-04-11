@@ -10,9 +10,10 @@ using System.Xml.Linq;
 namespace InitialProject.Repository
 {
     public class RequestStatusRepository
-    { 
+    {
         private const string FilePath = "../../../Resources/Data/requestsStatuses.csv";
         private readonly Serializer<RequestStatus> _serializer;
+        private List<RequestStatus> _requests;
 
         private List<RequestStatus> _requestStatuses;
 

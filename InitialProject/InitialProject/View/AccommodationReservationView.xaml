@@ -15,17 +15,17 @@
         <DatePicker x:Name="StartDatePicker" HorizontalAlignment="Left" Margin="564,92,0,0" VerticalAlignment="Top" Height="43" Width="182" FontSize="20"/>
         <DatePicker x:Name="EndDatePicker" HorizontalAlignment="Left" Margin="564,163,0,0" VerticalAlignment="Top" Height="44" Width="184" FontSize="20"/>
         <TextBox x:Name="StayLengthBox" HorizontalAlignment="Left" Margin="568,305,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="178" Height="41" FontSize="21"/>
-        <DataGrid x:Name="DatesDataGrid" ItemsSource="{Binding AvailableDatesPair}" SelectedItem="{Binding SelectedAvailableDatePair}"  AutoGenerateColumns="False" SelectionChanged="DataGrid_SelectionChanged" Margin="380,24,62,119">
+        <DataGrid x:Name="DatesDataGrid" ItemsSource="{Binding AvailableDatesPair}" SelectedItem="{Binding SelectedAvailableDatePair}"  AutoGenerateColumns="False" Margin="380,24,22,99">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Check-in" Binding="{Binding Item1, StringFormat='{}{0:d}'}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Checkout" Binding="{Binding Item2, StringFormat='{}{0:d}'}"  Width="*"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="GoBackButton" Content="GO BACK" HorizontalAlignment="Left" Margin="606,390,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.429,0.816" Height="54" Width="202" FontSize="28" Click="GoBackButton_Click"/>
-        <Button x:Name="ReserveButton" Content="Reserve" HorizontalAlignment="Left" Margin="379,390,0,0" VerticalAlignment="Top" Height="54" Width="202" FontSize="28" Click="ReserveButton_Click"/>
-        <TextBox x:Name="GuestNumberBox" HorizontalAlignment="Left" Margin="48,417,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="287" Height="27"/>
+        <Button x:Name="GoBackButton" Content="Go back" HorizontalAlignment="Left" Margin="606,390,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.429,0.816" Height="54" Width="202" FontSize="28" Click="GoBackButton_Click"/>
+        <Button x:Name="ReserveButton" Content="Reserve" HorizontalAlignment="Left" Margin="382,393,0,0" VerticalAlignment="Top" Height="54" Width="202" FontSize="28" Click="ReserveButton_Click"/>
+        <TextBox x:Name="GuestNumberBox" HorizontalAlignment="Left" Margin="48,417,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="287" Height="27"/>
         <Label x:Name="NumGuestLabel" Content="How many guests will be?" HorizontalAlignment="Left" Margin="28,375,0,0" VerticalAlignment="Top" FontSize="20"/>
-        <Button x:Name="HideButton" Content="GO BACK" HorizontalAlignment="Left" Margin="606,390,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.429,0.816" Height="54" Width="202" FontSize="28" Click="HideButton_Click"/>
+        <Button x:Name="HideButton" Content="Go back" HorizontalAlignment="Left" Margin="606,390,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.429,0.816" Height="54" Width="202" FontSize="28" Click="HideButton_Click"/>
         <Image HorizontalAlignment="Left" Height="282" Margin="28,24,0,0" VerticalAlignment="Top" Width="291"/>
 
     </Grid>
