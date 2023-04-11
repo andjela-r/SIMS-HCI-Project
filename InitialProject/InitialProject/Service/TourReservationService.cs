@@ -13,24 +13,22 @@ namespace InitialProject.Service
     {
         TourReservationRepository tourReservationRepository = new TourReservationRepository();
 
-        public static TourAppointment Book(TourReservation newReservation)
+        public void Book(TourReservation newReservation)
         {
             var appointmentRepository = new TourAppointmentRepository();
             var tourReservationRepository = new TourReservationRepository();
+            var tourRepository = new TourRepository();
+
             var appointment = appointmentRepository.FindById(newReservation.TourId);
+            var tour = tourRepository.FindById(newReservation.TourId);
             var createdReservation = tourReservationRepository.CreateReservation(newReservation);
+            appointment.TouristIds.Add(newReservation.TouristId);
+            appointment.AvailableSeats -= newReservation.NumberOfTourists;
+            appointment = appointmentRepository.Update(appointment);
 
-            for (var i = 0; i < createdReservation.NumberOfTourists; i++)
-            {
-                var highestId = appointment.TouristIds.Any() ? appointment.TouristIds.Max() : 1;
-                appointment.TouristIds.Add(highestId + 1);
-                appointment = appointmentRepository.Update(appointment);
-            }
-
-            return appointment;
         }
 
-        public void ProcessCreateTourReservation(TourReservation newReservation)
+        /*public void ProcessCreateTourReservation(TourReservation newReservation)
         {
             var tourRepository = new TourRepository();
             var appointmentRepository = new TourAppointmentRepository();
@@ -43,8 +41,9 @@ namespace InitialProject.Service
                 //It's possible to make a reservation
                 if (newReservation.NumberOfTourists <= seatsLeft)
                 {
-                    var updatedAppointment = Book(newReservation);
-                    seatsLeft = tour.MaxTourists - updatedAppointment.TouristIds.Count;
+                    var touristId = 1;
+                    var updatedAppointment = Book(newReservation, touristId);
+                    seatsLeft = tour.MaxTourists - updatedAppointment.TouristsId.Count;
                     //Console.WriteLine("Successfully booked tour!\nFree seats left: {0}", seatsLeft);
                 }
                 else
@@ -52,10 +51,10 @@ namespace InitialProject.Service
                     //Console.WriteLine("Free seats left: {0}", seatsLeft);
                     //Update number of tourists
                     //Console.WriteLine("Would you like to change the number of tourists? (y/n) ");
-                    var answer = Console.ReadLine();
-                    switch (answer)
-                    {
-                        case "y":
+                    //var answer = Console.ReadLine();
+                   // switch (answer)
+                    //{
+                      //  case "y":
                             //Console.WriteLine("Enter new number of tourists: ");
                             //Console.WriteLine("Enter '0' to return");
                             var newTouristNumber = -1;
@@ -67,7 +66,7 @@ namespace InitialProject.Service
                             }
 
                             newReservation.NumberOfTourists = newTouristNumber;
-                            break;
+                         //  break;
                         case "n":
                             return;
                         default:
@@ -75,8 +74,8 @@ namespace InitialProject.Service
                             break;
                     }
 
-                    var updatedAppointment = Book(newReservation);
-                    seatsLeft = tour.MaxTourists - updatedAppointment.TouristIds.Count();
+                    //var updatedAppointment = Book(newReservation);
+                    //seatsLeft = tour.MaxTourists - updatedAppointment.TouristsId.Count();
                     //Console.WriteLine("Successfully booked tour!\nFree seats left: {0}", seatsLeft);
                 }
             }
@@ -99,8 +98,8 @@ namespace InitialProject.Service
                     default:
                         //Console.WriteLine("Option does not exist");
                         break;
-                }
-            }
-        }
+                }*/
+            //}
+        //}
     }
 }

@@ -7,37 +7,32 @@ namespace InitialProject.Model
     public class Voucher : ISerializable
     {
         public int Id { get; set; }
-        public string Name { get; set; }
         public int TouristId { get; set; }
+        public string Name { get; set; }
         public DateTime ExpirationDate { get; set; }
 
-        public Voucher(){}
+        public Voucher(){ }
 
-        public Voucher(int id, string name, int touristId, DateTime expirationDate)
+        public Voucher(int id, int touristId, string name, DateTime expirationDate)
         {
             Id = id;
-            Name = name;
             TouristId = touristId;
+            Name = name;
             ExpirationDate = expirationDate;
+        }
+
+        public string[] ToCSV()
+        {
+            string[] csvValues = { Id.ToString(), TouristId.ToString(), Name, ExpirationDate.ToString("MM/dd/yyyy HH:mm:ss tt") };
+            return csvValues;
         }
 
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
-            Name = values[1];
-            TouristId = Convert.ToInt32(values[2]);
+            TouristId = Convert.ToInt32(values[1]);
+            Name = values[2];
             ExpirationDate = Convert.ToDateTime(values[3]);
-        }
-
-        public string[] ToCSV()
-        {
-            string[] csvValues = new string[] { };
-            csvValues = csvValues.Append(Id.ToString()).ToArray();
-            csvValues = csvValues.Append(Name).ToArray();
-            csvValues = csvValues.Append(TouristId.ToString()).ToArray();
-            csvValues = csvValues.Append(ExpirationDate.ToString()).ToArray();
-
-            return csvValues;
         }
     }
 }

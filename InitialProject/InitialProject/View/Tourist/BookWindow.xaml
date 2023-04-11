@@ -7,20 +7,184 @@
         mc:Ignorable="d"
         Title="Make a Reservation" Height="450" Width="450" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
-        <Label Content="Tour Details:" FontSize="24" HorizontalAlignment="Left" Margin="32,38,0,0" VerticalAlignment="Top"/>
-        <TextBox FontSize="17" HorizontalAlignment="Left" Margin="52,86,0,0" TextWrapping="Wrap" Text="Some text" VerticalAlignment="Top" Width="120"/>
-        <Label Content="How many seats?" FontSize="24" HorizontalAlignment="Left" Margin="32,183,0,0" VerticalAlignment="Top"/>
-        <Slider HorizontalAlignment="Left" Margin="61,231,0,0" VerticalAlignment="Top" Width="279" Height="18" />
-        <TextBox Grid.Row="0" Text="{Binding Path=NumberOfGuests, UpdateSourceTrigger=PropertyChanged}" Height="25" TextWrapping="Wrap" Margin="357,228,60,181"/>
-        <Label Content="Pick voucher" FontSize="24" HorizontalAlignment="Left" Margin="32,279,0,0" VerticalAlignment="Top"/>
-        <Label Content="Voucher code" HorizontalAlignment="Left" Margin="266,287,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="31" Margin="353,288,0,0" TextWrapping="Wrap" Text="code123" VerticalAlignment="Top" Width="74"/>
-        <Image Source="../../Resources/Images/add.png" HorizontalAlignment="Left" Height="42" Margin="182,283,0,0" VerticalAlignment="Top" Width="42"/>
-        <Image Source="../../Resources/Images/info.png" HorizontalAlignment="Left" Height="34" Margin="385,24,0,0" VerticalAlignment="Top" Width="34"/>
-        <Label Content="Status" FontSize="13" HorizontalAlignment="Left" Margin="43,363,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Margin="46,391,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <Button FontSize="17" Content="Book" HorizontalAlignment="Left" Height="32" Margin="230,379,0,0" VerticalAlignment="Top" Width="90" Click="Book_OnClick"/>
-        <Button FontSize="17" Content="Cancel" HorizontalAlignment="Left" Height="32" Margin="337,379,0,0" VerticalAlignment="Top" Width="90" Click="Cancel_OnClick"/>
+        <Label 
+            Content="{Binding TourName}" 
+            FontSize="24" 
+            HorizontalAlignment="Left" 
+            Margin="25,20,0,0" 
+            VerticalAlignment="Top"/>
 
+        <Label 
+            Content="How many seats?" 
+            FontSize="24" 
+            HorizontalAlignment="Left" 
+            Margin="32,183,0,0" 
+            VerticalAlignment="Top"/>
+
+        <Slider 
+            x:Name="Slider"
+            Value="1"
+            Minimum="1"
+            Maximum="{Binding MaxTourists}"
+            HorizontalAlignment="Left" 
+            Margin="61,231,0,0" 
+            VerticalAlignment="Top" 
+            Width="269" 
+            Height="18" />
+
+        <Label Content="Pick voucher" 
+               FontSize="24" 
+               HorizontalAlignment="Left" 
+               Margin="32,279,0,0" 
+               VerticalAlignment="Top"/>
+
+        <Label 
+            Content="Voucher code" 
+            FontSize="14"
+            HorizontalAlignment="Left" 
+            Margin="255,287,0,0" 
+            VerticalAlignment="Top"/>
+
+        <TextBox 
+            IsReadOnly="True"
+            HorizontalAlignment="Left" 
+            Height="30" 
+            Margin="353,288,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding VoucherName, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+            TextAlignment="Center"
+            VerticalAlignment="Top" 
+            Width="57"/>
+
+        <Image 
+            Source="../../Resources/Images/add.png" 
+            HorizontalAlignment="Left" 
+            Height="42" 
+            Margin="182,283,0,0" 
+            VerticalAlignment="Top" 
+            Width="42" />
+
+        <Image 
+            Source="../../Resources/Images/info.png" 
+            HorizontalAlignment="Left" 
+            Height="34" 
+            Margin="385,24,0,0" 
+            VerticalAlignment="Top" 
+            Width="34"/>
+
+        <Label 
+            Content="Status: " 
+            FontSize="15" 
+            HorizontalAlignment="Left" 
+            Margin="43,343,0,0" 
+            VerticalAlignment="Top"/>
+
+        <Label 
+            HorizontalAlignment="Left" 
+            Content="{Binding Status}"
+            Margin="50,365,0,0" 
+            VerticalAlignment="Top" 
+            Width="120"/>
+
+        <Button 
+            FontSize="17" 
+            Content="Book"
+            HorizontalAlignment="Left" 
+            Height="32" 
+            Margin="225,361,0,0" 
+            VerticalAlignment="Top" 
+            Width="90" 
+            Click="Book_OnClick"/>
+
+        <Button 
+            FontSize="17" 
+            Content="Cancel" 
+            HorizontalAlignment="Left" 
+            Height="32" 
+            Margin="320,361,0,0" 
+            VerticalAlignment="Top"
+            Width="90" 
+            Click="Cancel_OnClick"/>
+
+        <TextBlock 
+            HorizontalAlignment="Left" 
+            Margin="32,71,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding TourDescription}" 
+            MaxWidth="283"
+            MaxHeight="56"
+            VerticalAlignment="Top" 
+            Height="56" 
+            Width="283"/>
+
+        <Label 
+            Content="{Binding Date}" 
+            HorizontalAlignment="Left" 
+            Margin="30,135,0,0" 
+            VerticalAlignment="Top"/>
+
+        <Image 
+            Source="{Binding PicturePath}" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top"
+            Height="100" 
+            Margin="326,71,0,0" 
+            Width="100" 
+            Stretch="UniformToFill"/>
+
+        <Label 
+            Content="Number of Seats Left:" 
+            HorizontalAlignment="Left" 
+            Margin="30,150,0,0" 
+            VerticalAlignment="Top"/>
+
+        <Label 
+            Content="{Binding AvailableSeats}" 
+            HorizontalAlignment="Left" 
+            Margin="150,150,0,0" 
+            VerticalAlignment="Top"/>
+
+        <Border 
+            BorderBrush="Black" 
+            BorderThickness="1" 
+            HorizontalAlignment="Center" 
+            Height="120" 
+            Margin="0,62,0,0" 
+            VerticalAlignment="Top"
+            Width="430"/>
+
+        <TextBox 
+            Text="{Binding ElementName=Slider, Path=Value, UpdateSourceTrigger=PropertyChanged, Converter={local:IntToTextConverter}}" 
+            Height="30" 
+            TextWrapping="Wrap" 
+            Margin="353,70,0,0" HorizontalAlignment="Left" Width="57"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="184,283,0,0" VerticalAlignment="Top" Opacity="0" Click="Vouchers_OnClick" Height="42"/>
+        <Grid x:Name="VoucherGrid" Visibility="Hidden">
+            <Rectangle Height="450" Width="450" Fill="White"/>
+                <DataGrid ItemsSource="{Binding Vouchers}" IsReadOnly="True" SelectionMode="Single" SelectedItem="{Binding SelectedVoucher}"
+                      AutoGenerateColumns="False" Height="300" HeadersVisibility="Column" FontSize="13" Margin="35,67,30,67">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Code" Binding="{Binding Name}" Width="200" CanUserResize="True"/>
+                    <DataGridTextColumn Header="Expiration Date" Binding="{Binding ExpirationDate}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button 
+                Content="Confirm Selection" 
+                HorizontalAlignment="Left" 
+                Margin="242,374,0,0" 
+                VerticalAlignment="Top" 
+                Width="115" 
+                Height="30"
+                Click="Confirm_OnClick"/>
+            <Button 
+                Content="Cancel" 
+                HorizontalAlignment="Left" 
+                Margin="362,374,0,0" 
+                VerticalAlignment="Top" 
+                Height="30" 
+                Width="58" 
+                Click="Cancel_OnClick"/>
+            <Label Content="Select a Voucher" FontSize="24" HorizontalAlignment="Left" Margin="35,25,0,0" VerticalAlignment="Top"/>
+        </Grid>
     </Grid>
 </Window>
