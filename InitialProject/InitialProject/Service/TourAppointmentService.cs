@@ -13,6 +13,7 @@ namespace InitialProject.Service
     public class TourAppointmentService
     {
         TourAppointmentRepository tourAppointmentRepository = new TourAppointmentRepository();
+        private TourRepository _tourRepository = new TourRepository();
 
         public void CreateAppointment(TourAppointmentDTO tourAppointmentDTO)
         {
@@ -21,6 +22,8 @@ namespace InitialProject.Service
             tourAppointment.TourId = tourAppointmentDTO.TourId;
             tourAppointment.StartTime = tourAppointmentDTO.StartTime;
             tourAppointment.KeyPointIds = tourAppointmentDTO.KeyPointIds;
+            var tour = _tourRepository.FindById(tourAppointment.TourId);
+            tourAppointment.AvailableSeats = tour.MaxTourists;
 
             tourAppointmentRepository.Save(tourAppointment);
         }

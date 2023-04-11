@@ -67,7 +67,7 @@ namespace InitialProject
                             Close();
                             break;
                         case Role.Guide:
-                            tour tour = new tour();
+                            tour tour = new tour(user);
                             tour.Show();
                             Close();
                             break;

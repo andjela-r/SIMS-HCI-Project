@@ -11,25 +11,25 @@ namespace InitialProject.Model
         public int Id { get; set; }
         public int TourId { get; set; }
         public Tour Tour { get; set; }
-        public int AvailableSeats { get; set; }
         public DateTime StartTime { get; set; }
         public List<int> TouristIds { get; set; }
         public Status Status { get; set; }
         public List<int> KeyPointIds { get; set; }
+        public int AvailableSeats { get; set; }
 
         private readonly string ListDelimiter = ",";
 
         public TourAppointment() { }
 
-        public TourAppointment(int id, int TourID, int availableSeats, DateTime startTime, Status status, List<int> keyPointIds)
+        public TourAppointment(int id, int tourId, DateTime startTime, Status status, List<int> keyPointIds, int availableSeats)
         {
             this.Id = id;
-            this.TourId = TourID;
-            this.AvailableSeats = availableSeats;
+            this.TourId = tourId;
             this.StartTime = startTime;
             this.TouristIds = null;
             this.Status = status;
             this.KeyPointIds = keyPointIds;
+            this.AvailableSeats = availableSeats;
         }
 
         public string[] ToCSV()
@@ -55,6 +55,7 @@ namespace InitialProject.Model
             StringBuilder keyPoints = new StringBuilder();
             keyPoints.AppendJoin(ListDelimiter, KeyPointIds);
             csvValues = csvValues.Append(keyPoints.ToString()).ToArray();
+            csvValues = csvValues.Append(AvailableSeats.ToString()).ToArray();
 
             return csvValues;
         }
@@ -75,6 +76,7 @@ namespace InitialProject.Model
 
             var keyPoints = values[5].Split(ListDelimiter);
             KeyPointIds = keyPoints.Select(int.Parse).ToList();
+            AvailableSeats = Convert.ToInt32(values[6]);
         }
     }
 }

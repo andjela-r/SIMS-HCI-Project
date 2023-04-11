@@ -12,6 +12,7 @@ namespace InitialProject.View.Tourist
     public partial class HomePage : Window
     {
         public TourRepository _tourRepository = new TourRepository();
+        public TourAppointmentRepository _tourAppointmentRepository = new TourAppointmentRepository();
 
         public User User { get; set; }
 
@@ -19,6 +20,8 @@ namespace InitialProject.View.Tourist
         private string _tour2;
         private string _tour3;
         private int _tourId;
+        private int _tourId1;
+        private int _tourId2;
 
         private string _tour11;
         private string _tour21;
@@ -27,6 +30,7 @@ namespace InitialProject.View.Tourist
         private string _tour20;
         private string _tour22;
         private string _tour32;
+
         private List<Tour> _tours;
 
         public string TourName
@@ -62,6 +66,22 @@ namespace InitialProject.View.Tourist
             set
             {
                 if (value != _tourId) _tourId = value;
+            }
+        }
+        public int TourId1
+        {
+            get => _tourId1;
+            set
+            {
+                if (value != _tourId1) _tourId1 = value;
+            }
+        }
+        public int TourId2
+        {
+            get => _tourId2;
+            set
+            {
+                if (value != _tourId2) _tourId2 = value;
             }
         }
 
@@ -127,21 +147,26 @@ namespace InitialProject.View.Tourist
             User = user;
 
             var turica = _tourRepository.FindById(1);
+            var turicaa = _tourAppointmentRepository.FindById(1);
             TourName = turica.Name;
             TourDescription = turica.Description;
             ImagePath = turica.Pictures[0];
-            TourId = turica.Id;
+            TourId = turicaa.Id;
 
             var turica1 = _tourRepository.FindById(2);
+            var turicaa1 = _tourAppointmentRepository.FindById(2);
             TourName1 = turica1.Name;
             TourDescription1 = turica1.Description;
             ImagePath1 = turica1.Pictures[0];
+            TourId1 = turicaa1.Id;
 
             var turica2 = _tourRepository.FindById(3);
+            var turicaa2 = _tourAppointmentRepository.FindById(3);
             TourName2 = turica2.Name;
             TourDescription2 = turica2.Description;
             ImagePath2 = turica2.Pictures[0];
-            _tours = _tourRepository.FindAll();
+            TourId2 = turicaa2.Id;
+
         }
 
 

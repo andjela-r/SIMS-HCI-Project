@@ -36,11 +36,17 @@ namespace InitialProject.View.Tourist
         private TourReservation newReservation = new TourReservation();
         private readonly VoucherRepository _voucherRepository;
 
+        private TourAppointmentService _tourAppointmentService = new TourAppointmentService();
+        private TourAppointmentRepository _tourAppointmentRepository = new TourAppointmentRepository();
+
         private string _name;
+        private string _status;
         private string _description;
         private string _picture;
         private DateTime _date;
         private string _voucher;
+        private int _maxTourists;
+        private int _availableSeats;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -77,6 +83,15 @@ namespace InitialProject.View.Tourist
             }
         }
 
+        public string Status
+        {
+            get => _status;
+            set
+            {
+                if (value != _status) _status = value;
+            }
+        }
+
         public string TourDescription
         {
             get => _description;
@@ -101,24 +116,50 @@ namespace InitialProject.View.Tourist
             get => _date.ToString();
             set
             {
-                
+                if (value != _date.ToString()) _date = Convert.ToDateTime(value);
             }
         }
 
-        public BookWindow(User user, int tourId)
+        public int MaxTourists
+        {
+            get => _maxTourists;
+            set
+            {
+                if (value != _maxTourists) _maxTourists = value;
+            }
+        }
+
+        public int AvailableSeats
+        {
+            get => _availableSeats;
+            set
+            {
+                if (value != _availableSeats) _availableSeats = value;
+            }
+        }
+
+        public BookWindow(User user, int appointmentId)
         {
             InitializeComponent();
             this.DataContext = this;
             this.User = user;
-            this.TourId = tourId;
+            this.TourId = appointmentId;
             _voucherRepository = new VoucherRepository();
             Vouchers = new ObservableCollection<Voucher>(_voucherRepository.FindByTouristId(user.Id));
 
-            var tour = _tourRepository.FindById(TourId);
+            var appointment = _tourAppointmentRepository.FindById(appointmentId);
+            var tour = _tourRepository.FindById(appointment.TourId);
             TourName = tour.Name;
             TourDescription = tour.Description;
             PicturePath = tour.Pictures[0];
-
+            Date = appointment.StartTime.ToString("D");
+            MaxTourists = tour.MaxTourists;
+            AvailableSeats = appointment.AvailableSeats;
+            Status = "Can be booked";
+            if (appointment.AvailableSeats == 0)
+            {
+                Status = "Tour is full :(";
+            }
         }
 
         private void Cancel_OnClick(object sender, RoutedEventArgs e)
@@ -127,57 +168,43 @@ namespace InitialProject.View.Tourist
         }
         private void Book_OnClick(object sender, RoutedEventArgs e)
         {
+            var appointment = _tourAppointmentRepository.FindById(TourId);
 
             newReservation.NumberOfTourists = (int)Slider.Value;
             newReservation.TourId = TourId;
             newReservation.TouristId = this.User.Id;
 
-            /*if (appointment.TouristIds.Count() < tour.MaxTourists)
+            if (appointment.AvailableSeats == 0)
             {
-                //It's possible to make a reservation
-                if (newReservation.NumberOfTourists <= seatsLeft)
+                var result = MessageBox.Show("Unfortunately, the tour you've chosen doesn't have any seats left.\nWould you like to pick another tour?", "Status", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
                 {
-                    var touristId = 1;
-                    var updatedAppointment = Book(newReservation, touristId);
-                    seatsLeft = tour.MaxTourists - updatedAppointment.TouristsId.Count;
-                    //Console.WriteLine("Successfully booked tour!\nFree seats left: {0}", seatsLeft);
+                    MessageBox.Show("Showing available tours on the same location", "Status", MessageBoxButton.OK);
                 }
                 else
                 {
-                    //Console.WriteLine("Free seats left: {0}", seatsLeft);
-                    //Update number of tourists
-                    //Console.WriteLine("Would you like to change the number of tourists? (y/n) ");
-                    //var answer = Console.ReadLine();
-                    // switch (answer)
-                    //{
-                    //  case "y":
-                    //Console.WriteLine("Enter new number of tourists: ");
-                    //Console.WriteLine("Enter '0' to return");
-                    var newTouristNumber = -1;
-                    while (newTouristNumber == -1 || newTouristNumber > tour.MaxTourists)
-                    {
-                        newTouristNumber = Convert.ToInt32(Console.ReadLine());
-                        if (newTouristNumber == 0)
-                            return;
-                    }
-
-                    newReservation.NumberOfTourists = newTouristNumber;
-                         //  break;
-                        case "n":
-                            return;
-                    default:
-                            //Console.WriteLine("Option does not exist");
-                            break;
+                    Close();
                 }
-
-                //var updatedAppointment = Book(newReservation);
-                //seatsLeft = tour.MaxTourists - updatedAppointment.TouristsId.Count();
-                //Console.WriteLine("Successfully booked tour!\nFree seats left: {0}", seatsLeft);
             }
-        }
             else
             {
-                //Console.WriteLine(
+                if (appointment.AvailableSeats >= newReservation.NumberOfTourists)
+                {
+                    _tourReservationService.Book(newReservation);
+                    if (SelectedVoucher != null) _voucherRepository.Delete(SelectedVoucher);
+                    MessageBox.Show("Successfully booked tour!", "Status", MessageBoxButton.OK);
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show(
+                        "The number of tourists is larger than the number of available seats.\nPlease change the number of tourists or cancel.",
+                        "Status", MessageBoxButton.OK);
+                }
+            }
+
+            /*
+
                     //"Unfortunately, the tour you've chosen doesn't have any seats left.\nWould you like to pick another tour? (y/n) ");
                 var answer = Console.ReadLine();
                 switch (answer)
@@ -185,21 +212,9 @@ namespace InitialProject.View.Tourist
                     case "y":
                         //Console.WriteLine("Tours on the same location: ");
                         var locationId = tour.LocationId;
-        var app = appointmentRepository.FindByLocation(Convert.ToInt32(locationId));
-                        //Program.PrintAppointments(app);
+                        var app = appointmentRepository.FindByLocation(Convert.ToInt32(locationId));
 
-                        break;
-                    case "n":
-                        return;
-                    default:
-                        //Console.WriteLine("Option does not exist");
-                        break;
                 }*/
-
-
-            _tourReservationService.Book(newReservation);
-            _voucherRepository.Delete(SelectedVoucher);
-            Close();
         }
 
         private void Vouchers_OnClick(object sender, RoutedEventArgs e)

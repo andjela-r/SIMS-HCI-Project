@@ -25,7 +25,7 @@
             x:Name="Slider"
             Value="1"
             Minimum="1"
-            Maximum="100"
+            Maximum="{Binding MaxTourists}"
             HorizontalAlignment="Left" 
             Margin="61,231,0,0" 
             VerticalAlignment="Top" 
@@ -81,7 +81,7 @@
 
         <Label 
             HorizontalAlignment="Left" 
-            Content="Can be booked"
+            Content="{Binding Status}"
             Margin="50,365,0,0" 
             VerticalAlignment="Top" 
             Width="120"/>
@@ -118,9 +118,9 @@
             Width="283"/>
 
         <Label 
-            Content="Date" 
+            Content="{Binding Date}" 
             HorizontalAlignment="Left" 
-            Margin="34,150,0,0" 
+            Margin="30,135,0,0" 
             VerticalAlignment="Top"/>
 
         <Image 
@@ -135,13 +135,13 @@
         <Label 
             Content="Number of Seats Left:" 
             HorizontalAlignment="Left" 
-            Margin="111,150,0,0" 
+            Margin="30,150,0,0" 
             VerticalAlignment="Top"/>
 
         <Label 
-            Content="999" 
+            Content="{Binding AvailableSeats}" 
             HorizontalAlignment="Left" 
-            Margin="236,150,0,0" 
+            Margin="150,150,0,0" 
             VerticalAlignment="Top"/>
 
         <Border 
