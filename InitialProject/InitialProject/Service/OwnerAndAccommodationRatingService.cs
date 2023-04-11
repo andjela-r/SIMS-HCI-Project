@@ -8,5 +8,18 @@ namespace InitialProject.Service
 {
     public class OwnerAndAccommodationRatingService
     {
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

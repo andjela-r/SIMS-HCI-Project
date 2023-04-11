@@ -1,0 +1,74 @@
+﻿<Window x:Class="InitialProject.View.Owner.ReviewsAndForums"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.View.Owner"
+        mc:Ignorable="d"
+        Title="Reviews" Height="450" Width="800" ResizeMode="NoResize" WindowStyle="SingleBorderWindow"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="900"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="15"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="2" Margin="20,70,350,0" Grid.ColumnSpan="2">
+            <DataGrid x:Name="DataGridReviews" ItemsSource="{Binding OwnerAndAccommodationRatings}"
+                      SelectedItem="{Binding SelectedOwnerAndAccommodationRatings}"
+                      IsReadOnly="False" SelectionMode="Single" 
+                  AutoGenerateColumns="False" Height="214" HeadersVisibility="Column" FontSize="13" SelectionChanged="DataGrid_SelectionChanged" Width="531">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Guest id" Binding="{Binding Id}" Width="60"/>
+                    <DataGridTextColumn Header="Cleanliness" Binding="{Binding Cleanliness}" Width="80"/>
+                    <DataGridTextColumn Header="OwnerHospitality" Binding="{Binding OwnerHospitality}" Width="110"/>
+                    <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" Width="100"/>
+                    <DataGridTextColumn Header="Owner id" Binding="{Binding OwnerId}" Width="70"/>
+                    <DataGridTextColumn Header="Accommodation" Binding="{Binding AccommodationId}" Width="150"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+
+        <ToolBar Grid.Row="0" Grid.ColumnSpan="3">
+            <Button Click="HomePage_OnClick">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../Resources/Images/House-icon.png" Width="20" Height="25"/>
+                    <TextBlock Text="Home page" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../Resources/Images/woman-icon-png-2.jpg" Width="20" Height="25"/>
+                    <TextBlock Text="Your profile" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" />
+                </StackPanel>
+
+            </Button>
+            <Separator/>
+            <Button>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../Resources/Images/tutorial.png" Width="20" Height="25"/>
+                    <TextBlock Text="Tutorial" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button Click="LogOut_OnClick">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../Resources/Images/logout.png" Width="15" Height="20"/>
+                    <TextBlock Name="DeleteTxtBlock" Text="Log out" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" />
+                </StackPanel>
+            </Button>
+        </ToolBar>
+        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="301,10,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Reviews" VerticalAlignment="Top" Width="115" Height="40" FontSize="20" FontWeight="Bold"/>
+        <Button Content="Average rating" Click="AverageRating_OnClick" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="668,74,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+        <Button Content="Title" Click="Title_OnClick" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="668,99,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>
