@@ -7,6 +7,7 @@ using System.Printing;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using System.Xml.Linq;
 
 namespace InitialProject.Repository
 {
@@ -56,20 +57,6 @@ namespace InitialProject.Repository
             return _accommodationReservations.FindAll(u => u.EndDate <= endDate);
         }
 
-        public List<DateTime> GetDatesBetween(DateTime startDate, DateTime endDate)
-        {
-            List<DateTime> allDates = new List<DateTime>();
-            for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
-                allDates.Add(date);
-            return allDates;
-        }
-
-        public List<DateTime> GetOccupiedDays(DateTime startDate, DateTime endDate)
-        {
-            List<DateTime> dates = GetDatesBetween(startDate, endDate).ToList();
-            return dates;
-        }
-
         public List<AccommodationReservation> FindByAccommodationId(int accommodationId)
         {
             _accommodationReservations = _serializer.FromCSV(FilePath);
@@ -85,6 +72,17 @@ namespace InitialProject.Repository
         public List<AccommodationReservation> FindAll()
         {
             return _serializer.FromCSV(FilePath);
+        }
+
+        public AccommodationReservation Update(AccommodationReservation reservation)
+        {
+            _accommodationReservations = _serializer.FromCSV(FilePath);
+            AccommodationReservation current = _accommodationReservations.Find(c => c.Id == reservation.Id);
+            int index = _accommodationReservations.IndexOf(current);
+            _accommodationReservations.Remove(current);
+            _accommodationReservations.Insert(index, reservation);       // keep ascending order of ids in file 
+            _serializer.ToCSV(FilePath, _accommodationReservations);
+            return reservation;
         }
 
     }

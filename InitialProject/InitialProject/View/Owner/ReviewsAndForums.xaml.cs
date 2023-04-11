@@ -17,12 +17,10 @@ namespace InitialProject.View.Owner
         public OwnerAndAccommodationRating SelectedOwnerAndAccommodationRating { get; set; }
 
         private readonly OwnerAndAccommodationRatingRepository _ownerAndAccommodationRatingRepository;
-        private readonly OwnerAndAccommodationRatingRepository ownerAndAccommodationRatingRepository;
 
         public static ObservableCollection<OwnerAndAccommodationRating> OwnerAndAccommodationRatings { get; set; }
 
         float AverageRating { get; set; }
-
 
         public ReviewsAndForums(User owner)
         {

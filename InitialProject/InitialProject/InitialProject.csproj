@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="View\Owner\ReservationRequests.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Resources\Data\accommodations.csv" />
     <None Remove="Resources\Data\guestRatings.csv" />
     <None Remove="Resources\Data\TextFile1.txt" />
@@ -22,6 +26,10 @@
     <None Remove="Resources\Images\tour_picture1.jpg" />
     <None Remove="Resources\Images\tour_picture2.jpg" />
     <None Remove="Resources\Images\view.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="View\Owner\ReservationRequests.xaml" />
   </ItemGroup>
 
   <ItemGroup>

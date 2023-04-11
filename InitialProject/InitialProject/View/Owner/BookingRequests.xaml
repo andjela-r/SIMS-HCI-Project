@@ -54,16 +54,24 @@
             </Button>
         </ToolBar>
         <TextBox Grid.Column="1" HorizontalAlignment="Center" Margin="0,24,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Requests" VerticalAlignment="Top" Width="91" Height="40" FontSize="20" FontWeight="Bold"/>
-        <DataGrid ItemsSource="{Binding Comments}"
-            SelectedItem="{Binding SelectedComment}"
+        <DataGrid ItemsSource="{Binding Requests}"
+            SelectedItem="{Binding SelectedRequest}"
             IsReadOnly="True" SelectionMode="Single" 
-            AutoGenerateColumns="False" HeadersVisibility="Column" FontSize="13" Margin="22,100,358,58" Grid.Column="1" Grid.Row="2">
+            AutoGenerateColumns="False" HeadersVisibility="Column" FontSize="13" Margin="22,100,176,58" Grid.Column="1" Grid.Row="2">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Request" Binding="{Binding CreationTime}" Width="200"/>
-                <DataGridTextColumn Header="Status" Binding="{Binding Text}" Width="*"/>
+                <DataGridTextColumn Header="Request id" Binding="{Binding Id}" Width="100"/>
+                <DataGridTextColumn Header="Start date" Binding="{Binding StartDate}" Width="100"/>
+                <DataGridTextColumn Header="End date" Binding="{Binding EndDate}" Width="100"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding Request}" Width="80"/>
+                <DataGridTextColumn Header="Reservation id" Binding="{Binding ReservationId}" Width="100"/>
+                <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" Width="100"/>
             </DataGrid.Columns>
         </DataGrid>
-
-
+        <Button Grid.Column="1" Click="AcceptRequest" Content="Accept" HorizontalAlignment="Left" Margin="589,243,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+        <Button Grid.Column="1" Click="DenyRequest" Content="Deny" HorizontalAlignment="Left" Margin="664,243,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+        <TextBox TextWrapping="Wrap" Text="{Binding Path=RequestId, UpdateSourceTrigger=PropertyChanged}" Width="120" Grid.Column="1" Margin="589,163,51,161" Grid.Row="2"/>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="589,130,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Enter request id:" VerticalAlignment="Top"/>
+        <TextBox TextWrapping="Wrap" Text="{Binding Path=AddedComment, UpdateSourceTrigger=PropertyChanged}" Width="120" Grid.Column="1" Margin="632,314,8,10" Grid.Row="2"/>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="637,293,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Add a comment: " VerticalAlignment="Top"/>
     </Grid>
 </Window>

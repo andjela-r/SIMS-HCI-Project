@@ -46,7 +46,7 @@ namespace InitialProject.Repository
         public List<OwnerAndAccommodationRating> FindByOwnerId(int id)
         {
             _ownerAndAccommodationRatings = _serializer.FromCSV(FilePath);
-            return _ownerAndAccommodationRatings.FindAll(u => u.Id == id);
+            return _ownerAndAccommodationRatings.FindAll(u => u.OwnerId == id);
         }
 
 

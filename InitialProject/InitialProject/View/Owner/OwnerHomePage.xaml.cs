@@ -48,7 +48,7 @@ namespace InitialProject.View.Owner
 
         private void BookingRequests_OnClick(object sender, RoutedEventArgs e)
         {
-            BookingRequests bookingRequests = new BookingRequests();
+            BookingRequests bookingRequests = new BookingRequests(User);
             bookingRequests.Show();
             Close();
         }

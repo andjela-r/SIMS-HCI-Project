@@ -1,8 +1,10 @@
 ﻿using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
+using InitialProject.View.Tourist;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -27,7 +29,9 @@ namespace InitialProject.View.Owner
 
         private readonly GuestRatingRepository _guestRatingRepository;
         private readonly GuestRepository _guestRepository;
+        private readonly AccommodationReservationRepository _accommodationReservationRepository;
         public User User { get; set; }
+        public ObservableCollection<AccommodationReservation> Guests { get; }
 
         private int _guestId;
         public int GuestId
@@ -98,9 +102,9 @@ namespace InitialProject.View.Owner
             this.DataContext = this;
             _guestRatingRepository = new GuestRatingRepository();
             _guestRepository=new GuestRepository();
+            _accommodationReservationRepository = new AccommodationReservationRepository();
             this.User = owner;
-            //_guestRating = new GuestRating();
-            //_guestRatingService=new GuestRatingService();
+            Guests = new ObservableCollection<AccommodationReservation>(_accommodationReservationRepository.FindAll());
         }
 
         private void HomePage_OnClick(object sender, RoutedEventArgs e)
@@ -121,7 +125,6 @@ namespace InitialProject.View.Owner
         private void GuestRating_OnClick(object sender, RoutedEventArgs e)
         {
             User guest = _guestRepository.FindById(_guestId);
-            //GuestRatingRepository guestRatingRepository = new GuestRatingRepository();
             if (guest == null)
             {
                 MessageBox.Show("That guest does not exist!");

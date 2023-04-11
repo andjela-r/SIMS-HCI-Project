@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="GuestRatings" Height="450" Width="800">
     <Grid>
-        <Grid Grid.Row="1" Grid.Column="0" Margin="236,28,264,122" Grid.RowSpan="2">
+        <Grid Grid.Row="1" Grid.Column="0" Margin="416,43,84,107" Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -29,7 +29,7 @@
             <TextBox Name="txtComment" Grid.Row="3" Text="{Binding Path=Comment, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Height="25" VerticalAlignment="Center"/>
         </Grid>
 
-        <Button Grid.Row="2" Click="GuestRating_OnClick" Content="Confirm" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="60" Margin="386,119,0,0"/>
+        <Button Grid.Row="2" Click="GuestRating_OnClick" Content="Confirm" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="60" Margin="566,112,0,0"/>
         <ToolBar Grid.Row="0" Margin="0,0,0,42">
             <Button Click="HomePage_OnClick">
                 <StackPanel Orientation="Horizontal">
@@ -60,13 +60,28 @@
             </Button>
         </ToolBar>
 
+        <DataGrid ItemsSource="{Binding Guests}"
+            SelectedItem="{Binding SelectedGuests}"
+            IsReadOnly="True" SelectionMode="Single" 
+            AutoGenerateColumns="False" HeadersVisibility="Column" FontSize="13" Margin="0,68,410,107" Grid.Row="1" Grid.RowSpan="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Reservation id" Binding="{Binding Id}" Width="100"/>
+                <DataGridTextColumn Header="Accommodation id" Binding="{Binding AccommodationId}" Width="100"/>
+                <DataGridTextColumn Header="Guest id" Binding="{Binding GuestId}" Width="100"/>
+                <DataGridTextColumn Header="Start date" Binding="{Binding StartDate}" Width="80"/>
+                <DataGridTextColumn Header="End date" Binding="{Binding EndDate}" Width="100"/>
+                <DataGridTextColumn Header="Duration" Binding="{Binding DurationDays}" Width="100"/>
+                <DataGridTextColumn Header="Guest number" Binding="{Binding GuestNumber}" Width="100"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="136"></RowDefinition>
             <RowDefinition Height="214"></RowDefinition>
         </Grid.RowDefinitions>
 
-        
-        
+
+
     </Grid>
 </Window>
