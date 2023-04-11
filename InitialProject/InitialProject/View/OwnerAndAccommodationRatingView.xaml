@@ -1,0 +1,38 @@
+﻿<Window x:Class="InitialProject.View.OwnerAndAccommodationRatingView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.View"
+        mc:Ignorable="d"
+        Title="OwnerAndAccommodationRatingView" Height="450" Width="800">
+    <Grid>
+        <DataGrid x:Name="dataGridAccommodations" DockPanel.Dock="Bottom"
+                  ItemsSource="{Binding Path=Reservations, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding Path = SelectedReservation, UpdateSourceTrigger=PropertyChanged}"
+                  AutoGenerateColumns="False" IsReadOnly="True" Margin="10,10,278,30">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding GuestId}" Width="100" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Start date" Binding="{Binding StartDate}" Width="100"></DataGridTextColumn>
+                <DataGridTextColumn Header="End date" Binding="{Binding EndDate}" Width="100"></DataGridTextColumn>
+                <DataGridTextColumn Header="Number of guests" Binding="{Binding GuestNumber}" Width="110"></DataGridTextColumn>
+                <DataGridTextColumn Header="Stay length" Binding="{Binding DurationDays}" Width="100"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="SelectButton" Content="Select" HorizontalAlignment="Left" Margin="549,10,0,0" VerticalAlignment="Top" Height="54" Width="220" Click="SelectButton_Click" FontSize="23"/>
+        <Button x:Name="RateButton" Content="Rate" HorizontalAlignment="Left" Margin="549,242,0,0" VerticalAlignment="Top" Height="57" Width="220" FontSize="25" Click="RateButton_Click"/>
+        <Button x:Name="CancelButton" Content="Cancel the reservation" HorizontalAlignment="Left" Margin="549,163,0,0" VerticalAlignment="Top" Height="54" Width="217" FontSize="17" RenderTransformOrigin="0.5,0.5" Click="CancelButton_Click">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="-0.352"/>
+                    <RotateTransform Angle="0.587"/>
+                    <TranslateTransform Y="-0.549"/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="MoveButon" Content="Reschedule a reservation" HorizontalAlignment="Left" Margin="549,86,0,0" VerticalAlignment="Top" Height="55" Width="220" FontSize="17" Click="MoveButon_Click"/>
+        <Button x:Name="GoBackButton" Content="Go back" HorizontalAlignment="Left" Margin="549,326,0,0" VerticalAlignment="Top" Height="57" Width="220" FontSize="25" Click="GoBackButton_Click"/>
+
+    </Grid>
+</Window>

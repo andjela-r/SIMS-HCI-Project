@@ -12,24 +12,24 @@
         <TextBox x:Name="GuestNumBox" HorizontalAlignment="Left" Margin="10,275,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="NameBox" HorizontalAlignment="Left" Margin="10,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <ComboBox x:Name="LocationComboBox" HorizontalAlignment="Left" Margin="10,118,0,0" VerticalAlignment="Top" Width="120"/>
-        <ComboBox x:Name="TypeBox" HorizontalAlignment="Left" Margin="10,195,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="TypeBox_SelectionChanged"/>
-        <Label Content="Name" HorizontalAlignment="Left" Margin="18,28,0,0" VerticalAlignment="Top"/>
-        <Label Content="Location" HorizontalAlignment="Left" Margin="18,92,0,0" VerticalAlignment="Top"/>
-        <Label Content="Type" HorizontalAlignment="Left" Margin="18,170,0,0" VerticalAlignment="Top"/>
-        <Label Content="Guest numbers" HorizontalAlignment="Left" Margin="18,249,0,0" VerticalAlignment="Top"/>
-        <Label Content="Minimum days" HorizontalAlignment="Left" Margin="18,321,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="TypeBox" HorizontalAlignment="Left" Margin="10,195,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Name" HorizontalAlignment="Left" Margin="13,28,0,0" VerticalAlignment="Top"/>
+        <Label Content="Location" HorizontalAlignment="Left" Margin="10,92,0,0" VerticalAlignment="Top"/>
+        <Label Content="Type" HorizontalAlignment="Left" Margin="11,169,0,0" VerticalAlignment="Top"/>
+        <Label Content="Guest numbers" HorizontalAlignment="Left" Margin="10,249,0,0" VerticalAlignment="Top"/>
+        <Label Content="Minimum days for reservation" HorizontalAlignment="Left" Margin="10,321,0,0" VerticalAlignment="Top"/>
         <Button Content="Search" HorizontalAlignment="Left" Margin="10,389,0,0" VerticalAlignment="Top" Height="35" Width="120" Click="Button_Click"/>
         <DataGrid x:Name="dataGridAccommodations" DockPanel.Dock="Bottom"
                   ItemsSource="{Binding Path=Accommodations, UpdateSourceTrigger=PropertyChanged}"
                   SelectedItem="{Binding Path = SelectedAccommodation, UpdateSourceTrigger=PropertyChanged}"
-                  AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="dataGridAccommodations_SelectionChanged" Margin="145,0,0,53">
+                  AutoGenerateColumns="False" IsReadOnly="True" Margin="145,0,0,53">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="90" ></DataGridTextColumn>
-                <DataGridTextColumn Header="Location" Binding="{Binding Location.City}" Width="120"></DataGridTextColumn>
-                <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="90"></DataGridTextColumn>
-                <DataGridTextColumn Header="MaxGuests" Binding="{Binding MaxGuests}" Width="100"></DataGridTextColumn>
-                <DataGridTextColumn Header="MinStay" Binding="{Binding MinStay}" Width="80"></DataGridTextColumn>
-                <DataGridTextColumn Header="DaysToCancel" Binding="{Binding DaysToCancelBeforeReservation}" Width="110"></DataGridTextColumn>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="70" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Location" Binding="{Binding Location.City}" Width="70"></DataGridTextColumn>
+                <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="70"></DataGridTextColumn>
+                <DataGridTextColumn Header="Maxiumum guests" Binding="{Binding MaxGuests}" Width="110"></DataGridTextColumn>
+                <DataGridTextColumn Header="Minimum days for staying in" Binding="{Binding MinStay}" Width="120"></DataGridTextColumn>
+                <DataGridTextColumn Header="Number of days for cancellation before reservation" Binding="{Binding DaysToCancelBeforeReservation}" Width="150"></DataGridTextColumn>
                 <DataGridTemplateColumn Header="Images">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

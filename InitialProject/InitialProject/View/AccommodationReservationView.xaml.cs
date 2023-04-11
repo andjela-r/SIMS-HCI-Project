@@ -1,21 +1,13 @@
 ﻿using InitialProject.Model;
+using InitialProject.Repository;
+using InitialProject.Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using InitialProject.Repository;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace InitialProject.View
 {
@@ -24,7 +16,8 @@ namespace InitialProject.View
     /// </summary>
     public partial class AccommodationReservationView : Window
     {
-        private AccommodationReservationRepository _reservationRepository;
+        private readonly AccommodationReservationRepository _reservationRepository;
+        private readonly AccommodationReservationService _reservationService;
         public Accommodation SelectedAccommodation { get; set; }
         public ObservableCollection<AccommodationReservation> Reservations { get; set; }
         public ObservableCollection<Tuple<DateTime, DateTime>> AvailableDatesPair { get; set; }
@@ -33,8 +26,6 @@ namespace InitialProject.View
 
         private DateTime _checkInDate;
         private DateTime _checkOutDate;
-        private int _lengthOfStay;
-        private int _guestsNumber;
 
         public AccommodationReservationView(Accommodation selectedAccommodation, User guest)
         {
@@ -42,12 +33,14 @@ namespace InitialProject.View
             DataContext = this;
 
             _reservationRepository = new AccommodationReservationRepository();
+            _reservationService = new AccommodationReservationService();
             this.Guest = guest;
             Reservations = new ObservableCollection<AccommodationReservation>(_reservationRepository.FindAll());
             SelectedAccommodation = selectedAccommodation;
             StartDatePicker.DisplayDateStart = DateTime.Today;
             EndDatePicker.DisplayDateStart = DateTime.Today;
             AvailableDatesPair = new ObservableCollection<Tuple<DateTime, DateTime>>();
+
             DatesDataGrid.Visibility = Visibility.Collapsed;
             ReserveButton.Visibility = Visibility.Collapsed;
             NumGuestLabel.Visibility = Visibility.Collapsed;
@@ -78,40 +71,8 @@ namespace InitialProject.View
                     OnPropertyChanged();
                 }
             }
-        }
+        }           
 
-        public int DurationStay
-        {
-            get => _lengthOfStay;
-            set
-            {
-                if (value != _lengthOfStay)
-                {
-                    _lengthOfStay = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public int GuestNumber
-        {
-            get => _guestsNumber;
-            set
-            {
-                if (value != _guestsNumber)
-                {
-                    _guestsNumber = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-        public string Error
-        {
-            get
-            {
-                return string.Empty;
-            }
-        }
         public string this[string columnName] => throw new NotImplementedException();
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -120,7 +81,7 @@ namespace InitialProject.View
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public List<DateTime> FindReservedDates()
+        public List<DateTime> FindOccupiedDates()
         {
             List<DateTime> reservedDates = new List<DateTime>();
             foreach (AccommodationReservation reservation in Reservations) 
@@ -129,8 +90,8 @@ namespace InitialProject.View
                 {
                     DateTime startDate = reservation.StartDate;
                     DateTime endDate = reservation.EndDate;
-                    for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
-                        reservedDates.Add(date);
+                    for (DateTime dates = startDate; dates <= endDate; dates = dates.AddDays(1))
+                        reservedDates.Add(dates);
                 }
             }
             return reservedDates;
@@ -138,13 +99,6 @@ namespace InitialProject.View
 
         private void ContinueButton_Click(object sender, RoutedEventArgs e)
         {
-            DatesDataGrid.Visibility = Visibility.Visible;
-            ReserveButton.Visibility = Visibility.Visible;
-            NumGuestLabel.Visibility = Visibility.Visible;
-            GuestNumberBox.Visibility = Visibility.Visible;
-            HideButton.Visibility = Visibility.Visible;
-            ContinueButton.Visibility = Visibility.Collapsed;
-            GoBackButton.Visibility = Visibility.Collapsed;
             DateTime startDate = (DateTime)StartDatePicker.SelectedDate;
             DateTime endDate = (DateTime)EndDatePicker.SelectedDate;
             int stayLength = int.Parse(StayLengthBox.Text);
@@ -161,10 +115,17 @@ namespace InitialProject.View
                 MessageBox.Show($"Minimum days for reservation: {SelectedAccommodation.MinStay}");
                 return;
             }
-            List<DateTime> reservatedDates = FindReservedDates();
+            DatesDataGrid.Visibility = Visibility.Visible;
+            ReserveButton.Visibility = Visibility.Visible;
+            NumGuestLabel.Visibility = Visibility.Visible;
+            GuestNumberBox.Visibility = Visibility.Visible;
+            HideButton.Visibility = Visibility.Visible;
+            ContinueButton.Visibility = Visibility.Collapsed;
+            GoBackButton.Visibility = Visibility.Collapsed;
+
+            List<DateTime> reservatedDates = FindOccupiedDates();
             List<DateTime> availableDates = new List<DateTime>();
             AvailableDatesPair.Clear();
-            //NotificationBlock.Text = "";
             for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
             {
                 if (!reservatedDates.Contains(date))
@@ -213,11 +174,6 @@ namespace InitialProject.View
             }
         }
 
-        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void ReserveButton_Click(object sender, RoutedEventArgs e)
         {
             if (SelectedAvailableDatePair != null)
@@ -236,6 +192,7 @@ namespace InitialProject.View
                 CheckOutDate = SelectedAvailableDatePair.Item2;
                 AccommodationReservation reservation = new AccommodationReservation(SelectedAccommodation.Id, Guest.Id, CheckInDate, CheckOutDate, int.Parse(StayLengthBox.Text), int.Parse(GuestNumberBox.Text));
                 _reservationRepository.Save(reservation);
+                MessageBox.Show("Successfuly reserved! ");
                 Close();
             }
         }
