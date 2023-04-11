@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using InitialProject.View.Guide;
 using InitialProject.View.Tourist;
+using InitialProject.View.Owner;
 
 namespace InitialProject
 {
@@ -71,6 +72,9 @@ namespace InitialProject
                             Close();
                             break;
                         case Role.Owner:
+                            OwnerHomePage ownerHomePage = new OwnerHomePage(user);
+                            ownerHomePage.Show();
+                            Close();
                             break;
                     }
 ;

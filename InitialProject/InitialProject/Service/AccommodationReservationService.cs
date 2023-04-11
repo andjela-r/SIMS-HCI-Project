@@ -1,7 +1,10 @@
-﻿using System.DirectoryServices;
+﻿using System.Collections.Generic;
+using System;
+using System.DirectoryServices;
 using InitialProject.DTO;
 using InitialProject.Model;
 using InitialProject.Repository;
+using System.Linq;
 
 namespace InitialProject.Service
 {
@@ -20,6 +23,20 @@ namespace InitialProject.Service
 
             accommodationReservationRepository.Save(accommodationReservation);
 
+        }
+
+        public List<DateTime> GetDatesBetween(DateTime startDate, DateTime endDate)
+        {
+            List<DateTime> allDates = new List<DateTime>();
+            for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
+                allDates.Add(date);
+            return allDates;
+        }
+
+        public List<DateTime> GetOccupiedDays(DateTime startDate, DateTime endDate)
+        {
+            List<DateTime> dates = GetDatesBetween(startDate, endDate).ToList();
+            return dates;
         }
 
         public bool IsContainingNameWords(Accommodation accommodation, string[] nameWords)

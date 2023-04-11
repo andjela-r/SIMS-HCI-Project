@@ -8,8 +8,9 @@ namespace InitialProject.Model
 {
     public enum RequestStatusEnum
     {
-        Approved,
+        Accepted,
         Waiting,
-        Rejected
+        Denied
     }
+
 }
