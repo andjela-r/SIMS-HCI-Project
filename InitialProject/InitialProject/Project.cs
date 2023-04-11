@@ -1,4 +1,4 @@
-﻿/*using InitialProject.DTO;
+﻿using InitialProject.DTO;
 using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
@@ -145,12 +145,12 @@ namespace InitialProject
 
                     break;
                 case "2":
-                    do
+                    /*do
                     {
                         RateAGuest();
                     } while (!chosenOption.Equals("x"));
 
-                    break;
+                    break;*/
                 case "3":
                     string searchOption;
                     do
@@ -163,7 +163,7 @@ namespace InitialProject
 
                     break;
                 case "4":
-                    AccommodationRepository accommodationRepository = new AccommodationRepository();
+                   /* AccommodationRepository accommodationRepository = new AccommodationRepository();
                     Console.WriteLine("Option 4\n");
                     Console.WriteLine("Enter id of the accommodation: ");
                     int accId = Convert.ToInt32(Console.ReadLine());
@@ -212,7 +212,7 @@ namespace InitialProject
                         d = Convert.ToInt32(Console.ReadLine());
                     }
                     ProcessCreateAccommodationReservation(accId, guestId1, startDate, endDate, d);
-                    break;
+                    break;*/
                 case "5":
                     string creationOption;
                     do
@@ -267,6 +267,7 @@ namespace InitialProject
             Console.WriteLine("1. Tour creation");
             Console.WriteLine("2. Appointment creation");
             Console.WriteLine("3. Key point creation");
+            Console.WriteLine("4. Find upcoming appointments");
             Console.WriteLine("x. Exit");
 
             Console.WriteLine("Your option: ");
@@ -296,7 +297,7 @@ namespace InitialProject
             var pictures = Console.ReadLine().Split(',');
             var pictureLinks = pictures.ToList();
             
-            var tourDTO = new TourDTO(name, locationId, description, language, maxTourists, keyPointsId, duration,
+            var tourDTO = new TourDTO(name, locationId, description, language, maxTourists, duration,
                 pictureLinks);
 
             return tourDTO;
@@ -351,9 +352,9 @@ namespace InitialProject
             accommodationService.CreateAccommodation(smestaj);
         }
 
-        private static void RateAGuest()
+        /*private static void RateAGuest()
         {
-            /* this will be activated with front
+             //this will be activated with front
              AccommodationReservation accommodationReservation = new AccommodationReservation();
              if (!isDeadlineOver(accommodationReservation))
              {
@@ -392,9 +393,9 @@ namespace InitialProject
             GuestRatingDTO guestRatingDTO = new GuestRatingDTO(
                 cleanliness, obedience, comment, guestId);
             guestRatigService.CreateGuestRating(guestRatingDTO);
-        }
+        }*/
 
-        private static bool IsDeadlineOver(AccommodationReservation accommodationReservation)
+        /*private static bool IsDeadlineOver(AccommodationReservation accommodationReservation)
         {
             var today = DateTime.Today;
             var leavingDay = accommodationReservation.EndDate;
@@ -406,17 +407,17 @@ namespace InitialProject
             }
 
             return false;
-        }
+        }*/
 
 
-        public static void PrintAppointments(List<Appointment> app)
+        /*public static void PrintAppointments(List<Appointment> app)
         {
             foreach (var appointment in app)
             {
                 Console.WriteLine("(ID: " + appointment.Id + ") " + appointment.Tour.Name);
                 Console.WriteLine("---");
             }
-        }
+        }*/
 
         private static TourAppointmentDTO GetAppointmentCreationData()
         {
@@ -459,6 +460,10 @@ namespace InitialProject
                     KeyPointService keyPointService = new KeyPointService();
                     keyPointService.CreateKeyPoint(keyPointDTO);
                     break;
+                case "4":
+                    TourAppointmentService tourAppointmentService = new TourAppointmentService();
+                    tourAppointmentService.CancelUpcomingAppointment();
+                    break;
                 case "x":
                     break;
                 default:
@@ -467,7 +472,7 @@ namespace InitialProject
             }
         }
 
-        public static void ProcessCreateTourReservation(TourReservation newReservation)
+        /*public static void ProcessCreateTourReservation(TourReservation newReservation)
         {
             var tourRepository = new TourRepository();
             var appointmentRepository = new TourAppointmentRepository();
@@ -513,7 +518,7 @@ namespace InitialProject
                     }
 
                     var updatedAppointment = TourReservationService.Book(newReservation);
-                    seatsLeft = tour.MaxTourists - updatedAppointment.TouristsId.Count();
+                    seatsLeft = tour.MaxTourists - updatedAppointment.TouristIds.Count();
                     Console.WriteLine("Successfully booked tour!\nFree seats left: {0}", seatsLeft);
                 }
             }
@@ -538,7 +543,7 @@ namespace InitialProject
                         break;
                 }
             }
-        }
+        }*/
 
         private static KeyPointDTO GetKeyPointCreationData()
         {
@@ -550,7 +555,7 @@ namespace InitialProject
             return keyPointDTO;
         }
 
-        public static void ProcessCreateAccommodationReservation(int accommodationId, int guestId, DateTime startDate, DateTime endDate, int duration)
+        /*public static void ProcessCreateAccommodationReservation(int accommodationId, int guestId, DateTime startDate, DateTime endDate, int duration)
         {
             List<Accommodation> retVal = new List<Accommodation>();
             List<AccommodationReservation> retVal1 = new List<AccommodationReservation>();
@@ -759,7 +764,7 @@ namespace InitialProject
                         new AccommodationReservation(accommodationId, guestId, starttDate, enddDate, duration);
                     var newReservation4 = accommodationReservationRepository.CreateReservation(newReservation9);
 
-                    /* Console.WriteLine("Available dates: ");
+                     Console.WriteLine("Available dates: ");
                      List<DateTime> listAcc5 = accommodationReservationRepository.GetOccupiedDays(startDate, endDate);
                      Console.WriteLine("Slobodni dani:  ");
                      int i = 1;
@@ -787,7 +792,7 @@ namespace InitialProject
                      Console.WriteLine("Succesful! ");
                 }
             }
-            }
+            }*/
         }
-    }*/
+    }
 

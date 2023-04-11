@@ -1,5 +1,6 @@
 ﻿using InitialProject.Model;
 using InitialProject.Serializer;
+using InitialProject.View.Guide;
 using System;
 using System.Collections.Generic;
 using System.Linq;

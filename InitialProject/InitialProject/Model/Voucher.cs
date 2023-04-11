@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Windows;
 using InitialProject.Serializer;
 
 namespace InitialProject.Model
@@ -35,7 +34,5 @@ namespace InitialProject.Model
             Name = values[2];
             ExpirationDate = Convert.ToDateTime(values[3]);
         }
-
-        
     }
 }

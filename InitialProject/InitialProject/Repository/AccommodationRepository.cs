@@ -1,6 +1,8 @@
 ﻿using InitialProject.Model;
 using InitialProject.Serializer;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Type = InitialProject.Model.Type;
 
@@ -9,7 +11,7 @@ namespace InitialProject.Repository
 {
     public class AccommodationRepository
     {
-        private const string FilePath ="../../../Resources/Data/accs.csv";
+        private const string FilePath = "../../../Resources/Data/accs.csv";
         private readonly Serializer<Accommodation> _serializer;
 
         private List<Accommodation> _accommodations;
@@ -79,5 +81,43 @@ namespace InitialProject.Repository
             return _serializer.FromCSV(FilePath);
         }
 
+       /* public string FindNameFromId(int id)
+        {
+            string name = null;
+
+            try
+            {
+                using (var reader = new StreamReader(FilePath))
+                {
+                    reader.ReadLine();
+
+                    while (!reader.EndOfStream)
+                    {
+                        var line = reader.ReadLine();
+                        var values = line.Split(',');
+
+                        if (values.Length >= 2)
+                        {
+                            int currentId;
+                            if (int.TryParse(values[0], out currentId))
+                            {
+                                if (currentId == id)
+                                {
+                                    name = values[1];
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions as appropriate for your application
+                Console.WriteLine($"Error reading CSV file: {ex.Message}");
+            }
+
+            return name;
+        }*/
     }
 }

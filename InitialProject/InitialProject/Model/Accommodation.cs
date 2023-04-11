@@ -12,10 +12,10 @@ namespace InitialProject.Model
         public string Name { get; set; }
         public int LocationId { get; set; }
         public Type Type { get; set; }
-        public string TypeText { get; set; }
         public Location Location { get; set; }
         public int MaxGuests { get; set; }
         public int MinStay { get; set; }
+        public int OwnerId { get; set; }
         public int DaysToCancelBeforeReservation { get; set; } = 1;
         public List<string> Pictures { get; set; }
 
@@ -50,6 +50,7 @@ namespace InitialProject.Model
             csvValues = csvValues.Append(MaxGuests.ToString()).ToArray();
             csvValues = csvValues.Append(MinStay.ToString()).ToArray();
             csvValues = csvValues.Append(DaysToCancelBeforeReservation.ToString()).ToArray();
+            csvValues = csvValues.Append(OwnerId.ToString()).ToArray();
             StringBuilder pictures = new StringBuilder();
             pictures.AppendJoin(ListDelimiter, Pictures);
             csvValues = csvValues.Append(pictures.ToString()).ToArray();
@@ -65,7 +66,8 @@ namespace InitialProject.Model
             MaxGuests = Convert.ToInt32(values[4]);
             MinStay = Convert.ToInt32(values[5]);
             DaysToCancelBeforeReservation = Convert.ToInt32(values[6]);
-            var pictures = values[7].Split(ListDelimiter);
+            OwnerId = Convert.ToInt32(values[7]);
+            var pictures = values[8].Split(ListDelimiter);
             Pictures = pictures.ToList();
         }
 

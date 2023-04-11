@@ -7,12 +7,20 @@
         mc:Ignorable="d"
         Title="Create new comment" Height="225" Width="400" WindowStartupLocation="CenterScreen">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="24*"/>
+            <ColumnDefinition Width="122*"/>
+            <ColumnDefinition Width="52*"/>
+            <ColumnDefinition Width="195*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="150"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Grid.Column="0" Width="300" Height="125">
+        <Grid Grid.Row="0" Grid.Column="3" Width="300" Height="125" Margin="19,12,50,12" Grid.ColumnSpan="3">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -25,7 +33,7 @@
             <TextBox x:Name="txtCommentText" Grid.Column="1" Grid.RowSpan="2"  Height="80" TextWrapping="Wrap"
                      Text="{Binding Path=Text, UpdateSourceTrigger=PropertyChanged}"></TextBox>
         </Grid>
-        <WrapPanel Grid.Row="1" FlowDirection="RightToLeft">
+        <WrapPanel Grid.Row="1" FlowDirection="RightToLeft" Grid.ColumnSpan="6">
             <Button Click="Cancel" Content="Cancel" HorizontalAlignment="Left" Margin="20, 5, 20, 5" Height="20" Width="60"/>
             <Button Name="btnSave"  Click="SaveComment"  Content="Save" HorizontalAlignment="Left"  Margin="20, 5, 20, 5" Height="20" Width="60"/>
         </WrapPanel>
