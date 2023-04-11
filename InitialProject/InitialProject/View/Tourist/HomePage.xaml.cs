@@ -12,9 +12,13 @@ namespace InitialProject.View.Tourist
     public partial class HomePage : Window
     {
         public TourRepository _tourRepository = new TourRepository();
+
+        public User User { get; set; }
+
         private string _tour;
         private string _tour2;
         private string _tour3;
+        private int _tourId;
 
         private string _tour11;
         private string _tour21;
@@ -24,152 +28,109 @@ namespace InitialProject.View.Tourist
         private string _tour22;
         private string _tour32;
         private List<Tour> _tours;
-        public string TourName {            
-            get
-            {
-                return _tour;
-            }
+
+        public string TourName
+        {
+            get => _tour;
             set
             {
-                if (value != _tour)
-                {
-                    _tour = value;
-                }
-            }}
+                if (value != _tour) _tour = value;
+            }
+        }
+
         public string TourDescription
         {
-            get
-            {
-                return _tour2;
-            }
+            get => _tour2;
             set
             {
-                if (value != _tour2)
-                {
-                    _tour2 = value;
-                }
+                if (value != _tour2) _tour2 = value;
             }
         }
+
         public string ImagePath
         {
-            get
-            {
-                return _tour3;
-            }
+            get => _tour3;
             set
             {
-                if (value != _tour3)
-                {
-                    _tour3 = value;
-                }
+                if (value != _tour3) _tour3 = value;
             }
         }
+
+        public int TourId
+        {
+            get => _tourId;
+            set
+            {
+                if (value != _tourId) _tourId = value;
+            }
+        }
+
         public string TourName1
         {
-            get
-            {
-                return _tour11;
-            }
+            get => _tour11;
             set
             {
-                if (value != _tour11)
-                {
-                    _tour11 = value;
-                }
+                if (value != _tour11) _tour11 = value;
             }
         }
+
         public string TourDescription1
         {
-            get
-            {
-                return _tour21;
-            }
+            get => _tour21;
             set
             {
-                if (value != _tour21)
-                {
-                    _tour21 = value;
-                }
+                if (value != _tour21) _tour21 = value;
             }
         }
+
         public string ImagePath1
         {
-            get
-            {
-                return _tour31;
-            }
+            get => _tour31;
             set
             {
-                if (value != _tour31)
-                {
-                    _tour31 = value;
-                }
+                if (value != _tour31) _tour31 = value;
             }
         }
+
         public string TourName2
         {
-            get
-            {
-                return _tour20;
-            }
+            get => _tour20;
             set
             {
-                if (value != _tour20)
-                {
-                    _tour20 = value;
-                }
+                if (value != _tour20) _tour20 = value;
             }
         }
+
         public string TourDescription2
         {
-            get
-            {
-                return _tour22;
-            }
+            get => _tour22;
             set
             {
-                if (value != _tour22)
-                {
-                    _tour22 = value;
-                }
+                if (value != _tour22) _tour22 = value;
             }
         }
+
         public string ImagePath2
         {
-            get
-            {
-                return _tour32;
-            }
+            get => _tour32;
             set
             {
-                if (value != _tour32)
-                {
-                    _tour32 = value;
-                }
+                if (value != _tour32) _tour32 = value;
             }
         }
-        public List<Tour> Tours
-        {
-            get
-            {
-                return _tours;
-            }
-            //set
-            //{
-            //    if (value != _tours)
-            //    {
-            //        var Tours = value;
-            //    }
-            //}
-        }
-        public HomePage()
+
+        public HomePage(User user)
         {
             InitializeComponent();
             this.DataContext = this;
+            this.User = user;
+            User = user;
+
             var turica = _tourRepository.FindById(1);
             TourName = turica.Name;
             TourDescription = turica.Description;
             ImagePath = turica.Pictures[0];
+            TourId = turica.Id;
 
             var turica1 = _tourRepository.FindById(2);
             TourName1 = turica1.Name;
@@ -186,35 +147,37 @@ namespace InitialProject.View.Tourist
 
         private void Home_OnClick(object sender, RoutedEventArgs e)
         {
-
+            HomePage home = new HomePage(User);
+            home.Show();
+            Close();
         }
         private void Search_OnClick(object sender, RoutedEventArgs e)
         {
-            Search search = new Search();
+            Search search = new Search(User);
             search.Show();
             Close();
         }
         private void Requests_OnClick(object sender, RoutedEventArgs e)
         {
-            Requests requests = new Requests();
+            Requests requests = new Requests(User);
             requests.Show();
             Close();
         }
         private void Vouchers_OnClick(object sender, RoutedEventArgs e)
         {
-            Vouchers vouchers = new Vouchers();
+            Vouchers vouchers = new Vouchers(User);
             vouchers.Show();
             Close();
         }
         private void RegisteredTours_OnClick(object sender, RoutedEventArgs e)
         {
-            RegisteredTours registeredTours = new RegisteredTours();
+            RegisteredTours registeredTours = new RegisteredTours(User);
             registeredTours.Show();
             Close();
         }
         private void SentRequests_OnClick(object sender, RoutedEventArgs e)
         {
-            SentRequests sentRequests = new SentRequests();
+            SentRequests sentRequests = new SentRequests(User);
             sentRequests.Show();
             Close();
         }
@@ -224,12 +187,6 @@ namespace InitialProject.View.Tourist
             SignInForm signInForm = new SignInForm();
             signInForm.Show();
             Close();
-        }
-
-        private void BookBase_OnClick(object sender, RoutedEventArgs e)
-        {
-            BookWindow bookWindow = new BookWindow();
-            bookWindow.Show();
         }
     }
 }

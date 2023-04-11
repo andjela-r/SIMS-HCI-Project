@@ -13,7 +13,7 @@ namespace InitialProject.Service
     {
         TourReservationRepository tourReservationRepository = new TourReservationRepository();
 
-        public static TourAppointment Book(TourReservation newReservation, int touristId)
+        public void Book(TourReservation newReservation)
         {
             var appointmentRepository = new TourAppointmentRepository();
             var tourReservationRepository = new TourReservationRepository();
@@ -22,11 +22,10 @@ namespace InitialProject.Service
             var appointment = appointmentRepository.FindById(newReservation.TourId);
             var tour = tourRepository.FindById(newReservation.TourId);
             var createdReservation = tourReservationRepository.CreateReservation(newReservation);
-            appointment.TouristIds.Add(touristId);
+            appointment.TouristIds.Add(newReservation.TouristId);
             appointment.AvailableSeats -= newReservation.NumberOfTourists;
             appointment = appointmentRepository.Update(appointment);
 
-            return appointment;
         }
 
         /*public void ProcessCreateTourReservation(TourReservation newReservation)

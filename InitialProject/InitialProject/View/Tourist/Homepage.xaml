@@ -34,7 +34,9 @@
             Grid.Row="1" 
             Title="{Binding TourName}" 
             Description="{Binding TourDescription}"
-            ImagePath="{Binding ImagePath}">
+            ImagePath="{Binding ImagePath}"
+            Tourist="{Binding User}"
+            TourId ="{Binding TourId}">
         </components:TourComponent>
 
         <components:TourComponent 
@@ -42,14 +44,16 @@
             Grid.Column="0"
             Title="{Binding TourName1}" 
             Description="{Binding TourDescription1}"
-            ImagePath="{Binding ImagePath1}" Grid.ColumnSpan="3" Margin="341,0,341,0"/>
+            ImagePath="{Binding ImagePath1}" Grid.ColumnSpan="3" Margin="341,0,341,0"
+            TourId ="{Binding TourId}"/>
 
         <components:TourComponent 
             Grid.Row="1" 
             Grid.Column="2" 
             Title="{Binding TourName2}" 
             Description="{Binding TourDescription2}"
-            ImagePath="{Binding ImagePath2}">
+            ImagePath="{Binding ImagePath2}"
+            TourId ="{Binding TourId}">
         </components:TourComponent>
 
         <Button Content="Log Out" HorizontalAlignment="Left" Height="31" Margin="30,59,0,0" Grid.Row="2" VerticalAlignment="Top" Width="150" Click="LogOut_OnClick"/>

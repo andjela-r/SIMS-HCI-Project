@@ -55,7 +55,7 @@ namespace InitialProject
                     switch (user.Role)
                     {
                         case Role.Tourist:
-                            HomePage homePage = new HomePage();
+                            HomePage homePage = new HomePage(user);
                             homePage.Show();
                             Close();
                             break;
