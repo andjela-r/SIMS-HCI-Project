@@ -5,6 +5,7 @@ using InitialProject.View;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using InitialProject.View.Guide;
 using InitialProject.View.Tourist;
 
 namespace InitialProject
@@ -65,6 +66,9 @@ namespace InitialProject
                             Close();
                             break;
                         case Role.Guide:
+                            tour tour = new tour();
+                            tour.Show();
+                            Close();
                             break;
                         case Role.Owner:
                             break;
