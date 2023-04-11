@@ -45,7 +45,7 @@ namespace InitialProject.View
                 MessageBox.Show("Start date can not be smaller than end date. Try again!");
                 return;
             }
-            RequestStatus request = new RequestStatus(RequestStatusEnum.Waiting,Reservation.Id, startDate, endDate, "");
+            RequestStatus request = new RequestStatus(startDate, endDate, "", RequestStatusEnum.Waiting, Reservation.Id);
             _requestStatus.Save(request); 
             MessageBox.Show("Successfuly requested! Now wait for the response.");
             Close();

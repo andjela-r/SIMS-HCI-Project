@@ -23,9 +23,8 @@ namespace InitialProject.Model
 
         public string Comment { get; set; }
 
-        public RequestStatus(int id, DateTime startDate, DateTime endDate, string comment, RequestStatusEnum request, int reservationId)
+        public RequestStatus(DateTime startDate, DateTime endDate, string comment, RequestStatusEnum request, int reservationId)
         {
-            this.Id = id;
             this.StartDate = startDate;
             this.EndDate = endDate;
             this.Request = request;
@@ -39,9 +38,6 @@ namespace InitialProject.Model
         {
             string[] csvValues = new string[] { };
             csvValues = csvValues.Append(Id.ToString()).ToArray();
-            int status = Convert.ToInt32(Status);
-            csvValues = csvValues.Append(status.ToString()).ToArray();
-            csvValues = csvValues.Append(ReservationId.ToString()).ToArray();
             csvValues = csvValues.Append(StartDate.ToString()).ToArray();
             csvValues = csvValues.Append(EndDate.ToString()).ToArray();
             int request = Convert.ToInt32(Request);
