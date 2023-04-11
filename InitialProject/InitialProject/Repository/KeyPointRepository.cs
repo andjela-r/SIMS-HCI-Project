@@ -29,13 +29,13 @@ namespace InitialProject.Repository
             return _keyPoints.Find(u => u.Id == id);
         }
 
-        public List<KeyPoint> FindKeyPoints(Tour tour)
+        public List<KeyPoint> FindAllByTourAppointment(TourAppointment tourAppointment)
         {
             _keyPoints = _serializer.FromCSV(FilePath);
-            List<int> keyPointsId = tour.KeyPointsId;
+            List<int> keyPointIds = tourAppointment.KeyPointIds;
             List<KeyPoint> retKeyPoints= new List<KeyPoint>();
 
-            foreach(int keyPointId in keyPointsId)
+            foreach(int keyPointId in keyPointIds)
             {
                 KeyPoint keyPoint = FindById(keyPointId);
                 retKeyPoints.Add(keyPoint);
@@ -74,74 +74,6 @@ namespace InitialProject.Repository
                 return 1;
             }
             return _keyPoints.Max(c => c.Id) + 1;
-        }
-
-        public List<int> InitiateKeyPoint(KeyPoint keyPoint, List<KeyPoint> keyPoints, List<int> touristsToArrive)
-        {
-            KeyPointRepository keyPointRepository = new KeyPointRepository();
-            keyPoint.Status = Status.Ongoing;
-            keyPointRepository.Update(keyPoint);
-
-            List<int> arrivedTourists = new List<int>();
-
-            Console.WriteLine("\nTourists to arrive: ");
-            touristsToArrive.ForEach(Console.WriteLine);
-
-            foreach (int tourist in touristsToArrive)
-            {
-                Console.WriteLine(tourist + "Arrived: (y/n)");
-                string arrived = Console.ReadLine();
-
-                if (arrived == "y")
-                {
-                    arrivedTourists.Add(tourist);
-                }
-            }
-
-            keyPoint.ArrivedIds = arrivedTourists;
-
-            arrivedTourists.ForEach(Console.WriteLine);
-
-            FinishKeyPoint(keyPoint, keyPoints);
-
-            return arrivedTourists;
-        }
-
-        public static void FinishKeyPoint(KeyPoint keyPoint, List<KeyPoint> keyPoints)
-        {
-            KeyPointRepository keyPointRepository = new KeyPointRepository();
-            Console.WriteLine("\nStarted keyPoint " + keyPoint.Name + ". Do you want to finish key point? (y) ");
-            string response = Console.ReadLine();
-            switch (response)
-            {
-                case "y":
-                    keyPoint.Status = Status.Finished;
-                    keyPointRepository.Update(keyPoint);
-                    break;
-                default:
-                    Console.WriteLine("Option does not exist");
-                    break;
-            }
-
-        }
-
-        public void SelectKeyPoint(List<KeyPoint> keyPoints, List<int> keyPointsId, List<int> touristsToArrive)
-        {
-            KeyPointRepository keyPointRepository = new KeyPointRepository();
-
-            Console.WriteLine("\nAvailable key points:");
-            foreach (int id in keyPointsId)
-            {
-                KeyPoint keyPoint = keyPointRepository.FindById(id);
-                if (keyPoint.Status != Status.Finished)
-                    Console.WriteLine(keyPoint.Id + " " + keyPoint.Name);
-            }
-
-            Console.WriteLine("\nSelect key point: ");
-            int keyPointId = Convert.ToInt32(Console.ReadLine());
-
-            KeyPoint selectedKeyPoint = keyPointRepository.FindById(keyPointId);
-            InitiateKeyPoint(selectedKeyPoint, keyPoints, touristsToArrive);
         }
 
     }
