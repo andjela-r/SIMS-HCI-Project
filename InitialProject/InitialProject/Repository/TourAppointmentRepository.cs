@@ -3,6 +3,7 @@ using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace InitialProject.Repository
 {
@@ -61,11 +62,7 @@ namespace InitialProject.Repository
             TourAppointment result = _appointments.Find(x => x.Id == id);
             result.Status = Status.Ongoing;
             Update(result);
-            _serializer.ToCSV(FilePath, _appointments);
-
-            TourRepository tourRepository = new TourRepository();
-            Tour tour = tourRepository.FindById(id);
-
+            //_serializer.ToCSV(FilePath, _appointments);
         }
 
         public DateTime FindTodaysDate()
@@ -77,11 +74,16 @@ namespace InitialProject.Repository
         {
             _appointments = _serializer.FromCSV(FilePath);
 
-            List<TourAppointment> appointments = _appointments.FindAll(t => t.StartTime.Date == today);
-
-            TourRepository tourRepository = new TourRepository();
+            List<TourAppointment> appointments = _appointments.FindAll(t => t.StartTime.Date == today && t.Status == Status.NotStarted);
 
             return appointments;
+        }
+
+        public List<TourAppointment> FindUpcomingAppointments(DateTime today)
+        {
+            List<TourAppointment> upcomingAppointments = _appointments.FindAll(t => t.StartTime.Date >= today.AddDays(2));
+
+            return upcomingAppointments;
         }
 
         public List<TourAppointment> FindAll()
@@ -139,6 +141,14 @@ namespace InitialProject.Repository
         public void FillAppointmentTourDetails(List<TourAppointment> appointments)
         {
             foreach (var appointment in appointments) appointment.Tour = _tourRepository.FindById(appointment.TourId);
+        }
+
+        public void Delete(TourAppointment tourAppointment)
+        {
+            _appointments = _serializer.FromCSV(FilePath);
+            TourAppointment found = _appointments.Find(c => c.Id == tourAppointment.Id);
+            _appointments.Remove(found);
+            _serializer.ToCSV(FilePath, _appointments);
         }
     }
 }

@@ -4,6 +4,7 @@ using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 
 namespace InitialProject.Service
 {
@@ -30,13 +31,13 @@ namespace InitialProject.Service
 
         public TourAppointment SelectTour()
         {
-            TourAppointmentRepository appointmentRepository = new TourAppointmentRepository();
+            TourAppointmentRepository tourAppointmentRepository = new TourAppointmentRepository();
             TourAppointmentService tourAppointmentService = new TourAppointmentService();
 
-            DateTime today = appointmentRepository.FindTodaysDate();
+            DateTime today = tourAppointmentRepository.FindTodaysDate();
             Console.WriteLine("Today: " + today + "\n");
 
-            List<TourAppointment> appointments = appointmentRepository.FindTodaysAppointments(today);
+            List<TourAppointment> appointments = tourAppointmentRepository.FindTodaysAppointments(today);
             foreach (TourAppointment appointment in appointments)
             {
                 Tour tour = tourRepository.FindById(appointment.TourId);
@@ -69,13 +70,13 @@ namespace InitialProject.Service
         {
             KeyPointService keyPointService = new KeyPointService();
             TourRepository tourRepository = new TourRepository();
+            TourAppointmentRepository tourAppointmentRepository = new TourAppointmentRepository();
 
             TourAppointment selectedAppointment = SelectTour();
             
             UpdateKeyPoints(selectedAppointment);
 
             Console.WriteLine("\n-----------------\nTour is finished.\n-----------------\n");
-
         }
 
         public void InitiateTour(List<KeyPoint> keyPoints, List<int> touristsToArrive)
