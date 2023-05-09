@@ -21,7 +21,8 @@
             HorizontalAlignment="Center" 
             Margin="0,170,0,0" 
             TextWrapping="Wrap" 
-            Text="All sent request are here, including complex tour requests." 
+            Text="All sent request are here, including complex tour requests.
+" 
             VerticalAlignment="Top" 
             Width="700" Height="19"/>
         <Rectangle HorizontalAlignment="Center" Height="495" Margin="0,209,0,0" Stroke="Black" VerticalAlignment="Top" Width="844" RadiusX="20" RadiusY="20"/>
