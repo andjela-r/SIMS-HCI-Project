@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="SentRequests" Height="768" Width="1024" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
-        <Label Content="Sent Requests" FontSize="40" HorizontalAlignment="Left" Margin="323,250,0,0" VerticalAlignment="Top"/>
+        <Label Content="Sent Requests" FontSize="40" HorizontalAlignment="Left" Margin="162,107,0,0" VerticalAlignment="Top"/>
         <DockPanel HorizontalAlignment="Center" Height="147" VerticalAlignment="Top" Width="700">
             <Button Content="Home" Width="110" Height="50" FontSize="17" Click="Home_OnClick"/>
             <Button Content="Search" Width="110" Height="50" FontSize="17" Click="Search_OnClick"/>
@@ -16,6 +16,50 @@
             <Button Content="Vouchers" Width="110" Height="50" FontSize="17" Click="Vouchers_OnClick"/>
             <Button Content="Sent Requests" Width="120" Height="50" FontSize="17" Click="SentRequests_OnClick"/>
         </DockPanel>
+        <TextBlock 
+            FontSize="14"
+            HorizontalAlignment="Center" 
+            Margin="0,170,0,0" 
+            TextWrapping="Wrap" 
+            Text="All sent request are here, including complex tour requests." 
+            VerticalAlignment="Top" 
+            Width="700" Height="19"/>
+        <Rectangle HorizontalAlignment="Center" Height="495" Margin="0,209,0,0" Stroke="Black" VerticalAlignment="Top" Width="844" RadiusX="20" RadiusY="20"/>
 
+        <Line X1="924" Y1="396"
+              X2="81" Y2="396"
+              Stroke="Black"
+              StrokeThickness="1"
+              Margin="2,0,-2,0"/>
+        <DataGrid 
+            HorizontalAlignment="Center" Height="111" Margin="0,265,0,0" 
+            VerticalAlignment="Top" Width="810" ItemsSource="{Binding TourRequests}" IsReadOnly="True" 
+            SelectionMode="Single" AutoGenerateColumns="False" SelectedItem="{Binding Selected}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Location" Binding="{Binding LocationId}" Width="100" CanUserResize="True"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="100"/>
+                <DataGridTextColumn Header="Language" Binding="{Binding Language}" Width="100"/>
+                <DataGridTextColumn Header="Maximum No Tourists" Binding="{Binding MaxTourists}"/>
+                <DataGridTextColumn Header="Start Date" Binding="{Binding StartDate}"/>
+                <DataGridTextColumn Header="End Date" Binding="{Binding EndDate}"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>
+            </DataGrid.Columns>
+        </DataGrid> 
+        <DataGrid HorizontalAlignment="Center" Height="245" Margin="0,444,0,0" VerticalAlignment="Top" Width="810" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+        <Label 
+            Content="Tours" 
+            FontSize="25" 
+            HorizontalAlignment="Left" 
+            Margin="107,217,0,0" 
+            VerticalAlignment="Top"/>
+        <Label 
+            Content="Complex Tours" 
+            FontSize="25" 
+            HorizontalAlignment="Left" 
+            Margin="107,401,0,0" 
+            VerticalAlignment="Top"/>
+        <Rectangle HorizontalAlignment="Left" Height="75" Margin="765,119,0,0" Stroke="Black" VerticalAlignment="Top" Width="160" RadiusX="20" RadiusY="20" Fill="#FFE5E5E5"/>
+        <Label Content="What is Status?" FontSize="15" HorizontalAlignment="Left" Margin="791,133,0,0" VerticalAlignment="Top"/>
+        <Label Content="Hold On, Accepted, Invalid" FontSize="10" HorizontalAlignment="Left" Margin="783,154,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
