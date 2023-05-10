@@ -26,6 +26,7 @@
     <None Remove="Resources\Images\tour_picture1.jpg" />
     <None Remove="Resources\Images\tour_picture2.jpg" />
     <None Remove="Resources\Images\view.png" />
+    <None Remove="View\trophy.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -54,6 +55,7 @@
     <Resource Include="Resources\Images\tour_picture.jpg" />
     <Resource Include="Resources\Images\tour_picture1.jpg" />
     <Resource Include="Resources\Images\tour_picture2.jpg" />
+    <Resource Include="View\trophy.jpg" />
   </ItemGroup>
 
   <ItemGroup>

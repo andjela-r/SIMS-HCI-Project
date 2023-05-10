@@ -13,6 +13,8 @@ namespace InitialProject.Model
         public DateTime EndDate { get; set; }
         public int DurationDays { get; set; }
         public int GuestNumber { get; set; }
+        public bool IsRequested { get; set; }
+        public bool IsRated { get; set; }
 
         public AccommodationReservation() { }
 
@@ -35,12 +37,13 @@ namespace InitialProject.Model
             EndDate = Convert.ToDateTime(values[4]);
             DurationDays = Convert.ToInt32(values[5]);
             GuestNumber = Convert.ToInt32(values[6]);
-
+            IsRequested = Convert.ToBoolean(values[7]);
+            IsRated = Convert.ToBoolean(values[8]);
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), AccommodationId.ToString(), GuestId.ToString(), StartDate.ToString(), EndDate.ToString(), DurationDays.ToString(), GuestNumber.ToString() };
+            string[] csvValues = { Id.ToString(), AccommodationId.ToString(), GuestId.ToString(), StartDate.ToString(), EndDate.ToString(), DurationDays.ToString(), GuestNumber.ToString(), IsRequested.ToString(), IsRated.ToString() };
             return csvValues;
         }
     }

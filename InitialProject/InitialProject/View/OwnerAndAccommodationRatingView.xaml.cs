@@ -16,7 +16,8 @@ namespace InitialProject.View
         private readonly AccommodationRepository _accomodationRepository;
         public static ObservableCollection<AccommodationReservation> Reservations { get; set; }
         public AccommodationReservation SelectedReservation { get; set; }
-        public ObservableCollection<AccommodationReservation> FilteredAccommodations { get; set; }
+        public ObservableCollection<AccommodationReservation> FilteredAccommodationsOld { get; set; }
+        public ObservableCollection<AccommodationReservation> FilteredAccommodationsNew { get; set; }
         public User guest { get; set; }
 
         public OwnerAndAccommodationRatingView(User guest)
@@ -28,32 +29,45 @@ namespace InitialProject.View
             _accomodationReservationRepository = new AccommodationReservationRepository();
             _requestStatusRepository = new RequestStatusRepository();
             Reservations = new ObservableCollection<AccommodationReservation>(_accomodationReservationRepository.FindByGuestId(guest.Id));
-            FilteredAccommodations = new ObservableCollection<AccommodationReservation>();
+            FilteredAccommodationsOld = new ObservableCollection<AccommodationReservation>();
+            FilteredAccommodationsNew = new ObservableCollection<AccommodationReservation>();
             MoveButon.Visibility = Visibility.Collapsed;
             RateButton.Visibility = Visibility.Collapsed;
             CancelButton.Visibility = Visibility.Collapsed;
             GoBackButton.Visibility = Visibility.Collapsed;
 
-            FilteredAccommodations.Clear();
+            FilteredAccommodationsNew.Clear();
+            FilteredAccommodationsOld.Clear();
             foreach (AccommodationReservation reservation in Reservations)
             {
                 if (guest.Id == reservation.GuestId)
                 {
-                    if (!FilteredAccommodations.Contains(reservation))
-                        FilteredAccommodations.Add(reservation);
-                    dataGridAccommodations.ItemsSource = FilteredAccommodations;
+                    if (reservation.EndDate < DateTime.Now)
+                    {
+                        if (!FilteredAccommodationsOld.Contains(reservation))
+                            FilteredAccommodationsOld.Add(reservation);
+                        dataGridAccommodationsOld.ItemsSource = FilteredAccommodationsOld;
+                                            }
+                    else
+                    {
+                        if (!FilteredAccommodationsNew.Contains(reservation))
+                            FilteredAccommodationsNew.Add(reservation);
+                        dataGridAccommodationsNew.ItemsSource = FilteredAccommodationsNew;
+                    }
                 }
+                dataGridAccommodationsNew.ItemsSource = FilteredAccommodationsNew;
+                dataGridAccommodationsOld.ItemsSource = FilteredAccommodationsOld;
             }
-            dataGridAccommodations.ItemsSource = FilteredAccommodations;
         }
 
         private void SelectButton_Click(object sender, RoutedEventArgs e)
         {
             if (SelectedReservation != null)
             {
-                 if (SelectedReservation.EndDate > DateTime.Today)
+                 if (SelectedReservation.EndDate < DateTime.Today)
                 {
-                    dataGridAccommodations.IsEnabled = false;
+                    dataGridAccommodationsOld.IsEnabled = false;
+                    dataGridAccommodationsNew.IsEnabled = false;
                     MoveButon.Visibility = Visibility.Visible;
                     CancelButton.Visibility = Visibility.Visible;
                     SelectButton.Visibility = Visibility.Collapsed;
@@ -61,7 +75,8 @@ namespace InitialProject.View
                 }
                 else
                 {
-                    dataGridAccommodations.IsEnabled = false;
+                    dataGridAccommodationsOld.IsEnabled = false;
+                    dataGridAccommodationsNew.IsEnabled = false;
                     GoBackButton.Visibility = Visibility.Visible;
                     RateButton.Visibility = Visibility.Visible;
                     SelectButton.Visibility = Visibility.Collapsed;
@@ -69,7 +84,7 @@ namespace InitialProject.View
             }
             else
             {
-                MessageBox.Show("Please select accommodation for reservation.");
+                MessageBox.Show("Please select accommodation.");
             }
 
         }
@@ -77,20 +92,28 @@ namespace InitialProject.View
         private void RateButton_Click(object sender, RoutedEventArgs e)
         {
             var dayDifference = DateTime.Today - SelectedReservation.EndDate;
-            if(dayDifference.Days > 5)
+            if (SelectedReservation.IsRated == true)
             {
-                MessageBox.Show("Sorry, your deadline for rating has passed.");
+                MessageBox.Show("You already rated this accommodation.");
             }
             else
             {
-                RatingView rating = new RatingView(SelectedReservation, guest);
-                rating.Show();
+                if (dayDifference.Days > 5)
+                {
+                    MessageBox.Show("Sorry, your deadline for rating has passed.");
+                }
+                else
+                {
+                    RatingView rating = new RatingView(SelectedReservation, guest);
+                    rating.Show();
+                }
             }
         }
 
         private void GoBackButton_Click(object sender, RoutedEventArgs e)
         {
-            dataGridAccommodations.IsEnabled = true;
+            dataGridAccommodationsOld.IsEnabled = true;
+            dataGridAccommodationsNew.IsEnabled = true;
             MoveButon.Visibility = Visibility.Collapsed;
             CancelButton.Visibility = Visibility.Collapsed;
             SelectButton.Visibility = Visibility.Visible;
@@ -109,6 +132,7 @@ namespace InitialProject.View
             }
             else
             {
+
                 _accomodationReservationRepository.DeleteById(SelectedReservation.Id);
                 MessageBox.Show("We will inform the owmer.");
             }
@@ -116,8 +140,17 @@ namespace InitialProject.View
 
         private void MoveButon_Click(object sender, RoutedEventArgs e)
         {
-            RescheduleView reschedule = new RescheduleView(SelectedReservation);
-            reschedule.Show();
+            if (SelectedReservation.IsRequested == false)
+            {
+                RescheduleView reschedule = new RescheduleView(SelectedReservation);
+                reschedule.Show();
+            }
+            else
+            {
+                RescheduleStatusView status = new RescheduleStatusView(SelectedReservation);
+                status.Show();
+            }
         }
+
     }
 }

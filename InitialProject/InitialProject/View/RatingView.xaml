@@ -17,7 +17,7 @@
         <TextBox x:Name="PictureButton" HorizontalAlignment="Left" Margin="325,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="SubmitButton" Content="Submit" HorizontalAlignment="Left" Margin="500,272,0,0" VerticalAlignment="Top" Height="62" Width="274" FontSize="20" Click="SubmitButton_Click"/>
         <Button x:Name="GoBackButton" Content="Go back" HorizontalAlignment="Left" Margin="500,349,0,0" VerticalAlignment="Top" Height="64" Width="274" FontSize="20" Click="GoBackButton_Click"/>
-        <Button Content="Recommendation for owner" HorizontalAlignment="Left" Margin="500,195,0,0" VerticalAlignment="Top" Height="62" Width="274" FontSize="20"/>
+        <Button Content="Recommendation for owner" HorizontalAlignment="Left" Margin="500,195,0,0" VerticalAlignment="Top" Height="62" Width="274" FontSize="20" Click="Button_Click"/>
 
     </Grid>
 </Window>

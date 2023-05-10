@@ -46,5 +46,11 @@ namespace InitialProject.View
             accView.Show();
             Close();
         }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            ProfileView profile = new ProfileView(User);
+            profile.Show();
+        }
     }
 }

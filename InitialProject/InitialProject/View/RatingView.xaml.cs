@@ -43,6 +43,9 @@ namespace InitialProject.View
             var accommodation = _accomodationRepository.FindById(Reservation.AccommodationId);
             OwnerAndAccommodationRating rating = new OwnerAndAccommodationRating(cleanliness, communication, comment, accommodation.OwnerId, Reservation.AccommodationId);
             _ratingRepository.Save(rating);
+            AccommodationReservation status = _reservationRepository.FindById(Reservation.Id);
+            status.IsRated = true;
+            _reservationRepository.Update(status);
             MessageBox.Show("Successfuly rated!");
             Close();
 
@@ -51,6 +54,12 @@ namespace InitialProject.View
         private void GoBackButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            RenovationSuggestionView renovationSuggestion = new RenovationSuggestionView(Reservation);
+            renovationSuggestion.Show();
         }
     }
 }
