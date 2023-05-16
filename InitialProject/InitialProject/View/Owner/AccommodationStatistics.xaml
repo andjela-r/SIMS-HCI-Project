@@ -1,0 +1,69 @@
+﻿<Window x:Class="InitialProject.View.Owner.AccommodationStatistics"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.View.Owner"
+        mc:Ignorable="d"
+        Title="AccommodationStatistics" Height="450" Width="800">
+    <Grid>
+        <DataGrid ItemsSource="{Binding OwnerAccommodations}"
+            SelectedItem="{Binding SelectedRequest}"
+            IsReadOnly="True" SelectionMode="Single" 
+            AutoGenerateColumns="False" HeadersVisibility="Column" FontSize="13" Margin="10,146,538,82">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="100"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="150"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBlock HorizontalAlignment="Left" FontSize="15" Margin="10,117,0,0" TextWrapping="Wrap" Text="Your accommodations:" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="296,137,0,0" TextWrapping="Wrap" Text="Enter accommodation id:" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Margin="454,137,0,0" TextWrapping="Wrap" Text="{Binding Path=AccommodationId, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="40"/>
+        <TextBlock HorizontalAlignment="Center" FontSize="20" Margin="0,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.477,-0.341"><Run Text="Accommodation statistics"/><LineBreak/><Run/></TextBlock>
+        <ToolBar Grid.Row="0" Margin="0,0,0,394">
+            <Button Click="HomePage_OnClick">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Resources/Images/house.png" Width="20" Height="25"/>
+                    <TextBlock Text="Home page" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Resources/Images/profile.png" Width="20" Height="25"/>
+                    <TextBlock Text="Your profile" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Resources/Images/tutorial.png" Width="20" Height="25"/>
+                    <TextBlock Text="Tutorial" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button Click="LogOut_OnClick">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Resources/Images/logout.png" Width="15" Height="20"/>
+                    <TextBlock Text="Log out" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" />
+                </StackPanel>
+            </Button>
+        </ToolBar>
+        <Button Content="Show" HorizontalAlignment="Left" Margin="742,375,0,0" VerticalAlignment="Top" Click="Show_Click"/>
+        <DataGrid ItemsSource="{Binding ListStatistics}"
+            SelectedItem="{Binding SelectedRequest}"
+            IsReadOnly="True" SelectionMode="Single" Name="TableStatistics" 
+            AutoGenerateColumns="False" HeadersVisibility="Column" FontSize="13" Margin="319,184,85,44">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Year" Binding="{Binding Year}" Width="80"/>
+                <DataGridTextColumn Header="NumRes" Binding="{Binding NumRes}" Width="80"/>
+                <DataGridTextColumn Header="NumCanc" Binding="{Binding NumCanc}" Width="80"/>
+                <DataGridTextColumn Header="NumMov" Binding="{Binding NumMov}" Width="80"/>
+                <DataGridTextColumn Header="NumSug" Binding="{Binding NumSug}" Width="80"/>
+            </DataGrid.Columns>
+
+        </DataGrid>
+         
+
+    </Grid>
+</Window>

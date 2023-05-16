@@ -59,7 +59,7 @@ namespace InitialProject.Model
             Request = (RequestStatusEnum)Convert.ToInt32(values[3]);
             ReservationId = Convert.ToInt32(values[4]);
             Comment = values[5];
-            IsChanged = Convert.ToBoolean(values[5]);
+            IsChanged = Convert.ToBoolean(values[6]);
         }
 
 

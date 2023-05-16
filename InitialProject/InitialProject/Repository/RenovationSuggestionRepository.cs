@@ -36,6 +36,11 @@ namespace InitialProject.Repository
             return _renovationSuggestions.Max(c => c.Id) + 1;
         }
 
+        public List<RenovationSuggestion> FindByReservationId(int reservationId)
+        {
+            _renovationSuggestions = _serializer.FromCSV(FilePath);
+            return _renovationSuggestions.FindAll(u => u.ReservationId == reservationId);
+        }
         public List<RenovationSuggestion> FindAll()
         {
             return _serializer.FromCSV(FilePath);
