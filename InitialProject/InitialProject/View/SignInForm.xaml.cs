@@ -63,6 +63,7 @@ namespace InitialProject
                             break;
                         case Role.Guest:
                             GuestView guest = new GuestView(user);
+                            guest.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                             guest.Show();
                             Close();
                             break;

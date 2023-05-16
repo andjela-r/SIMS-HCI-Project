@@ -23,7 +23,7 @@ namespace InitialProject.View
     {
         private readonly AccommodationReservationRepository _reservationRepository;
         private readonly OwnerAndAccommodationRatingRepository _ratingRepository;
-        private readonly RequestStatusRepository _requestStatus;
+        private readonly RequestStatusRepository _requestStatusRepository;
         public AccommodationReservation Reservation { get; set; }
 
         public RescheduleView(AccommodationReservation reservation)
@@ -31,7 +31,7 @@ namespace InitialProject.View
             InitializeComponent();
             _reservationRepository = new AccommodationReservationRepository();
             _ratingRepository = new OwnerAndAccommodationRatingRepository();
-            _requestStatus = new RequestStatusRepository();
+            _requestStatusRepository = new RequestStatusRepository();
             Reservation = reservation;
         }
 
@@ -45,8 +45,11 @@ namespace InitialProject.View
                 MessageBox.Show("Start date can not be smaller than end date. Try again!");
                 return;
             }
-            RequestStatus request = new RequestStatus(startDate, endDate, "", RequestStatusEnum.Waiting, Reservation.Id);
-            _requestStatus.Save(request); 
+            RequestStatus request = new RequestStatus(startDate,endDate, "", RequestStatusEnum.Waiting,Reservation.Id);
+            _requestStatusRepository.Save(request);
+            AccommodationReservation status = _reservationRepository.FindById(Reservation.Id);
+            status.IsRequested = true;
+            _reservationRepository.Update(status);
             MessageBox.Show("Successfuly requested! Now wait for the response.");
             Close();
 

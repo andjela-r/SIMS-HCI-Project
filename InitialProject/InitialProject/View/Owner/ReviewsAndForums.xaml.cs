@@ -14,7 +14,7 @@ namespace InitialProject.View.Owner
     public partial class ReviewsAndForums : Window
     {
         public User User { get; set; }
-        public OwnerAndAccommodationRating SelectedOwnerAndAccommodationRating { get; set; }
+        //public OwnerAndAccommodationRating SelectedOwnerAndAccommodationRating { get; set; }
 
         private readonly OwnerAndAccommodationRatingRepository _ownerAndAccommodationRatingRepository;
 
@@ -80,5 +80,9 @@ namespace InitialProject.View.Owner
             MessageBox.Show(Status);
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

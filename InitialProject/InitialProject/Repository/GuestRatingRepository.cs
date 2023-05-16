@@ -41,5 +41,16 @@ namespace InitialProject.Repository
             return _guestRatings.Max(c => c.Id) + 1;
         }
 
+        public List<GuestRating> FindByGuestId(int guestId)
+        {
+            _guestRatings = _serializer.FromCSV(FilePath);
+            return _guestRatings.FindAll(u => u.GuestId <= guestId);
+        }
+
+        public List<GuestRating> FindAll()
+        {
+            return _serializer.FromCSV(FilePath);
+        }
+
     }
 }

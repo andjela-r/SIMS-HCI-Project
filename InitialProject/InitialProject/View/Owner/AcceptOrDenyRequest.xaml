@@ -1,0 +1,76 @@
+﻿<Window x:Class="InitialProject.View.Owner.AcceptOrDenyRequest"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.View.Owner"
+        mc:Ignorable="d"
+        Title="AcceptOrDenyRequest" Background="LightPink" Height="450" Width="800" ResizeMode="NoResize" WindowStyle="SingleBorderWindow"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="26.473"/>
+            <ColumnDefinition Width="733.527"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="15"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="2" Grid.Column="1" Margin="13,262,367,67" Grid.ColumnSpan="2"/>
+
+        <ToolBar Grid.Row="0" Grid.ColumnSpan="4">
+            <Button Click="HomePage_OnClick">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../../Resources/Images/house.png" Width="20" Height="25"/>
+                    <TextBlock Text="Home page" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../../Resources/Images/profile.png" Width="20" Height="25"/>
+                    <TextBlock Text="Your profile" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../../Resources/Images/tutorial.png" Width="20" Height="25"/>
+                    <TextBlock Text="Tutorial" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button Click="LogOut_OnClick">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../../Resources/Images/logout.png" Width="15" Height="20"/>
+                    <TextBlock Name="DeleteTxtBlock" Text="Log out" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" />
+                </StackPanel>
+            </Button>
+        </ToolBar>
+        <TextBox Grid.Column="2" Background="LightPink" HorizontalAlignment="Center" Margin="0,24,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Accept or deny a request" VerticalAlignment="Top" Width="251" Height="40" FontSize="20" FontWeight="Bold"/>
+        <DataGrid ItemsSource="{Binding Requests}"
+            SelectedItem="{Binding SelectedRequest}"
+            IsReadOnly="True" SelectionMode="Single" 
+            AutoGenerateColumns="False" HeadersVisibility="Column" FontSize="13" Margin="22,100,156,155" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Request id" Binding="{Binding Id}" Width="100"/>
+                <DataGridTextColumn Header="Start date" Binding="{Binding StartDate}" Width="100"/>
+                <DataGridTextColumn Header="End date" Binding="{Binding EndDate}" Width="100"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding Request}" Width="80"/>
+                <DataGridTextColumn Header="Reservation id" Binding="{Binding ReservationId}" Width="100"/>
+                <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" Width="100"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Grid.Column="2" Background="LightYellow" Click="AcceptRequest" Content="Accept" HorizontalAlignment="Left" Margin="354,222,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+        <Button Grid.Column="2" Background="LightYellow" Click="DenyRequest" Content="Deny" HorizontalAlignment="Left" Margin="428,222,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+        <TextBox TextWrapping="Wrap" Text="{Binding Path=AddedComment, UpdateSourceTrigger=PropertyChanged}" Width="120" Grid.Column="2" Margin="589,262,25,62" Grid.Row="2"/>
+        <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="589,212,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="135"><Run FontSize="15" Text="In case of &quot;deny&quot;, leave a comment: "/></TextBlock>
+        <TextBox Name="IdBlock" Background="LightPink" Grid.Column="2" HorizontalAlignment="Left" Margin="230,222,0,0" Grid.Row="2" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock TextWrapping="Wrap" FontSize="15" Text="What would you like to do with the    . request?" Grid.Column="1" Grid.ColumnSpan="2" Margin="19,222,361,93" Grid.Row="2"/>
+    </Grid>
+</Window>

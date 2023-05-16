@@ -76,6 +76,12 @@ namespace InitialProject.Repository
             return _accommodations.Find(x => x.Id == id);
         }
 
+        public List<Accommodation> FindByOwnerId(int ownerId)
+        {
+            _accommodations = _serializer.FromCSV(FilePath);
+            return _accommodations.FindAll(u => u.OwnerId == ownerId);
+        }
+
         public List<Accommodation> FindAll()
         {
             return _serializer.FromCSV(FilePath);

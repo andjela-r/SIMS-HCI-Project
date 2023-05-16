@@ -11,6 +11,7 @@ namespace InitialProject.Repository
     internal class GuestRepository
     {
         private const string FilePath = "../../../Resources/Data/guests.csv";
+
         private readonly Serializer<Guest> _serializer;
 
         private List<Guest> _guests;
@@ -46,9 +47,30 @@ namespace InitialProject.Repository
             return _guests.FindAll(u => u.Username == name);
         }
 
-        public User FindById(int id)
+        public Guest FindById(int id)
         {
             return _guests.Find(x => x.Id == id);
+        }
+
+        public Guest FindByUserId(int userId)
+        {
+            return _guests.Find(x => x.UserId == userId);
+        }
+
+        public List<Guest> FindAll()
+        {
+            return _serializer.FromCSV(FilePath);
+        }
+
+        public Guest Update(Guest guest)
+        {
+            _guests = _serializer.FromCSV(FilePath);
+            Guest current = _guests.Find(u => u.Id == guest.Id);
+            int index = _guests.IndexOf(current);
+            _guests.Remove(current);
+            _guests.Insert(index, guest);
+            _serializer.ToCSV(FilePath, _guests);
+            return guest;
         }
     }
 }
