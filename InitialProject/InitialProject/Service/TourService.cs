@@ -12,7 +12,7 @@ namespace InitialProject.Service
     {
         TourRepository tourRepository = new TourRepository();
         TourReservationRepository tourReservationRepository = new TourReservationRepository();
-        public void CreateTour(TourDTO tourDTO)
+        public int CreateTour(TourDTO tourDTO)
         {
             Tour tour = new Tour();
 
@@ -26,7 +26,9 @@ namespace InitialProject.Service
             tour.Pictures = tourDTO.Pictures;
             tour.GuideId = tourDTO.GuideId;
 
-            tourRepository.Save(tour);
+            Tour newTour = tourRepository.Save(tour);
+
+            return newTour.Id;
         }
 
         public TourAppointment SelectTour()

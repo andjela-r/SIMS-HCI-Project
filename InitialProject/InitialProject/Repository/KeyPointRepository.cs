@@ -1,5 +1,6 @@
 ﻿using InitialProject.Model;
 using InitialProject.Serializer;
+using InitialProject.View.Guide;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -74,6 +75,12 @@ namespace InitialProject.Repository
                 return 1;
             }
             return _keyPoints.Max(c => c.Id) + 1;
+        }
+
+        public List<KeyPoint> FindAll()
+        {
+            _keyPoints = _serializer.FromCSV(FilePath);
+            return _keyPoints;
         }
 
     }

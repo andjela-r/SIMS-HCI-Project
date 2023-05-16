@@ -1,0 +1,275 @@
+﻿<Window x:Class="InitialProject.View.Guide.CreateTour"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.View.Guide"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="CreateTour" Background ="#c7f2ea "
+        BorderBrush="#c7f2ea"
+        Height="720" Width="1280" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" FontFamily="Wide Latin" WindowStyle="None" Margin="1 20 10 10">
+
+    <Grid>
+        <Grid x:Name="panelHeader" VerticalAlignment="Top" Height="25" Background="White">
+            <Button Name="CloseButton" Width="26" Height="26" Click="CloseButton_Click" Background="#82cfc1" HorizontalAlignment="Right"/>
+            <Image Source="../../Resources/Images/Guide/close.png" Width="20" Height="25" HorizontalAlignment="Left" Margin="1257,0,0,-1"/>
+        </Grid>
+        <Grid x:Name="sidePanel" Background="#82cfc1" HorizontalAlignment="Left" Width="210" >
+            <Label x:Name="usernameLabel" Content="Hello," Margin="35" FontFamily="Century Gothic" FontSize="25" Foreground="White" FontWeight="Bold"/>
+            <StackPanel Margin="10,204,10,50">
+                <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" FontFamily="Century Gothic" FontSize="20" Foreground="White" BorderBrush="Transparent" Background="Transparent" FontWeight="Bold">
+                    <ListViewItem Height="50">
+                        <StackPanel Orientation="Horizontal" MouseLeftButtonUp="Tours_OnClick">
+                            <Image Source="../../Resources/Images/Guide/tours.png" Width="20" Height="25"/>
+                            <TextBlock Margin="15 0 0 0" Text="tours" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="50">
+                        <StackPanel Orientation="Horizontal" MouseLeftButtonUp="CreateTour_OnClick">
+                            <Image Source="../../Resources/Images/Guide/createTour.png" Width="20" Height="25"/>
+                            <TextBlock Margin="15 0 0 0" Text="create tour" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="50">
+                        <StackPanel Orientation="Horizontal" MouseLeftButtonUp="Statistics_OnClick">
+                            <Image Source="../../Resources/Images/Guide/statistics.png" Width="20" Height="25"/>
+                            <TextBlock Margin="15 0 0 0" Text="statistics" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="50">
+                        <StackPanel Orientation="Horizontal" MouseLeftButtonUp="Requests_OnClick">
+                            <Image Source="../../Resources/Images/Guide/requests.png" Width="20" Height="25"/>
+                            <TextBlock Margin="15 0 0 0" Text="requests" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="100">
+                        <StackPanel Orientation="Horizontal" MouseLeftButtonUp="MyProfile_OnClick">
+                            <Image Source="../../Resources/Images/Guide/myProfile.png" Width="20" Height="25"/>
+                            <TextBlock Margin="15 0 0 0" Text="my profile" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="230">
+                        <StackPanel Orientation="Horizontal" MouseLeftButtonUp="LogOut_OnClick">
+                            <Image Source="../../Resources/Images/Guide/logOut.png" Width="20" Height="25"/>
+                            <TextBlock Margin="15 0 0 0" Text="log out" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+                </ListView>
+            </StackPanel>
+        </Grid>
+        <Border BorderBrush="White" BorderThickness="0 0 1 1" Margin="210,25,380,274">
+            <Grid Margin="215,47,288,252">
+                <TextBlock 
+                    Foreground="White" 
+                           FontWeight="Bold" 
+                           FontFamily="Century Gothic" 
+                           FontSize="30" Margin="-200,-38,127,83">
+                Create new tour
+                    <TextBlock.Effect>
+                        <DropShadowEffect 
+                            Color="#82cfc1" 
+                            ShadowDepth="2" 
+                            BlurRadius="10"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBox Name="NameBox" Foreground="#82cfc1" FontFamily="Century Gothic" FontSize="20" Margin="-71,10,53,84"></TextBox>
+                <Button Background="#82cfc1" Foreground="White"  FontFamily="Century Gothic" FontSize="20" Margin="342,323,-265,-234" Click="CreateNewTour_OnClick">
+                    Create
+                </Button>
+                <TextBlock Foreground="#82cfc1" FontWeight="Bold" FontFamily="Century Gothic" FontSize="20" Margin="-200,10,257,57">
+                    Name:
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="White" ShadowDepth="2" BlurRadius="10"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock Foreground="#82cfc1" FontWeight="Bold" FontFamily="Century Gothic" FontSize="20" Margin="-200,58,213,5" >
+                    Language:
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="White" ShadowDepth="2" BlurRadius="10"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBox Name="LanguageBox" Foreground="#82cfc1" FontFamily="Century Gothic" FontSize="20" Margin="-71,60,53,34"></TextBox>
+                <TextBlock Foreground="#82cfc1" FontWeight="Bold" FontFamily="Century Gothic" FontSize="20" Margin="-200,104,213,-48" >
+                    Duration (h):
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="White" ShadowDepth="2" BlurRadius="10"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBox Name="DurationBox" Foreground="#82cfc1" FontFamily="Century Gothic" FontSize="20" Margin="-71,104,53,-10"></TextBox>
+                <TextBlock Foreground="#82cfc1" FontWeight="Bold" FontFamily="Century Gothic" FontSize="20" Margin="-200,150,158,-91" >
+                    Max number of guests:
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="White" ShadowDepth="2" BlurRadius="10"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBox Name="MaxGuestsBox" Foreground="#82cfc1" FontFamily="Century Gothic" FontSize="20" Margin="28,150,53,-60"></TextBox>
+                <TextBlock Foreground="#82cfc1" FontWeight="Bold" FontFamily="Century Gothic" FontSize="20" Margin="-200,196,213,-153" >
+                    Description:
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="White" ShadowDepth="2" BlurRadius="10"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBox Name="DescriptionBox" TextWrapping="Wrap" Foreground="#82cfc1" FontFamily="Century Gothic" FontSize="20" Margin="-70,196,-265,-185"></TextBox>
+                <TextBlock Foreground="#82cfc1" FontWeight="Bold" FontFamily="Century Gothic" FontSize="20" Margin="160,10,-141,0" >
+                    Location:
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="White" ShadowDepth="2" BlurRadius="10"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <ComboBox Name="LocationBox" Foreground="#82cfc1" FontFamily="Century Gothic" FontSize="20" Margin="253,10,-265,83"></ComboBox>
+                <TextBlock Foreground="#82cfc1" FontWeight="Bold" FontFamily="Century Gothic" FontSize="20" Margin="160,58,-83,-60" >
+                    Pictures:
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="White" ShadowDepth="2" BlurRadius="10"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBox Name="PicturesBox" TextWrapping="Wrap" Foreground="#82cfc1" FontFamily="Century Gothic" FontSize="20" Margin="253,58,-265,-60"></TextBox>
+
+            </Grid>
+        </Border>
+        <Border BorderBrush="White" BorderThickness="0 0 1 0" Margin="215,446,380,0">
+            <Grid>
+                <TextBlock Foreground="White" FontWeight="Bold" FontFamily="Century Gothic" FontSize="30" Margin="10,10,-4,186">
+                Create new appointment
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="#82cfc1" ShadowDepth="2" BlurRadius="10"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Button Background="#82cfc1" Foreground="White"  FontFamily="Century Gothic" FontSize="20" Margin="558,213,22,31" Click="CreateNewAppointment_OnClick">
+                    Create
+                </Button>
+                <TextBlock Foreground="#82cfc1" FontWeight="Bold" FontFamily="Century Gothic" FontSize="20" Margin="10,73,607,128">
+                    Tour:
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="White" ShadowDepth="2" BlurRadius="10"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <ComboBox Name ="TourBox" Foreground="#82cfc1" FontFamily="Century Gothic" FontSize="20" Margin="82,73,398,166"></ComboBox>
+                <TextBlock 
+                    Foreground="#82cfc1" 
+                    FontWeight="Bold" 
+                    FontFamily="Century Gothic" 
+                    FontSize="20" Margin="10,146,0,71" >
+                    Date:
+                    <TextBlock.Effect>
+                        <DropShadowEffect 
+                            Color="White" 
+                            ShadowDepth="2" 
+                            BlurRadius="10"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <DatePicker Name="DateBox" Foreground="#82cfc1" FontFamily="Century Gothic" FontSize="20" SelectedDate="{Binding MyDate}" Margin="82,146,398,93" />
+                <TextBlock 
+                    Foreground="#82cfc1" 
+                    FontWeight="Bold" 
+                    FontFamily="Century Gothic" 
+                    FontSize="20" Margin="10,213,381,10" >
+                    Time:
+                    <TextBlock.Effect>
+                        <DropShadowEffect 
+                            Color="White" 
+                            ShadowDepth="2" 
+                            BlurRadius="10"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <xctk:TimePicker Name="TimeBox" Foreground="#82cfc1" FontFamily="Century Gothic" FontSize="20" Margin="82,208,398,31"></xctk:TimePicker>
+                <TextBlock Foreground="#82cfc1" FontWeight="Bold" FontFamily="Century Gothic" FontSize="20" Margin="425,93,99,137" >
+                    Add a key point:
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="White" ShadowDepth="2" BlurRadius="10"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBox Name="KeyPointNameBox" Foreground="#82cfc1" FontFamily="Century Gothic" FontSize="20" Margin="463,133,22,115"></TextBox>
+                <Button Background="#82cfc1" Foreground="White"  FontFamily="Century Gothic" FontSize="20" Margin="428,133,228,113" Click="CreateNewKeyPoint_OnClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="50"/>
+                        </Style>
+                    </Button.Resources>
+                    <Image Source="../../Resources/Images/Guide/createTour.png" Width="26" Height="24" HorizontalAlignment="Center"/>
+                </Button>
+            </Grid>
+        </Border>
+        <Grid Margin="905,0,0,0">
+            <TextBlock Foreground="White" FontWeight="Bold" FontFamily="Century Gothic" FontSize="30" Margin="10,32,0,0">
+                Tour requests
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="#82cfc1" ShadowDepth="2" BlurRadius="10"/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBlock Foreground="#82cfc1" FontWeight="Bold" FontFamily="Century Gothic" FontSize="20" Margin="35,90,220,550" >
+                Location:
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="White" ShadowDepth="2" BlurRadius="10"/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBlock Foreground="#82cfc1" FontWeight="Bold" FontFamily="Century Gothic" FontSize="20" Margin="35,153,183,508" >
+                    Language:
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="White" ShadowDepth="2" BlurRadius="10"/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBox Name="TRLanguageBox" Foreground="#82cfc1" FontFamily="Century Gothic" FontSize="20" Margin="162,147,37,538"></TextBox>
+            <ComboBox Name="TRLocationBox" Foreground="#82cfc1" FontFamily="Century Gothic" FontSize="20" Margin="160,90,37,598"></ComboBox>
+            <TextBlock Foreground="#82cfc1" FontWeight="Bold" FontFamily="Century Gothic" FontSize="20" Margin="35,217,183,447" >
+                Year:
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="White" ShadowDepth="2" BlurRadius="10"/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBox Name="TRYearBox" Foreground="#82cfc1" FontFamily="Century Gothic" FontSize="20" Margin="162,212,37,471"></TextBox>
+
+            <TextBlock Foreground="#82cfc1" FontWeight="Bold" FontFamily="Century Gothic" FontSize="20" Margin="35,278,158,360" >
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="White" ShadowDepth="2" BlurRadius="10"/>
+                </TextBlock.Effect>
+                Number of tour
+                <LineBreak></LineBreak>
+                requests:
+            </TextBlock>
+            <Button x:Name="GuestNumberButton" Background="#82cfc1" Foreground="White"  FontFamily="Century Gothic" FontSize="20" Margin="155,304,183,380" Click="GetTouristsNumber_OnClick">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="50"/>
+                    </Style>
+                </Button.Resources>
+                <Image Source="../../Resources/Images/Guide/createTour.png" Width="26" Height="24" HorizontalAlignment="Center"/>
+            </Button>
+            <TextBox Name="GuestNumberBox" Foreground="#82cfc1" FontFamily="Century Gothic" FontSize="20" Text="{Binding Result}" Margin="222,278,75,390"></TextBox>
+
+            <TextBlock Foreground="#82cfc1" FontWeight="Bold" FontFamily="Century Gothic" FontSize="20" Margin="35,430,136,202" >
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="White" ShadowDepth="2" BlurRadius="10"/>
+                </TextBlock.Effect>
+                Recommend a tour
+                <LineBreak></LineBreak>
+                based on language
+            </TextBlock>
+            <Button x:Name="RecomendedLanguageButton" Background="#82cfc1" Foreground="White"  FontFamily="Century Gothic" FontSize="20" Margin="250,430,75,243" Click="RecommendTourByLanguage_OnClick">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="50"/>
+                    </Style>
+                </Button.Resources>
+                <Image Source="../../Resources/Images/Guide/createTour.png" Width="35" Height="44" HorizontalAlignment="Center"/>
+            </Button>
+            <TextBlock Foreground="#82cfc1" FontWeight="Bold" FontFamily="Century Gothic" FontSize="20" Margin="35,523,136,84" >
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="White" ShadowDepth="2" BlurRadius="10"/>
+                </TextBlock.Effect>
+                Recommend a tour
+                <LineBreak></LineBreak>
+                based on location
+            </TextBlock>
+            <Button x:Name="RecomendedLocationButton" Background="#82cfc1" Foreground="White"  FontFamily="Century Gothic" FontSize="20" Margin="250,523,75,146" Click="RecommendTourByLocation_OnClick">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="50"/>
+                    </Style>
+                </Button.Resources>
+                <Image Source="../../Resources/Images/Guide/createTour.png" Width="69" Height="36" HorizontalAlignment="Center"/>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>
