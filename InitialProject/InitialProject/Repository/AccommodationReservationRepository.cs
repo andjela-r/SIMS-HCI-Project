@@ -3,12 +3,6 @@ using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Printing;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Data;
-using System.Xml.Linq;
 
 namespace InitialProject.Repository
 {

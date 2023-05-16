@@ -12,7 +12,6 @@ namespace InitialProject.View
     public partial class OwnerAndAccommodationRatingView : Window
     {
         private readonly AccommodationReservationRepository _accomodationReservationRepository;
-        private readonly RequestStatusRepository _requestStatusRepository;
         private readonly AccommodationRepository _accomodationRepository;
         public static ObservableCollection<AccommodationReservation> Reservations { get; set; }
         public AccommodationReservation SelectedReservation { get; set; }
@@ -27,13 +26,12 @@ namespace InitialProject.View
             this.guest = guest;
             _accomodationRepository = new AccommodationRepository();
             _accomodationReservationRepository = new AccommodationReservationRepository();
-            _requestStatusRepository = new RequestStatusRepository();
             Reservations = new ObservableCollection<AccommodationReservation>(_accomodationReservationRepository.FindByGuestId(guest.Id));
             FilteredAccommodationsOld = new ObservableCollection<AccommodationReservation>();
             FilteredAccommodationsNew = new ObservableCollection<AccommodationReservation>();
-            MoveButon.Visibility = Visibility.Collapsed;
-            RateButton.Visibility = Visibility.Collapsed;
-            CancelButton.Visibility = Visibility.Collapsed;
+            MoveButon.IsEnabled = false;
+            RateButton.IsEnabled = false;
+            CancelButton.IsEnabled = false;
             GoBackButton.Visibility = Visibility.Collapsed;
 
             FilteredAccommodationsNew.Clear();
@@ -47,7 +45,7 @@ namespace InitialProject.View
                         if (!FilteredAccommodationsOld.Contains(reservation))
                             FilteredAccommodationsOld.Add(reservation);
                         dataGridAccommodationsOld.ItemsSource = FilteredAccommodationsOld;
-                                            }
+                    }
                     else
                     {
                         if (!FilteredAccommodationsNew.Contains(reservation))
@@ -64,13 +62,13 @@ namespace InitialProject.View
         {
             if (SelectedReservation != null)
             {
-                 if (SelectedReservation.EndDate < DateTime.Today)
+                 if (SelectedReservation.EndDate > DateTime.Today)
                 {
                     dataGridAccommodationsOld.IsEnabled = false;
                     dataGridAccommodationsNew.IsEnabled = false;
-                    MoveButon.Visibility = Visibility.Visible;
-                    CancelButton.Visibility = Visibility.Visible;
-                    SelectButton.Visibility = Visibility.Collapsed;
+                    MoveButon.IsEnabled = true;
+                    CancelButton.IsEnabled = true;
+                    SelectButton.IsEnabled = false;
                     GoBackButton.Visibility = Visibility.Visible;
                 }
                 else
@@ -78,8 +76,9 @@ namespace InitialProject.View
                     dataGridAccommodationsOld.IsEnabled = false;
                     dataGridAccommodationsNew.IsEnabled = false;
                     GoBackButton.Visibility = Visibility.Visible;
-                    RateButton.Visibility = Visibility.Visible;
-                    SelectButton.Visibility = Visibility.Collapsed;
+                    RateButton.IsEnabled = true;
+                    SelectButton.IsEnabled = false;
+                    GoBackButton.IsEnabled = true;
                 }
             }
             else
@@ -105,6 +104,7 @@ namespace InitialProject.View
                 else
                 {
                     RatingView rating = new RatingView(SelectedReservation, guest);
+                    rating.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                     rating.Show();
                 }
             }
@@ -114,11 +114,11 @@ namespace InitialProject.View
         {
             dataGridAccommodationsOld.IsEnabled = true;
             dataGridAccommodationsNew.IsEnabled = true;
-            MoveButon.Visibility = Visibility.Collapsed;
-            CancelButton.Visibility = Visibility.Collapsed;
-            SelectButton.Visibility = Visibility.Visible;
-            GoBackButton.Visibility = Visibility.Collapsed;
-            RateButton.Visibility = Visibility.Collapsed;
+            MoveButon.IsEnabled = false;
+            CancelButton.IsEnabled = false;
+            GoBackButton.IsEnabled = false;
+            RateButton.IsEnabled = false;
+            SelectButton.IsEnabled = true;
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -143,11 +143,13 @@ namespace InitialProject.View
             if (SelectedReservation.IsRequested == false)
             {
                 RescheduleView reschedule = new RescheduleView(SelectedReservation);
+                reschedule.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 reschedule.Show();
             }
             else
             {
                 RescheduleStatusView status = new RescheduleStatusView(SelectedReservation);
+                status.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 status.Show();
             }
         }

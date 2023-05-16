@@ -1,14 +1,11 @@
 ﻿using InitialProject.Model;
 using InitialProject.Serializer;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InitialProject.Repository
 {
-    public class RenovationSuggestionRepository
+    internal class RenovationSuggestionRepository
     {
         private const string FilePath = "../../../Resources/Data/renovationSuggestions.csv";
         private readonly Serializer<RenovationSuggestion> _serializer;
@@ -16,7 +13,7 @@ namespace InitialProject.Repository
 
         public RenovationSuggestionRepository()
         {
-            _serializer = new Serializer<Accommodation>();
+            _serializer = new Serializer<RenovationSuggestion>();
             _renovationSuggestions = _serializer.FromCSV(FilePath);
         }
 

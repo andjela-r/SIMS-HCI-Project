@@ -7,7 +7,7 @@ namespace InitialProject.Repository
 {
     public class OwnerAndAccommodationRatingRepository
     {
-        private const string FilePath = "../../../Resources/Data/accRatings.csv";
+        private const string FilePath = "../../../Resources/Data/ownerAndAccommodationRating.csv";
 
         private readonly Serializer<OwnerAndAccommodationRating> _serializer;
 
@@ -47,6 +47,12 @@ namespace InitialProject.Repository
         {
             _ownerAndAccommodationRatings = _serializer.FromCSV(FilePath);
             return _ownerAndAccommodationRatings.FindAll(u => u.OwnerId == id);
+        }
+
+        public List<OwnerAndAccommodationRating> FindByAccommodationId(int accommodationId)
+        {
+            _ownerAndAccommodationRatings = _serializer.FromCSV(FilePath);
+            return _ownerAndAccommodationRatings.FindAll(u => u.AccommodationId == accommodationId);
         }
 
 

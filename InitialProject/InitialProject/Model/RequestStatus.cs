@@ -23,6 +23,8 @@ namespace InitialProject.Model
 
         public string Comment { get; set; }
 
+        public bool IsChanged { get; set; }
+
         public RequestStatus(DateTime startDate, DateTime endDate, string comment, RequestStatusEnum request, int reservationId)
         {
             this.StartDate = startDate;
@@ -44,6 +46,8 @@ namespace InitialProject.Model
             csvValues = csvValues.Append(request.ToString()).ToArray();
             csvValues = csvValues.Append(ReservationId.ToString()).ToArray();
             csvValues = csvValues.Append(Comment).ToArray();
+            bool isChanged = Convert.ToBoolean(IsChanged);
+            csvValues = csvValues.Append(isChanged.ToString()).ToArray();
             return csvValues;
         }
 
@@ -54,7 +58,8 @@ namespace InitialProject.Model
             EndDate = Convert.ToDateTime(values[2]);
             Request = (RequestStatusEnum)Convert.ToInt32(values[3]);
             ReservationId = Convert.ToInt32(values[4]);
-            Comment = values[5];    
+            Comment = values[5];
+            IsChanged = Convert.ToBoolean(values[5]);
         }
 
 

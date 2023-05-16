@@ -31,8 +31,8 @@ namespace InitialProject.View
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             OwnerAndAccommodationRatingView rating = new OwnerAndAccommodationRatingView(User);
+            rating.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             rating.Show();
-            Close();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -43,13 +43,14 @@ namespace InitialProject.View
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             AccommodationView accView = new AccommodationView(User);
+            accView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             accView.Show();
-            Close();
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             ProfileView profile = new ProfileView(User);
+            profile.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             profile.Show();
         }
     }
