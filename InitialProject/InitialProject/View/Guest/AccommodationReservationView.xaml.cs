@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace InitialProject.View
 {
@@ -18,8 +19,10 @@ namespace InitialProject.View
     {
         private readonly AccommodationReservationRepository _reservationRepository;
         private readonly AccommodationReservationService _reservationService;
+        private readonly GuestRepository _guestRepository;
         public Accommodation SelectedAccommodation { get; set; }
         public ObservableCollection<AccommodationReservation> Reservations { get; set; }
+        public static ObservableCollection<Guest> Guests { get; set; }
         public ObservableCollection<Tuple<DateTime, DateTime>> AvailableDatesPair { get; set; }
         public Tuple<DateTime, DateTime> SelectedAvailableDatePair { get; set; }
         public User Guest { get; set; }
@@ -27,24 +30,57 @@ namespace InitialProject.View
         private DateTime _checkInDate;
         private DateTime _checkOutDate;
 
-        public AccommodationReservationView(Accommodation selectedAccommodation, User guest)
+        int brojac;
+
+        public AccommodationReservationView(Accommodation selectedAccommodation, User user)
         {
             InitializeComponent();
             DataContext = this;
 
             _reservationRepository = new AccommodationReservationRepository();
             _reservationService = new AccommodationReservationService();
-            this.Guest = guest;
+            _guestRepository = new GuestRepository();
+            this.Guest = user;
             Reservations = new ObservableCollection<AccommodationReservation>(_reservationRepository.FindAll());
+            Guests = new ObservableCollection<Guest>(_guestRepository.FindAll());
             SelectedAccommodation = selectedAccommodation;
             StartDatePicker.DisplayDateStart = DateTime.Today;
             EndDatePicker.DisplayDateStart = DateTime.Today;
+            DateTime oneYearAgo = DateTime.Now.AddYears(-1);
             AvailableDatesPair = new ObservableCollection<Tuple<DateTime, DateTime>>();
 
             DatesDataGrid.Visibility = Visibility.Collapsed;
             ReserveButton.Visibility = Visibility.Collapsed;
             NumGuestLabel.Visibility = Visibility.Collapsed;
             GuestNumberBox.Visibility = Visibility.Collapsed;
+
+            foreach (AccommodationReservation reservation in Reservations)
+            {
+                if (reservation.GuestId == user.Id && reservation.EndDate >= oneYearAgo)
+                    brojac++;
+            }
+            PointsLabel.Visibility = Visibility.Collapsed;
+            foreach (Guest guest in Guests)
+            {
+                if (guest.UserId == user.Id && brojac >= 10)
+                {
+                    if (guest.IsSuperGuest)
+                    {
+                        PointsLabel.Visibility = Visibility.Visible;
+                        PointsLabel.Content = "You have:" + guest.BonusPoints + "point(s)";
+                        return;
+                    }
+                    else
+                    {
+                        PointsLabel.Visibility = Visibility.Visible;
+                        Guest super = _guestRepository.FindByUserId(guest.UserId);
+                        super.IsSuperGuest = true;
+                        super.BonusPoints = 5;
+                        _guestRepository.Update(super);
+                        PointsLabel.Content = "You have:" + super.BonusPoints + "point(s)";
+                    }
+                }
+            }
         }
 
         public DateTime CheckInDate
@@ -190,10 +226,22 @@ namespace InitialProject.View
                 }
                 CheckInDate = SelectedAvailableDatePair.Item1;
                 CheckOutDate = SelectedAvailableDatePair.Item2;
-                AccommodationReservation reservation = new AccommodationReservation(SelectedAccommodation.Id, Guest.Id, CheckInDate, CheckOutDate, int.Parse(StayLengthBox.Text), int.Parse(GuestNumberBox.Text));
-                _reservationRepository.Save(reservation);
-                MessageBox.Show("Successfuly reserved! ");
-                Close();
+                
+                foreach (Guest guest in Guests)
+                {
+                    if (guest.UserId == Guest.Id && guest.IsSuperGuest)
+                    {
+                        int bonusPoints = guest.BonusPoints - 1;
+                        Guest points = _guestRepository.FindByUserId(guest.UserId);
+                        points.BonusPoints = bonusPoints;
+                        _guestRepository.Update(points);
+                        AccommodationReservation reservation = new AccommodationReservation(SelectedAccommodation.Id, Guest.Id, CheckInDate, CheckOutDate, int.Parse(StayLengthBox.Text), int.Parse(GuestNumberBox.Text));
+                        _reservationRepository.Save(reservation);
+                        MessageBox.Show("Successfuly reserved! Now,you have: " + bonusPoints + " points");
+                        Close();
+                    }
+                }
+
             }
         }
 

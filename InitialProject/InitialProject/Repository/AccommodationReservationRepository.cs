@@ -3,12 +3,6 @@ using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Printing;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Data;
-using System.Xml.Linq;
 
 namespace InitialProject.Repository
 {
@@ -42,6 +36,17 @@ namespace InitialProject.Repository
             accommodationReservation.Id = NextId();
             _accommodationReservations = _serializer.FromCSV(FilePath);
             _accommodationReservations.Add(accommodationReservation);
+            _serializer.ToCSV(FilePath, _accommodationReservations);
+            return accommodationReservation;
+        }
+
+        public AccommodationReservation Update(AccommodationReservation accommodationReservation)
+        {
+            _accommodationReservations = _serializer.FromCSV(FilePath);
+            AccommodationReservation current = _accommodationReservations.Find(u => u.Id == accommodationReservation.Id);
+            int index = _accommodationReservations.IndexOf(current);
+            _accommodationReservations.Remove(current);
+            _accommodationReservations.Insert(index, accommodationReservation);
             _serializer.ToCSV(FilePath, _accommodationReservations);
             return accommodationReservation;
         }
@@ -88,17 +93,6 @@ namespace InitialProject.Repository
         public List<AccommodationReservation> FindAll()
         {
             return _serializer.FromCSV(FilePath);
-        }
-
-        public AccommodationReservation Update(AccommodationReservation reservation)
-        {
-            _accommodationReservations = _serializer.FromCSV(FilePath);
-            AccommodationReservation current = _accommodationReservations.Find(c => c.Id == reservation.Id);
-            int index = _accommodationReservations.IndexOf(current);
-            _accommodationReservations.Remove(current);
-            _accommodationReservations.Insert(index, reservation);       // keep ascending order of ids in file 
-            _serializer.ToCSV(FilePath, _accommodationReservations);
-            return reservation;
         }
 
     }

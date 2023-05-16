@@ -1,0 +1,34 @@
+﻿<Window x:Class="InitialProject.View.ProfileView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.View"
+        mc:Ignorable="d"
+        Title="Profile view" Height="393" Width="800" Background="Lavender">
+    <Grid Margin="0,0,0,-43">
+        <DataGrid x:Name="dataGridRatings"
+            ItemsSource="{Binding Reservations, UpdateSourceTrigger=PropertyChanged}"
+            SelectedItem="{Binding SelectedReservation, UpdateSourceTrigger=PropertyChanged}"
+            AutoGenerateColumns="False" IsReadOnly="True" Margin="10,127,0,95" FontSize="20" HorizontalAlignment="Left" Width="764" Background="Lavender" FontFamily="Bahnschrift Light">
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="FontSize" Value="15" />
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding GuestId}" Width="80" />
+                <DataGridTextColumn Header="Cleanliness" Binding="{Binding Cleanliness}" Width="83"/>
+                <DataGridTextColumn Header="Obedience" Binding="{Binding Obedience}" Width="85"/>
+                <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" Width="450"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Name:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="52" Width="98" FontSize="25" FontFamily="Bahnschrift Light"/>
+        <Label x:Name="NameLabel" Content="Label" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top" FontSize="25" FontFamily="Bahnschrift Light"/>
+        <Label x:Name="SuperGuestLabel" Content="Label" HorizontalAlignment="Left" Margin="286,30,0,0" VerticalAlignment="Top" FontSize="25" FontFamily="Bahnschrift Light"/>
+        <Image x:Name="Image" HorizontalAlignment="Left" Height="53" Margin="463,36,0,0" VerticalAlignment="Top" Width="57" Source="/Resources/Images/trophy.jpg"/>
+        <Label Content="B - GO BACK ON
+PREVIOUS PAGE
+" HorizontalAlignment="Left" Margin="552,12,0,0" VerticalAlignment="Top" FontSize="15" Width="238" FontFamily="Bahnschrift Light"/>
+    </Grid>
+</Window>
