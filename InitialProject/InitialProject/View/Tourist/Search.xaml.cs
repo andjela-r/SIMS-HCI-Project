@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using InitialProject.Model;
 using InitialProject.Repository;
+using InitialProject.View.Guide;
 using InitialProject.View.Tourist.Components;
 
 namespace InitialProject.View.Tourist
@@ -31,22 +32,7 @@ namespace InitialProject.View.Tourist
         }
 
         private TourRepository _tourRepository = new TourRepository();
-        private string _tour;
-
-        public string Tour
-        {
-            get
-            {
-                return _tour;
-            }
-            set
-            {
-                if (value != _tour)
-                {
-                    _tour = value;
-                }
-            }
-        }
+        public TourAppointmentRepository _tourAppointmentRepository = new TourAppointmentRepository();
 
         /*public void LoadTours()
         {
@@ -68,13 +54,159 @@ namespace InitialProject.View.Tourist
 
             return component;
         }*/
+        private string _tour;
+        private string _tour2;
+        private string _tour3;
+        private int _tourId;
+        private int _tourId1;
+        private int _tourId2;
 
+        private string _tour11;
+        private string _tour21;
+        private string _tour31;
+
+        private string _tour20;
+        private string _tour22;
+        private string _tour32;
+
+        private List<Tour> _tours;
+
+        public string TourName
+        {
+            get => _tour;
+            set
+            {
+                if (value != _tour) _tour = value;
+            }
+        }
+
+        public string TourDescription
+        {
+            get => _tour2;
+            set
+            {
+                if (value != _tour2) _tour2 = value;
+            }
+        }
+
+        public string ImagePath
+        {
+            get => _tour3;
+            set
+            {
+                if (value != _tour3) _tour3 = value;
+            }
+        }
+
+        public int TourId
+        {
+            get => _tourId;
+            set
+            {
+                if (value != _tourId) _tourId = value;
+            }
+        }
+        public int TourId1
+        {
+            get => _tourId1;
+            set
+            {
+                if (value != _tourId1) _tourId1 = value;
+            }
+        }
+        public int TourId2
+        {
+            get => _tourId2;
+            set
+            {
+                if (value != _tourId2) _tourId2 = value;
+            }
+        }
+
+        public string TourName1
+        {
+            get => _tour11;
+            set
+            {
+                if (value != _tour11) _tour11 = value;
+            }
+        }
+
+        public string TourDescription1
+        {
+            get => _tour21;
+            set
+            {
+                if (value != _tour21) _tour21 = value;
+            }
+        }
+
+        public string ImagePath1
+        {
+            get => _tour31;
+            set
+            {
+                if (value != _tour31) _tour31 = value;
+            }
+        }
+
+        public string TourName2
+        {
+            get => _tour20;
+            set
+            {
+                if (value != _tour20) _tour20 = value;
+            }
+        }
+
+        public string TourDescription2
+        {
+            get => _tour22;
+            set
+            {
+                if (value != _tour22) _tour22 = value;
+            }
+        }
+
+        public string ImagePath2
+        {
+            get => _tour32;
+            set
+            {
+                if (value != _tour32) _tour32 = value;
+            }
+        }
 
         public Search(User user)
         {
             InitializeComponent();
             this.DataContext = this;
             this.User = user;
+            InitializeComponent();
+            this.DataContext = this;
+            this.User = user;
+            User = user;
+
+            var turica = _tourRepository.FindById(1);
+            var turicaa = _tourAppointmentRepository.FindById(1);
+            TourName = turica.Name;
+            TourDescription = turica.Description;
+            ImagePath = turica.Pictures[0];
+            TourId = turicaa.Id;
+
+            var turica1 = _tourRepository.FindById(2);
+            var turicaa1 = _tourAppointmentRepository.FindById(2);
+            TourName1 = turica1.Name;
+            TourDescription1 = turica1.Description;
+            ImagePath1 = turica1.Pictures[0];
+            TourId1 = turicaa1.Id;
+
+            var turica2 = _tourRepository.FindById(3);
+            var turicaa2 = _tourAppointmentRepository.FindById(3);
+            TourName2 = turica2.Name;
+            TourDescription2 = turica2.Description;
+            ImagePath2 = turica2.Pictures[0];
+            TourId2 = turicaa2.Id;
         }
         private void Home_OnClick(object sender, RoutedEventArgs e)
         {

@@ -28,7 +28,7 @@
         <Label Content="Additional Comment" FontSize="24" HorizontalAlignment="Left" Margin="539,345,0,0" VerticalAlignment="Top"/>
         <TextBox FontSize="17" HorizontalAlignment="Left" Margin="539,392,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="371" Height="132"/>
         <Rectangle HorizontalAlignment="Left" Height="132" Margin="539,392,0,0" Stroke="Black" VerticalAlignment="Top" Width="371"/>
-        <Button Content="Submit" FontSize="17" HorizontalAlignment="Left" Margin="815,577,0,0" VerticalAlignment="Top" Height="52" Width="110"/>
+        <Button Click="ButtonBase_OnClick" Content="Submit" FontSize="17" HorizontalAlignment="Left" Margin="815,577,0,0" VerticalAlignment="Top" Height="52" Width="110"/>
         <RadioButton Content="1" HorizontalAlignment="Left" Margin="554,177,0,0" VerticalAlignment="Top"/>
         <RadioButton Content="2" HorizontalAlignment="Left" Margin="597,177,0,0" VerticalAlignment="Top"/>
         <RadioButton Content="3" HorizontalAlignment="Left" Margin="641,177,0,0" VerticalAlignment="Top"/>

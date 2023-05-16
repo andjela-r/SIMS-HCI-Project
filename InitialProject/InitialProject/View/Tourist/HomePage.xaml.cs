@@ -3,6 +3,7 @@ using InitialProject.Model;
 using InitialProject.Repository;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Input;
 
 namespace InitialProject.View.Tourist
 {
@@ -217,6 +218,45 @@ namespace InitialProject.View.Tourist
         private void Link_OnClick(object sender, RoutedEventArgs e)
         {
             throw new NotImplementedException();
+        }
+
+        private void NotificationHelp_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (!NotificationPopup.IsOpen)
+            {
+                NotificationPopup.IsOpen = true;
+            }
+        }
+
+        private void HPHelp_OnClickHelp_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (!HPPopup.IsOpen)
+            {
+                HPPopup.IsOpen = true;
+            }
+        }
+
+        private void ReviewHelp_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (!ReviewPopup.IsOpen)
+            {
+                ReviewPopup.IsOpen = true;
+            }
+        }
+
+        private void NotificationBell_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (!BellPopup.IsOpen)
+            {
+                BellPopup.IsOpen = true;
+            }
+        }
+
+        private void Control_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            TourRatingWindow tourRating = new TourRatingWindow(User);
+            tourRating.Show();
+            Close();
         }
     }
 }
