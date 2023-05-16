@@ -104,5 +104,9 @@ namespace InitialProject.View
             }
         }
 
+        private void LocationComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

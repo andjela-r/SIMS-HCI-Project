@@ -5,22 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View.Owner"
         mc:Ignorable="d"
-        Title="Welcome page" Height="450" Width="800" ResizeMode="NoResize" WindowStyle="SingleBorderWindow"
+        Title="Welcome page" Height="450" Width="800" ResizeMode="NoResize" WindowStyle="SingleBorderWindow" Background="LightGray"
         WindowStartupLocation="CenterScreen">
-    <Grid>
+    <Grid Margin="0,0,0,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="760"/>
+            <ColumnDefinition Width="381.616"/>
+            <ColumnDefinition Width="378.384"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="15"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="15"/>
+            <RowDefinition Height="379.04"/>
+            <RowDefinition Height="0"/>
         </Grid.RowDefinitions>
 
-        <ToolBar Grid.Row="0" Grid.ColumnSpan="3">
+        <ToolBar Grid.Row="0" Grid.ColumnSpan="4">
             <Button Click="HomePage_OnClick">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="../../Resources/Images/house.png" Width="20" Height="25"/>
@@ -49,14 +50,30 @@
                 </StackPanel>
             </Button>
         </ToolBar>
-        <TextBox Grid.Column="1" HorizontalAlignment="Center" Margin="0,10,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Choose your activity!" VerticalAlignment="Top" Width="226" Height="40" FontSize="20" FontWeight="Bold"/>
-        <Button Grid.Column="1" Content="Accommodation registration" HorizontalAlignment="Left" Margin="0,73,0,0" Grid.Row="2" VerticalAlignment="Top" FontSize="14"/>
-        <Button Grid.Column="1" Content="Accommodation statistics" HorizontalAlignment="Left" Margin="0,159,0,0" Grid.Row="2" VerticalAlignment="Top" FontSize="14"/>
-        <Button Grid.Column="1" Content="Suggestions for adding/deleting accommodations" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top" FontSize="14" Margin="0,229,0,0"/>
-        <Button Grid.Column="1" Click="BookingRequests_OnClick" Content="Booking requests" HorizontalAlignment="Left" Margin="10,313,0,0" Grid.Row="2" VerticalAlignment="Top" FontSize="14"/>
-        <Button Grid.Column="1" Click="GuestRatings_OnClick" Content="Guests ratings" HorizontalAlignment="Left" Margin="468,73,0,0" Grid.Row="2" VerticalAlignment="Top" FontSize="14"/>
-        <Button Grid.Column="1" Click="Reviews_OnClick" Content="Reviews and forums" HorizontalAlignment="Left" Margin="468,159,0,0" Grid.Row="2" VerticalAlignment="Top" FontSize="14"/>
-        <Button Grid.Column="1" Content="Accommodation renovation" HorizontalAlignment="Left" Margin="468,229,0,0" Grid.Row="2" VerticalAlignment="Top" FontSize="14"/>
+        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="267,10,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Choose your activity!" VerticalAlignment="Top" Width="226" Height="40" FontSize="20" FontWeight="Bold" Background="LightGray" TextChanged="TextBox_TextChanged" Grid.ColumnSpan="2"/>
+        <Button Click="AccommodationRegistration_OnClick" Grid.Column="1" Content="Accommodation registration" HorizontalAlignment="Left" Margin="0,73,0,0" Grid.Row="2" VerticalAlignment="Top" FontSize="14" Background="LightCoral"/>
+        <Button Click="AccommodationStatistics_OnClick" Grid.Column="1" Content="Accommodation statistics" HorizontalAlignment="Left" Margin="0,114,0,0" Grid.Row="2" VerticalAlignment="Top" FontSize="14" Background="LightGreen"/>
+        <Button Grid.Column="1" Content="Suggestions for adding/deleting accommodations" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top" FontSize="14" Margin="0,153,0,0" Background="LightBlue"/>
+        <Button Grid.Column="1" Click="BookingRequests_OnClick" Content="Booking requests" HorizontalAlignment="Left" Margin="0,199,0,0" Grid.Row="2" VerticalAlignment="Top" FontSize="14" Background="LemonChiffon"/>
+        <Button Click="GuestRatings_OnClick" Content="Guests ratings" HorizontalAlignment="Left" Margin="19,240,0,0" Grid.Row="2" VerticalAlignment="Top" FontSize="14" Grid.ColumnSpan="2" Background="LightPink"/>
+        <Button Click="Reviews_OnClick" Content="Reviews and forums" HorizontalAlignment="Left" Margin="19,289,0,0" Grid.Row="2" VerticalAlignment="Top" FontSize="14" Grid.ColumnSpan="2" Background="LightSeaGreen"/>
+        <Button Click="Renovations_OnClick" Content="Accommodation renovation" HorizontalAlignment="Left" Margin="19,331,0,0" Grid.Row="2" VerticalAlignment="Top" FontSize="14" Grid.ColumnSpan="2" Background="LightSlateGray"/>
+        <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="36" Margin="242,98,0,0" Grid.Row="2" Stroke="Black" VerticalAlignment="Top" Width="490" Fill="White" Grid.ColumnSpan="2"/>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="254,100,0,0" Grid.Row="2" TextWrapping="Wrap" Text="See the number of reservations, cancelations, date changes and recommendations for renovations monthly/yearly!" VerticalAlignment="Top" Width="466" Grid.ColumnSpan="2"/>
+        <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="36" Margin="334,142,0,0" Grid.Row="2" Stroke="Black" VerticalAlignment="Top" Width="426" Fill="White" Grid.ColumnSpan="2"/>
+        <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="254,199,0,0" Grid.Row="2" Stroke="Black" VerticalAlignment="Top" Width="426" Fill="White" Grid.ColumnSpan="2"/>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="348,144,0,0" Grid.Row="2" TextWrapping="Wrap" Text="See which locations are the best for opening new, or closing existing accommodations!" VerticalAlignment="Top" Width="432" Grid.ColumnSpan="3" Height="32"/>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="266,202,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Accept/deny requests for reservation date movings!" VerticalAlignment="Top" Width="466" Grid.ColumnSpan="2"/>
+        <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="242,240,0,0" Grid.Row="2" Stroke="Black" VerticalAlignment="Top" Width="426" Fill="White" Grid.ColumnSpan="2"/>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="254,245,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Rate your guests and check deadlines for that activity!" VerticalAlignment="Top" Width="466" Grid.ColumnSpan="2"/>
+        <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="242,282,0,0" Grid.Row="2" Stroke="Black" VerticalAlignment="Top" Width="426" Fill="White" Grid.ColumnSpan="2"/>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="254,284,0,0" Grid.Row="2" TextWrapping="Wrap" Text="See ratings from your guests and forums from your locations" VerticalAlignment="Top" Width="466" Grid.ColumnSpan="2"/>
+        <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="242,331,0,0" Grid.Row="2" Stroke="Black" VerticalAlignment="Top" Width="426" Fill="White" Grid.ColumnSpan="2"/>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="254,334,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Schedule a renovation for your accommodaiton and see all of them." VerticalAlignment="Top" Width="466" Grid.ColumnSpan="2"/>
+        <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="36" Margin="15,0,0,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="227" Fill="White" Grid.RowSpan="2"/>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="15,0,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Need help? Click here for the instructions about how to use this application!" VerticalAlignment="Top" Width="227" Height="70" Grid.RowSpan="2"/>
+
+
 
     </Grid>
 </Window>
