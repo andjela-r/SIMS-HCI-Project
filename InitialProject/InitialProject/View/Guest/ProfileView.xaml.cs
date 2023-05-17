@@ -80,9 +80,15 @@ namespace InitialProject.View
                     }                         
                }
                else
-                    SuperGuestLabel.Content = "Guest";
-                
-             }
+               {
+                   SuperGuestLabel.Content = "Guest";
+                   Guest super1 = _guestRepository.FindByUserId(guest.UserId);
+                   super1.IsSuperGuest = false;
+                   super1.BonusPoints = 0;
+                   _guestRepository.Update(super1);
+               }
+
+            }
 
         }
 
