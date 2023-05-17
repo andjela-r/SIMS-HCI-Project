@@ -64,5 +64,10 @@ namespace InitialProject.View.Tourist
             sentRequests.Show();
             Close();
         }
+
+        private void JoinTour_OnClick(object sender, RoutedEventArgs e)
+        {
+            //UpdateTouristsToArrive(User.Id);
+        }
     }
 }
