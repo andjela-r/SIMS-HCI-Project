@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using InitialProject.Model;
 using System.Windows;
 using InitialProject.Service;
+using System.Collections.ObjectModel;
+using InitialProject.Repository;
 
 namespace InitialProject.View.Tourist
 {
@@ -13,6 +15,8 @@ namespace InitialProject.View.Tourist
     {
         public TourRequestStatisticsService StatisticsService = new TourRequestStatisticsService();
         public User User { get; set; }
+        public TourRequestRepository tourRequestRepository { get; set; }
+        public static ObservableCollection<TourRequest> TourRequests { get; set; }
         private double _oar;
         public double OAR
         {
@@ -178,6 +182,8 @@ namespace InitialProject.View.Tourist
             InitializeComponent();
             this.DataContext = this;
             this.User = user;
+            tourRequestRepository = new TourRequestRepository();
+            TourRequests = new ObservableCollection<TourRequest>(tourRequestRepository.FindByTouristId(User.Id));
             OAR = StatisticsService.GetStatisticsByStatus(User.Id, Convert.ToInt32(RequestStatusEnum.Accepted));
             ODR = StatisticsService.GetStatisticsByStatus(User.Id, Convert.ToInt32(RequestStatusEnum.Denied));
             AR23 = StatisticsService.GetStatisticsByStatus(User.Id, Convert.ToInt32(RequestStatusEnum.Accepted), Convert.ToDateTime("1/1/2023"));
