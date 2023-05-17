@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using InitialProject.Model;
 
 namespace InitialProject.View.Tourist
 {
@@ -19,9 +20,20 @@ namespace InitialProject.View.Tourist
     /// </summary>
     public partial class TourRatingWindow : Window
     {
-        public TourRatingWindow()
+        User User { get; set; }
+
+        public TourRatingWindow(User user)
         {
             InitializeComponent();
+            this.DataContext = this;
+            this.User = user;
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            HomePage home = new HomePage(User);
+            home.Show();
+            Close();
         }
     }
 }

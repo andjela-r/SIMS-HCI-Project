@@ -3,8 +3,10 @@ using InitialProject.Model;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Input;
 using InitialProject.Service;
 using System.Windows.Markup;
+using System.Windows.Media;
 using InitialProject.Repository;
 
 namespace InitialProject.View.Tourist
@@ -161,35 +163,100 @@ namespace InitialProject.View.Tourist
 
         private void Send_OnClick(object sender, RoutedEventArgs e)
         {
-            if (locationRepository.FindByCity(City) == null)
+            if (CityTextBox.BorderBrush != Brushes.Red || CountryTextBox.BorderBrush != Brushes.Red|| DescriptionTextBox.BorderBrush != Brushes.Red|| LanguageTextBox.BorderBrush != Brushes.Red)
             {
-                Location location = new Location();
-                location.City = City;
-                location.Country = Country;
-                locationRepository.Save(location);
-                LocationId = location.Id;
+                if (locationRepository.FindByCity(City) == null)
+                {
+                    Location location = new Location();
+                    location.City = City;
+                    location.Country = Country;
+                    locationRepository.Save(location);
+                    LocationId = location.Id;
+                }
+                else
+                {
+                    LocationId = locationRepository.FindByCity(City).Id;
+                }
+
+                TourRequest request = new TourRequest();
+
+                request.TouristId = User.Id;
+                request.Status = RequestStatusEnum.Waiting;
+                request.Description = Description;
+                request.Language = TourLanguage;
+                request.StartDate = Convert.ToDateTime(StartDate);
+                request.EndDate = Convert.ToDateTime(EndDate);
+                request.MaxTourists = (int)Slider.Value;
+                request.LocationId = LocationId;
+
+                tourRequestService.CreateRequest(request);
+                MessageBox.Show("Tour Request successfully created", "Status", MessageBoxButton.OK);
+                SentRequests sentRequests = new SentRequests(User);
+                sentRequests.Show();
+                Close();
             }
             else
             {
-                LocationId = locationRepository.FindByCity(City).Id;
+                MessageBox.Show("Empty fields!", "Status", MessageBoxButton.OK);
             }
+        }
 
-            TourRequest request = new TourRequest();
+        private void CountryTextBox_OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            if (Country == "")
+            {
+                CountryTextBox.BorderBrush = Brushes.Red;
 
-            request.TouristId = User.Id;
-            request.Status = RequestStatusEnum.Waiting;
-            request.Description = Description;
-            request.Language = TourLanguage;
-            request.StartDate = Convert.ToDateTime(StartDate);
-            request.EndDate = Convert.ToDateTime(EndDate);
-            request.MaxTourists = (int)Slider.Value;
-            request.LocationId = LocationId;
+            }
+            else
+            {
+                var converter = new System.Windows.Media.BrushConverter();
+                var brush = (Brush)converter.ConvertFromString("#FFABADB3");
+                CountryTextBox.BorderBrush = brush;
+            }
+        }
+        private void DescriptionTextBox_OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            if (Description == "")
+            {
+                DescriptionTextBox.BorderBrush = Brushes.Red;
 
-            tourRequestService.CreateRequest(request);
-            MessageBox.Show("Tour Request successfully created", "Status", MessageBoxButton.OK);
-            SentRequests sentRequests = new SentRequests(User);
-            sentRequests.Show();
-            Close();
+            }
+            else
+            {
+                var converter = new System.Windows.Media.BrushConverter();
+                var brush = (Brush)converter.ConvertFromString("#FFABADB3");
+                DescriptionTextBox.BorderBrush = brush;
+            }
+        }
+        private void LanguageTextBox_OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            if (TourLanguage == "")
+            {
+                LanguageTextBox.BorderBrush = Brushes.Red;
+
+            }
+            else
+            {
+                var converter = new System.Windows.Media.BrushConverter();
+                var brush = (Brush)converter.ConvertFromString("#FFABADB3");
+                LanguageTextBox.BorderBrush = brush;
+            }
+        }
+
+        private void CityTextBox_OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            if (City == "")
+            {
+                CityTextBox.BorderBrush = Brushes.Red;
+
+            }
+            else
+            {
+                var converter = new System.Windows.Media.BrushConverter();
+                var brush = (Brush)converter.ConvertFromString("#FFABADB3");
+                CityTextBox.BorderBrush = brush;
+            }
         }
     }
 }

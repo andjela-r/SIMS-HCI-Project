@@ -59,14 +59,79 @@
         </components:TourComponent>
 
         <Button Content="Log Out" HorizontalAlignment="Left" Height="31" Margin="30,59,0,0" Grid.Row="2" VerticalAlignment="Top" Width="150" Click="LogOut_OnClick"/>
+        <Popup
+            Name="NotificationPopup"
+            PlacementTarget = "{Binding ElementName = NotificationHelp}"
+            AllowsTransparency = "True" PopupAnimation = "Slide" StaysOpen="False" Placement="Bottom">
 
-        <Image Grid.Column="2" Source="../../Resources/Images/info.png" HorizontalAlignment="Left" Height="24" Margin="250,46,0,0" VerticalAlignment="Top" Width="24"/>
-        <Image Grid.Column="2" Source="../../Resources/Images/bell.png" HorizontalAlignment="Left" Height="50" Margin="201,0,0,0" VerticalAlignment="Center" Width="50"/>
+            <TextBlock TextWrapping = "Wrap" Foreground = "Blue" Background="LightGray" MaxWidth="150" MaxHeight="400"
+                           Text = "By tapping this bell you can see your notifications. You can see if your tour request has been approved, news about new tours containing things you wanted in your request but never got and notifications from your tour guide from an ongoing tour. If there is a number on the bell, then you have that number of new notification." />
+        </Popup>
+
+        <Button Name="NotificationBell" Grid.Column="2" HorizontalAlignment="Left" Height="50" 
+                Margin="201,0,0,0" 
+                VerticalAlignment="Center" 
+                Width="50" Background="White" BorderBrush="White" Click="NotificationBell_OnClick">
+        <Image 
+            Source="../../Resources/Images/bell.png"/>
+        </Button>
+        <Popup
+            Name="BellPopup"
+            PlacementTarget = "{Binding ElementName = NotificationBell}"
+            AllowsTransparency = "True" PopupAnimation = "Slide" StaysOpen="False" Placement="Bottom">
+
+            <TextBlock TextWrapping = "Wrap" Foreground = "Blue" Background="LightGray" MaxWidth="130" MaxHeight="300"
+                       Text = "Here are some notifications:
+                                        New tour!
+                                        New tour!" />
+        </Popup>
+
         <Rectangle Fill="LightPink" Grid.Column="2" HorizontalAlignment="Left" Height="108" Margin="0,455,0,0" Grid.RowSpan="2" Grid.Row="1" Stroke="#FF757575" VerticalAlignment="Top" Width="317"/>
-        <Label Grid.Column="2" FontSize="17" Content="Tour Name" HorizontalAlignment="Left" Margin="12,503,0,0" Grid.Row="1" VerticalAlignment="Top" Foreground="#FF0006FF" FontWeight="Bold" FontStyle="Italic" Grid.RowSpan="2"/>
-        <Label FontSize="20" Content="Leave a Review!" HorizontalAlignment="Left" Margin="10,463,0,0" Grid.Row="1" Grid.Column="2" Grid.RowSpan="2"/>
+        <Label MouseDoubleClick="Control_OnMouseDoubleClick" Grid.Column="2" FontSize="17" Content="Tour Name" HorizontalAlignment="Left" Margin="12,503,0,0" Grid.Row="1" VerticalAlignment="Top" Foreground="#FF0006FF" FontWeight="Bold" FontStyle="Italic" Grid.RowSpan="2"/>
+        <Label FontSize="20" Content="Leave a Review!" HorizontalAlignment="Left" Margin="0,460,0,53" Grid.Row="1" Grid.Column="2" Grid.RowSpan="2"/>
         <Label Grid.Column="2" Content="Days left to review:" HorizontalAlignment="Left" Margin="147,36,0,0" Grid.Row="2" VerticalAlignment="Top"/>
         <TextBox Grid.Column="2" FontSize="13" HorizontalAlignment="Left" Margin="262,36,0,0" Grid.Row="2" TextWrapping="Wrap" Text="5" VerticalAlignment="Top" Width="25" Height="26" RenderTransformOrigin="1.185,0.923"/>
-        <Button Grid.Column="2" Visibility="Hidden" Click="Link_OnClick" Content="Button" HorizontalAlignment="Left" Height="19" Margin="22,40,0,0" Grid.Row="2" VerticalAlignment="Top" Width="80"/>
+
+
+
+        <Button x:Name="NotificationHelp" 
+                Background="White" BorderBrush="White" 
+                HorizontalAlignment="Left" Margin="251,48,0,0" 
+                VerticalAlignment="Top" Width="23" Grid.Column="2" Click="NotificationHelp_OnClick">
+            <Image 
+                Source="/Resources/Images/info.png" />
+        </Button>
+        <Button x:Name="HPHelp" 
+                Background="White" BorderBrush="White" 
+                HorizontalAlignment="Left" Margin="283,10,0,0" 
+                VerticalAlignment="Top" Width="23" Click="HPHelp_OnClickHelp_OnClick" Grid.Row="1">
+            <Image 
+                Source="/Resources/Images/info.png" />
+        </Button>
+        <Popup
+            Name="HPPopup"
+            PlacementTarget = "{Binding ElementName = HPHelp}"
+            AllowsTransparency = "True" PopupAnimation = "Slide" StaysOpen="False" Placement="Bottom">
+
+            <TextBlock TextWrapping = "Wrap" Foreground = "Blue" Background="LightGray" MaxWidth="250" MaxHeight="300"
+                       Text = "Tap the arrow to see more tours.
+                            To book a tour tap the BOOK button" />
+        </Popup>
+
+        <Popup
+            Name="ReviewPopup"
+            PlacementTarget = "{Binding ElementName = ReviewHelp}"
+            AllowsTransparency = "True" PopupAnimation = "Slide" StaysOpen="False" Placement="Bottom">
+
+            <TextBlock TextWrapping = "Wrap" Foreground = "Blue" Background="LightGray" MaxWidth="300" MaxHeight="300"
+                       Text = "After a tour is finished, you can review it. Tap the link with desired tour to leave a review. The number below is how many days are left to review a certain tour." />
+        </Popup>
+        <Button x:Name="ReviewHelp" 
+                Background="LightPink" BorderBrush="LightPink" 
+                HorizontalAlignment="Left" Margin="269,459,0,111" 
+                MaxWidth="23" MaxHeight="23" Click="ReviewHelp_OnClick" Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" Width="41" >
+            <Image 
+                Source="/Resources/Images/info.png"/>
+        </Button>
     </Grid>
 </Window>

@@ -23,7 +23,7 @@ namespace InitialProject.Model
 
         public TourRequest() { }
 
-        public TourRequest(int locationId, int touristId, string description, string language, int maxTourists, DateTime startDate, DateTime endDate, RequestStatusEnum status)
+        public TourRequest (int touristId, int locationId, string description, string language, int maxTourists, DateTime startDate, DateTime endDate, RequestStatusEnum status)
         {
             this.TouristId = touristId;
             this.LocationId = locationId;
