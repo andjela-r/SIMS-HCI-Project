@@ -46,9 +46,16 @@ namespace InitialProject.Repository
         {
             return _serializer.FromCSV(FilePath);
         }
+
         public RequestStatus FindById(int id)
         {
             return _requestStatuses.Find(x => x.Id == id);
+        }
+
+        public List<RequestStatus> FindByReservationId(int reservationId)
+        {
+            _requestStatuses = _serializer.FromCSV(FilePath);
+            return _requestStatuses.FindAll(u => u.ReservationId == reservationId);
         }
         public RequestStatus Update(RequestStatus requestStatus)
         {

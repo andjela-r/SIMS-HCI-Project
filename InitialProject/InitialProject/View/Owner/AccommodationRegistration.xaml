@@ -1,0 +1,94 @@
+﻿<Window x:Class="InitialProject.View.Owner.AccommodationRegistration"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.View.Owner"
+        mc:Ignorable="d"
+        Title="AccommodationRegistration" Height="450" Width="800" Background="MediumAquamarine">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="722*"/>
+            <ColumnDefinition Width="11*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="64*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="1" Grid.Column="0" Margin="50,43,372,107" Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Height="40" Content="Name:" FontSize="20"/>
+            <Label Grid.Row="1" Grid.Column="0" Height="40" Content="Location:" FontSize="20"/>
+            <Label Grid.Row="2" Grid.Column="0" Height="40" Content="Type:" FontSize="20"/>
+            <Label Grid.Row="3" Grid.Column="0" Height="40" FontSize="20" Content="Max number of guests:" Grid.ColumnSpan="2" Margin="0,10,57,0"/>
+            <TextBox Name="name" Grid.Row="0" Text="{Binding NameAcc, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Height="25" TextWrapping="Wrap" VerticalAlignment="Center"/>
+            <TextBox Name="maxGuests" Grid.Row="3" Text="{Binding Path=MaxGuests}" Grid.Column="1" Height="26" VerticalAlignment="Top" Margin="122,17,28,0"/>
+            <Label Grid.Row="3" Grid.Column="0" FontSize="20" Height="40" Content="Min number of days to stay in:" Grid.ColumnSpan="2" Margin="0,65,2,-55" RenderTransformOrigin="0.5,0.5">
+                <Label.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-0.194"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Label.RenderTransform>
+            </Label>
+            <TextBox x:Name="daysNumber" Text="{Binding Path=DaysToCancelBeforeReservation}" Grid.Column="1" Height="26" VerticalAlignment="Center" Margin="580,0,-430,0"/>
+        </Grid>
+
+        <Button Grid.Row="2" Click="AccommodationRegistration_OnClick" FontSize="15" Content="Confirm" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="78" Margin="523,128,0,0" Background="LightCyan"/>
+        <ToolBar Grid.Row="0" Margin="0,0,0,30" Grid.ColumnSpan="4">
+            <Button Click="HomePage_OnClick">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../../Resources/Images/house.png" Width="20" Height="30"/>
+                    <TextBlock Text="Home page" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../../Resources/Images/profile.png" Width="20" Height="30"/>
+                    <TextBlock Text="Your profile" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../../Resources/Images/tutorial.png" Width="20" Height="30"/>
+                    <TextBlock Text="Tutorial" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" />
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button Click="LogOut_OnClick">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../../Resources/Images/logout.png" Width="15" Height="30"/>
+                    <TextBlock Text="Log out" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0" />
+                </StackPanel>
+            </Button>
+        </ToolBar>
+        <TextBox HorizontalAlignment="Left" Margin="273,70,0,0" TextWrapping="Wrap" Text="Accommodation registration" VerticalAlignment="Top" Width="283" Height="40" FontSize="20" FontWeight="Bold" Grid.RowSpan="2" Background="MediumAquamarine"/>
+        <Image Margin="220,66,454,106" Source="/blackhouse.png" Stretch="Fill" Grid.RowSpan="2"/>
+        <TextBox x:Name="minStay" Grid.Row="2" Text="{Binding Path=MinStay, UpdateSourceTrigger=PropertyChanged}" Height="26" VerticalAlignment="Top" Margin="350,128,322,0"/>
+        <ComboBox x:Name="LocationComboBox" HorizontalAlignment="Left" Margin="160,104,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="LocationComboBox_SelectionChanged" Grid.Row="1"/>
+        <ComboBox x:Name="AccommodationTypeBox" HorizontalAlignment="Left" Margin="148,23,0,0" VerticalAlignment="Top" Width="120" Grid.Row="2"/>
+        <Label Grid.Row="1" Grid.Column="0" FontSize="20" Height="40" Content="Days to cancel before reservation:" Margin="418,48,62,48" Grid.ColumnSpan="4"/>
+        <Label Grid.Row="1" Grid.Column="0" Height="40" FontSize="20" Content="URL adrresses of pictures:" Margin="400,128,69,182" Grid.RowSpan="2"/>
+        <TextBox x:Name="pictures" Grid.Row="1" Text="{Binding PicturesAcc, UpdateSourceTrigger=PropertyChanged}" Height="110" VerticalAlignment="Top" Margin="641,133,10,0" Grid.RowSpan="2" Grid.ColumnSpan="4"/>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="136"></RowDefinition>
+            <RowDefinition Height="214"></RowDefinition>
+        </Grid.RowDefinitions>
+
+
+
+    </Grid>
+</Window>

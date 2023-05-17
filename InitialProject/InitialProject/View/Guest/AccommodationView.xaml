@@ -1,0 +1,36 @@
+﻿<Window x:Class="InitialProject.View.AccommodationView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.View"
+        mc:Ignorable="d"
+        Title="Accommodation view" Height="470" Width="830" Background="Lavender">
+    <Grid>
+        <ToolBar HorizontalAlignment="Left" Height="434" VerticalAlignment="Center" Width="178" Background="Lavender"/>
+        <TextBox x:Name="MinDaysBox" HorizontalAlignment="Left" Margin="10,351,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="135" Background="FloralWhite" FontSize="20" FontFamily="Bahnschrift Light"/>
+        <TextBox x:Name="GuestNumBox" HorizontalAlignment="Left" Margin="10,275,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="135" Background="FloralWhite" FontSize="20" FontFamily="Bahnschrift Light" />
+        <TextBox x:Name="NameBox" HorizontalAlignment="Left" Margin="11,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Background="FloralWhite" FontSize="20" FontFamily="Bahnschrift Light"/>
+        <ComboBox x:Name="LocationComboBox" HorizontalAlignment="Left" Margin="10,118,0,0" VerticalAlignment="Top" Width="135" Background="FloralWhite" FontSize="20" FontFamily="Bahnschrift Light"/>
+        <ComboBox x:Name="TypeBox" HorizontalAlignment="Left" Margin="10,195,0,0" VerticalAlignment="Top" Width="135" Background="FloralWhite" FontSize="20" FontFamily="Bahnschrift Light"/>
+        <Label Content="Name" HorizontalAlignment="Left" Margin="11,17,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift Light"/>
+        <Label Content="Location" HorizontalAlignment="Left" Margin="10,81,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift Light"/>
+        <Label Content="Type" HorizontalAlignment="Left" Margin="10,161,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift Light"/>
+        <Label Content="Guest number" HorizontalAlignment="Left" Margin="8,241,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift Light"/>
+        <Label Content="Number of days" HorizontalAlignment="Left" Margin="8,317,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift Light"/>
+        <Button Content="Search" HorizontalAlignment="Left" Margin="11,396,0,0" VerticalAlignment="Top" Height="37" Width="135" Click="Button_Click" Background="Lavender" FontFamily="Bahnschrift Light" FontSize="20"/>
+        <DataGrid x:Name="dataGridAccommodations" DockPanel.Dock="Bottom"
+                  ItemsSource="{Binding Path=Accommodations, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding Path = SelectedAccommodation, UpdateSourceTrigger=PropertyChanged}"
+                  AutoGenerateColumns="False" IsReadOnly="True" Margin="200,0,0,81" Background="FloralWhite" FontSize="20" FontFamily="Bahnschrift Light">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="100" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Location" Binding="{Binding Location.City}" Width="110"></DataGridTextColumn>
+                <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="100"></DataGridTextColumn>
+                <DataGridTextColumn Header="Maxiumum guests" Binding="{Binding MaxGuests}" Width="175"></DataGridTextColumn>
+                <DataGridTextColumn Header="Days" Binding="{Binding MinStay}" Width="150" FontSize="20"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Reserve" HorizontalAlignment="Left" Margin="657,401,0,0" VerticalAlignment="Top" Height="39" Width="163" Click="Button_Click_1" Background="Lavender" FontSize="20" FontFamily="Bahnschrift Light"/>
+    </Grid>
+</Window>

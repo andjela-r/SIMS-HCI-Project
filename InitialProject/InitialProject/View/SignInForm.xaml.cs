@@ -63,12 +63,13 @@ namespace InitialProject
                             break;
                         case Role.Guest:
                             GuestView guest = new GuestView(user);
+                            guest.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                             guest.Show();
                             Close();
                             break;
                         case Role.Guide:
-                            tour tour = new tour(user);
-                            tour.Show();
+                            ToursView toursView = new ToursView(user);
+                            toursView.Show();
                             Close();
                             break;
                         case Role.Owner:

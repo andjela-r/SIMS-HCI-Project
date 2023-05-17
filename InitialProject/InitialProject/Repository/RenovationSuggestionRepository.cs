@@ -1,0 +1,49 @@
+﻿using InitialProject.Model;
+using InitialProject.Serializer;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace InitialProject.Repository
+{
+    internal class RenovationSuggestionRepository
+    {
+        private const string FilePath = "../../../Resources/Data/renovationSuggestions.csv";
+        private readonly Serializer<RenovationSuggestion> _serializer;
+        private List<RenovationSuggestion> _renovationSuggestions;
+
+        public RenovationSuggestionRepository()
+        {
+            _serializer = new Serializer<RenovationSuggestion>();
+            _renovationSuggestions = _serializer.FromCSV(FilePath);
+        }
+
+        public RenovationSuggestion Save(RenovationSuggestion renovationSuggestion)
+        {
+            renovationSuggestion.Id = NextId();
+            _renovationSuggestions = _serializer.FromCSV(FilePath);
+            _renovationSuggestions.Add(renovationSuggestion);
+            _serializer.ToCSV(FilePath, _renovationSuggestions);
+            return renovationSuggestion;
+        }
+
+        public int NextId()
+        {
+            _renovationSuggestions = _serializer.FromCSV(FilePath);
+            if (_renovationSuggestions.Count < 1)
+            {
+                return 1;
+            }
+            return _renovationSuggestions.Max(c => c.Id) + 1;
+        }
+
+        public List<RenovationSuggestion> FindByReservationId(int reservationId)
+        {
+            _renovationSuggestions = _serializer.FromCSV(FilePath);
+            return _renovationSuggestions.FindAll(u => u.ReservationId == reservationId);
+        }
+        public List<RenovationSuggestion> FindAll()
+        {
+            return _serializer.FromCSV(FilePath);
+        }
+    }
+}
