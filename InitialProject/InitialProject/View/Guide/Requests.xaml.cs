@@ -170,7 +170,7 @@ namespace InitialProject.View.Guide
             if ((tourRequest.Location.City.Replace(" ", "").Contains(location) || string.IsNullOrEmpty(location)) &&
                 (_tourRequestService.IsTouristNumberLessThanMaximum(tourRequest, touristNumber) || string.IsNullOrEmpty(touristNumber)) &&
                 (_tourRequestService.IsContainingLanguageWords(tourRequest, languageWords) || string.IsNullOrEmpty(language)) &&
-                (_tourRequestService.IsWithinDateRange(tourRequest, startDate, endDate)))
+                (_tourRequestService.IsWithinDateRange(tourRequest, startDate, endDate) || startDate==DateTime.MinValue || endDate==DateTime.MaxValue))
                     result = true;
 
             return result;
