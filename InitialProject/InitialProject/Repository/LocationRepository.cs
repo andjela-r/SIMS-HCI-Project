@@ -46,6 +46,18 @@ namespace InitialProject.Repository
             return _locations.FirstOrDefault(u => u.Id == id);
         }
 
+        public Location FindByCity(string city)
+        {
+            _locations = _serializer.FromCSV(FilePath);
+            return _locations.FirstOrDefault(u => u.City == city);
+        }
+
+        public Location FindByCountry(string country)
+        {
+            _locations = _serializer.FromCSV(FilePath);
+            return _locations.FirstOrDefault(u => u.Country == country);
+        }
+
         public List<Location> FindAll()
         {
             return _serializer.FromCSV(FilePath);

@@ -21,6 +21,14 @@
     <None Remove="Resources\Images\bell_notification.png" />
     <None Remove="Resources\Images\delete.png" />
     <None Remove="Resources\Images\edit.png" />
+    <None Remove="Resources\Images\Guide\close.png" />
+    <None Remove="Resources\Images\Guide\createTour.png" />
+    <None Remove="Resources\Images\Guide\logout.png" />
+    <None Remove="Resources\Images\Guide\myProfile.png" />
+    <None Remove="Resources\Images\Guide\requests.png" />
+    <None Remove="Resources\Images\Guide\search.png" />
+    <None Remove="Resources\Images\Guide\statistics.png" />
+    <None Remove="Resources\Images\Guide\tours.png" />
     <None Remove="Resources\Images\info.png" />
     <None Remove="Resources\Images\tour_picture.jpg" />
     <None Remove="Resources\Images\tour_picture1.jpg" />
@@ -51,8 +59,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Resources\Images\bell.png" />
     <Resource Include="Resources\Images\bell_notification.png" />
+    <Resource Include="Resources\Images\Guide\close.png" />
+    <Resource Include="Resources\Images\Guide\createTour.png" />
+    <Resource Include="Resources\Images\Guide\logout.png" />
+    <Resource Include="Resources\Images\Guide\myProfile.png" />
+    <Resource Include="Resources\Images\Guide\requests.png" />
+    <Resource Include="Resources\Images\Guide\search.png" />
+    <Resource Include="Resources\Images\Guide\statistics.png" />
+    <Resource Include="Resources\Images\Guide\tours.png" />
     <Resource Include="Resources\Images\info.png" />
     <Resource Include="Resources\Images\tour_picture.jpg" />
     <Resource Include="Resources\Images\tour_picture1.jpg" />

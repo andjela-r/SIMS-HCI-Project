@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Requests" Height="768" Width="1024" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
-        <Label Content="Requests Page" FontSize="40" HorizontalAlignment="Left" Margin="180,102,0,0" VerticalAlignment="Top"/>
+        <Label Content="Requests" FontSize="40" HorizontalAlignment="Left" Margin="172,107,0,0" VerticalAlignment="Top"/>
         <DockPanel HorizontalAlignment="Center" Height="147" VerticalAlignment="Top" Width="700">
             <Button Content="Home" Width="110" Height="50" FontSize="17" Click="Home_OnClick"/>
             <Button Content="Search" Width="110" Height="50" FontSize="17" Click="Search_OnClick"/>
@@ -16,6 +16,112 @@
             <Button Content="Vouchers" Width="110" Height="50" FontSize="17" Click="Vouchers_OnClick"/>
             <Button Content="Sent Requests" Width="120" Height="50" FontSize="17" Click="SentRequests_OnClick"/>
         </DockPanel>
+        <TextBlock 
+            FontSize="14"
+            HorizontalAlignment="Center" 
+            Margin="0,170,0,0" 
+            TextWrapping="Wrap" 
+            Text="In this panel, you can see some statistics, and view them in total or for certain years. Below you can make new requests, and  at the end you can see stats of the requests you made. Tap See more to view all requests and see more details." 
+            VerticalAlignment="Top" 
+            Width="864"/>
+
+        <Rectangle 
+            HorizontalAlignment="Center" 
+            Height="207" 
+            Margin="0,212,0,0" 
+            Stroke="Black" 
+            VerticalAlignment="Top" 
+            Width="864"/>
+
+        <Label 
+            Content="Overview" 
+            FontSize="25" 
+            HorizontalAlignment="Left" 
+            Margin="95,221,0,0" 
+            VerticalAlignment="Top"/>
+
+        <Rectangle 
+            HorizontalAlignment="Center"
+            Height="110" 
+            Margin="0,424,0,0" 
+            Stroke="Black" 
+            VerticalAlignment="Top" 
+            Width="864"/>
+
+        <Label 
+            Content="New Request"
+            FontSize="25" 
+            HorizontalAlignment="Left" 
+            Margin="95,434,0,0" 
+            VerticalAlignment="Top"/>
+
+        <TextBlock 
+            HorizontalAlignment="Left" 
+            Margin="95,479,0,0" 
+            TextWrapping="Wrap" 
+            Text="If you want to make a new request: Select the type of request you want to make.  
+                Complex tours are made up of several ordinary tours." 
+            VerticalAlignment="Top" 
+            Height="35" 
+            Width="425"/>
+
+        <Button 
+            Content="Tour Request" 
+            Height="31" 
+            Width="150" 
+            HorizontalAlignment="Left"
+            Margin="557,446,0,0" 
+            VerticalAlignment="Top"
+            Click="TourRequests_OnClick"/>
+
+        <Button 
+            Content="Complex Tour Request" 
+            Height="31" Width="170" 
+            HorizontalAlignment="Left" 
+            Margin="730,446,0,0" 
+            VerticalAlignment="Top"/>
+        <Rectangle 
+            HorizontalAlignment="Left"
+            Height="155" 
+            Margin="73,539,0,0" 
+            Stroke="Black" 
+            VerticalAlignment="Top" 
+            Width="430"/>
+        <Rectangle 
+            HorizontalAlignment="Left"
+            Height="155" 
+            Margin="507,539,0,0" 
+            Stroke="Black" 
+            VerticalAlignment="Top" 
+            Width="430"/>
+        <Label 
+            Content="Sent Tour Requests"
+            FontSize="25" 
+            HorizontalAlignment="Left" 
+            Margin="95,539,0,0" 
+            VerticalAlignment="Top"/>
+        <Label 
+            Content="Sent Complex Tour Requests"
+            FontSize="25" 
+            HorizontalAlignment="Left" 
+            Margin="530,539,0,0" 
+            VerticalAlignment="Top"/>
+        <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="95,582,529,103"/>
+        <Button 
+            Content="See More" 
+            Height="31" 
+            Width="100" 
+            HorizontalAlignment="Left"
+            Margin="395,654,0,0" 
+            VerticalAlignment="Top"/>
+        <Button 
+            Content="See More" 
+            Height="31" 
+            Width="100" 
+            HorizontalAlignment="Left"
+            Margin="830,654,0,0" 
+            VerticalAlignment="Top"/>
+        <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="530,582,94,103"/>
 
     </Grid>
 </Window>

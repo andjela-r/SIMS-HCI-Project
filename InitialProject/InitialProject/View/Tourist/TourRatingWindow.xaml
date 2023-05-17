@@ -1,0 +1,44 @@
+﻿<Window x:Class="InitialProject.View.Tourist.TourRatingWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.View.Tourist"
+        mc:Ignorable="d"
+        Title="Tour Rating" Height="768" Width="1024" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <Label Content="Review Tour" FontSize="40" HorizontalAlignment="Center" Margin="0,34,0,0" VerticalAlignment="Top"/>
+        <Image Source="../../Resources/Images/info.png" HorizontalAlignment="Left" Height="24" Margin="675,54,0,0" VerticalAlignment="Top" Width="100"/>
+        <Rectangle HorizontalAlignment="Left" Height="220" Margin="75,119,0,0" Stroke="Black" VerticalAlignment="Top" Width="437"/>
+        <Rectangle HorizontalAlignment="Left" Height="205" Margin="75,339,0,0" Stroke="Black" VerticalAlignment="Top" Width="437"/>
+        <Rectangle HorizontalAlignment="Left" Height="425" Margin="512,119,0,0" Stroke="Black" VerticalAlignment="Top" Width="433"/>
+        <Label Content="Tour Name" FontSize="24" HorizontalAlignment="Left" Margin="106,119,0,0" VerticalAlignment="Top"/>
+        <TextBlock FontSize="17" HorizontalAlignment="Left" Margin="122,166,0,0" TextWrapping="Wrap" Text="DETAILS" VerticalAlignment="Top" Height="98" Width="344"/>
+        <Label Content="Date" FontSize="17" HorizontalAlignment="Left" Margin="106,269,0,0" VerticalAlignment="Top"/>
+        <Label Content="Upload Pictures" FontSize="24" HorizontalAlignment="Left" Margin="106,345,0,0" VerticalAlignment="Top"/>
+        <Image Source="../../Resources/Images/upload.png" HorizontalAlignment="Left" Height="34" MaxWidth="34" Margin="294,353,0,0" VerticalAlignment="Top" Width="100"/>
+        <Rectangle HorizontalAlignment="Left" Height="132" Margin="106,392,0,0" Stroke="Black" VerticalAlignment="Top" Width="374"/>
+        <Image Source="../../Resources/Images/tour_picture.jpg" Stretch="UniformToFill" HorizontalAlignment="Left" Height="66" Margin="129,425,0,0" VerticalAlignment="Top" Width="65"/>
+        <Image Source="/Resources/Images/tour_picture.jpg" Stretch="UniformToFill" HorizontalAlignment="Left" Height="66" Margin="212,425,0,0" VerticalAlignment="Top" Width="65" RenderTransformOrigin="2.015,0.607"/>
+        <Image Source="/Resources/Images/tour_picture.jpg" Stretch="UniformToFill" HorizontalAlignment="Left" Height="66" Margin="294,425,0,0" VerticalAlignment="Top" Width="65"/>
+        <Image Source="/Resources/Images/tour_picture.jpg" Stretch="UniformToFill" HorizontalAlignment="Left" Height="66" Margin="381,425,0,0" VerticalAlignment="Top" Width="65"/>
+        <Label Content="Guide's Knowledge" FontSize="24" HorizontalAlignment="Left" Margin="539,130,0,0" VerticalAlignment="Top"/>
+        <Label Content="Guide's Knowledge" FontSize="24" HorizontalAlignment="Left" Margin="539,222,0,0" VerticalAlignment="Top"/>
+        <Label Content="of the Language" FontSize="24" HorizontalAlignment="Left" Margin="554,254,0,0" VerticalAlignment="Top"/>
+        <Label Content="Additional Comment" FontSize="24" HorizontalAlignment="Left" Margin="539,345,0,0" VerticalAlignment="Top"/>
+        <TextBox FontSize="17" HorizontalAlignment="Left" Margin="539,392,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="371" Height="132"/>
+        <Rectangle HorizontalAlignment="Left" Height="132" Margin="539,392,0,0" Stroke="Black" VerticalAlignment="Top" Width="371"/>
+        <Button Content="Submit" FontSize="17" HorizontalAlignment="Left" Margin="815,577,0,0" VerticalAlignment="Top" Height="52" Width="110"/>
+        <RadioButton Content="1" HorizontalAlignment="Left" Margin="554,177,0,0" VerticalAlignment="Top"/>
+        <RadioButton Content="2" HorizontalAlignment="Left" Margin="597,177,0,0" VerticalAlignment="Top"/>
+        <RadioButton Content="3" HorizontalAlignment="Left" Margin="641,177,0,0" VerticalAlignment="Top"/>
+        <RadioButton Content="4" HorizontalAlignment="Left" Margin="687,177,0,0" VerticalAlignment="Top"/>
+        <RadioButton Content="5" HorizontalAlignment="Left" Margin="724,177,0,0" VerticalAlignment="Top"/>
+        <RadioButton Content="1" HorizontalAlignment="Left" Margin="554,301,0,0" VerticalAlignment="Top"/>
+        <RadioButton Content="2" HorizontalAlignment="Left" Margin="597,301,0,0" VerticalAlignment="Top"/>
+        <RadioButton Content="3" HorizontalAlignment="Left" Margin="641,301,0,0" VerticalAlignment="Top"/>
+        <RadioButton Content="4" HorizontalAlignment="Left" Margin="687,301,0,0" VerticalAlignment="Top"/>
+        <RadioButton Content="5" HorizontalAlignment="Left" Margin="728,301,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>
