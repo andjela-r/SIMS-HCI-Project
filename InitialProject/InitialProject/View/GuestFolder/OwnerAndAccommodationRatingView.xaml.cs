@@ -2,7 +2,9 @@
 using InitialProject.Repository;
 using System;
 using System.Collections.ObjectModel;
+using System.Security.Cryptography.X509Certificates;
 using System.Windows;
+using System.Windows.Media.Imaging;
 
 namespace InitialProject.View
 {
@@ -18,6 +20,7 @@ namespace InitialProject.View
         public ObservableCollection<AccommodationReservation> FilteredAccommodationsOld { get; set; }
         public ObservableCollection<AccommodationReservation> FilteredAccommodationsNew { get; set; }
         public User guest { get; set; }
+        public string Name;
 
         public OwnerAndAccommodationRatingView(User guest)
         {
@@ -33,6 +36,9 @@ namespace InitialProject.View
             RateButton.IsEnabled = false;
             CancelButton.IsEnabled = false;
             GoBackButton.Visibility = Visibility.Collapsed;
+
+            Uri iconUri = new Uri("C:/Users/Dell/Desktop/projekatSims/SIMS-HCI-Project/InitialProject/InitialProject/Resources/Images/resv.png", UriKind.RelativeOrAbsolute);
+            this.Icon = BitmapFrame.Create(iconUri);
 
             FilteredAccommodationsNew.Clear();
             FilteredAccommodationsOld.Clear();
@@ -52,40 +58,16 @@ namespace InitialProject.View
                             FilteredAccommodationsNew.Add(reservation);
                         dataGridAccommodationsNew.ItemsSource = FilteredAccommodationsNew;
                     }
+
+                    Accommodation acc = _accomodationRepository.FindById(reservation.AccommodationId);
+                    reservation.Name = acc.Name;
                 }
                 dataGridAccommodationsNew.ItemsSource = FilteredAccommodationsNew;
                 dataGridAccommodationsOld.ItemsSource = FilteredAccommodationsOld;
-            }
-        }
 
-        private void SelectButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (SelectedReservation != null)
-            {
-                 if (SelectedReservation.EndDate > DateTime.Today)
-                {
-                    dataGridAccommodationsOld.IsEnabled = false;
-                    dataGridAccommodationsNew.IsEnabled = false;
-                    MoveButon.IsEnabled = true;
-                    CancelButton.IsEnabled = true;
-                    SelectButton.IsEnabled = false;
-                    GoBackButton.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    dataGridAccommodationsOld.IsEnabled = false;
-                    dataGridAccommodationsNew.IsEnabled = false;
-                    GoBackButton.Visibility = Visibility.Visible;
-                    RateButton.IsEnabled = true;
-                    SelectButton.IsEnabled = false;
-                    GoBackButton.IsEnabled = true;
-                }
-            }
-            else
-            {
-                MessageBox.Show("Please select accommodation.");
-            }
 
+
+            }
         }
 
         private void RateButton_Click(object sender, RoutedEventArgs e)
@@ -118,7 +100,6 @@ namespace InitialProject.View
             CancelButton.IsEnabled = false;
             GoBackButton.IsEnabled = false;
             RateButton.IsEnabled = false;
-            SelectButton.IsEnabled = true;
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -154,5 +135,26 @@ namespace InitialProject.View
             }
         }
 
+        private void MyDataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+                if (SelectedReservation.EndDate > DateTime.Today)
+                {
+                    dataGridAccommodationsOld.IsEnabled = false;
+                    dataGridAccommodationsNew.IsEnabled = false;
+                    MoveButon.IsEnabled = true;
+                    CancelButton.IsEnabled = true;
+                    GoBackButton.Visibility = Visibility.Visible;
+                    GoBackButton.IsEnabled = true;
+            }
+                else
+                {
+                    dataGridAccommodationsOld.IsEnabled = false;
+                    dataGridAccommodationsNew.IsEnabled = false;
+                    GoBackButton.Visibility = Visibility.Visible;
+                    RateButton.IsEnabled = true;
+                    GoBackButton.IsEnabled = true;
+                }
+            
+        }
     }
 }

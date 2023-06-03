@@ -124,7 +124,7 @@ namespace InitialProject.View.Owner
 
         private void GuestRating_OnClick(object sender, RoutedEventArgs e)
         {
-            Guest guest = _guestRepository.FindById(_guestId);
+            Model.Guest guest = _guestRepository.FindById(_guestId);
             if (guest == null)
             {
                 MessageBox.Show("That guest does not exist!");

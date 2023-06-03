@@ -1,9 +1,13 @@
 ﻿using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace InitialProject.View
 {
@@ -32,6 +36,10 @@ namespace InitialProject.View
             _reservationService = new AccommodationReservationService();
             Accommodations = new ObservableCollection<Accommodation>(_accomodationRepository.FindAll());
             Locations = new List<Location>(_locationRepository.FindAll());
+            MouseDown += YourWindowClass_MouseDown;
+
+            Uri iconUri = new Uri("C:/Users/Dell/Desktop/projekatSims/SIMS-HCI-Project/InitialProject/InitialProject/Resources/Images/home.png", UriKind.RelativeOrAbsolute);
+            this.Icon = BitmapFrame.Create(iconUri);
 
             Types = new ObservableCollection<string>();
             TypeBox.Items.Add("");
@@ -96,12 +104,19 @@ namespace InitialProject.View
             if (SelectedAccommodation != null)
             {
                 AccommodationReservationView reservationView = new AccommodationReservationView(SelectedAccommodation, Guest);
+                reservationView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 reservationView.Show();
             }
             else
             {
                 MessageBox.Show("Please select accommodation for reservation.");
             }
+        }
+
+        private void YourWindowClass_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            // Prevent the window from being dragged
+            e.Handled = true;
         }
 
     }

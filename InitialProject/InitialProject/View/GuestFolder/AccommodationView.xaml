@@ -19,16 +19,16 @@
         <Label Content="Guest number" HorizontalAlignment="Left" Margin="8,241,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift Light"/>
         <Label Content="Number of days" HorizontalAlignment="Left" Margin="8,317,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift Light"/>
         <Button Content="Search" HorizontalAlignment="Left" Margin="11,396,0,0" VerticalAlignment="Top" Height="37" Width="135" Click="Button_Click" Background="Lavender" FontFamily="Bahnschrift Light" FontSize="20"/>
-        <DataGrid x:Name="dataGridAccommodations" DockPanel.Dock="Bottom"
+        <DataGrid x:Name="dataGridAccommodations" DockPanel.Dock="Bottom" BorderBrush="FloralWhite"
                   ItemsSource="{Binding Path=Accommodations, UpdateSourceTrigger=PropertyChanged}"
                   SelectedItem="{Binding Path = SelectedAccommodation, UpdateSourceTrigger=PropertyChanged}"
-                  AutoGenerateColumns="False" IsReadOnly="True" Margin="200,0,0,81" Background="FloralWhite" FontSize="20" FontFamily="Bahnschrift Light">
+                  AutoGenerateColumns="False" IsReadOnly="True" Margin="200,17,32,81" Background="FloralWhite" FontSize="20" FontFamily="Bahnschrift Light">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="100" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Location" Binding="{Binding Location.City}" Width="110"></DataGridTextColumn>
                 <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="100"></DataGridTextColumn>
                 <DataGridTextColumn Header="Maxiumum guests" Binding="{Binding MaxGuests}" Width="175"></DataGridTextColumn>
-                <DataGridTextColumn Header="Days" Binding="{Binding MinStay}" Width="150" FontSize="20"></DataGridTextColumn>
+                <DataGridTextColumn Header="Days" Binding="{Binding MinStay}" Width="88" FontSize="20"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Reserve" HorizontalAlignment="Left" Margin="657,401,0,0" VerticalAlignment="Top" Height="39" Width="163" Click="Button_Click_1" Background="Lavender" FontSize="20" FontFamily="Bahnschrift Light"/>

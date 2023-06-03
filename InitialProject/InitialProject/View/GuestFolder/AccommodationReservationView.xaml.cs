@@ -9,6 +9,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace InitialProject.View
 {
@@ -22,7 +23,7 @@ namespace InitialProject.View
         private readonly GuestRepository _guestRepository;
         public Accommodation SelectedAccommodation { get; set; }
         public ObservableCollection<AccommodationReservation> Reservations { get; set; }
-        public static ObservableCollection<Guest> Guests { get; set; }
+        public static ObservableCollection<Model.Guest> Guests { get; set; }
         public ObservableCollection<Tuple<DateTime, DateTime>> AvailableDatesPair { get; set; }
         public Tuple<DateTime, DateTime> SelectedAvailableDatePair { get; set; }
         public User Guest { get; set; }
@@ -42,12 +43,15 @@ namespace InitialProject.View
             _guestRepository = new GuestRepository();
             this.Guest = user;
             Reservations = new ObservableCollection<AccommodationReservation>(_reservationRepository.FindAll());
-            Guests = new ObservableCollection<Guest>(_guestRepository.FindAll());
+            Guests = new ObservableCollection<Model.Guest>(_guestRepository.FindAll());
             SelectedAccommodation = selectedAccommodation;
             StartDatePicker.DisplayDateStart = DateTime.Today;
             EndDatePicker.DisplayDateStart = DateTime.Today;
             DateTime oneYearAgo = DateTime.Now.AddYears(-1);
             AvailableDatesPair = new ObservableCollection<Tuple<DateTime, DateTime>>();
+
+            Uri iconUri = new Uri("C:/Users/Dell/Desktop/projekatSims/SIMS-HCI-Project/InitialProject/InitialProject/Resources/Images/home.png", UriKind.RelativeOrAbsolute);
+            this.Icon = BitmapFrame.Create(iconUri);
 
             DatesDataGrid.Visibility = Visibility.Collapsed;
             ReserveButton.Visibility = Visibility.Collapsed;
@@ -60,7 +64,7 @@ namespace InitialProject.View
                     brojac++;
             }
             PointsLabel.Visibility = Visibility.Collapsed;
-            foreach (Guest guest in Guests)
+            foreach (Model.Guest guest in Guests)
             {
                 if (guest.UserId == user.Id && brojac >= 10)
                 {
@@ -73,7 +77,7 @@ namespace InitialProject.View
                     else
                     {
                         PointsLabel.Visibility = Visibility.Visible;
-                        Guest super = _guestRepository.FindByUserId(guest.UserId);
+                        Model.Guest super = _guestRepository.FindByUserId(guest.UserId);
                         super.IsSuperGuest = true;
                         super.BonusPoints = 5;
                         _guestRepository.Update(super);
@@ -214,7 +218,7 @@ namespace InitialProject.View
         {
             if (SelectedAvailableDatePair != null)
             {
-                if(int.Parse(GuestNumberBox.Text) > SelectedAccommodation.MaxGuests)
+                if (int.Parse(GuestNumberBox.Text) > SelectedAccommodation.MaxGuests)
                 {
                     MessageBox.Show($"Maximum number of guests for this accommodation: {SelectedAccommodation.MaxGuests} ");
                     return;
@@ -226,13 +230,13 @@ namespace InitialProject.View
                 }
                 CheckInDate = SelectedAvailableDatePair.Item1;
                 CheckOutDate = SelectedAvailableDatePair.Item2;
-                
-                foreach (Guest guest in Guests)
+
+                foreach (Model.Guest guest in Guests)
                 {
                     if (guest.UserId == Guest.Id && guest.IsSuperGuest)
                     {
                         int bonusPoints = guest.BonusPoints - 1;
-                        Guest points = _guestRepository.FindByUserId(guest.UserId);
+                        Model.Guest points = _guestRepository.FindByUserId(guest.UserId);
                         points.BonusPoints = bonusPoints;
                         _guestRepository.Update(points);
                         AccommodationReservation reservation = new AccommodationReservation(SelectedAccommodation.Id, Guest.Id, CheckInDate, CheckOutDate, int.Parse(StayLengthBox.Text), int.Parse(GuestNumberBox.Text));

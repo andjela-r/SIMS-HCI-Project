@@ -8,6 +8,7 @@ using System.Windows;
 using InitialProject.View.Guide;
 using InitialProject.View.Tourist;
 using InitialProject.View.Owner;
+using InitialProject.View.GuestFolder;
 
 namespace InitialProject
 {
@@ -62,7 +63,7 @@ namespace InitialProject
                             Close();
                             break;
                         case Role.Guest:
-                            GuestView guest = new GuestView(user);
+                            WelcomeView guest = new WelcomeView(user);
                             guest.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                             guest.Show();
                             Close();

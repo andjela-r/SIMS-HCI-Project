@@ -15,6 +15,7 @@ namespace InitialProject.Model
         public int GuestNumber { get; set; }
         public bool IsRequested { get; set; }
         public bool IsRated { get; set; }
+        public string Name { get; set; }
 
         public AccommodationReservation() { }
 

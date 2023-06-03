@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Media.Imaging;
 using System.Xml.Linq;
 
 namespace InitialProject.View
@@ -29,6 +30,8 @@ namespace InitialProject.View
             _reservationRepository = new AccommodationReservationRepository();
             _ratingRepository = new OwnerAndAccommodationRatingRepository();
             Reservation = reservation;
+            Uri iconUri = new Uri("C:/Users/Dell/Desktop/projekatSims/SIMS-HCI-Project/InitialProject/InitialProject/Resources/Images/rating.png", UriKind.RelativeOrAbsolute);
+            this.Icon = BitmapFrame.Create(iconUri);
         }
 
         protected virtual void OnPropertyChanged(string name)

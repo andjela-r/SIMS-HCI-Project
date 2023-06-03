@@ -59,9 +59,9 @@
     <Resource Include="Resources\Images\tour_picture2.jpg" />
     <Resource Include="Resources\Images\logo.jpg" />
     <Resource Include="Resources\Images\trophy.jpg" />
-    <Resource Include="View\Guest\accommodation.jpg" />
-    <Resource Include="View\Guest\logo.jpg" />
-    <Resource Include="View\Guest\trophy.jpg" />
+    <Resource Include="View\GuestFolder\accommodation.jpg" />
+    <Resource Include="View\GuestFolder\logo.jpg" />
+    <Resource Include="View\GuestFolder\trophy.jpg" />
   </ItemGroup>
 
   <ItemGroup>
