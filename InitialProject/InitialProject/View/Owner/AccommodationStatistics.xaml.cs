@@ -273,7 +273,7 @@ namespace InitialProject.View.Owner
             {
                 if (YourReservations[i].StartDate.Year == 2022)
                 {
-                    counterSug2023++;
+                    counterSug2022++;
                 }
             }
 
