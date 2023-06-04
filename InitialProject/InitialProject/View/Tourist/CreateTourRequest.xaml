@@ -1,0 +1,113 @@
+﻿<Window x:Class="InitialProject.View.Tourist.CreateTourRequest"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.View.Tourist"
+        mc:Ignorable="d"
+        Title="CreateTourRequest" Height="768" Width="1024" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <Label Content="Tour Request" FontSize="40" HorizontalAlignment="Left" Margin="172,107,0,0" VerticalAlignment="Top"/>
+        <DockPanel HorizontalAlignment="Center" Height="147" VerticalAlignment="Top" Width="700">
+            <Button Content="Home" Width="110" Height="50" FontSize="17" Click="Home_OnClick"/>
+            <Button Content="Search" Width="110" Height="50" FontSize="17" Click="Search_OnClick"/>
+            <Button Content="Registered Tours" Width="140" Height="50" FontSize="17" Click="RegisteredTours_OnClick"/>
+            <Button Content="Requests" Width="110" Height="50" FontSize="17" Click="Requests_OnClick"/>
+            <Button Content="Vouchers" Width="110" Height="50" FontSize="17" Click="Vouchers_OnClick"/>
+            <Button Content="Sent Requests" Width="120" Height="50" FontSize="17" Click="SentRequests_OnClick"/>
+        </DockPanel>
+        <TextBlock 
+            HorizontalAlignment="Left" 
+            Margin="172,170,0,0" 
+            TextWrapping="Wrap" 
+            Text="Please enter all the parameters and tap Send to create a new request." 
+            VerticalAlignment="Top" 
+            Height="19" 
+            Width="378"/>
+
+        <Rectangle
+            HorizontalAlignment="Center" 
+            Height="520" Margin="0,194,0,0" 
+            Stroke="Black" VerticalAlignment="Top" 
+            Width="440" StrokeDashOffset="-3" RadiusX="20" 
+            RadiusY="20"/>
+
+        <Label Content="Location" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" Margin="319,212,0,0" VerticalAlignment="Top"/>
+        <Label Content="Description" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" Margin="311,307,0,0" VerticalAlignment="Top"/>
+        <Label Content="Language" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" Margin="319,408,0,0" VerticalAlignment="Top"/>
+        <Label Content="Date range" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" Margin="305,489,0,0" VerticalAlignment="Top"/>
+        <Label Content="City" FontSize="14" HorizontalAlignment="Left" Margin="474,218,0,0" VerticalAlignment="Top"/>
+        <Label Content="Country" FontSize="14" HorizontalAlignment="Left" Margin="448,252,0,0" VerticalAlignment="Top"/>
+        
+        <TextBox Name="CityTextBox" LostFocus="CityTextBox_OnLostFocus" HorizontalAlignment="Left" Margin="525,223,0,0" TextWrapping="Wrap" Text="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="CountryTextBox" LostFocus="CountryTextBox_OnLostFocus" HorizontalAlignment="Left" Margin="525,257,0,0" TextWrapping="Wrap" Text="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="DescriptionTextBox" LostFocus="DescriptionTextBox_OnLostFocus" HorizontalAlignment="Left" Margin="491,316,0,0" TextWrapping="Wrap" Text="{Binding Path=Description, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="189" Height="60"/>
+        <TextBox Name="LanguageTextBox" LostFocus="LanguageTextBox_OnLostFocus" HorizontalAlignment="Left" Margin="525,417,0,0" TextWrapping="Wrap" Text="{Binding Path=TourLanguage, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
+        
+        <Label Content="Number of Tourists" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" Margin="313,596,0,0" VerticalAlignment="Top" Height="42" Width="195"/>
+        
+        <Slider 
+            x:Name="Slider"
+            Value="1"
+            Minimum="1"
+            Maximum="100"
+            HorizontalAlignment="Left" 
+            Margin="526,608,0,0" 
+            VerticalAlignment="Top" Width="120"/>
+        
+        <TextBox 
+            Text="{Binding ElementName=Slider, Path=Value, UpdateSourceTrigger=PropertyChanged, Converter={local:IntToTextConverter}}"
+            HorizontalAlignment="Left" 
+            Margin="665,608,0,0" 
+            TextWrapping="Wrap"
+            VerticalAlignment="Top" Width="30" Height="18"/>
+        
+        <Label Content="Start Date" FontSize="14" HorizontalAlignment="Left" Margin="478,495,0,0" VerticalAlignment="Top"/>
+        <Label Content="End Date" FontSize="14" HorizontalAlignment="Left" Margin="478,529,0,0" VerticalAlignment="Top"/>
+        <DatePicker  
+            SelectedDate="{Binding Path=StartDate, UpdateSourceTrigger=PropertyChanged}" 
+            HorizontalAlignment="Left" Margin="563,500,0,0" VerticalAlignment="Top" 
+            Text=""/>
+
+        <DatePicker SelectedDate="{Binding Path=EndDate, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="563,531,0,0" VerticalAlignment="Top"/>
+        <Line X1="720" Y1="300"
+            X2="280" Y2="300"
+            Stroke="Black"
+            StrokeDashArray="1, 3"
+            StrokeThickness="3"
+            Margin="2,0,-2,0"/>
+        <Line X1="720" Y1="396"
+              X2="280" Y2="396"
+              Stroke="Black"
+              StrokeDashArray="1, 3"
+              StrokeThickness="3"
+              Margin="2,0,-2,0"/>
+        <Line X1="720" Y1="469"
+              X2="280" Y2="469"
+              Stroke="Black"
+              StrokeDashArray="1, 3"
+              StrokeThickness="3"
+              Margin="2,0,-2,0"/>
+        <Line X1="720" Y1="579"
+              X2="280" Y2="579"
+              Stroke="Black"
+              StrokeDashArray="1, 3"
+              StrokeThickness="3"
+              Margin="2,0,-2,0"/>
+        <Line X1="720" Y1="647"
+              X2="280" Y2="647"
+              Stroke="Black"
+              StrokeDashArray="1, 3"
+              StrokeThickness="3"
+              Margin="2,0,-2,0"/>
+        <Button 
+            Content="Send" 
+            Height="31" 
+            Width="100" 
+            HorizontalAlignment="Left"
+            Margin="614,664,0,0" 
+            VerticalAlignment="Top"
+            Click="Send_OnClick"
+            />
+    </Grid>
+</Window>

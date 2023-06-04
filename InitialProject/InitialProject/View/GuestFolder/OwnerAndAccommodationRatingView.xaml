@@ -17,7 +17,7 @@
                 </Style>
             </DataGrid.ColumnHeaderStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="250" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="240" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Start date" Binding="{Binding StartDate, StringFormat={}{0:dd.MM.yyyy}}" Width="130"></DataGridTextColumn>
                 <DataGridTextColumn Header="End date" Binding="{Binding EndDate, StringFormat={}{0:dd.MM.yyyy}}" Width="130"></DataGridTextColumn>
             </DataGrid.Columns>
@@ -37,10 +37,9 @@
                 </Style>
             </DataGrid.ColumnHeaderStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="70" />
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="240" />
                 <DataGridTextColumn Header="Start date" Binding="{Binding StartDate, StringFormat={}{0:dd/MM/yyyy}}" Width="130"/>
                 <DataGridTextColumn Header="End date" Binding="{Binding EndDate, StringFormat={}{0:dd/MM/yyyy}}" Width="130"/>
-                <DataGridTextColumn Header="Number of guests" Binding="{Binding GuestNumber}" Width="130"/>
             </DataGrid.Columns>
         </DataGrid>
         <Label Content="Old reservations:&#xD;" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift Light"/>

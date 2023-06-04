@@ -13,21 +13,27 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using InitialProject.Model;
 
-namespace InitialProject.View.Guide
+namespace InitialProject.View.Tourist
 {
     /// <summary>
-    /// Interaction logic for tour.xaml
+    /// Interaction logic for TourRatingWindow.xaml
     /// </summary>
-    public partial class tour : Window
+    public partial class TourRatingWindow : Window
     {
-        public tour(User user)
+        User User { get; set; }
+
+        public TourRatingWindow(User user)
         {
             InitializeComponent();
+            this.DataContext = this;
+            this.User = user;
         }
 
-        private void SelectTourComponent_Loaded(object sender, RoutedEventArgs e)
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-
+            HomePage home = new HomePage(User);
+            home.Show();
+            Close();
         }
     }
 }

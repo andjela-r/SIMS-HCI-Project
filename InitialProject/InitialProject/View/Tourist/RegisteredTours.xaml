@@ -16,6 +16,21 @@
             <Button Content="Vouchers" Width="110" Height="50" FontSize="17" Click="Vouchers_OnClick"/>
             <Button Content="Sent Requests" Width="120" Height="50" FontSize="17" Click="SentRequests_OnClick"/>
         </DockPanel>
+        <Button Content="Join Tour" HorizontalAlignment="Left" Height="20" Margin="788,394,0,0" VerticalAlignment="Top" Width="102" Click="JoinTour_OnClick"/>
+        <DataGrid 
+            HorizontalAlignment="Left" 
+            Height="107" Margin="162,307,0,0" 
+            VerticalAlignment="Top" Width="585" 
+            d:ItemsSource="{d:SampleData ItemCount=5}"
+            ItemsSource="{Binding Appointments}" IsReadOnly="True" SelectionMode="Single" SelectedItem="{Binding SelectedAppointment}"
+            AutoGenerateColumns="False" HeadersVisibility="Column" FontSize="13">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="200" CanUserResize="True"/>
+                <DataGridTextColumn Header="Current KeyPoint" Binding="{Binding CurrentKeyPoint}" Width="*"/>
+                <DataGridTextColumn Header="Presence" Binding="{Binding Presence}" Width="200" CanUserResize="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Ongoing Tours" FontSize="20" HorizontalAlignment="Left" Margin="162,265,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

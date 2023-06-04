@@ -12,12 +12,14 @@ namespace InitialProject.Service
     {
         KeyPointRepository keyPointRepository = new KeyPointRepository();
 
-        public void CreateKeyPoint(KeyPointDTO keyPointDTO)
+        public int CreateKeyPoint(KeyPointDTO keyPointDTO)
         {
             KeyPoint keyPoint = new KeyPoint();
             keyPoint.Name = keyPointDTO.Name;
 
             keyPointRepository.Save(keyPoint);
+
+            return keyPoint.Id;
         }
 
         public void ChangeKeyPointStatus(KeyPoint keyPoint)

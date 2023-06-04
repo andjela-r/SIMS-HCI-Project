@@ -1,10 +1,12 @@
 ﻿using InitialProject.Model;
 using InitialProject.Repository;
+using InitialProject.View.Tourist;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Documents;
 
 namespace InitialProject.View.Owner
 {
@@ -18,6 +20,7 @@ namespace InitialProject.View.Owner
         public static ObservableCollection<RequestStatus> Requests { get; set; }
         public RequestStatus SelectedRequest { get; set; }
         public User User { get; set; }
+      //  public string id { get; set; }
 
         private int _requestId;
         public int RequestId
@@ -98,12 +101,12 @@ namespace InitialProject.View.Owner
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-
         public BookingRequests(User owner)
         {
             InitializeComponent();
             this.DataContext = this;
             this.User = owner;
+            //id = IdBox.Text;
             _requestStatusRepository = new RequestStatusRepository();
             _accommodationReservationRepository=new AccommodationReservationRepository();
             Requests = new ObservableCollection<RequestStatus>(_requestStatusRepository.FindAll());
@@ -123,40 +126,18 @@ namespace InitialProject.View.Owner
 
         }
 
-        private void AcceptRequest(object sender, RoutedEventArgs e)
+        private void OpenRequest_OnClick(object sender, RoutedEventArgs e)
         {
-            RequestStatus request = _requestStatusRepository.FindById(_requestId);
-            
-            if (request == null)
-            {
-                MessageBox.Show("That request does not exist!");
-            } else
-            {
-                AccommodationReservation accReservation = new AccommodationReservation();
-                accReservation = _accommodationReservationRepository.FindById(request.ReservationId);
-                request.Request = RequestStatusEnum.Accepted;
-                _requestStatusRepository.Update(request);
-                accReservation.StartDate=Convert.ToDateTime(request.StartDate);
-                accReservation.EndDate=Convert.ToDateTime(request.EndDate);
-               _accommodationReservationRepository.Update(accReservation);
-               MessageBox.Show("Request accepted!");
-            }
-        }
-
-        private void DenyRequest(object sender, RoutedEventArgs e)
-        {
-            RequestStatus request = _requestStatusRepository.FindById(_requestId);
+            AcceptOrDenyRequest acceptOrDenyRequest = new AcceptOrDenyRequest(User);
+            acceptOrDenyRequest.IdBlock.Text = IdBox.Text;
+            int id = int.Parse(IdBox.Text);
+            RequestStatus request = _requestStatusRepository.FindById(id);
             if (request == null)
             {
                 MessageBox.Show("That request does not exist!");
             }
-            else
-            {
-                request.Request = RequestStatusEnum.Denied;
-                request.Comment = _addedComment.ToString();
-                _requestStatusRepository.Update(request);
-                MessageBox.Show("Request denied!");
-            }
+            acceptOrDenyRequest.Show();
+            Close();
 
         }
     }

@@ -69,8 +69,8 @@ namespace InitialProject
                             Close();
                             break;
                         case Role.Guide:
-                            tour tour = new tour(user);
-                            tour.Show();
+                            ToursView toursView = new ToursView(user);
+                            toursView.Show();
                             Close();
                             break;
                         case Role.Owner:

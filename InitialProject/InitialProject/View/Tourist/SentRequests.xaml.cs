@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using InitialProject.Model;
+using InitialProject.Repository;
 
 namespace InitialProject.View.Tourist
 {
@@ -21,12 +23,16 @@ namespace InitialProject.View.Tourist
     public partial class SentRequests : Window
     {
         public User User { get; set; }
+        public TourRequestRepository tourRequestRepository { get; set; }
+        public static ObservableCollection<TourRequest> TourRequests { get; set; }
 
         public SentRequests(User user)
         {
             InitializeComponent();
             this.DataContext = this;
             this.User = user;
+            tourRequestRepository = new TourRequestRepository();
+            TourRequests = new ObservableCollection<TourRequest>(tourRequestRepository.FindByTouristId(User.Id));
         }
         private void Home_OnClick(object sender, RoutedEventArgs e)
         {

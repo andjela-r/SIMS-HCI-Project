@@ -27,6 +27,22 @@ namespace InitialProject.Service
 
             accommodationRepository.Save(accommodation);
         }
+
+        public void CreateAccommodation(Accommodation createdAccommodation)
+        {
+            Accommodation accommodation = new Accommodation();
+            accommodation.Name = createdAccommodation.Name;
+            accommodation.LocationId = createdAccommodation.LocationId;
+            accommodation.Type = createdAccommodation.Type;
+            accommodation.MaxGuests = createdAccommodation.MaxGuests;
+            accommodation.MinStay = createdAccommodation.MinStay;
+            accommodation.DaysToCancelBeforeReservation = createdAccommodation.DaysToCancelBeforeReservation;
+            accommodation.OwnerId = createdAccommodation.OwnerId;
+            accommodation.Pictures = createdAccommodation.Pictures;
+
+            accommodationRepository.Save(accommodation);
+        }
+
         private static void AccommodationRegistration()
         {
 
