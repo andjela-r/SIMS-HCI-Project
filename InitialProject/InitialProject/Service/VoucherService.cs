@@ -22,5 +22,16 @@ namespace InitialProject.Service
             VoucherRepository voucherRepository = new VoucherRepository();
             voucherRepository.Save(voucher);
         }
+
+        public void DeleteVoucherBecauseOfGuidesResignation(int guideId)
+        {
+            VoucherRepository voucherRepository = new VoucherRepository();
+
+            List<Voucher> vouchers = voucherRepository.FindByGuideId(guideId);
+            foreach (Voucher voucher in vouchers)
+            {
+                voucherRepository.Delete(voucher);
+            }
+        }
     }
 }

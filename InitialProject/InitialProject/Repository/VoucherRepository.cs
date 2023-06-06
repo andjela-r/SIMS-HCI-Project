@@ -42,6 +42,12 @@ namespace InitialProject.Repository
             return _vouchers.FindAll(x => x.TouristId == touristId && x.ExpirationDate > DateTime.Now);
         }
 
+        public List<Voucher> FindByGuideId(int guideId)
+        {
+            _vouchers = _serializer.FromCSV(FilePath);
+            return _vouchers.FindAll(x => x.GuideId == guideId);
+        }
+
         public Voucher Save(Voucher voucher)
         {
             voucher.Id = NextId();

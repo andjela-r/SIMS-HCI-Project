@@ -57,7 +57,7 @@
                     </ListViewItem>
                 </ListView>
             </StackPanel>
-            <Button x:Name="Create" Background="#82cfc1" Foreground="White"  FontFamily="Century Gothic" FontSize="20" Margin="1088,670,-1040,14" Click="Create_OnClick">
+            <Button x:Name="Create" Background="#82cfc1" Foreground="White"  FontFamily="Century Gothic" FontSize="20" Margin="1088,174,-1040,512" Click="Create_OnClick">
                 Create
             </Button>
         </Grid>
@@ -108,11 +108,59 @@
                 </Button>
             </Grid>
         </Border>
+        <TextBlock Foreground="White" FontWeight="Bold" FontFamily="Century Gothic" FontSize="30" Margin="223,174,795,456">
+            Tour Requests
+            <TextBlock.Effect>
+                <DropShadowEffect Color="#82cfc1" ShadowDepth="2" BlurRadius="10"/>
+            </TextBlock.Effect>
+        </TextBlock>
         <DataGrid x:Name="TourRequestDataGrid" DockPanel.Dock="Bottom"
                   ItemsSource="{Binding Path=TourRequests, UpdateSourceTrigger=PropertyChanged}"
                   SelectedItem="{Binding Path = SelectedTourRequest, UpdateSourceTrigger=PropertyChanged}"
                   Background="#c7f2ea" 
-                  AutoGenerateColumns="False" IsReadOnly="True" Margin="210,174,0,68">
+                  AutoGenerateColumns="False" IsReadOnly="True" Margin="210,213,0,276">
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="#82cfc1"></Setter>
+                    <Setter Property="FontFamily" Value="Century Gothic"></Setter>
+                    <Setter Property="Foreground" Value="White"></Setter>
+                    <Setter Property="BorderThickness" Value="0 0 1 1"></Setter>
+                    <Setter Property="BorderBrush" Value="#c7f2ea"></Setter>
+                    <Setter Property="FontSize" Value="20"></Setter>
+                    <Setter Property="Padding" Value="8 3 0 3"></Setter>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.CellStyle>
+                <Style TargetType="{x:Type DataGridCell}">
+                    <Setter Property="FontFamily" Value="Century Gothic"></Setter>
+                    <Setter Property="FontSize" Value="15"></Setter>
+                    <Setter Property="Foreground" Value="#82cfc1"></Setter>
+                </Style>
+            </DataGrid.CellStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Location" Binding="{Binding Location.City}" Width="150"></DataGridTextColumn>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="320"></DataGridTextColumn>
+                <DataGridTextColumn Header="Language" Binding="{Binding Language}" Width="150"></DataGridTextColumn>
+                <DataGridTextColumn Header="Max Guests" Binding="{Binding MaxTourists}" Width="130"></DataGridTextColumn>
+                <DataGridTextColumn Header="Start Date" Binding="{Binding StartDate}" Width="170"></DataGridTextColumn>
+                <DataGridTextColumn Header="End Date" Binding="{Binding EndDate}" Width="170"></DataGridTextColumn>
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="130"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBlock Foreground="White" FontWeight="Bold" FontFamily="Century Gothic" FontSize="30" Margin="223,444,704,216">
+            Complex Tour Requests
+            <TextBlock.Effect>
+                <DropShadowEffect Color="#82cfc1" ShadowDepth="2" BlurRadius="10"/>
+            </TextBlock.Effect>
+        </TextBlock>
+        <Button x:Name="Select" Background="#82cfc1" Foreground="White"  FontFamily="Century Gothic" FontSize="20" Margin="1088,449,29,239" Click="Select_OnClick" RenderTransformOrigin="0.5,0.5">
+            Select
+        </Button>
+        <DataGrid x:Name="ComplexTourRequestDataGrid" DockPanel.Dock="Bottom"
+                  ItemsSource="{Binding Path=ComplexTourRequests, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding Path = SelectedComplexTourRequest, UpdateSourceTrigger=PropertyChanged}"
+                  Background="#c7f2ea" 
+                  AutoGenerateColumns="False" IsReadOnly="True" Margin="210,486,0,10">
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="Background" Value="#82cfc1"></Setter>

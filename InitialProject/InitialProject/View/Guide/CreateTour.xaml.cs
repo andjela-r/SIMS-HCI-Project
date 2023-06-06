@@ -19,6 +19,10 @@ using InitialProject.DTO;
 using System.Collections;
 using System.Security.Cryptography;
 using Xceed.Wpf.Toolkit;
+using System.Windows.Controls.DataVisualization.Charting;
+using System.Linq;
+using System.Windows.Controls.DataVisualization.Charting;
+
 
 namespace InitialProject.View.Guide
 {

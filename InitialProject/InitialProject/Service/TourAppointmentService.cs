@@ -14,6 +14,7 @@ namespace InitialProject.Service
     {
         TourAppointmentRepository tourAppointmentRepository = new TourAppointmentRepository();
         private TourRepository _tourRepository = new TourRepository();
+        private VoucherService voucherService = new VoucherService();
 
         public void CreateAppointment(TourAppointmentDTO tourAppointmentDTO)
         {
@@ -68,6 +69,31 @@ namespace InitialProject.Service
             }
 
             tourAppointmentRepository.Delete(selectedAppointment);
+        }
+
+        public void DeletetourAppointmentBecauseOfGuidesResignation(Tour tour)
+        {
+            List<int> touristIds = new List<int>();
+            List<TourAppointment> tourAppointments = tourAppointmentRepository.FindByTour(tour.Id);
+            foreach (TourAppointment tourAppointment in tourAppointments)
+            {
+                foreach (int touristId in tourAppointment.TouristIds)
+                {
+                    touristIds.Add(touristId);
+                }
+                tourAppointmentRepository.Delete(tourAppointment);
+            }
+
+            string name = tour.Name + " refund";
+            DateTime expirationDate = DateTime.Today.AddYears(2);
+            VoucherDTO voucherDto = new VoucherDTO();
+            voucherDto.Name = name;
+            voucherDto.ExpirationDate = expirationDate;
+            foreach (int touristid in touristIds)
+            {
+                voucherDto.TouristId = touristid;
+                voucherService.CreateVoucher(voucherDto);
+            }
         }
     }
 }

@@ -1,0 +1,19 @@
+﻿<Window x:Class="InitialProject.View.Guide.PickDate"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.View.Guide"
+        mc:Ignorable="d"
+        Background ="#c7f2ea "
+        WindowStartupLocation="CenterScreen"
+        Title="PickDate" Height="300" Width="300">
+    <Grid>
+        <DatePicker Name="DateBox" Foreground="#82cfc1" FontFamily="Century Gothic" FontSize="20" SelectedDate="{Binding MyDate}" Margin="30,43,30,192" RenderTransformOrigin="0.5,0.5" >
+        </DatePicker>
+        <Button Background="#82cfc1" Foreground="White"  FontFamily="Century Gothic" FontSize="20" Margin="45,186,45,43" Click="Accept_OnClick" RenderTransformOrigin="0.5,0.5">
+            Accept
+        </Button>
+    </Grid>
+
+</Window>

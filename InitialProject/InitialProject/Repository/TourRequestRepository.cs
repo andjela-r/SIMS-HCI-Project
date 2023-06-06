@@ -116,5 +116,21 @@ namespace InitialProject.Repository
             int mostFrequentLocation = valueCounts.OrderByDescending(kv => kv.Value).FirstOrDefault().Key;
             return mostFrequentLocation;
         }
+
+        public List<int> FindAllYears()
+        {
+            List<TourRequest> allTourRequests = FindAll();
+            List<int> years = new List<int>();
+
+            foreach (TourRequest tourRequest in allTourRequests)
+            { 
+                years.Add(tourRequest.StartDate.Year);
+                years.Add(tourRequest.EndDate.Year);
+            }
+
+            List<int> distinctYears = years.Distinct().ToList();
+
+            return distinctYears;
+        }
     }
 }

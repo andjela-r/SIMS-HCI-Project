@@ -10,6 +10,7 @@ namespace InitialProject.Model
         public int TouristId { get; set; }
         public string Name { get; set; }
         public DateTime ExpirationDate { get; set; }
+        public int GuideId { get; set; }
 
         public Voucher(){ }
 
@@ -23,7 +24,7 @@ namespace InitialProject.Model
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), TouristId.ToString(), Name, ExpirationDate.ToString("MM/dd/yyyy HH:mm:ss tt") };
+            string[] csvValues = { Id.ToString(), TouristId.ToString(), Name, ExpirationDate.ToString("MM/dd/yyyy HH:mm:ss tt"), GuideId.ToString() };
             return csvValues;
         }
 
@@ -33,6 +34,7 @@ namespace InitialProject.Model
             TouristId = Convert.ToInt32(values[1]);
             Name = values[2];
             ExpirationDate = Convert.ToDateTime(values[3]);
+            GuideId = Convert.ToInt32(values[4]);
         }
     }
 }

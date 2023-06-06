@@ -10,7 +10,7 @@ namespace InitialProject.Repository
 {
     public class PartOfComplexTourRequestRepository
     {
-        private const string FilePath = "../../../Resources/Data/partOfComplexTourRequest.csv";
+        private const string FilePath = "../../../Resources/Data/partOfComplexTour.csv";
         private readonly Serializer<TourRequest> _serializer;
         private List<TourRequest> _partOfComplexTourRequests;
 
