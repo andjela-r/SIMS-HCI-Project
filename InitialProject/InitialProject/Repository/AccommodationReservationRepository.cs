@@ -95,6 +95,21 @@ namespace InitialProject.Repository
             return _serializer.FromCSV(FilePath);
         }
 
+        public List<AccommodationReservation> GetMatchingReservations(List<AccommodationReservation> rezervacije, List<Accommodation> smestaji)
+        {
+            List<AccommodationReservation> matchingReservations = rezervacije
+                .Where(r => smestaji.Any(s => s.Id == r.AccommodationId))
+                .ToList();
+
+            return matchingReservations;
+        }
+
+        public bool IsTrueGetMatchingReservations(List<AccommodationReservation> reservation) {
+            if (reservation == null)
+                return false;
+            else
+                return true;
+        }
     }
 
 }

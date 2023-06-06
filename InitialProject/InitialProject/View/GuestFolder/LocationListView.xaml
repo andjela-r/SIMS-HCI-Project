@@ -5,14 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View.GuestFolder"
         mc:Ignorable="d"
-        Title="Location list" Height="450" Width="800" Background="Lavender">
-    <Grid>
+        Title="Location list" Height="410" Width="491" Background="Lavender">
+    <Grid Margin="0,0,0,-367" HorizontalAlignment="Left" Width="783">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <Label Content="Which location you are interested in?" HorizontalAlignment="Left" Margin="25,24,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift Light" FontSize="25"/>
-        <DataGrid x:Name="LocationsDataGrid" ItemsSource="{Binding AvailableDatesPair}" SelectedItem="{Binding SelectedAvailableDatePair}"  AutoGenerateColumns="False" Margin="36,69,366,117" Background="Lavender" BorderBrush="Lavender" FontFamily="Bahnschrift Light" FontSize="20" SelectionChanged="MyDataGrid_SelectionChanged">
+        <DataGrid x:Name="LocationsDataGrid" ItemsSource="{Binding Location}" IsReadOnly="True" SelectedItem="{Binding SelectedLocation}"  SelectionChanged="MyDataGrid_SelectionChanged"  AutoGenerateColumns="False" Margin="36,69,366,446" Background="Lavender" BorderBrush="Lavender" FontFamily="Bahnschrift Light" FontSize="20" GridLinesVisibility="None">
+            <DataGrid.InputBindings>
+                <KeyBinding Key="Enter" Command="{Binding SelectColumnCommand}" />
+            </DataGrid.InputBindings>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="City" Binding="{Binding City}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Country" Binding="{Binding Country}"  Width="*"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <Button x:Name="CommentButton_Copy" Content="Go back" HorizontalAlignment="Left" Margin="145,318,0,0" VerticalAlignment="Top" Height="44" Width="181" FontSize="20" Click="GoBack" FontFamily="Bahnschrift Light">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="10">
+                        <ContentPresenter HorizontalAlignment="Center"
+                            VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+            <Button.Effect>
+                <DropShadowEffect Color="Black" Direction="300" ShadowDepth="3" Opacity="0.5" />
+            </Button.Effect>
+        </Button>
     </Grid>
 </Window>

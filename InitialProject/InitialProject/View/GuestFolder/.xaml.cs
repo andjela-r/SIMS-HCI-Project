@@ -30,16 +30,16 @@ namespace InitialProject.Forms
 
         private void ShowCreateCommentForm(object sender, RoutedEventArgs e)
         {
-            CommentForm createCommentForm = new CommentForm(LoggedInUser);
-            createCommentForm.Show();
+           // CommentForm createCommentForm = new CommentForm(LoggedInUser);
+            //createCommentForm.Show();
         }
 
         private void ShowViewCommentForm(object sender, RoutedEventArgs e)
         {
             if (SelectedComment != null)
             {
-                CommentForm viewCommentForm = new CommentForm(SelectedComment);
-                viewCommentForm.Show();
+                //CommentForm viewCommentForm = new CommentForm(SelectedComment);
+                //viewCommentForm.Show();
             }
         }
 
@@ -47,8 +47,8 @@ namespace InitialProject.Forms
         {
             if (SelectedComment != null)
             {
-                CommentForm updateCommentForm = new CommentForm(SelectedComment, LoggedInUser);
-                updateCommentForm.Show();
+               // CommentForm updateCommentForm = new CommentForm(SelectedComment, LoggedInUser);
+                //updateCommentForm.Show();
             }
         }
 

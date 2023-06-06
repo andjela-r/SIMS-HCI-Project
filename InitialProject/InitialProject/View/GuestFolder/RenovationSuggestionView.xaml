@@ -8,9 +8,17 @@
         Title="Renovation suggestion" Height="450" Width="800" Background="Lavender" >
     <Grid>
         <Label Content="What things would you renovate/change in this accommodation?" HorizontalAlignment="Center" Margin="0,28,0,0" VerticalAlignment="Top" Height="57" Width="742" FontSize="25" FontFamily="Bahnschrift Light" />
-        <TextBox x:Name="SuggestionTextBox" HorizontalAlignment="Left" Margin="76,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="605" Height="107" FontSize="20" Background="Gainsboro" FontFamily="Bahnschrift Light"/>
+        <TextBox x:Name="SuggestionTextBox" HorizontalAlignment="Left" Margin="76,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="605" Height="107" FontSize="20" Background="Gainsboro" FontFamily="Bahnschrift Light">
+            <TextBox.Effect>
+                <DropShadowEffect Color="Black" Direction="300" ShadowDepth="3" Opacity="0.5" />
+            </TextBox.Effect>
+        </TextBox>
         <Label Content="How urgent is it?" HorizontalAlignment="Left" Margin="29,217,0,0" VerticalAlignment="Top" Height="52" Width="213" FontSize="25" FontFamily="Bahnschrift Light" />
-        <TextBox x:Name="LevelTextBox" HorizontalAlignment="Left" Margin="76,269,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="166" Height="52" FontSize="20" Background="Gainsboro" FontFamily="Bahnschrift Light"/>
+        <TextBox x:Name="LevelTextBox" HorizontalAlignment="Left" Margin="76,269,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="166" Height="52" FontSize="20" Background="Gainsboro" FontFamily="Bahnschrift Light">
+            <TextBox.Effect>
+                <DropShadowEffect Color="Black" Direction="300" ShadowDepth="3" Opacity="0.5" />
+            </TextBox.Effect>
+        </TextBox>
         <Label Content="What scale is this?" HorizontalAlignment="Left" Margin="510,220,0,0" VerticalAlignment="Top" Height="49" Width="224" FontSize="25" FontFamily="Bahnschrift Light"/>
         <Button Content="?" Margin="595,269,147,113" FontSize="25" Click="Button_Click_1">
             <Button.Template>
@@ -39,11 +47,42 @@
                     </Grid>
                 </ControlTemplate>
             </Button.Template>
+            <Button.Effect>
+                <DropShadowEffect Color="Black" Direction="300" ShadowDepth="3" Opacity="0.5" />
+            </Button.Effect>
         </Button>
-        <Button Content="Submit" HorizontalAlignment="Left" Margin="246,359,0,0" VerticalAlignment="Top" Height="65" Width="264" FontSize="25" FontFamily="Bahnschrift Light" Click="Button_Click_2"/>
-        <Label Content="B - GO BACK ON
-PREVIOUS PAGE
-" HorizontalAlignment="Left" Margin="556,403,0,0" VerticalAlignment="Top" FontSize="15" FontFamily="Bahnschrift Light"/>
+        <Button Content="Submit" HorizontalAlignment="Left" Margin="114,359,0,0" VerticalAlignment="Top" Height="65" Width="264" FontSize="25" FontFamily="Bahnschrift Light" Click="Button_Click_2">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="10">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                  VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+            <Button.Effect>
+                <DropShadowEffect Color="Black" Direction="300" ShadowDepth="3" Opacity="0.5" />
+            </Button.Effect>
+        </Button>
+        <Button x:Name="GoBackButton" Content="Go back" HorizontalAlignment="Left" Margin="417,360,0,0" VerticalAlignment="Top" Height="65" Width="264" FontSize="25" Click="GoBack" FontFamily="Bahnschrift Light">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="10">
+                        <ContentPresenter HorizontalAlignment="Center"
+                            VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+            <Button.Effect>
+                <DropShadowEffect Color="Black" Direction="300" ShadowDepth="3" Opacity="0.5" />
+            </Button.Effect>
+        </Button>
 
     </Grid>
 </Window>

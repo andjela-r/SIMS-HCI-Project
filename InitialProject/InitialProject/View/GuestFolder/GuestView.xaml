@@ -7,13 +7,73 @@
         mc:Ignorable="d"
         Title="Welcome window" Height="470" Width="810" Background="Lavender">
     <Grid>
-        <Label Content="WELCOME BACK!" HorizontalAlignment="Left" Margin="37,24,0,0" VerticalAlignment="Top" Height="54" Width="343" FontSize="40" FontFamily="Bahnschrift Light"/>
-        <Label Content="Where would you like to go?" HorizontalAlignment="Left" Margin="37,83,0,0" VerticalAlignment="Top" Height="46" Width="343" FontSize="25" FontFamily="Bahnschrift Light" />
-        <Button x:Name="SurpriseMeButton" HorizontalAlignment="Left" Margin="40,348,0,0" VerticalAlignment="Top" Height="73" Width="343" Content="Surprise me" FontSize="25" Background="Gainsboro" FontFamily="Bahnschrift Light"/>
-        <Button Content="Search" HorizontalAlignment="Left" Margin="40,250,0,0" VerticalAlignment="Top" Height="73" Width="343" FontSize="25" Click="Button_Click_2" Background="Gainsboro" FontFamily="Bahnschrift Light"/>
-        <Button Content="Forums" HorizontalAlignment="Left" Margin="423,348,0,0" VerticalAlignment="Top" Height="73" Width="345" FontSize="25" Click="Button_Click_4" Background="Gainsboro" FontFamily="Bahnschrift Light"/>
-        <Button Content="Reservations" HorizontalAlignment="Left" VerticalAlignment="Top" Height="73" Width="343" Click="Button_Click" Margin="425,250,0,0" FontSize="25" Background="Gainsboro" FontFamily="Bahnschrift Light"/>
-        <Button x:Name="NotificationButton" Content="2" Margin="440,24,315,376" FontSize="25" Click="NotificationButton_Click" Background="Lavender">
+        <Label Content="WELCOME BACK!" HorizontalAlignment="Left" Margin="37,51,0,0" VerticalAlignment="Top" Height="54" Width="398" FontSize="48" FontFamily="Bahnschrift Light"/>
+        <Label Content="Where would you like to go?" HorizontalAlignment="Left" Margin="42,144,0,0" VerticalAlignment="Top" Height="46" Width="343" FontSize="25" FontFamily="Bahnschrift Light" />
+        <Button x:Name="Search" Content="Search" HorizontalAlignment="Left" Margin="40,232,0,0" VerticalAlignment="Top" Height="85" Width="343" FontSize="25" Click="Button_Click_2" Background="Gainsboro" FontFamily="Bahnschrift Light">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="10">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                  VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+            <Button.Effect>
+                <DropShadowEffect Color="Black" Direction="300" ShadowDepth="3" Opacity="0.5" />
+            </Button.Effect>
+        </Button>
+        <Button x:Name="Forum" Content="Forums" HorizontalAlignment="Left" Margin="40,338,0,0" VerticalAlignment="Top" Height="85" Width="345" FontSize="25" Click="Button_Click_4" Background="Gainsboro" FontFamily="Bahnschrift Light">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="10">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                  VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+            <Button.Effect>
+                <DropShadowEffect Color="Black" Direction="300" ShadowDepth="3" Opacity="0.5" />
+            </Button.Effect>
+        </Button>
+        <Button Content="Reservations" HorizontalAlignment="Left" VerticalAlignment="Top" Height="85" Width="343" Click="Button_Click" Margin="425,232,0,0" FontSize="25" Background="Gainsboro" FontFamily="Bahnschrift Light">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="10">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                  VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+            <Button.Effect>
+                <DropShadowEffect Color="Black" Direction="300" ShadowDepth="3" Opacity="0.5" />
+            </Button.Effect>
+        </Button>
+        <Button Content="Profile" HorizontalAlignment="Left" Margin="424,338,0,0" VerticalAlignment="Top" Height="85" Width="346" FontSize="25" Click="Button_Click_3" Background="Gainsboro" FontFamily="Bahnschrift Light">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="10">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                  VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+            <Button.Effect>
+                <DropShadowEffect Color="Black" Direction="300" ShadowDepth="3" Opacity="0.5" />
+            </Button.Effect>
+        </Button>
+        <Button x:Name="NotificationButton" Content="2" Margin="440,24,333,376" FontSize="15" Click="NotificationButton_Click" Background="Lavender">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Grid>
@@ -41,10 +101,9 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Image HorizontalAlignment="Left" Height="162" Margin="563,28,0,0" VerticalAlignment="Top" Width="200" Source="/Resources/Images/logo.jpg"/>
-        <Label Content="B - GO BACK ON PREVIOUS PAGE
-" HorizontalAlignment="Left" Margin="563,428,0,0" FontSize="15" FontFamily="Bahnschrift Light"/>
-        <Button Content="Profile" HorizontalAlignment="Left" Margin="40,154,0,0" VerticalAlignment="Top" Height="73" Width="345" FontSize="25" Click="Button_Click_3" Background="Gainsboro" FontFamily="Bahnschrift Light"/>
+        <Image HorizontalAlignment="Left" Height="162" Margin="571,28,0,0" VerticalAlignment="Top" Width="202" Source="/View/GuestFolder/circle-logo.png"/>
+
+        <Label Content="   our &#xD;&#xA;company" HorizontalAlignment="Left" Margin="597,67,0,0" VerticalAlignment="Top" FontSize="30" FontFamily="Old English Text MT"/>
 
     </Grid>
 </Window>

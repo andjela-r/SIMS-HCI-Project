@@ -123,5 +123,15 @@ namespace InitialProject.View
         {
 
         }
+
+        private void dataGridAccommodations_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void GoBackButton(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

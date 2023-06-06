@@ -4,6 +4,7 @@ using InitialProject.View.Guest;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Prism.Commands;
+using System.Data.Common;
 
 namespace InitialProject.View.GuestFolder
 {
@@ -30,6 +33,7 @@ namespace InitialProject.View.GuestFolder
         public static ObservableCollection<Forum> Forums { get; set; }
         public ObservableCollection<Location> FilteredLocations { get; set; }
         public User Guest { get; set; }
+        public DelegateCommand SelectColumnCommand { get; set; }
 
         public LocationListView(User user)
         {
@@ -54,24 +58,75 @@ namespace InitialProject.View.GuestFolder
             }
             LocationsDataGrid.ItemsSource = FilteredLocations;
 
+           // MyCommand = new DelegateCommand(ExecuteMyCommand, CanExecuteMyCommand);
+
         }
 
-        private void MyDataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-            foreach(Forum forum in Forums) {
+       private void MyDataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+         {
+                 if (_forumRepository.IsThereLocationId(SelectedLocation.Id))
+                 {
+                     ForumListView forumList = new ForumListView(Guest, SelectedLocation);
+                     forumList.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                     forumList.Show();
+                 }
+                 else
+                 {
+                     ForumOpenView forumOpen = new ForumOpenView(Guest, SelectedLocation);
+                     forumOpen.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                     forumOpen.Show();
+                 }
+                    
+         }
 
-                if (SelectedLocation.Id == forum.LocationIntId)
+        private void GoBack(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        /*private void SelectColumn(object parameter)
+        {
+            var columnIndex = LocationsDataGrid.CurrentCell.Column.DisplayIndex;
+            var view = CollectionViewSource.GetDefaultView(LocationsDataGrid.ItemsSource);
+            view.MoveCurrentToFirst();
+
+            while (!view.IsCurrentAfterLast)
+            {
+                var row = view.CurrentItem as DataRowView;
+                if (row != null)
                 {
-                    //otvori forum koji vec postoji
-                }
-                else
-                {
-                    ForumOpenView forumOpen = new ForumOpenView();
+                    var cellValue = row.Row.ItemArray[columnIndex];
+                    ForumOpenView forumOpen = new ForumOpenView(Guest, SelectedLocation);
                     forumOpen.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                     forumOpen.Show();
                 }
-                   
+                view.MoveCurrentToNext();
             }
         }
+        private void ExecuteMyCommand(object parameter)
+        {
+            var columnIndex = LocationsDataGrid.CurrentCell.Column.DisplayIndex;
+            var view = CollectionViewSource.GetDefaultView(LocationsDataGrid.ItemsSource);
+            view.MoveCurrentToFirst();
+
+            while (!view.IsCurrentAfterLast)
+            {
+                var row = view.CurrentItem as DataRowView;
+                if (row != null)
+                {
+                    var cellValue = row.Row.ItemArray[columnIndex];
+                    ForumOpenView forumOpen = new ForumOpenView(Guest, SelectedLocation);
+                    forumOpen.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                    forumOpen.Show();
+                }
+                view.MoveCurrentToNext();
+            }
+        }
+
+        private bool CanExecuteMyCommand(object parameter)
+        {
+            // Logika koja određuje da li je komanda dostupna za izvršavanje
+            return true;
+        }*/
     }
 }

@@ -35,6 +35,9 @@
     <None Remove="Resources\Images\tour_picture2.jpg" />
     <None Remove="Resources\Images\view.png" />
     <None Remove="View\accommodation.jpg" />
+    <None Remove="View\GuestFolder\acc.jpg" />
+    <None Remove="View\GuestFolder\circle-logo.png" />
+    <None Remove="View\GuestFolder\trophy1.png" />
     <None Remove="View\logo.jpg" />
     <None Remove="View\trophy.jpg" />
   </ItemGroup>
@@ -60,6 +63,8 @@
 
   <ItemGroup>
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
+    <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
+    <PackageReference Include="Prism.Core" Version="8.1.97" />
   </ItemGroup>
 
   <ItemGroup>
@@ -79,9 +84,12 @@
     <Resource Include="Resources\Images\tour_picture2.jpg" />
     <Resource Include="Resources\Images\logo.jpg" />
     <Resource Include="Resources\Images\trophy.jpg" />
+    <Resource Include="View\GuestFolder\acc.jpg" />
     <Resource Include="View\GuestFolder\accommodation.jpg" />
+    <Resource Include="View\GuestFolder\circle-logo.png" />
     <Resource Include="View\GuestFolder\logo.jpg" />
     <Resource Include="View\GuestFolder\trophy.jpg" />
+    <Resource Include="View\GuestFolder\trophy1.png" />
   </ItemGroup>
 
   <ItemGroup>
