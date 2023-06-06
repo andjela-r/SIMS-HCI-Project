@@ -57,5 +57,10 @@
                 </ListView>
             </StackPanel>
         </Grid>
+        <Button Background="#82cfc1" Foreground="White"  FontFamily="Century Gothic" FontSize="20" Margin="1108,127,54,562" Click="GiveResignation_OnClick">
+            Quit
+        </Button>
+        <Label Padding="0" x:Name="nameLabel" Content=" " Margin="312,46,701,642" FontFamily="Century Gothic" FontSize="25" Foreground="#82cfc1" FontWeight="Bold"/>
+        <Label Padding="0" x:Name="superGuideLabel" Content=" " Margin="312,95,701,595" FontFamily="Century Gothic" FontSize="25" Foreground="#82cfc1" FontWeight="Bold"/>
     </Grid>
 </Window>

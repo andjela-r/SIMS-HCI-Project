@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using InitialProject.Model;
 using InitialProject.Repository;
-
 namespace InitialProject.Service
 {
     public class TourRequestService
@@ -100,5 +99,6 @@ namespace InitialProject.Service
 
             return locationId;
         }
+        
     }
 }

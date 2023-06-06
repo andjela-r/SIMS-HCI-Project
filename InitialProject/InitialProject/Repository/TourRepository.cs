@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using InitialProject.Model;
 using InitialProject.Serializer;
+using InitialProject.View.Tourist;
 
 namespace InitialProject.Repository
 {
@@ -56,6 +57,12 @@ namespace InitialProject.Repository
             return _tours.FindAll(u => u.MaxTourists == numberOfTourists);
         }
 
+        public List<Tour> FindByGuide(int guideId)
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            return _tours.FindAll(u => u.GuideId == guideId);
+        }
+
         public Tour Save(Tour tour)
         {
             tour.Id = NextId();
@@ -81,6 +88,14 @@ namespace InitialProject.Repository
             _tours.Insert(index, tour);
             _serializer.ToCSV(FilePath, _tours);
             return tour;
+        }
+
+        public void Delete(Tour tour)
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            Tour current = _tours.Find(c => c.Id == tour.Id);
+            _tours.Remove(current);
+            _serializer.ToCSV(FilePath, _tours);
         }
     }
 }

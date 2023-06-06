@@ -88,5 +88,17 @@ namespace InitialProject.Service
             KeyPoint firstKeypoint = keyPoints.First();
             keyPointService.InitiateKeyPoint(firstKeypoint, keyPoints, touristsToArrive);
         }
+
+        public void DeleteTourBecauseOfGuidesResignation(int guideId)
+        {
+            TourAppointmentService tourAppointmentService = new TourAppointmentService();
+            List<Tour> tours = tourRepository.FindByGuide(guideId);
+            foreach (Tour tour in tours)
+            {
+                tourAppointmentService.DeletetourAppointmentBecauseOfGuidesResignation(tour);
+                tourRepository.Delete(tour);
+            }
+            
+        }
     }
 }

@@ -128,6 +128,12 @@ namespace InitialProject.Repository
             return appointments;
         }
 
+        public List<TourAppointment> FindByTour(int tourId)
+        {
+            _appointments = _serializer.FromCSV(FilePath);
+            return _appointments.FindAll(u => u.TourId == tourId);
+        }
+
         public List<TourAppointment> FindByGuestNumber(int numberOfTourists)
         {
             _appointments = _serializer.FromCSV(FilePath);

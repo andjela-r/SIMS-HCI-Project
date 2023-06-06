@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using InitialProject.Model;
+using InitialProject.Repository;
+using InitialProject.Service;
 
 namespace InitialProject.View.Guide
 {
@@ -21,12 +23,22 @@ namespace InitialProject.View.Guide
     public partial class MyProfile : Window
     {
         public User User { get; set; }
+
+        private readonly GuideRepository _guideRepository;
+        private GuideService _guideService = new GuideService();
         public MyProfile(User user)
         {
             InitializeComponent();
             this.DataContext = this;
             this.User = user;
+
+            _guideRepository = new GuideRepository();
             usernameLabel.Content = "Hello, \n" + user.Username + "!";
+            nameLabel.Content = user.Username;
+            if (_guideService.CheckSuperGuideCriteria(user.Id))
+            {
+                superGuideLabel.Content = "-Super Guide-";
+            }
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
@@ -75,6 +87,20 @@ namespace InitialProject.View.Guide
             ToursView toursView = new ToursView(User);
             toursView.Show();
             Close();
+        }
+
+        private void GiveResignation_OnClick(Object sender, RoutedEventArgs e)
+        {
+            _guideService.GiveResignation(User.Id);
+
+            SignInForm signInForm = new SignInForm();
+            signInForm.Show();
+            Close();
+        }
+
+        private void Check_OnClick(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

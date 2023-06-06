@@ -29,12 +29,14 @@ namespace InitialProject.View.Guide
 
         private readonly LocationRepository _locationRepository;
         private readonly TourRequestRepository _tourRequestRepository;
+        private readonly PartOfComplexTourRequestRepository _partOfComplexTourRequestRepository;
 
         private readonly TourRequestService _tourRequestService;
 
         public ObservableCollection<TourRequest> FilteredTourRequests { get; set; }
 
         public static ObservableCollection<TourRequest> TourRequests { get; set; }
+        public static ObservableCollection<TourRequest> ComplexTourRequests { get; set; }
 
         public static List<Location> Locations { get; set; }
         public Requests(User user)
@@ -46,15 +48,22 @@ namespace InitialProject.View.Guide
 
             _locationRepository = new LocationRepository();
             _tourRequestRepository = new TourRequestRepository();
+            _partOfComplexTourRequestRepository = new PartOfComplexTourRequestRepository();
             _tourRequestService = new TourRequestService();
 
             TourRequests = new ObservableCollection<TourRequest>(_tourRequestRepository.FindAll());
+            ComplexTourRequests = new ObservableCollection<TourRequest>(_partOfComplexTourRequestRepository.FindAll());
 
             Locations = new List<Location>(_locationRepository.FindAll());
 
             foreach (TourRequest tourRequest in TourRequests)
             {
                 tourRequest.Location = Locations.Find(l => l.Id == tourRequest.LocationId);
+            }
+
+            foreach (TourRequest ComplexTourRequest in ComplexTourRequests)
+            {
+                ComplexTourRequest.Location = Locations.Find(l => l.Id == ComplexTourRequest.LocationId);
             }
 
             foreach (Location location in Locations)
@@ -123,6 +132,16 @@ namespace InitialProject.View.Guide
             return null;
         }
 
+        private TourRequest GetSelectedDataFromComplexDataGrid()
+        {
+            if (ComplexTourRequestDataGrid.SelectedItem is TourRequest selectedItem)
+            {
+                return selectedItem;
+            }
+
+            return null;
+        }
+
         private void Create_OnClick(object sender, RoutedEventArgs e)
         {
             TourRequest selectedData = GetSelectedDataFromDataGrid();
@@ -175,5 +194,24 @@ namespace InitialProject.View.Guide
 
             return result;
         }
+
+        public void Select_OnClick(object sender, RoutedEventArgs e)
+        {
+            TourRequest selectedData = GetSelectedDataFromComplexDataGrid();
+
+            if (selectedData.Status != RequestStatusEnum.Waiting)
+            {
+                System.Windows.MessageBox.Show("Part of complex tour request has to have waiting status!", "Status", MessageBoxButton.OK);
+                return;
+            }
+
+            if (selectedData != null)
+            {
+                PickDate pickDate = new PickDate(selectedData);
+                pickDate.Show();
+            }
+
+        }
     }
+    
 }

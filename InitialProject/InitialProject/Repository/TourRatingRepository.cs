@@ -37,5 +37,17 @@ namespace InitialProject.Repository
             if (_tourRatings.Count < 1) return 1;
             return _tourRatings.Max(c => c.Id) + 1;
         }
+
+        public List<TourRating> FindAll()
+        {
+            _tourRatings = _serializer.FromCSV(FilePath);
+            return _tourRatings;
+        }
+
+        public List<TourRating> FindByTour(Tour tour)
+        {
+            _tourRatings = _serializer.FromCSV(FilePath);
+            return _tourRatings.FindAll(u => u.TourId == tour.Id);
+        }
     }
 }

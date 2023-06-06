@@ -50,7 +50,7 @@ namespace InitialProject.Model
            TourAmusement = Convert.ToInt32(values[4]);
            Comment = values[5];
 
-           var pictures = values[8].Split(ListDelimiter);
+           var pictures = values[6].Split(ListDelimiter);
            Pictures = pictures.ToList();
 
         }
