@@ -2,8 +2,10 @@
 using InitialProject.Repository;
 using System;
 using System.Collections.ObjectModel;
+using System.Drawing;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace InitialProject.View
@@ -33,9 +35,13 @@ namespace InitialProject.View
             FilteredAccommodationsOld = new ObservableCollection<AccommodationReservation>();
             FilteredAccommodationsNew = new ObservableCollection<AccommodationReservation>();
             MoveButon.IsEnabled = false;
+            MoveButon.Background = Brushes.DarkGray;
+            RateButton.Background = Brushes.DarkGray;
+            GoBackButton.Background = Brushes.DarkGray;
+            CancelButton.Background = Brushes.DarkGray;
+
             RateButton.IsEnabled = false;
             CancelButton.IsEnabled = false;
-            GoBackButton.Visibility = Visibility.Collapsed;
 
             Uri iconUri = new Uri("C:/Users/Dell/Desktop/projekatSims/SIMS-HCI-Project/InitialProject/InitialProject/Resources/Images/resv.png", UriKind.RelativeOrAbsolute);
             this.Icon = BitmapFrame.Create(iconUri);
@@ -94,12 +100,23 @@ namespace InitialProject.View
 
         private void GoBackButton_Click(object sender, RoutedEventArgs e)
         {
-            dataGridAccommodationsOld.IsEnabled = true;
-            dataGridAccommodationsNew.IsEnabled = true;
-            MoveButon.IsEnabled = false;
-            CancelButton.IsEnabled = false;
-            GoBackButton.IsEnabled = false;
-            RateButton.IsEnabled = false;
+            if (SelectedReservation == null)
+            {
+                Close();
+            }
+            else
+            {
+                dataGridAccommodationsOld.IsEnabled = true;
+                dataGridAccommodationsNew.IsEnabled = true;
+                MoveButon.IsEnabled = false;
+                CancelButton.IsEnabled = false;
+                GoBackButton.Visibility = Visibility.Collapsed;
+                MoveButon.Background = Brushes.DarkGray;
+                RateButton.Background = Brushes.DarkGray;
+                GoBackButton.Background = Brushes.DarkGray;
+                CancelButton.Background = Brushes.DarkGray;
+                RateButton.IsEnabled = false;
+            }
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -145,6 +162,9 @@ namespace InitialProject.View
                     CancelButton.IsEnabled = true;
                     GoBackButton.Visibility = Visibility.Visible;
                     GoBackButton.IsEnabled = true;
+                    MoveButon.Background = Brushes.Gainsboro;
+                    GoBackButton.Background = Brushes.Gainsboro;
+                    CancelButton.Background = Brushes.Gainsboro;
             }
                 else
                 {
@@ -153,7 +173,11 @@ namespace InitialProject.View
                     GoBackButton.Visibility = Visibility.Visible;
                     RateButton.IsEnabled = true;
                     GoBackButton.IsEnabled = true;
-                }
+                    RateButton.Background = Brushes.Gainsboro;
+                    MoveButon.Background = Brushes.DarkGray;
+                    GoBackButton.Background = Brushes.Gainsboro;
+                    CancelButton.Background = Brushes.DarkGray;
+            }
             
         }
     }

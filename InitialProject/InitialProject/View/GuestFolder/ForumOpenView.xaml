@@ -5,14 +5,79 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View.Guest"
         mc:Ignorable="d"
-        Title="Forum" Height="450" Width="582"  Background="Lavender">
-    <Grid>
-        <Label Content="It looks that there is no forum available for this location. &#xD;&#xA;Do you want to open a forum for this location?" HorizontalAlignment="Center" Margin="28,29,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift Light" HorizontalContentAlignment="Center"/>
-        <Button x:Name="YesButton" Content="Yes" HorizontalAlignment="Left" Margin="327,105,0,0" VerticalAlignment="Top" Height="47" Width="177" Click="Button_Click" FontFamily="Bahnschrift Light" FontSize="20"/>
-        <Button x:Name="NoButton" Content="No" HorizontalAlignment="Left" Margin="88,105,0,0" VerticalAlignment="Top" Height="47" Width="176" Click="Button_Click" FontFamily="Bahnschrift Light" FontSize="20"/>
-        <Label Content="What question would you like to ask about this location?" HorizontalAlignment="Left" Margin="42,183,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift Light" FontSize="20"/>
-        <TextBox Margin="47,228,37,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="117" Background="FloralWhite"/>
-        <Button x:Name="OpenButton" Content="Submit and open a forum" HorizontalAlignment="Left" Margin="176,362,0,0" VerticalAlignment="Top" Height="48" Width="240" Click="Button_Click" FontFamily="Bahnschrift Light" FontSize="20"/>
+        Title="Forum" Height="460" Width="582"  Background="Lavender">
+    <Grid Margin="0,0,-312,-362">
+        <Label Content="It looks that there is no forum available for this location. &#xD;&#xA;Do you want to open a forum for this location?" HorizontalAlignment="Left" Margin="28,27,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift Light" HorizontalContentAlignment="Center" Width="537"/>
+        <Button x:Name="YesButton" Content="Yes" HorizontalAlignment="Left" Margin="327,105,0,0" VerticalAlignment="Top" Height="47" Width="177" Click="Button2_Click" FontFamily="Bahnschrift Light" FontSize="20">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="10">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                  VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+            <Button.Effect>
+                <DropShadowEffect Color="Black" Direction="300" ShadowDepth="3" Opacity="0.5" />
+            </Button.Effect>
+        </Button>
+        <Button x:Name="NoButton" Content="No" HorizontalAlignment="Left" Margin="88,105,0,0" VerticalAlignment="Top" Height="47" Width="176" Click="Button_Click" FontFamily="Bahnschrift Light" FontSize="20">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="10">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                  VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+            <Button.Effect>
+                <DropShadowEffect Color="Black" Direction="300" ShadowDepth="3" Opacity="0.5" />
+            </Button.Effect>
+        </Button>
+        <Label x:Name="CommLabel" Content="What question would you like to ask about this location?" HorizontalAlignment="Left" Margin="42,183,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift Light" FontSize="20"/>
+        <TextBox x:Name="CommentTextBox" Margin="47,228,358,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="117" Background="FloralWhite">
+            <TextBox.Effect>
+                <DropShadowEffect Color="Black" Direction="300" ShadowDepth="3" Opacity="0.5" />
+            </TextBox.Effect>
+        </TextBox>
+        <Button x:Name="OpenButton" Content="Submit and open a forum" HorizontalAlignment="Left" Margin="42,368,0,0" VerticalAlignment="Top" Height="48" Width="240" Click="Button1_Click" FontFamily="Bahnschrift Light" FontSize="20">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="10">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                  VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+            <Button.Effect>
+                <DropShadowEffect Color="Black" Direction="300" ShadowDepth="3" Opacity="0.5" />
+            </Button.Effect>
+        </Button>
+        <Button x:Name="GoBackButton" Content="Go back" HorizontalAlignment="Left" Margin="296,368,0,0" VerticalAlignment="Top" Height="48" Width="240" FontSize="20" Click="GoBack" FontFamily="Bahnschrift Light">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="10">
+                        <ContentPresenter HorizontalAlignment="Center"
+                            VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+            <Button.Effect>
+                <DropShadowEffect Color="Black" Direction="300" ShadowDepth="3" Opacity="0.5" />
+            </Button.Effect>
+        </Button>
 
     </Grid>
 </Window>

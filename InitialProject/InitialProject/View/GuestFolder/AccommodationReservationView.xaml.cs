@@ -146,6 +146,9 @@ namespace InitialProject.View
 
         private void ContinueButton_Click(object sender, RoutedEventArgs e)
         {
+            StartDatePicker.IsEnabled = false;
+            EndDatePicker.IsEnabled = false;
+            NumGuestLabel.IsEnabled = false;
             DateTime startDate = (DateTime)StartDatePicker.SelectedDate;
             DateTime endDate = (DateTime)EndDatePicker.SelectedDate;
             int stayLength = int.Parse(StayLengthBox.Text);
@@ -265,6 +268,9 @@ namespace InitialProject.View
             HideButton.Visibility = Visibility.Collapsed;
             ContinueButton.Visibility = Visibility.Visible;
             GoBackButton.Visibility = Visibility.Visible;
+            StartDatePicker.IsEnabled = true;
+            EndDatePicker.IsEnabled = true;
+            GuestNumberBox.IsEnabled = true;
         }
 
         private void GoBackButton_Click(object sender, RoutedEventArgs e)

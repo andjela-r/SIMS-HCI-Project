@@ -15,30 +15,100 @@
         <Label Content="Start date:" HorizontalAlignment="Left" Margin="400,92,0,0" VerticalAlignment="Top" FontSize="25"/>
         <Label Content="End date:" HorizontalAlignment="Left" Margin="400,163,0,0" VerticalAlignment="Top" FontSize="25"/>
         <Label Content="How many days would you&#xD;&#xA;like to go?&#xD;&#xD;&#xA;" HorizontalAlignment="Left" Margin="400,241,0,0" VerticalAlignment="Top" FontSize="25" Width="369" Height="78" Grid.RowSpan="2"/>
-        <Button x:Name="ContinueButton" Content="Continue" HorizontalAlignment="Left" Margin="382,128,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.429,0.816" Height="54" Width="202" FontSize="28" Click="ContinueButton_Click" Grid.Row="1" Background="Lavender" FontFamily="Bahnschrift Light"/>
-        <DatePicker x:Name="StartDatePicker" HorizontalAlignment="Left" Margin="564,92,0,0" VerticalAlignment="Top" Height="43" Width="182" FontSize="20"/>
-        <DatePicker x:Name="EndDatePicker" HorizontalAlignment="Left" Margin="564,163,0,0" VerticalAlignment="Top" Height="44" Width="184" FontSize="20"/>
-        <TextBox x:Name="StayLengthBox" HorizontalAlignment="Left" Margin="568,43,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="178" Height="41" FontSize="21" Grid.Row="1"/>
-        <DataGrid x:Name="DatesDataGrid" ItemsSource="{Binding AvailableDatesPair}" SelectedItem="{Binding SelectedAvailableDatePair}"  AutoGenerateColumns="False" Margin="380,87,22,99" Grid.RowSpan="2" Background="Lavender" BorderBrush="Lavender" FontFamily="Bahnschrift Light" FontSize="20">
+        <Button x:Name="ContinueButton" Content="Continue" HorizontalAlignment="Left" Margin="382,128,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.429,0.816" Height="54" Width="202" FontSize="28" Click="ContinueButton_Click" Grid.Row="1" Background="Lavender" FontFamily="Bahnschrift Light">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="10">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                  VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+            <Button.Effect>
+                <DropShadowEffect Color="Black" Direction="300" ShadowDepth="3" Opacity="0.5" />
+            </Button.Effect>
+        </Button>
+        <DatePicker x:Name="StartDatePicker" HorizontalAlignment="Left" Margin="564,92,0,0" VerticalAlignment="Top" Height="43" Width="182" FontSize="20">
+            <DatePicker.Effect>
+                <DropShadowEffect Color="Black" Direction="300" ShadowDepth="3" Opacity="0.5" />
+            </DatePicker.Effect>
+        </DatePicker>
+        <DatePicker x:Name="EndDatePicker" HorizontalAlignment="Left" Margin="564,163,0,0" VerticalAlignment="Top" Height="44" Width="184" FontSize="20">
+            <DatePicker.Effect>
+                <DropShadowEffect Color="Black" Direction="300" ShadowDepth="3" Opacity="0.5" />
+            </DatePicker.Effect>
+        </DatePicker>
+        <TextBox x:Name="StayLengthBox" HorizontalAlignment="Left" Margin="568,43,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="178" Height="41" FontSize="21" Grid.Row="1">
+        </TextBox>
+        <DataGrid x:Name="DatesDataGrid" ItemsSource="{Binding AvailableDatesPair}" SelectedItem="{Binding SelectedAvailableDatePair}"  AutoGenerateColumns="False" Margin="379,74,23,112" Grid.RowSpan="2" Background="Lavender" BorderBrush="Lavender" FontFamily="Bahnschrift Light" FontSize="20" GridLinesVisibility="None">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Check-in" Binding="{Binding Item1, StringFormat='{}{0:dd.MM.yyyy}'}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Check-out" Binding="{Binding Item2, StringFormat='{}{0:dd.MM.yyyy}'}"  Width="*"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="GoBackButton" Content="Go back" HorizontalAlignment="Left" Margin="606,128,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.429,0.816" Height="54" Width="202" FontSize="28" Click="GoBackButton_Click" Grid.Row="1" Background="Lavender"/>
-        <Button x:Name="ReserveButton" Content="Reserve" HorizontalAlignment="Left" Margin="382,128,0,0" VerticalAlignment="Top" Height="54" Width="202" FontSize="28" Click="ReserveButton_Click" Grid.Row="1" Background="Lavender" FontFamily="Bahnschrift Light"/>
-        <TextBox x:Name="GuestNumberBox" HorizontalAlignment="Left" Margin="67,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="158" Height="27" Background="FloralWhite" Grid.Row="1"/>
-        <Label x:Name="NumGuestLabel" Content="How many guests will be?" HorizontalAlignment="Left" Margin="28,113,0,0" VerticalAlignment="Top" FontSize="20" Grid.Row="1" FontFamily="Bahnschrift Light"/>
-        <Button x:Name="HideButton" Content="Go back" HorizontalAlignment="Left" Margin="606,128,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.429,0.816" Height="54" Width="202" FontSize="28" Click="HideButton_Click" Grid.Row="1" Background="Lavender" FontFamily="Bahnschrift Light"/>
-        <Image HorizontalAlignment="Left" Height="302" Margin="28,24,0,0" VerticalAlignment="Top" Width="316" Source="/Resources/Images/accommodation.jpg" Grid.RowSpan="2" Stretch="Fill">
-            <Image.Style>
-                <Style/>
-            </Image.Style>
-            <Image.Effect>
-                <DropShadowEffect/>
-            </Image.Effect>
-        </Image>
+        <Button x:Name="GoBackButton" Content="Go back" HorizontalAlignment="Left" Margin="606,128,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.429,0.816" Height="54" Width="202" FontSize="28" Click="GoBackButton_Click" Grid.Row="1" FontFamily="Bahnschrift Light" Background="Lavender">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="10">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                  VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+            <Button.Effect>
+                <DropShadowEffect Color="Black" Direction="300" ShadowDepth="3" Opacity="0.5" />
+            </Button.Effect>
+        </Button>
+        <Button x:Name="ReserveButton" Content="Reserve" HorizontalAlignment="Left" Margin="382,128,0,0" VerticalAlignment="Top" Height="54" Width="202" FontSize="28" Click="ReserveButton_Click" Grid.Row="1" Background="Lavender" FontFamily="Bahnschrift Light">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="10">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                  VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+            <Button.Effect>
+                <DropShadowEffect Color="Black" Direction="300" ShadowDepth="3" Opacity="0.5" />
+            </Button.Effect>
+        </Button>
+        <TextBox x:Name="GuestNumberBox" HorizontalAlignment="Left" Margin="67,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="158" Height="27" Background="FloralWhite" Grid.Row="1">
+            <TextBox.Effect>
+                <DropShadowEffect Color="Black" Direction="300" ShadowDepth="3" Opacity="0.5" />
+            </TextBox.Effect>
+        </TextBox>
+        <Label x:Name="NumGuestLabel" Content="How many guests will be?" HorizontalAlignment="Left" Margin="28,113,0,0" VerticalAlignment="Top" FontSize="20" Grid.Row="1" FontFamily="Bahnschrift Light">
+            <Label.Effect>
+                <DropShadowEffect Color="Black" Direction="300" ShadowDepth="3" Opacity="0.5" />
+            </Label.Effect>
+        </Label>
+        <Button x:Name="HideButton" Content="Go back" HorizontalAlignment="Left" Margin="606,128,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.429,0.816" Height="54" Width="202" FontSize="28" Click="HideButton_Click" Grid.Row="1" Background="Lavender" FontFamily="Bahnschrift Light">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="10">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                  VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+            <Button.Effect>
+                <DropShadowEffect Color="Black" Direction="300" ShadowDepth="3" Opacity="0.5" />
+            </Button.Effect>
+        </Button>
         <Label x:Name="PointsLabel" Content="Label" HorizontalAlignment="Left" Margin="48,84,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Image HorizontalAlignment="Left" Height="299" Margin="28,39,0,0" VerticalAlignment="Top" Width="325" Grid.RowSpan="2" Source="/View/GuestFolder/acc.jpg"/>
 
     </Grid>
 </Window>

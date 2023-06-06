@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="All your reservations" Height="450" Width="800" Background="Lavender">
-    <Grid>
+        Title="All your reservations" Height="450" Width="816" Background="Lavender">
+    <Grid Margin="0,0,-344,0">
         <DataGrid x:Name="dataGridAccommodationsOld" DockPanel.Dock="Bottom" SelectionChanged="MyDataGrid_SelectionChanged"
                   ItemsSource="{Binding Path=Reservations, UpdateSourceTrigger=PropertyChanged}"
                   SelectedItem="{Binding Path = SelectedReservation, UpdateSourceTrigger=PropertyChanged}"
-                  AutoGenerateColumns="False" IsReadOnly="True" Margin="10,30,261,217" FontSize="20" Background="Lavender" FontFamily="Bahnschrift Light" BorderBrush="Lavender" HorizontalContentAlignment="Center">
+                  AutoGenerateColumns="False" IsReadOnly="True" Margin="10,30,603,217" FontSize="20" Background="Lavender" FontFamily="Bahnschrift Light" BorderBrush="Lavender" HorizontalContentAlignment="Center" GridLinesVisibility="None">
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="DataGridColumnHeader">
                     <Setter Property="FontSize" Value="15" />
@@ -22,15 +22,74 @@
                 <DataGridTextColumn Header="End date" Binding="{Binding EndDate, StringFormat={}{0:dd.MM.yyyy}}" Width="130"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="RateButton" Content="Review" HorizontalAlignment="Left" Margin="570,258,0,0" VerticalAlignment="Top" Height="55" Width="220" FontSize="22" Click="RateButton_Click" Background="Gainsboro" FontFamily="Bahnschrift Light"/>
-        <Button x:Name="CancelButton" Content="Cancel the reservation" HorizontalAlignment="Left" Margin="570,181,0,0" VerticalAlignment="Top" Height="52" Width="216" FontSize="20" RenderTransformOrigin="0.5,0.5" Click="CancelButton_Click" Background="Gainsboro" FontFamily="Bahnschrift Light">
+        <Button x:Name="RateButton" Content="Review" HorizontalAlignment="Left" Margin="570,258,0,0" VerticalAlignment="Top" Height="55" Width="220" FontSize="22" Click="RateButton_Click" Background="Gainsboro" FontFamily="Bahnschrift Light">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="10">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                  VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+            <Button.Effect>
+                <DropShadowEffect Color="Black" Direction="300" ShadowDepth="3" Opacity="0.5" />
+            </Button.Effect>
         </Button>
-        <Button x:Name="MoveButon" Content="Change reservation" HorizontalAlignment="Left" Margin="570,106,0,0" VerticalAlignment="Top" Height="53" Width="220" FontSize="20" Click="MoveButon_Click" Background="Gainsboro" FontFamily="Bahnschrift Light"/>
-        <Button x:Name="GoBackButton" Content="Go back" HorizontalAlignment="Left" Margin="570,340,0,0" VerticalAlignment="Top" Height="55" Width="220" FontSize="22" Click="GoBackButton_Click" Background="Gainsboro" FontFamily="Bahnschrift Light"/>
+        <Button x:Name="CancelButton" Content="Cancel the reservation" HorizontalAlignment="Left" Margin="570,181,0,0" VerticalAlignment="Top" Height="52" Width="216" FontSize="20" RenderTransformOrigin="0.5,0.5" Click="CancelButton_Click" Background="Gainsboro" FontFamily="Bahnschrift Light">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="10">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                  VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+            <Button.Effect>
+                <DropShadowEffect Color="Black" Direction="300" ShadowDepth="3" Opacity="0.5" />
+            </Button.Effect>
+        </Button>
+        <Button x:Name="MoveButon" Content="Change reservation" HorizontalAlignment="Left" Margin="570,106,0,0" VerticalAlignment="Top" Height="53" Width="220" FontSize="20" Click="MoveButon_Click" Background="Gainsboro" FontFamily="Bahnschrift Light">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="10">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                  VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+            <Button.Effect>
+                <DropShadowEffect Color="Black" Direction="300" ShadowDepth="3" Opacity="0.5" />
+            </Button.Effect>
+        </Button>
+        <Button x:Name="GoBackButton" Content="Go back" HorizontalAlignment="Left" Margin="570,340,0,0" VerticalAlignment="Top" Height="55" Width="220" FontSize="22" Click="GoBackButton_Click" Background="Gainsboro" FontFamily="Bahnschrift Light">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="10">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                  VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+            <Button.Effect>
+                <DropShadowEffect Color="Black" Direction="300" ShadowDepth="3" Opacity="0.5" />
+            </Button.Effect>
+        </Button>
         <DataGrid x:Name="dataGridAccommodationsNew" SelectionChanged="MyDataGrid_SelectionChanged"
             ItemsSource="{Binding Reservations, UpdateSourceTrigger=PropertyChanged}"
             SelectedItem="{Binding SelectedReservation, UpdateSourceTrigger=PropertyChanged}"
-            AutoGenerateColumns="False" IsReadOnly="True" Margin="10,251,261,5" FontSize="20" Background="Lavender" FontFamily="Bahnschrift Light" BorderBrush="Lavender" HorizontalContentAlignment="Center">
+            AutoGenerateColumns="False" IsReadOnly="True" Margin="10,251,603,5" FontSize="20" Background="Lavender" FontFamily="Bahnschrift Light" BorderBrush="Lavender" HorizontalContentAlignment="Center" GridLinesVisibility="None">
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="DataGridColumnHeader">
                     <Setter Property="FontSize" Value="15" />
@@ -44,7 +103,6 @@
         </DataGrid>
         <Label Content="Old reservations:&#xD;" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift Light"/>
         <Label Content="Upcoming reservations:&#xA;" HorizontalAlignment="Left" Margin="10,222,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift Light"/>
-        <Label Content="B - GO BACK ON PREVIOUS PAGE" HorizontalAlignment="Left" Margin="560,400,0,0" VerticalAlignment="Top" Height="34" FontSize="15" FontFamily="Bahnschrift Light"/>
 
     </Grid>
 </Window>

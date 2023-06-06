@@ -57,5 +57,10 @@ namespace InitialProject.View
             Close();
 
         }
+
+        private void GoBack(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }
