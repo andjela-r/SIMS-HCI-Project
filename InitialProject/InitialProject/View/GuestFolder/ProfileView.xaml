@@ -10,7 +10,7 @@
         <DataGrid x:Name="dataGridRatings"
             ItemsSource="{Binding Reservations, UpdateSourceTrigger=PropertyChanged}"
             SelectedItem="{Binding SelectedReservation, UpdateSourceTrigger=PropertyChanged}"
-            AutoGenerateColumns="False" IsReadOnly="True" Margin="10,127,0,95" FontSize="20" HorizontalAlignment="Left" Width="764" Background="Lavender" FontFamily="Bahnschrift Light">
+            AutoGenerateColumns="False" IsReadOnly="True" Margin="0,159,0,63" FontSize="25" HorizontalAlignment="Center" Width="764" Background="Lavender" FontFamily="Bahnschrift Light" BorderBrush="Lavender">
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="FontSize" Value="15" />
@@ -20,15 +20,16 @@
                 <DataGridTextColumn Header="Name" Binding="{Binding GuestId}" Width="80" />
                 <DataGridTextColumn Header="Cleanliness" Binding="{Binding Cleanliness}" Width="83"/>
                 <DataGridTextColumn Header="Obedience" Binding="{Binding Obedience}" Width="85"/>
-                <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" Width="450"/>
+                <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" Width="505"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Label Content="Name:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="52" Width="98" FontSize="25" FontFamily="Bahnschrift Light"/>
-        <Label x:Name="NameLabel" Content="Label" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top" FontSize="25" FontFamily="Bahnschrift Light"/>
-        <Label x:Name="SuperGuestLabel" Content="Label" HorizontalAlignment="Left" Margin="286,30,0,0" VerticalAlignment="Top" FontSize="25" FontFamily="Bahnschrift Light"/>
-        <Image x:Name="Image" HorizontalAlignment="Left" Height="53" Margin="463,36,0,0" VerticalAlignment="Top" Width="57" Source="/Resources/Images/trophy.jpg"/>
+        <Label Content="Name:" HorizontalAlignment="Left" Margin="18,16,0,0" VerticalAlignment="Top" Height="52" Width="98" FontSize="25" FontFamily="Bahnschrift Light"/>
+        <Label x:Name="NameLabel" Content="Label" HorizontalAlignment="Left" Margin="18,68,0,0" VerticalAlignment="Top" FontSize="25" FontFamily="Bahnschrift Light"/>
+        <Label x:Name="SuperGuestLabel" Content="Label" HorizontalAlignment="Left" Margin="400,10,0,0" VerticalAlignment="Top" FontSize="25" FontFamily="Bahnschrift Light"/>
+        <Image x:Name="Image" HorizontalAlignment="Left" Height="53" Margin="416,62,0,0" VerticalAlignment="Top" Width="57" Source="/Resources/Images/trophy.jpg"/>
         <Label Content="B - GO BACK ON
 PREVIOUS PAGE
 " HorizontalAlignment="Left" Margin="552,12,0,0" VerticalAlignment="Top" FontSize="15" Width="238" FontFamily="Bahnschrift Light"/>
+        <Label Content="Your reviews:" HorizontalAlignment="Left" Margin="18,119,0,0" VerticalAlignment="Top" FontSize="25" FontFamily="Bahnschrift Light"/>
     </Grid>
 </Window>

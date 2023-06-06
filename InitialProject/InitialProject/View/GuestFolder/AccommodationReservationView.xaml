@@ -19,15 +19,15 @@
         <DatePicker x:Name="StartDatePicker" HorizontalAlignment="Left" Margin="564,92,0,0" VerticalAlignment="Top" Height="43" Width="182" FontSize="20"/>
         <DatePicker x:Name="EndDatePicker" HorizontalAlignment="Left" Margin="564,163,0,0" VerticalAlignment="Top" Height="44" Width="184" FontSize="20"/>
         <TextBox x:Name="StayLengthBox" HorizontalAlignment="Left" Margin="568,43,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="178" Height="41" FontSize="21" Grid.Row="1"/>
-        <DataGrid x:Name="DatesDataGrid" ItemsSource="{Binding AvailableDatesPair}" SelectedItem="{Binding SelectedAvailableDatePair}"  AutoGenerateColumns="False" Margin="380,24,22,99" Grid.RowSpan="2" Background="Lavender" FontFamily="Bahnschrift Light" FontSize="20">
+        <DataGrid x:Name="DatesDataGrid" ItemsSource="{Binding AvailableDatesPair}" SelectedItem="{Binding SelectedAvailableDatePair}"  AutoGenerateColumns="False" Margin="380,87,22,99" Grid.RowSpan="2" Background="Lavender" BorderBrush="Lavender" FontFamily="Bahnschrift Light" FontSize="20">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Check-in" Binding="{Binding Item1, StringFormat='{}{0:d}'}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Checkout" Binding="{Binding Item2, StringFormat='{}{0:d}'}"  Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Check-in" Binding="{Binding Item1, StringFormat='{}{0:dd.MM.yyyy}'}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Check-out" Binding="{Binding Item2, StringFormat='{}{0:dd.MM.yyyy}'}"  Width="*"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="GoBackButton" Content="Go back" HorizontalAlignment="Left" Margin="606,128,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.429,0.816" Height="54" Width="202" FontSize="28" Click="GoBackButton_Click" Grid.Row="1" Background="Lavender"/>
-        <Button x:Name="ReserveButton" Content="Reserve" HorizontalAlignment="Left" Margin="382,131,0,0" VerticalAlignment="Top" Height="54" Width="202" FontSize="28" Click="ReserveButton_Click" Grid.Row="1" Background="Lavender" FontFamily="Bahnschrift Light"/>
-        <TextBox x:Name="GuestNumberBox" HorizontalAlignment="Left" Margin="48,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="287" Height="27" Background="FloralWhite" Grid.Row="1"/>
+        <Button x:Name="ReserveButton" Content="Reserve" HorizontalAlignment="Left" Margin="382,128,0,0" VerticalAlignment="Top" Height="54" Width="202" FontSize="28" Click="ReserveButton_Click" Grid.Row="1" Background="Lavender" FontFamily="Bahnschrift Light"/>
+        <TextBox x:Name="GuestNumberBox" HorizontalAlignment="Left" Margin="67,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="158" Height="27" Background="FloralWhite" Grid.Row="1"/>
         <Label x:Name="NumGuestLabel" Content="How many guests will be?" HorizontalAlignment="Left" Margin="28,113,0,0" VerticalAlignment="Top" FontSize="20" Grid.Row="1" FontFamily="Bahnschrift Light"/>
         <Button x:Name="HideButton" Content="Go back" HorizontalAlignment="Left" Margin="606,128,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.429,0.816" Height="54" Width="202" FontSize="28" Click="HideButton_Click" Grid.Row="1" Background="Lavender" FontFamily="Bahnschrift Light"/>
         <Image HorizontalAlignment="Left" Height="302" Margin="28,24,0,0" VerticalAlignment="Top" Width="316" Source="/Resources/Images/accommodation.jpg" Grid.RowSpan="2" Stretch="Fill">

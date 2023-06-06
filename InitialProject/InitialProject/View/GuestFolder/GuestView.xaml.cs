@@ -1,4 +1,5 @@
 ﻿using InitialProject.Model;
+using InitialProject.View.GuestFolder;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,9 @@ namespace InitialProject.View
         {
             InitializeComponent();
             this.User = guest;
+
+            Uri iconUri = new Uri("C:/Users/Dell/Desktop/projekatSims/SIMS-HCI-Project/InitialProject/InitialProject/Resources/Images/home.png", UriKind.RelativeOrAbsolute);
+            this.Icon = BitmapFrame.Create(iconUri);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -33,11 +37,6 @@ namespace InitialProject.View
             OwnerAndAccommodationRatingView rating = new OwnerAndAccommodationRatingView(User);
             rating.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             rating.Show();
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -50,6 +49,18 @@ namespace InitialProject.View
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             ProfileView profile = new ProfileView(User);
+            profile.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            profile.Show();
+        }
+
+        private void NotificationButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("You have 2 new messages: \n --The owner updated your request. You can check it on your profile. \n --Something something");
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            LocationListView profile = new LocationListView(User);
             profile.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             profile.Show();
         }

@@ -3,6 +3,7 @@ using InitialProject.Repository;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Media.Imaging;
 
 namespace InitialProject.View
 {
@@ -22,6 +23,9 @@ namespace InitialProject.View
             _renovationSuggestionRepository = new RenovationSuggestionRepository();
             this.Reservation = reservation;
             Renovations = new ObservableCollection<RenovationSuggestion>(_renovationSuggestionRepository.FindAll());
+
+            Uri iconUri = new Uri("C:/Users/Dell/Desktop/projekatSims/SIMS-HCI-Project/InitialProject/InitialProject/Resources/Images/rating.png", UriKind.RelativeOrAbsolute);
+            this.Icon = BitmapFrame.Create(iconUri);
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

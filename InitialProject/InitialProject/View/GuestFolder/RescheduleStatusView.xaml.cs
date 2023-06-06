@@ -30,6 +30,10 @@ namespace InitialProject.View
             InitializeComponent();
             _requestRepository = new RequestStatusRepository();
             Requests = new ObservableCollection<RequestStatus>(_requestRepository.FindAll());
+
+            Uri iconUri = new Uri("C:/Users/Dell/Desktop/projekatSims/SIMS-HCI-Project/InitialProject/InitialProject/Resources/Images/resv.png", UriKind.RelativeOrAbsolute);
+            this.Icon = BitmapFrame.Create(iconUri);
+
             foreach (RequestStatus request in Requests)
             {
                 if (selectedReservation.Id == request.ReservationId)
