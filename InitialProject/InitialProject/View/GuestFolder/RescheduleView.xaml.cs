@@ -33,6 +33,9 @@ namespace InitialProject.View
             _ratingRepository = new OwnerAndAccommodationRatingRepository();
             _requestStatusRepository = new RequestStatusRepository();
             Reservation = reservation;
+
+            Uri iconUri = new Uri("C:/Users/Dell/Desktop/projekatSims/SIMS-HCI-Project/InitialProject/InitialProject/Resources/Images/resv.png", UriKind.RelativeOrAbsolute);
+            this.Icon = BitmapFrame.Create(iconUri);
         }
 
         private void SubmitButton_Click(object sender, RoutedEventArgs e)
